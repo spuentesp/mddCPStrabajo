@@ -53,6 +53,7 @@ código personalizado (Code).
 │   ├── guion-video.md            #   video 5–7 min
 │   └── evidencia-de-pruebas.md   #   corrida real de punta a punta
 └── recursos-comunes/             # Apoyos transversales (no son entregables)
+    ├── apuntes-del-curso.md      #   TODA la materia S1–S4: seccionada y resumida
     ├── diseno-del-sistema.md     #   arquitectura del CPS
     ├── referencias.md            #   APA 7 con DOI/URL verificables
     ├── librerias-drawio/         #   bibliotecas de símbolos del curso
