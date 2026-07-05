@@ -44,7 +44,18 @@ del proceso MDD4CPS:
    python3 herramientas/publicar_evento_prueba.py --broker localhost --person-id 1 --authorized
    ```
 
-4. **Nodos ESP32**: compilar con Arduino IDE (core ESP32 + librería
+4. **Simulación completa del sistema** (gemelo en Python de ambos CPC, con los
+   mismos períodos y estructura del *dependum* que el PSM; ejercita las dos
+   ramas del OR — desbloqueo y alarma):
+
+   ```bash
+   python3 herramientas/simular_sistema.py --broker localhost --duracion 12 --semilla 7
+   ```
+
+   La evidencia de una corrida real está en
+   [`docs/semana-4/evidencia-de-pruebas.md`](../docs/semana-4/evidencia-de-pruebas.md).
+
+5. **Nodos ESP32**: compilar con Arduino IDE (core ESP32 + librería
    `PubSubClient`), copiando antes `secrets.h.example` → `secrets.h`. El
    `FaceMonitorComponent` compila por defecto con `SIMULATION_MODE`, que genera
    detecciones sintéticas sin cámara; también puede simularse el circuito completo

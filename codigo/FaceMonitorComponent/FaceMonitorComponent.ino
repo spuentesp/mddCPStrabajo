@@ -86,8 +86,10 @@ bool detectarRostro(float frame) {
   Serial.println("===Running Function 'detectarRostro'===");
 #ifdef SIMULATION_MODE
   // --- Your code goes here ---
-  // Simulacion: ~30% de los ciclos de monitoreo contienen un rostro.
-  return frame < 0.30f;
+  // Simulacion: la region baja del frame corresponde a un rostro autorizado
+  // (Ana) y la alta a uno no autorizado (Visita Roja), lo que permite
+  // ejercitar ambas ramas del OR (desbloqueo y alarma).
+  return frame < 0.30f || frame > 0.70f;
 #else
   // --- Your code goes here ---
   return false;
