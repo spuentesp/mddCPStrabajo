@@ -9,6 +9,13 @@ acotado para ser sencillo de construir, simular y probar.
 
 ## Caso de estudio
 
+> **Sobre el nombre:** *SVIF* (Sistema de Videovigilancia con Identificación
+> Facial) es la denominación asignada en este trabajo al caso de estudio; no
+> proviene de la literatura. Cumple el mismo rol que el «invernadero
+> automatizado» del ejemplo de cátedra de MDD4CPS. Las fuentes reales y
+> verificables que sustentan el trabajo están consolidadas en formato APA en
+> [`docs/referencias.md`](docs/referencias.md).
+
 SVIF controla el acceso a un recinto mediante dos nodos ciberfísicos que cooperan:
 
 | Nodo (CPC) | Función | Hardware de referencia |

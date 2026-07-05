@@ -97,7 +97,7 @@ fase Code:
 | **Total** | **625** | **~135** | **~78 %** |
 
 El resultado es consistente con el grado de automatización reportado para el caso
-de estudio del invernadero en MDD4CPS (≈78 %; Navarro, Devia, Gayo y Cares, 2025).
+de estudio del invernadero en MDD4CPS (≈78 %; Navarro et al., 2025).
 
 ## 3. Análisis crítico del proceso
 
@@ -134,7 +134,7 @@ andamiaje de comunicación es la parte más propensa a error si se escribe a man
 
 - Bézivin, J. (2005). On the unification power of models. *Software & Systems
   Modeling, 4*(2), 171–188.
-- Navarro, C., Devia, L., Gayo, J. E. L., & Cares, C. (2025). An agent-oriented
+- Navarro, C., Devia, L., Labra Gayo, J. E., & Cares, C. (2025). An agent-oriented
   model-driven development process for cyber-physical systems. *CIbSE 2025*
   (pp. 150–164). SBC.
 - Repositorio MDD4CPS: https://github.com/mdd4cps/aomdd4cps

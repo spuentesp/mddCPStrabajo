@@ -94,6 +94,6 @@ adopta las siguientes decisiones:
 - Marwedel, P., & Engel, M. (2016). Cyber-physical systems: opportunities, challenges
   and (some) solutions. *Management of Cyber Physical Objects in the Future Internet
   of Things* (pp. 1–30). Springer.
-- Navarro, C., Devia, L., Gayo, J. E. L., & Cares, C. (2025). An agent-oriented
+- Navarro, C., Devia, L., Labra Gayo, J. E., & Cares, C. (2025). An agent-oriented
   model-driven development process for cyber-physical systems. *CIbSE 2025*
   (pp. 150–164). SBC.
