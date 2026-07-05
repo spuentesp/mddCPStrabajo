@@ -1,6 +1,6 @@
 # Actividad Semana 3 — Modelado orientado a agentes de SVIF con iStar 2.0
 
-**Entregable:** modelo CIM en `modelos/cim-istar-svif.drawio`, construido con la
+**Entregable:** modelo CIM en `cim-istar-svif.drawio` (en esta carpeta), construido con la
 biblioteca de símbolos *scratchpad iStar 2.0* del curso para diagrams.net. El
 archivo contiene dos páginas: **Vista SD** (Strategic Dependency) y **Vista híbrida
 SD/SR** (Strategic Rationale).

@@ -2,7 +2,7 @@
 
 Este documento registra la verificación funcional del sistema desarrollado,
 realizada sin hardware mediante el **gemelo de simulación**
-(`herramientas/simular_sistema.py`), que replica en Python la lógica del PSM
+(`recursos-comunes/herramientas/simular_sistema.py`), que replica en Python la lógica del PSM
 (mismos períodos —monitoreo 500 ms, control 250 ms—, misma estructura del
 *dependum* y misma lógica del refinamiento OR) contra un broker **Mosquitto**
 local. Esta estrategia responde directamente al desafío de *verification
@@ -63,11 +63,11 @@ mosquitto -p 1883 -d           # o: docker run -p 1883:1883 eclipse-mosquitto:2 
 pip install paho-mqtt
 
 # 3) Simulación completa (reproducible con la misma semilla)
-python3 herramientas/simular_sistema.py --broker localhost --duracion 12 --semilla 7
+python3 recursos-comunes/herramientas/simular_sistema.py --broker localhost --duracion 12 --semilla 7
 
 # 4) (Opcional) observar el tópico y/o inyectar eventos manualmente
-python3 herramientas/monitor_mqtt.py --broker localhost
-python3 herramientas/publicar_evento_prueba.py --broker localhost --person-id 1 --authorized
+python3 recursos-comunes/herramientas/monitor_mqtt.py --broker localhost
+python3 recursos-comunes/herramientas/publicar_evento_prueba.py --broker localhost --person-id 1 --authorized
 ```
 
 ## 5. Hallazgo de verificación (y corrección aplicada)

@@ -14,7 +14,7 @@ acotado para ser sencillo de construir, simular y probar.
 > proviene de la literatura. Cumple el mismo rol que el «invernadero
 > automatizado» del ejemplo de cátedra de MDD4CPS. Las fuentes reales y
 > verificables que sustentan el trabajo están consolidadas en formato APA en
-> [`docs/referencias.md`](docs/referencias.md).
+> [`recursos-comunes/referencias.md`](recursos-comunes/referencias.md).
 
 SVIF controla el acceso a un recinto mediante dos nodos ciberfísicos que cooperan:
 
@@ -28,38 +28,47 @@ La comunicación entre nodos se realiza mediante **MQTT**. El diseño sigue el p
 plataforma (PIM, DSL para CPS) → modelo específico de plataforma (PSM, C++ Arduino) →
 código personalizado (Code).
 
-## Estructura del repositorio
+## Estructura del repositorio (una carpeta por entrega)
 
 ```
 .
-├── docs/
-│   ├── 00-diseno-del-sistema.md        # Descripción y arquitectura del CPS
-│   ├── semana-1/                        # Actividad: desafío abierto en CPS
-│   │   ├── actividad-desafio-abierto.md #   Análisis crítico + referencias
-│   │   ├── presentacion.md              #   Diapositivas (formato Marp)
-│   │   └── guion-video.md               #   Guion del video (3–5 min)
-│   ├── semana-2/
-│   │   └── fundamentos-de-modelado.md   # Modelo, metamodelo, DSL y MDD aplicados a SVIF
-│   ├── semana-3/
-│   │   └── actividad-modelado-istar.md  # Actividad: modelado orientado a agentes
-│   └── semana-4/
-│       ├── actividad-mdd4cps.md         # Actividad: proceso MDD4CPS completo
-│       └── guion-video.md               # Guion del video (5–7 min)
-├── modelos/
-│   ├── cim-istar-svif.drawio            # CIM: modelo iStar 2.0 (vistas SD y SD/SR)
-│   └── pim-dsl-svif.drawio              # PIM: modelo en el DSL para CPS
-├── codigo/                              # PSM + fase Code (C++ Arduino / ESP32)
-│   ├── FaceMonitorComponent/
-│   └── AccessActuatorComponent/
-└── herramientas/                        # Utilidades de prueba (broker MQTT, inyección de eventos)
+├── semana-1/                     # ENTREGA 1: desafío abierto en CPS
+│   ├── README.md                 #   checklist contra lo pedido en las diapositivas
+│   ├── actividad-desafio-abierto.md
+│   ├── presentacion.md           #   diapositivas (Marp → PDF/PPTX)
+│   └── guion-video.md            #   video 3–5 min
+├── semana-2/                     # (sin actividad evaluada; material puente)
+│   └── fundamentos-de-modelado.md
+├── semana-3/                     # ENTREGA 2: modelado iStar 2.0
+│   ├── README.md
+│   ├── actividad-modelado-istar.md
+│   └── cim-istar-svif.drawio     #   EL MODELO (vistas SD y SD/SR)
+├── semana-4/                     # ENTREGA 3: proceso MDD4CPS completo
+│   ├── README.md
+│   ├── actividad-mdd4cps.md      #   transformaciones + análisis crítico
+│   ├── cim-istar-svif.drawio     #   entregable declarado (copia de semana-3)
+│   ├── pim-dsl-svif.drawio       #   EL MODELO PIM (DSL para CPS)
+│   ├── codigo/                   #   PSM + fase Code (C++ Arduino/ESP32)
+│   ├── presentacion.md           #   diapositivas (Marp → PDF/PPTX)
+│   ├── guion-video.md            #   video 5–7 min
+│   └── evidencia-de-pruebas.md   #   corrida real de punta a punta
+└── recursos-comunes/             # Apoyos transversales (no son entregables)
+    ├── diseno-del-sistema.md     #   arquitectura del CPS
+    ├── referencias.md            #   APA 7 con DOI/URL verificables
+    ├── librerias-drawio/         #   bibliotecas de símbolos del curso
+    └── herramientas/             #   broker/monitor MQTT y simulador
 ```
+
+Cada carpeta `semana-N/` es autocontenida: puede comprimirse y entregarse tal
+cual. El `README.md` de cada una mapea archivo por archivo contra los
+requisitos y la rúbrica de la diapositiva «Actividad semanal» correspondiente.
 
 ## Cómo probar el sistema sin hardware
 
 El código incluye un modo de simulación (`SIMULATION_MODE`) que genera detecciones
 sintéticas, de modo que el flujo completo (detección → identificación → publicación
 MQTT → actuación) puede verificarse con un broker MQTT local y los scripts de
-`herramientas/`. Véase `codigo/README.md`.
+`recursos-comunes/herramientas/`. Véase `semana-4/codigo/README.md`.
 
 ## Modelado
 

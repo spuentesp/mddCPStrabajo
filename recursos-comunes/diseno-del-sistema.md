@@ -79,9 +79,9 @@ adopta las siguientes decisiones:
 
 | Fase | Artefacto en este repositorio |
 |---|---|
-| CIM (iStar 2.0) | `modelos/cim-istar-svif.drawio` |
-| PIM (DSL para CPS) | `modelos/pim-dsl-svif.drawio` |
-| PSM (C++ Arduino) | `codigo/FaceMonitorComponent/`, `codigo/AccessActuatorComponent/` |
+| CIM (iStar 2.0) | `semana-3/cim-istar-svif.drawio` |
+| PIM (DSL para CPS) | `semana-4/pim-dsl-svif.drawio` |
+| PSM (C++ Arduino) | `semana-4/codigo/` |
 | Code (personalización) | Secciones `// --- Your code goes here ---` y `secrets.h` |
 
 ## Referencias

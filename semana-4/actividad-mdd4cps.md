@@ -8,9 +8,9 @@ analizando cómo las decisiones de diseño se incorporan progresivamente.
 
 | Entregable | Ubicación |
 |---|---|
-| Modelo CIM (`.drawio`) | `modelos/cim-istar-svif.drawio` |
-| Modelo PIM/DSL (`.drawio`) | `modelos/pim-dsl-svif.drawio` |
-| Código fuente generado | `codigo/FaceMonitorComponent/`, `codigo/AccessActuatorComponent/` |
+| Modelo CIM (`.drawio`) | `cim-istar-svif.drawio` (en esta carpeta) |
+| Modelo PIM/DSL (`.drawio`) | `pim-dsl-svif.drawio` (en esta carpeta) |
+| Código fuente generado | `codigo/` (en esta carpeta) |
 | Presentación y video (5–7 min) | guion en `guion-video.md` |
 | Encuesta de la experiencia | https://forms.gle/VPaL9qx7mhKttJgf8 (completar tras la actividad) |
 
