@@ -1,0 +1,140 @@
+# Actividad Semana 4 — Desarrollo de SVIF mediante el proceso MDD4CPS
+
+**Objetivo:** aplicar el proceso MDD4CPS para transformar el modelo orientado a
+agentes de SVIF (Semana 3) en una implementación específica de plataforma,
+analizando cómo las decisiones de diseño se incorporan progresivamente.
+
+**Entregables:**
+
+| Entregable | Ubicación |
+|---|---|
+| Modelo CIM (`.drawio`) | `modelos/cim-istar-svif.drawio` |
+| Modelo PIM/DSL (`.drawio`) | `modelos/pim-dsl-svif.drawio` |
+| Código fuente generado | `codigo/FaceMonitorComponent/`, `codigo/AccessActuatorComponent/` |
+| Presentación y video (5–7 min) | guion en `guion-video.md` |
+| Encuesta de la experiencia | https://forms.gle/VPaL9qx7mhKttJgf8 (completar tras la actividad) |
+
+---
+
+## 1. Aplicación del proceso
+
+### 1.1 Transformación CIM → PIM
+
+A partir del modelo iStar 2.0, se derivó el modelo PIM en el DSL para CPS. Las
+correspondencias identificadas automáticamente por las reglas de transformación
+fueron:
+
+| Constructo CIM (iStar) | Constructo PIM (DSL) | Instancias en SVIF |
+|---|---|---|
+| *Agent* | `CPComponent` | cim-a1 → pim-fm-00; cim-a2 → pim-aa-00 |
+| *Goal* | `OnIntervalAction` | cim-g1 → pim-fm-01; cim-g2 → pim-aa-01 |
+| *Task* | `OnDemandAction` | cim-t1..t4, t6..t10 → pim-fm-02..05, pim-aa-02..06 |
+| *Resource* (SW) | `SWResource` | cim-r2 → pim-fm-06; cim-r5 → pim-aa-09 |
+| *Resource* (HW) | `HWResource` | cim-r1 → pim-fm-07; cim-r3/r4 → pim-aa-07/08 |
+| *Dependency* (dependum cim-d1) | `MessageSender` + `MessageReceiver` | pim-fm-08 y pim-aa-10 |
+| Refinamientos AND/OR | Operadores `AND`/`OR` | pim-fm-a1, pim-aa-a1, pim-aa-o1 |
+| *Quality* (softgoals) | `qualification_array` / `contribution_array` en los elementos afectados | cim-q1..q4 propagados |
+
+**Información incorporada por el diseñador en esta etapa** (no deducible del CIM,
+pero aún independiente de tecnología):
+
+| Elemento | Decisión de diseño |
+|---|---|
+| `pim-fm-01` | `interval_in_milliseconds = 500` (percepción 2 veces por segundo) |
+| `pim-aa-01` | `interval_in_milliseconds = 250` (la actuación debe ser más reactiva que la percepción) |
+| `pim-fm-08` / `pim-aa-10` | Estructura del *dependum*: `timestamp`, `person_id`, `person_name`, `confidence`, `authorized` (minimización de datos: se transmite la identidad, nunca la imagen) |
+| `OnDemandActions` | Parámetros de entrada/salida (p. ej., `identificarRostro`: entrada `frame`, salida `identification_event`) |
+| `pim-fm-06` / `pim-aa-09` | Campos de las estructuras de datos (`data_structure`) de la base de enrolados y la bitácora |
+
+### 1.2 Transformación PIM → PSM
+
+Se materializó el PIM sobre la plataforma **ESP32 (Arduino core)** con
+comunicación **MQTT**, decisión tomada durante esta transformación. Aunque adopta
+la forma de código fuente, el PSM sigue siendo un modelo: quedan abiertos aspectos
+que se completan en la fase Code.
+
+| Constructo PIM | Elemento PSM generado | Evidencia en el código |
+|---|---|---|
+| `CPComponent` | Unidad de despliegue: `<CPC>.ino` + `comm_utils.h` + `secrets.h` | Carpetas `FaceMonitorComponent/`, `AccessActuatorComponent/` |
+| `OnIntervalAction` | **Hilo periódico FreeRTOS** con el período del modelo | `monitorearPresenciaDePersonasTask` (500 ms), `controlarAccesoAlRecintoTask` (250 ms) |
+| `OnDemandAction` | **Función ejecutable** con firma derivada de los parámetros del PIM | `capturarImagen()`, `identificarRostro()`, `evaluarAutorizacion()`, … |
+| `MessageSender` | **Hilo de comunicación** que publica el *dependum* serializado | `eventoIdentificacionSenderTask` + `publishIdentificationEvent()` |
+| `MessageReceiver` | **Callback/hilo receptor** que deserializa y deja disponible el *dependum* | `eventoIdentificacionReceiverCallback` + `deserializeIdentificationEvent()` |
+| `SWResource` | **`struct` tipada** (tipos concretos asignados en esta etapa) | `EnrolledFace`, `AccessLogEntry`, `IdentificationEvent` |
+| `HWResource` | **Comentario estructurado** + marca de integración | Bloques `HW Resource:` con `RELAY_PIN`, `BUZZER_PIN` |
+| Refinamiento OR (cim-t8/t9) | **Estructura condicional** | `if/else` en `gestionarRespuestaAcceso()` |
+| Softgoals | **Comentarios de trazabilidad** | `Qualification Array:` / `Contribution Array:` en cada función |
+
+**Información incorporada por el diseñador en esta etapa:** plataforma objetivo
+(ESP32/Arduino), tecnología de comunicación (MQTT), tipado concreto
+(`unsigned long`, `char[32]`, `float`, `bool`), pines de integración y umbral de
+confianza.
+
+### 1.3 Fase Code
+
+Se completaron manualmente: credenciales y broker (`secrets.h`), la política de
+autorización (`evaluarAutorizacion`), la lógica de simulación de cámara
+(`SIMULATION_MODE`), las duraciones de desbloqueo/alarma y el tópico MQTT.
+
+## 2. Análisis: información automática vs. incorporada por el diseñador
+
+| Etapa | Capturado automáticamente | Incorporado por el diseñador |
+|---|---|---|
+| CIM → PIM | `id`, `name`, `id_cim_parent`, propagación de `qualification_array` y `contribution_array`, correspondencias de constructos, relaciones AND/OR | Períodos de las acciones, estructura del *dependum*, parámetros E/S, campos de recursos SW |
+| PIM → PSM | Esqueleto de hilos y funciones, nombres, structs del *dependum*, lógica de publicación/suscripción, comentarios de trazabilidad, condicionales del OR | Plataforma, tecnología de comunicación, tipos concretos, pines |
+| Code | — | Credenciales, umbrales, política de autorización, lógica específica de simulación/cámara |
+
+### Grado de automatización estimado
+
+Considerando como "generado" el esqueleto estructural (hilos, funciones, structs,
+comunicación, trazabilidad) y como "personalizado" las secciones manuales de la
+fase Code:
+
+| CPC | Líneas totales | Personalizadas (aprox.) | % generado |
+|---|---|---|---|
+| Face Monitor Component (`.ino` + `comm_utils.h`) | 310 | ~70 (simulación, umbral, credenciales) | ~77 % |
+| Access Actuator Component (`.ino` + `comm_utils.h`) | 315 | ~65 (política, pines, duraciones) | ~79 % |
+| **Total** | **625** | **~135** | **~78 %** |
+
+El resultado es consistente con el grado de automatización reportado para el caso
+de estudio del invernadero en MDD4CPS (≈78 %; Navarro, Devia, Gayo y Cares, 2025).
+
+## 3. Análisis crítico del proceso
+
+**Fortalezas observadas.**
+(i) La **trazabilidad** es el mayor aporte: cada función del código enlaza con su
+tarea CIM mediante `id_cim_parent`, lo que permitió, por ejemplo, verificar que la
+decisión de privacidad (comparar rostros localmente) sobrevive desde el softgoal
+cim-q2 hasta un comentario de contribución en `compararConRostrosEnrolados()`.
+(ii) La separación CIM/PIM/PSM obligó a **postergar decisiones** correctamente: el
+período de muestreo no contaminó el modelo de objetivos, y la elección de MQTT no
+apareció hasta el PSM.
+(iii) El esqueleto generado impone una **arquitectura homogénea** (hilos + buzón
+del *dependum*) que reduce errores de concurrencia típicos en Arduino.
+
+**Limitaciones observadas.**
+(i) El DSL no posee constructos para expresar **restricciones temporales duras**
+(plazos, prioridades de hilos); el período es un atributo, pero nada verifica su
+cumplimiento.
+(ii) Los **softgoals se preservan solo como comentarios** en el PSM: la
+trazabilidad es informativa, no verificable automáticamente.
+(iii) El refinamiento **OR pierde semántica** en la transformación: el criterio de
+selección de rama (¿cuándo alarma y cuándo desbloqueo?) debió reintroducirse
+manualmente en la fase Code.
+(iv) Al tratarse de una herramienta en versión alfa con fines académicos, la
+edición manual del PIM en diagrams.net sigue siendo necesaria para ajustar
+disposición y atributos no solicitados por el cuestionario guiado.
+
+**Balance.** Para un CPS pequeño como SVIF (2 nodos, 1 dependencia), el costo del
+modelado se amortiza principalmente en documentación y trazabilidad; el beneficio
+crecería con el número de componentes y dependencias, donde la generación del
+andamiaje de comunicación es la parte más propensa a error si se escribe a mano.
+
+## Referencias
+
+- Bézivin, J. (2005). On the unification power of models. *Software & Systems
+  Modeling, 4*(2), 171–188.
+- Navarro, C., Devia, L., Gayo, J. E. L., & Cares, C. (2025). An agent-oriented
+  model-driven development process for cyber-physical systems. *CIbSE 2025*
+  (pp. 150–164). SBC.
+- Repositorio MDD4CPS: https://github.com/mdd4cps/aomdd4cps

@@ -1,0 +1,14 @@
+# Credenciales de la fase Code (usar secrets.h.example como plantilla)
+codigo/**/secrets.h
+
+# Artefactos de compilación Arduino
+codigo/**/build/
+*.bin
+*.elf
+
+# Python
+__pycache__/
+*.pyc
+
+# Sistema
+.DS_Store
