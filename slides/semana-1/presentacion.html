@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>S1 · Seguridad y privacidad en CPS — Lo que presento (UFRO)</title>
+<link rel="stylesheet" href="../template/slides.css">
+</head>
+<body>
+
+<!-- 1. TITLE -->
+<section class="slide title-bg">
+  <div class="title-zone">
+    <div class="kicker">EMI305 · Producción de Software · Sistemas Ciberfísicos</div>
+    <h1>Seguridad y privacidad en CPS de videovigilancia<br>con reconocimiento facial</h1>
+    <p class="subtitle">Actividad Semana 1 — Desafíos abiertos en CPS:<br>
+      cómo proteger datos biométricos sin violar las restricciones del nodo.</p>
+    <div class="author-block">
+      Magíster en Ingeniería Informática · UFRO<br>
+      EMI305 · Producción de Software · 2026
+    </div>
+  </div>
+</section>
+
+<!-- 2. PROBLEMA -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">01 · Contexto</div>
+    <h2>El problema</h2>
+    <div class="grid2">
+      <div>
+        <p>Los <b>CPS</b> acoplan <b>cómputo + comunicación + proceso físico</b>:
+          un ataque lógico produce <b class="accent2">consecuencias físicas</b>
+          (abrir una puerta, silenciar una alarma).</p>
+        <p>Las contramedidas de TI tradicionales no bastan
+          <span style="color:#6b7390;">(Humayed et al., 2017)</span>:</p>
+        <ul>
+          <li>Nodos con <b>recursos restringidos</b>.</li>
+          <li>Requisitos de <b>tiempo real</b> que desaconsejan criptografía pesada.</li>
+          <li><b>Heterogeneidad</b> de protocolos y dispositivos.</li>
+        </ul>
+        <p>En videovigilancia facial el dato sensado es <b class="accent2">biométrico</b>:
+          identifica de forma única y <b>no es revocable</b> — un rostro filtrado no se cambia.</p>
+      </div>
+      <div class="card alt">
+        <div class="meta">Problema abierto</div>
+        <h3>Proteger el CPS <i>y</i> la privacidad biométrica</h3>
+        <p>…sin violar las restricciones temporales y de energía del nodo.</p>
+        <div class="quote">
+          Tres tensiones centrales:<br>
+          • <b>Seguridad</b> ↔ <b>Tiempo real</b><br>
+          • <b>Trazabilidad</b> ↔ <b>Minimización de datos</b><br>
+          • <b>Cómputo en nube</b> ↔ <b>Procesamiento en el borde</b>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">2</div>
+</section>
+
+<!-- 3. RELEVANCIA -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">02 · Relevancia</div>
+    <h2>¿Por qué es relevante para los CPS?</h2>
+    <div class="grid2">
+      <div>
+        <div class="flow-step">
+          <span class="num">01</span>
+          <b class="accent2">Consecuencia física directa.</b><br>
+          Una identificación falsificada (<i>spoofing</i> con una fotografía)
+          equivale a una intrusión física al recinto.
+        </div>
+        <div class="flow-step">
+          <span class="num">02</span>
+          <b class="accent2">Tensión seguridad ↔ tiempo real.</b><br>
+          Cifrar y anonimizar cuesta cómputo; el entorno dicta el plazo
+          de respuesta <span style="color:#6b7390;">(Lee, 2006)</span>.
+        </div>
+      </div>
+      <div>
+        <div class="flow-step">
+          <span class="num">03</span>
+          <b class="accent2">Regulación y confianza.</b><br>
+          Datos biométricos crecientemente regulados
+          (GDPR; Ley 19.628 en Chile).
+        </div>
+        <div class="flow-step">
+          <span class="num">04</span>
+          <b class="accent2">Escala.</b><br>
+          Una vulnerabilidad se replica en miles de cámaras
+          desplegadas <span style="color:#6b7390;">(Zanero, 2017)</span>.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">3</div>
+</section>
+
+<!-- 4. SOLUCIONES LITERATURA 1/2 -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">03 · Literatura (1/2)</div>
+    <h2>Soluciones en la literatura</h2>
+    <div class="grid2">
+      <div class="card">
+        <div class="meta">Caracterización del desafío</div>
+        <h3>Humayed et al. (2017)</h3>
+        <p><b>Cyber-physical systems security — A survey.</b>
+          <span class="meta">IEEE IoT Journal, 4(6), 1802–1831.</span></p>
+        <ul>
+          <li>Encuesta sistemática: 3 ejes (información, control, infraestructura)
+            × dominios de aplicación.</li>
+          <li>Contramedidas por capa: percepción, transmisión, aplicación.</li>
+        </ul>
+        <p><span class="check">Ventaja:</span> visión integral.<br>
+           <span class="cross">Limitación:</span> marco de análisis, no solución operativa.</p>
+      </div>
+      <div class="card alt">
+        <div class="meta">Reconocimiento facial con preservación de privacidad</div>
+        <h3>Erkin et al. (2009)</h3>
+        <p><b>Privacy-preserving face recognition.</b>
+          <span class="meta">PETS 2009, LNCS 5672, 235–253.</span></p>
+        <ul>
+          <li><i>Eigenfaces</i> sobre datos <b>cifrados homomórficamente</b>:
+            el servidor identifica sin ver la imagen;
+            el cliente no aprende la base de datos.</li>
+        </ul>
+        <p><span class="check">Ventaja:</span> garantías formales.<br>
+           <span class="cross">Limitación:</span> costo computacional impracticable
+           en microcontroladores; latencia de segundos.</p>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">4</div>
+</section>
+
+<!-- 5. SOLUCIONES LITERATURA 2/2 -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">03 · Literatura (2/2)</div>
+    <h2>Soluciones en la literatura</h2>
+    <div class="grid2">
+      <div class="card">
+        <div class="meta">Procesamiento en el borde</div>
+        <h3>Chen &amp; Ran (2019)</h3>
+        <p><b>Deep learning with edge computing: A review.</b>
+          <span class="meta">Proceedings of the IEEE, 107(8), 1655–1674.</span></p>
+        <ul>
+          <li>Inferencia de aprendizaje profundo <b>en el propio nodo</b>.</li>
+          <li>La imagen <b>no viaja por la red</b>; sólo se transmite el
+            resultado mínimo → minimización de datos.</li>
+          <li>Latencia acotada, factible en hardware de bajo costo.</li>
+        </ul>
+        <p><span class="cross">Limitación:</span> la base biométrica reside en el nodo
+          → seguridad física, actualización segura, modelos de menor capacidad.</p>
+      </div>
+      <div class="card alt">
+        <div class="meta">Síntesis comparativa</div>
+        <h3>¿Cómo se complementan?</h3>
+        <table class="dense">
+          <tr><th>Enfoque</th><th>Capa</th><th>Restricción crítica</th></tr>
+          <tr><td>Humayed et al.</td><td>Marco</td><td>Análisis</td></tr>
+          <tr><td>Erkin et al.</td><td>Aplicación</td><td>Cómputo</td></tr>
+          <tr><td>Chen &amp; Ran</td><td>Percepción</td><td>Energía</td></tr>
+        </table>
+        <p style="font-size:11.5px; color:#6b7390; margin-top:6px;">
+          Cada propuesta aborda una capa distinta del CPS — son <b>complementarias</b>.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">5</div>
+</section>
+
+<!-- 6. REFLEXIÓN -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">04 · Reflexión</div>
+    <h2>Reflexión crítica</h2>
+    <div class="grid2">
+      <div class="card alt">
+        <div class="meta">Lo que sigue sin resolverse</div>
+        <h3>Problemas abiertos</h3>
+        <ul>
+          <li><b>Verificación</b> extremo a extremo de propiedades de seguridad/privacidad.</li>
+          <li><b>Anti-spoofing</b> con recursos de borde.</li>
+          <li>Tensión <b>trazabilidad ↔ minimización de datos</b>.</li>
+          <li>Modelos de <b>amenazas</b> específicos para CPS con datos biométricos.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="meta">Líneas prometedoras</div>
+        <h3>Dirección de avance</h3>
+        <ul>
+          <li><b>Inferencia eficiente en el borde</b> (aceleradores de bajo consumo).</li>
+          <li><b>Biometría cancelable</b>: plantillas revocables y re-emisibles.</li>
+          <li>Atributos de calidad modelados <b>desde etapas tempranas</b>
+            (<i>softgoals</i> en orientación a agentes).</li>
+          <li>Enfoque que aplicaremos en el caso <b>SVIF</b> del curso.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="quote" style="margin-top:12px;">
+      Las soluciones actuales son <b>complementarias, no suficientes</b> por sí solas.
+      El desafío es integrarlas respetando las restricciones del CPS.
+    </div>
+  </div>
+  <div class="pageno">6</div>
+</section>
+
+<!-- 7. CASO SVIF (preview) -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">05 · Caso aplicado</div>
+    <h2>Cómo se aplica al caso SVIF del curso</h2>
+    <div class="diagram">
+      <svg viewBox="0 0 1100 230" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arr-svif-p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#1f7fd8"/>
+          </marker>
+          <marker id="arr-svif-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#c0334d"/>
+          </marker>
+        </defs>
+        <!-- Face Monitor -->
+        <rect x="40" y="40" width="280" height="150" rx="10" fill="#1f7fd8"/>
+        <text x="180" y="68" text-anchor="middle" fill="#fff" font-weight="700" font-size="15">Face Monitor (ESP32-CAM)</text>
+        <text x="180" y="92" text-anchor="middle" fill="#d9e6ff" font-size="11">Captura imagen</text>
+        <text x="180" y="110" text-anchor="middle" fill="#d9e6ff" font-size="11">Detecta rostro</text>
+        <text x="180" y="128" text-anchor="middle" fill="#fff" font-weight="700" font-size="11">⚠ Identifica <b>localmente</b></text>
+        <text x="180" y="148" text-anchor="middle" fill="#d9e6ff" font-size="10">(la imagen nunca sale del nodo)</text>
+        <text x="180" y="170" text-anchor="middle" fill="#d9e6ff" font-size="10">→ publica solo el evento</text>
+
+        <!-- Access Actuator -->
+        <rect x="700" y="40" width="280" height="150" rx="10" fill="#c0334d"/>
+        <text x="840" y="68" text-anchor="middle" fill="#fff" font-weight="700" font-size="15">Access Actuator (ESP32)</text>
+        <text x="840" y="92" text-anchor="middle" fill="#ffe1e6" font-size="11">Recibe evento (MQTT)</text>
+        <text x="840" y="110" text-anchor="middle" fill="#ffe1e6" font-size="11">Evalúa autorización</text>
+        <text x="840" y="130" text-anchor="middle" fill="#fff" font-weight="700" font-size="11">→ Desbloquea | Alarma</text>
+        <text x="840" y="150" text-anchor="middle" fill="#ffe1e6" font-size="11">Bitácora</text>
+
+        <!-- Broker -->
+        <rect x="430" y="80" width="180" height="70" rx="8" fill="#5a6fd8"/>
+        <text x="520" y="105" text-anchor="middle" fill="#fff" font-weight="700" font-size="13">Broker MQTT</text>
+        <text x="520" y="125" text-anchor="middle" fill="#dde0ff" font-size="10">Fog · red local</text>
+
+        <!-- Arrows -->
+        <path d="M320,100 L425,100" stroke="#1f7fd8" stroke-width="2.5" marker-end="url(#arr-svif-p)"/>
+        <text x="372" y="92" text-anchor="middle" font-size="10" fill="#1f7fd8" font-style="italic">evento identificación</text>
+        <path d="M615,125 L695,125" stroke="#c0334d" stroke-width="2.5" marker-end="url(#arr-svif-r)"/>
+        <text x="655" y="117" text-anchor="middle" font-size="10" fill="#c0334d" font-style="italic">dependum</text>
+
+        <text x="550" y="220" text-anchor="middle" font-size="11" fill="#6b7390" font-style="italic">
+          Decisión de privacidad: la imagen nunca abandona el nodo; sólo se transmite identidad (timestamp, person_id, person_name, confidence, authorized)
+        </text>
+      </svg>
+    </div>
+    <div class="grid3" style="margin-top:8px;">
+      <div class="card"><div class="meta">Desafío S1</div><h3>Timing</h3><p>Edge: 500 ms percepción, 250 ms control.</p></div>
+      <div class="card"><div class="meta">Desafío S1</div><h3>Confidencialidad</h3><p>Imagen nunca transmitida (Chen &amp; Ran).</p></div>
+      <div class="card alt"><div class="meta">Desafío S1</div><h3>Safety</h3><p>Falla de comunicación → bloqueado por defecto.</p></div>
+    </div>
+  </div>
+  <div class="pageno">7</div>
+</section>
+
+<!-- 8. CIERRE + REFERENCIAS -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">Bibliografía</div>
+    <h2>Referencias</h2>
+    <div class="grid2">
+      <div>
+        <div class="ref"><b>Chen, J., &amp; Ran, X. (2019).</b>
+          <span class="meta">Deep learning with edge computing: A review.</span>
+          <i>Proceedings of the IEEE, 107</i>(8), 1655–1674.</div>
+        <div class="ref"><b>Erkin, Z., Franz, M., Guajardo, J., Katzenbeisser, S., Lagendijk, I., &amp; Toft, T. (2009).</b>
+          <span class="meta">Privacy-preserving face recognition.</span>
+          <i>PETS 2009, LNCS 5672</i>, 235–253.</div>
+        <div class="ref"><b>Humayed, A., Lin, J., Li, F., &amp; Luo, B. (2017).</b>
+          <span class="meta">Cyber-physical systems security — A survey.</span>
+          <i>IEEE IoT Journal, 4</i>(6), 1802–1831.</div>
+      </div>
+      <div>
+        <div class="ref"><b>Lee, E. A. (2006).</b>
+          <span class="meta">Cyber-physical systems — Are computing foundations adequate?</span>
+          <i>NSF Workshop on CPS</i>.</div>
+        <div class="ref"><b>Zanero, S. (2017).</b>
+          <span class="meta">Cyber-physical systems.</span>
+          <i>Computer, 50</i>(4), 14–16.</div>
+        <div class="ref" style="margin-top:14px;"><b>Entregable de la actividad:</b>
+          <span class="meta">actividad-desafio-abierto.md · presentación.md</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">8</div>
+</section>
+
+</body>
+</html>

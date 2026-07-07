@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Seguridad y Privacidad en CPS de Videovigilancia — UFRO</title>
+<style>
+  @page { size: 1280px 720px; margin: 0; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; font-family: 'Helvetica Neue', Arial, sans-serif; }
+
+  .slide {
+    width: 1280px;
+    height: 720px;
+    page-break-after: always;
+    position: relative;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .slide:last-child { page-break-after: auto; }
+
+  .title-bg   { background-image: url('assets/ufro_bg_title.png'); }
+  .content-bg { background-image: url('assets/ufro_bg_content.png'); }
+
+  /* ---- Title / closing slide zone (between logo box and footer band) ---- */
+  .title-zone {
+    position: absolute;
+    top: 300px; left: 90px; right: 90px; height: 230px;
+    color: #ffffff;
+    display: flex; flex-direction: column; justify-content: center;
+    text-align: center;
+    align-items: center;
+  }
+  .title-zone h1 { font-size: 32px; margin: 0 0 10px 0; font-weight: 700; line-height: 1.2; }
+  .title-zone .subtitle { font-size: 17px; font-weight: 400; margin: 0 0 14px 0; color: #d9e6ff; max-width: 880px; line-height: 1.45; }
+  .title-zone .author-block { font-size: 14px; line-height: 1.7; color: #eef3ff; }
+  .title-zone .kicker { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #9fc4ff; margin-bottom: 8px; font-weight: 600; }
+
+  /* ---- Content slide zone (white body, between header bar and footer band) ---- */
+  .content-zone {
+    position: absolute;
+    top: 34px; left: 80px; right: 80px; bottom: 145px;
+    color: #15182b;
+  }
+  .content-zone h2 {
+    font-size: 28px; margin: 0 0 20px 0; font-weight: 700; color: #15182b;
+    border-bottom: 3px solid #1fb8d8; padding-bottom: 8px; display: inline-block;
+  }
+  .kicker-small {
+    font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase;
+    color: #5a6fd8; margin-bottom: 6px; font-weight: 700;
+  }
+  p, li { font-size: 14px; line-height: 1.5; color: #353a52; margin: 0 0 8px 0; }
+  ul { padding-left: 18px; margin: 0; }
+  li { margin-bottom: 6px; }
+  .accent { color: #1f7fd8; }
+  .accent2 { color: #c0334d; }
+  .mono { font-family: 'SF Mono', Consolas, monospace; color: #1f7fd8; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start; }
+  .card {
+    background: #f4f7fc; border: 1px solid #dde4f3; border-left: 4px solid #1fb8d8;
+    border-radius: 8px; padding: 14px 18px;
+  }
+  .card.alt { border-left-color: #c0334d; }
+  .card h3 { font-size: 16px; margin: 0 0 6px 0; font-weight: 700; color: #15182b; }
+  .card.alt h3 { color: #c0334d; }
+  .card p, .card li { font-size: 13px; line-height: 1.45; margin-bottom: 5px; }
+  .card .meta { font-size: 11px; color: #6b7390; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; font-weight: 600; }
+  .flow-step {
+    background: #f4f7fc; border: 1px solid #dde4f3; border-left: 4px solid #c0334d;
+    border-radius: 8px; padding: 8px 14px; font-size: 13px; margin-bottom: 7px;
+    line-height: 1.4;
+  }
+  .flow-step b { color: #15182b; }
+  .check { color: #2f8f4f; font-weight: 700; }
+  .cross { color: #c0334d; font-weight: 700; }
+  .warn  { color: #b8860b; font-weight: 700; }
+  .ref { font-size: 12px; margin-bottom: 9px; color: #353a52; line-height: 1.4; }
+  .ref b { color: #15182b; }
+  .ref .meta { color: #6b7390; font-style: italic; font-size: 11px; }
+  .pageno { position: absolute; bottom: 14px; right: 24px; font-size: 11px; color: #ffffff; opacity: 0.75; z-index: 2; }
+  .badge {
+    display: inline-block; padding: 3px 10px; border-radius: 14px;
+    background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.5);
+    color: #ffffff; font-size: 11px; font-weight: 600; margin-right: 5px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .quote {
+    border-left: 3px solid #1fb8d8; padding: 6px 12px;
+    background: #f9fbfe; font-size: 13px; font-style: italic; color: #353a52;
+    margin: 8px 0;
+  }
+</style>
+</head>
+<body>
+
+<!-- 1. TITLE -->
+<section class="slide title-bg">
+  <div class="title-zone">
+    <div class="kicker">EMI305 · Producción de Software · Sistemas Ciberfísicos</div>
+    <h1>Seguridad y privacidad en CPS de videovigilancia<br>con reconocimiento facial</h1>
+    <p class="subtitle">Actividad Semana 1 — Desafíos abiertos en Sistemas Ciberfísicos:<br>
+      proteger datos biométricos bajo restricciones de tiempo real y energía.</p>
+    <div class="author-block">
+      Magíster en Ingeniería Informática · UFRO<br>
+      EMI305 · Producción de Software · 2026
+    </div>
+  </div>
+</section>
+
+<!-- 2. EL DESAFÍO -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">01 · Contexto</div>
+    <h2>El desafío</h2>
+    <div class="grid2">
+      <div>
+        <p>Los <b>CPS</b> acoplan <b>cómputo + comunicación + proceso físico</b>: un ataque lógico
+          produce <b class="accent2">consecuencias físicas</b> (abrir una puerta, silenciar una alarma).</p>
+        <p>Las contramedidas de TI tradicionales no bastan <span class="meta">(Humayed et al., 2017)</span>:</p>
+        <ul>
+          <li>Nodos con <b>recursos restringidos</b>.</li>
+          <li>Requisitos de <b>tiempo real</b> que desaconsejan criptografía pesada.</li>
+          <li><b>Heterogeneidad</b> de protocolos y dispositivos.</li>
+        </ul>
+        <p>En videovigilancia facial el dato sensado es <b class="accent2">biométrico</b>:
+          identifica de forma única y <b>no es revocable</b> — un rostro filtrado no se cambia.</p>
+      </div>
+      <div class="card alt">
+        <div class="meta">Problema abierto</div>
+        <h3>Proteger el CPS <i>y</i> la privacidad biométrica</h3>
+        <p>…sin violar las restricciones temporales y de energía del nodo.</p>
+        <div class="quote">
+          Tres tensiones centrales:<br>
+          • <b>Seguridad</b> ↔ <b>Tiempo real</b><br>
+          • <b>Trazabilidad</b> ↔ <b>Minimización de datos</b><br>
+          • <b>Cómputo en nube</b> ↔ <b>Procesamiento en el borde</b>
+        </div>
+        <p style="font-size:12px; color:#6b7390;">Ninguna contramedida única resuelve las tres dimensiones simultáneamente.</p>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">2</div>
+</section>
+
+<!-- 3. RELEVANCIA PARA CPS -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">02 · Relevancia</div>
+    <h2>¿Por qué es relevante para los CPS?</h2>
+    <div class="grid2">
+      <div>
+        <div class="flow-step">
+          <b class="accent2">01 · Consecuencia física directa.</b><br>
+          Una identificación falsificada (<i>spoofing</i> con una fotografía)
+          equivale a una intrusión física al recinto.
+        </div>
+        <div class="flow-step">
+          <b class="accent2">02 · Tensión seguridad ↔ tiempo real.</b><br>
+          Cifrar y anonimizar cuesta cómputo; el entorno dicta el plazo
+          de respuesta <span class="meta">(Lee, 2006)</span>.
+        </div>
+      </div>
+      <div>
+        <div class="flow-step">
+          <b class="accent2">03 · Regulación y confianza.</b><br>
+          Datos biométricos crecientemente regulados
+          (GDPR; Ley 19.628 en Chile).
+        </div>
+        <div class="flow-step">
+          <b class="accent2">04 · Escala.</b><br>
+          Una vulnerabilidad se replica en miles de cámaras
+          desplegadas <span class="meta">(Zanero, 2017)</span>.
+        </div>
+      </div>
+    </div>
+    <p style="margin-top:14px; font-size:13px; color:#6b7390;">
+      Por estas cuatro razones, la videovigilancia facial es un <b>caso de estudio paradigmático</b>
+      para investigar seguridad y privacidad en CPS.
+    </p>
+  </div>
+  <div class="pageno">3</div>
+</section>
+
+<!-- 4. LITERATURA 1/2 -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">03 · Literatura (1/2)</div>
+    <h2>Soluciones en la literatura</h2>
+    <div class="grid2">
+      <div class="card">
+        <div class="meta">Caracterización del desafío</div>
+        <h3>Humayed et al. (2017)</h3>
+        <p><b>Cyber-physical systems security — A survey.</b>
+          <span class="meta">IEEE Internet of Things Journal, 4(6), 1802–1831.</span></p>
+        <ul>
+          <li>Encuesta sistemática: 3 ejes (información, control, infraestructura)
+            × dominios de aplicación.</li>
+          <li>Contramedidas organizadas por capa:
+            percepción, transmisión, aplicación.</li>
+        </ul>
+        <p><span class="check">Ventaja:</span> visión integral.<br>
+           <span class="cross">Limitación:</span> marco de análisis, no solución operativa.</p>
+      </div>
+      <div class="card alt">
+        <div class="meta">Reconocimiento facial con preservación de privacidad</div>
+        <h3>Erkin et al. (2009)</h3>
+        <p><b>Privacy-preserving face recognition.</b>
+          <span class="meta">PETS 2009, LNCS 5672, 235–253.</span></p>
+        <ul>
+          <li><i>Eigenfaces</i> sobre datos <b>cifrados homomórficamente</b>:
+            el servidor identifica sin ver la imagen;
+            el cliente no aprende la base de datos.</li>
+        </ul>
+        <p><span class="check">Ventaja:</span> garantías formales.<br>
+           <span class="cross">Limitación:</span> costo computacional impracticable
+           en microcontroladores; latencia de segundos.</p>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">4</div>
+</section>
+
+<!-- 5. LITERATURA 2/2 -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">03 · Literatura (2/2)</div>
+    <h2>Soluciones en la literatura</h2>
+    <div class="grid2">
+      <div class="card">
+        <div class="meta">Procesamiento en el borde</div>
+        <h3>Chen &amp; Ran (2019)</h3>
+        <p><b>Deep learning with edge computing: A review.</b>
+          <span class="meta">Proceedings of the IEEE, 107(8), 1655–1674.</span></p>
+        <ul>
+          <li>Inferencia de aprendizaje profundo <b>en el propio nodo</b>:</li>
+          <li>La imagen <b>no viaja por la red</b>; sólo se transmite el
+            resultado mínimo → minimización de datos.</li>
+          <li>Latencia acotada, factible en hardware de bajo costo.</li>
+        </ul>
+        <p><span class="cross">Limitación:</span> la base biométrica reside en el nodo
+          → seguridad física, actualización segura, modelos de menor capacidad.</p>
+      </div>
+      <div class="card alt">
+        <div class="meta">Síntesis comparativa</div>
+        <h3>¿Cómo se complementan?</h3>
+        <table style="width:100%; border-collapse:collapse; font-size:12px;">
+          <tr>
+            <th style="text-align:left; padding:5px 6px; color:#1f7fd8; font-size:11px;
+                       text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid #e2e7f3;">Enfoque</th>
+            <th style="text-align:left; padding:5px 6px; color:#1f7fd8; font-size:11px;
+                       text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid #e2e7f3;">Capa</th>
+            <th style="text-align:left; padding:5px 6px; color:#1f7fd8; font-size:11px;
+                       text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid #e2e7f3;">Restricción crítica</th>
+          </tr>
+          <tr><td style="padding:5px 6px; border-bottom:1px solid #e2e7f3;">Humayed et al.</td>
+              <td style="padding:5px 6px; border-bottom:1px solid #e2e7f3;">Marco</td>
+              <td style="padding:5px 6px; border-bottom:1px solid #e2e7f3;">Análisis</td></tr>
+          <tr><td style="padding:5px 6px; border-bottom:1px solid #e2e7f3;">Erkin et al.</td>
+              <td style="padding:5px 6px; border-bottom:1px solid #e2e7f3;">Aplicación</td>
+              <td style="padding:5px 6px; border-bottom:1px solid #e2e7f3;">Cómputo</td></tr>
+          <tr><td style="padding:5px 6px;">Chen &amp; Ran</td>
+              <td style="padding:5px 6px;">Percepción</td>
+              <td style="padding:5px 6px;">Energía</td></tr>
+        </table>
+        <p style="font-size:12px; color:#6b7390; margin-top:8px;">
+          Cada propuesta aborda una capa distinta del CPS — son <b>complementarias</b>.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">5</div>
+</section>
+
+<!-- 6. REFLEXIÓN CRÍTICA -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">04 · Reflexión</div>
+    <h2>Reflexión crítica</h2>
+    <div class="grid2">
+      <div class="card alt">
+        <div class="meta">Lo que sigue sin resolverse</div>
+        <h3>Problemas abiertos</h3>
+        <ul>
+          <li><b>Verificación</b> extremo a extremo de propiedades de seguridad/privacidad.</li>
+          <li><b>Anti-spoofing</b> con recursos de borde.</li>
+          <li>Tensión <b>trazabilidad ↔ minimización de datos</b>.</li>
+          <li>Modelos de <b>amenazas</b> específicos para CPS con datos biométricos.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="meta">Líneas prometedoras</div>
+        <h3>Dirección de avance</h3>
+        <ul>
+          <li><b>Inferencia eficiente en el borde</b> (aceleradores de bajo consumo).</li>
+          <li><b>Biometría cancelable</b>: plantillas revocables y re-emisibles.</li>
+          <li>Atributos de calidad modelados <b>desde etapas tempranas</b>
+            (<i>softgoals</i> en orientación a agentes).</li>
+          <li>Enfoque que aplicaremos en el caso <b>SVIF</b> del curso.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="quote" style="margin-top:12px;">
+      Las soluciones actuales son <b>complementarias, no suficientes</b> por sí solas.
+      El desafío es integrarlas respetando las restricciones del CPS.
+    </div>
+  </div>
+  <div class="pageno">6</div>
+</section>
+
+<!-- 7. REFERENCIAS -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">05 · Bibliografía</div>
+    <h2>Referencias</h2>
+    <div class="grid2">
+      <div>
+        <div class="ref">
+          <b>Chen, J., &amp; Ran, X. (2019).</b>
+          <span class="meta">Deep learning with edge computing: A review.</span><br>
+          <i>Proceedings of the IEEE, 107</i>(8), 1655–1674.
+        </div>
+        <div class="ref">
+          <b>Erkin, Z., Franz, M., Guajardo, J., Katzenbeisser, S., Lagendijk, I., &amp; Toft, T. (2009).</b><br>
+          <span class="meta">Privacy-preserving face recognition.</span><br>
+          <i>PETS 2009, LNCS 5672</i>, 235–253.
+        </div>
+      </div>
+      <div>
+        <div class="ref">
+          <b>Humayed, A., Lin, J., Li, F., &amp; Luo, B. (2017).</b>
+          <span class="meta">Cyber-physical systems security — A survey.</span><br>
+          <i>IEEE Internet of Things Journal, 4</i>(6), 1802–1831.
+        </div>
+        <div class="ref">
+          <b>Lee, E. A. (2006).</b>
+          <span class="meta">Cyber-physical systems — Are computing foundations adequate?</span><br>
+          <i>NSF Workshop on CPS.</i>
+        </div>
+        <div class="ref">
+          <b>Zanero, S. (2017).</b>
+          <span class="meta">Cyber-physical systems.</span><br>
+          <i>Computer, 50</i>(4), 14–16.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">7</div>
+</section>
+
+</body>
+</html>

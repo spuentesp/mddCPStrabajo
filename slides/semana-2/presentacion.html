@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>S2 · Fundamentos de modelado — Lo que presento (UFRO)</title>
+<link rel="stylesheet" href="../template/slides.css">
+</head>
+<body>
+
+<!-- 1. TITLE -->
+<section class="slide title-bg">
+  <div class="title-zone">
+    <div class="kicker">EMI305 · Producción de Software · Sistemas Ciberfísicos</div>
+    <h1>Modelo, niveles de modelado,<br>metamodelo, DSL y MDD aplicados a SVIF</h1>
+    <p class="subtitle">Material puente hacia las Semanas 3 (CIM) y 4 (PIM → PSM):<br>
+      cómo el caso SVIF instancia cada nivel conceptual.</p>
+    <div class="author-block">
+      Magíster en Ingeniería Informática · UFRO<br>
+      EMI305 · Producción de Software · 2026
+    </div>
+  </div>
+</section>
+
+<!-- 2. INSTANCIACIÓN -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">01 · El modelo como representación con propósito</div>
+    <h2>¿Qué es un modelo? Instanciado en SVIF</h2>
+    <div class="grid2">
+      <div>
+        <p>Un modelo es una <b>representación de la realidad para algún propósito definido</b>
+          (Pidd, 2000). Entre el sistema y el modelo media la relación
+          <i>is-represented-by</i>.</p>
+        <p>Todo modelo se construye conforme a un <b>paradigma de modelado</b>
+          (Aßmann, Zschaler y Wagner, 2006).</p>
+        <p>En SVIF esto se concreta así:</p>
+        <ul>
+          <li>Antes de escribir una línea de C++, el sistema queda <b>representado por modelos</b>.</li>
+          <li>Permiten <b>razonar sobre objetivos en conflicto</b>
+            (privacidad ↔ oportunidad de la respuesta).</li>
+          <li>Documentan la arquitectura de dos nodos y comunican decisiones al equipo.</li>
+        </ul>
+      </div>
+      <div class="card alt">
+        <div class="meta">Calidades de un modelo útil (Selic, 2003)</div>
+        <h3>5 atributos</h3>
+        <div class="grid3">
+          <div class="card"><div class="meta">1</div><h3>Abstracto</h3></div>
+          <div class="card"><div class="meta">2</div><h3>Comprensible</h3></div>
+          <div class="card"><div class="meta">3</div><h3>Preciso</h3></div>
+        </div>
+        <div class="grid2">
+          <div class="card"><div class="meta">4</div><h3>Predictivo</h3></div>
+          <div class="card"><div class="meta">5</div><h3>Barato</h3><p>(significativamente más barato que construir el sistema)</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">2</div>
+</section>
+
+<!-- 3. NIVELES EN SVIF -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">02 · Pirámide instanciada</div>
+    <h2>Niveles de modelado en el proyecto SVIF</h2>
+    <table>
+      <tr><th style="width:18%;">Nivel</th><th>Espacio visual (SVIF)</th><th>Ejemplo en el proyecto</th></tr>
+      <tr>
+        <td><span class="tag">M0 · Sistema</span></td>
+        <td>Recinto con cámara y cerradura</td>
+        <td>ESP32-CAM vigilando la puerta</td>
+      </tr>
+      <tr>
+        <td><span class="tag alt">M1 · Modelo</span></td>
+        <td><code>cim-istar-svif.drawio</code>, <code>pim-dsl-svif.drawio</code></td>
+        <td>El agente <i>Face Monitor Component</i> con su objetivo
+          «Monitorear presencia de personas»</td>
+      </tr>
+      <tr>
+        <td><span class="tag">M2 · Metamodelo</span></td>
+        <td>iStar 2.0 (Dalpiaz, Franch y Horkoff, 2016);
+          metamodelo del DSL PIM del curso</td>
+        <td>Reglas: una <i>dependency</i> conecta depender–dependum–dependee;
+          una <i>OnIntervalAction</i> posee <code>interval_in_milliseconds</code></td>
+      </tr>
+      <tr>
+        <td><span class="tag alt">M3 · Metametamodelo</span></td>
+        <td>XML de diagrams.net (mxGraph)</td>
+        <td>Los modelos se serializan como XML y por ello son transformables con XSLT</td>
+      </tr>
+    </table>
+    <div class="quote" style="margin-top:14px;">
+      La elección de XML como formato serializado (mxGraph) es lo que hace viable
+      transformar CIM → PIM con <b>XSLT</b> y PIM → PSM con scripts Python.
+    </div>
+  </div>
+  <div class="pageno">3</div>
+</section>
+
+<!-- 4. ¿POR QUÉ UN DSL? -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">03 · Motivación</div>
+    <h2>¿Por qué un DSL y no solo UML?</h2>
+    <div class="grid2">
+      <div>
+        <p>UML describe bien clases, objetos, componentes e interacciones,
+          pero el dominio CPS incorpora conceptos específicos:</p>
+        <div class="pill-row">
+          <span class="tag">Hilos periódicos</span>
+          <span class="tag">Recursos de hardware</span>
+          <span class="tag">Mensajes entre nodos físicos</span>
+        </div>
+        <p>Representarlos con extensiones UML incrementaría la complejidad del modelado.</p>
+        <p>En SVIF, el DSL permite expresar:</p>
+        <div class="card-emphasis">
+          <p style="font-size:14px; text-align:center; font-style:italic;">
+            «Identificar un rostro cada <b>500 ms</b> y publicar el evento»
+          </p>
+          <p style="text-align:center; font-size:12px; color:#6b7390;">
+            — sin comprometerse aún con una plataforma concreta.
+          </p>
+        </div>
+      </div>
+      <div class="card alt">
+        <div class="meta">Tres elementos del DSL PIM del curso</div>
+        <h3>En SVIF</h3>
+        <table class="dense">
+          <tr><th>Elemento</th><th>DSL PIM para CPS</th></tr>
+          <tr>
+            <td><b>Sintaxis abstracta</b></td>
+            <td><code>CPComponent</code>, <code>OnIntervalAction</code>,
+              <code>OnDemandAction</code>, <code>SWResource</code>,
+              <code>HWResource</code>, <code>MessageSender</code>,
+              <code>MessageReceiver</code>, operadores AND/OR</td>
+          </tr>
+          <tr>
+            <td><b>Sintaxis concreta</b></td>
+            <td>Biblioteca <i>scratchpad PIM-DSL</i> para diagrams.net</td>
+          </tr>
+          <tr>
+            <td><b>Semántica</b></td>
+            <td>Traducción hacia hilos FreeRTOS, funciones C++, structs y
+              comentarios de trazabilidad en Arduino</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">4</div>
+</section>
+
+<!-- 5. MDD EN SVIF (diagrama cadena) -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">04 · Cadena MDD en SVIF</div>
+    <h2>MDD aplicado: la cadena concreta del caso</h2>
+    <div class="diagram">
+      <svg viewBox="0 0 1100 280" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arr-s2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#c0334d"/>
+          </marker>
+        </defs>
+
+        <!-- CIM -->
+        <rect x="30" y="50" width="220" height="180" rx="10" fill="#1f7fd8"/>
+        <text x="140" y="80" text-anchor="middle" fill="#fff" font-weight="700" font-size="15">CIM</text>
+        <text x="140" y="98" text-anchor="middle" fill="#d9e6ff" font-size="11">(iStar 2.0)</text>
+        <text x="50" y="125" fill="#fff" font-size="11">· objetivos</text>
+        <text x="50" y="145" fill="#fff" font-size="11">· dependencias</text>
+        <text x="50" y="165" fill="#fff" font-size="11">· softgoals</text>
+        <text x="50" y="190" fill="#d9e6ff" font-size="10" font-style="italic">cim-istar-svif.drawio</text>
+        <text x="50" y="208" fill="#d9e6ff" font-size="10" font-style="italic">Semana 3</text>
+
+        <!-- Arrow 1 -->
+        <line x1="252" y1="140" x2="298" y2="140" stroke="#c0334d" stroke-width="2.5" marker-end="url(#arr-s2)"/>
+        <text x="275" y="130" text-anchor="middle" font-size="10" fill="#c0334d" font-style="italic">XSLT</text>
+
+        <!-- PIM -->
+        <rect x="300" y="50" width="220" height="180" rx="10" fill="#1fb8d8"/>
+        <text x="410" y="80" text-anchor="middle" fill="#fff" font-weight="700" font-size="15">PIM</text>
+        <text x="410" y="98" text-anchor="middle" fill="#d9e6ff" font-size="11">(DSL CPS)</text>
+        <text x="320" y="125" fill="#fff" font-size="11">· arquitectura</text>
+        <text x="320" y="145" fill="#fff" font-size="11">· independiente de</text>
+        <text x="335" y="160" fill="#fff" font-size="11">plataforma</text>
+        <text x="320" y="190" fill="#d9e6ff" font-size="10" font-style="italic">pim-dsl-svif.drawio</text>
+        <text x="320" y="208" fill="#d9e6ff" font-size="10" font-style="italic">Semana 4 (1.1)</text>
+
+        <!-- Arrow 2 -->
+        <line x1="522" y1="140" x2="568" y2="140" stroke="#c0334d" stroke-width="2.5" marker-end="url(#arr-s2)"/>
+        <text x="545" y="130" text-anchor="middle" font-size="10" fill="#c0334d" font-style="italic">Python</text>
+
+        <!-- PSM -->
+        <rect x="570" y="50" width="220" height="180" rx="10" fill="#5a6fd8"/>
+        <text x="680" y="80" text-anchor="middle" fill="#fff" font-weight="700" font-size="15">PSM</text>
+        <text x="680" y="98" text-anchor="middle" fill="#dde0ff" font-size="11">(C++ Arduino)</text>
+        <text x="590" y="125" fill="#fff" font-size="11">· hilos, funciones,</text>
+        <text x="605" y="140" fill="#fff" font-size="11">structs generados</text>
+        <text x="590" y="165" fill="#fff" font-size="11">· trazabilidad</text>
+        <text x="590" y="190" fill="#dde0ff" font-size="10" font-style="italic">codigo/*.ino</text>
+        <text x="590" y="208" fill="#dde0ff" font-size="10" font-style="italic">Semana 4 (1.2)</text>
+
+        <!-- Arrow 3 -->
+        <line x1="792" y1="140" x2="838" y2="140" stroke="#c0334d" stroke-width="2.5" marker-end="url(#arr-s2)"/>
+        <text x="815" y="130" text-anchor="middle" font-size="10" fill="#c0334d" font-style="italic">manual</text>
+
+        <!-- Code -->
+        <rect x="840" y="50" width="220" height="180" rx="10" fill="#c0334d"/>
+        <text x="950" y="80" text-anchor="middle" fill="#fff" font-weight="700" font-size="15">Code</text>
+        <text x="950" y="98" text-anchor="middle" fill="#ffe1e6" font-size="11">(fase Code)</text>
+        <text x="860" y="125" fill="#fff" font-size="11">· credenciales</text>
+        <text x="860" y="145" fill="#fff" font-size="11">· configuración</text>
+        <text x="860" y="165" fill="#fff" font-size="11">· lógica específica</text>
+        <text x="860" y="190" fill="#ffe1e6" font-size="10" font-style="italic">secrets.h + secciones</text>
+        <text x="860" y="208" fill="#ffe1e6" font-size="10" font-style="italic">"Your code goes here"</text>
+
+        <!-- Footer caption -->
+        <text x="550" y="265" text-anchor="middle" font-size="11" fill="#6b7390" font-style="italic">
+          Cada transformación incorpora decisiones de diseño del siguiente nivel,
+          preservando la trazabilidad mediante identificadores (id_cim_parent).
+        </text>
+      </svg>
+    </div>
+  </div>
+  <div class="pageno">5</div>
+</section>
+
+<!-- 6. DECISIONES -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">05 · Decisiones que introdujo cada nivel</div>
+    <h2>Lo nuevo en cada nivel (lo que <i>no</i> estaba antes)</h2>
+    <table>
+      <tr><th style="width:16%;">Etapa</th><th>Decisiones incorporadas por el diseñador</th></tr>
+      <tr>
+        <td><span class="tag">CIM → PIM</span></td>
+        <td>Períodos (500 ms / 250 ms); parámetros E/S de las <code>OnDemandAction</code>;
+          estructura del <i>dependum</i> (timestamp, person_id, person_name, confidence, authorized);
+          campos de los <code>SWResource</code>.</td>
+      </tr>
+      <tr>
+        <td><span class="tag alt">PIM → PSM</span></td>
+        <td>Plataforma objetivo: <b>ESP32 (Arduino core)</b>. Tecnología de comunicación:
+          <b>MQTT</b>. Tipado concreto (unsigned long, char[32], float, bool). Pines
+          (RELAY_PIN, BUZZER_PIN).</td>
+      </tr>
+      <tr>
+        <td><span class="tag">PSM → Code</span></td>
+        <td>Credenciales WiFi y broker; umbral de confianza; política de autorización;
+          SIMULATION_MODE; duraciones de desbloqueo/alarma; tópico MQTT exacto.</td>
+      </tr>
+    </table>
+    <div class="note" style="margin-top:14px;">
+      <b>Idea clave:</b> cada nivel agrega información <b>no derivable</b> automáticamente
+      del anterior. El valor del MDD es postergar la decisión al nivel donde corresponde.
+    </div>
+  </div>
+  <div class="pageno">6</div>
+</section>
+
+<!-- 7. CIERRE -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">Síntesis y referencias</div>
+    <h2>Qué deja Semana 2 para SVIF</h2>
+    <div class="grid2">
+      <div class="card-emphasis">
+        <h3>Conceptos instalados</h3>
+        <ul>
+          <li>El sistema se <b>representa</b> con modelos antes de existir como código.</li>
+          <li>Cada nivel (M0–M3) tiene un <b>rol distinto</b> en la pirámide.</li>
+          <li>Cuando UML no alcanza, se construye un <b>DSL</b> con metamodelo + notación + semántica.</li>
+          <li><b>MDD</b> es la cadena de transformaciones que lleva del CIM al código.</li>
+          <li>Cada transformación <b>agrega decisiones</b> y preserva trazabilidad.</li>
+        </ul>
+      </div>
+      <div>
+        <p><b>Referencias:</b></p>
+        <div class="ref"><b>Aßmann, U., Zschaler, S., &amp; Wagner, G. (2006).</b>
+          <span class="meta">Ontologies, meta-models, and the model-driven paradigm.</span>
+          Springer.</div>
+        <div class="ref"><b>Bézivin, J. (2005).</b>
+          <span class="meta">On the unification power of models.</span>
+          <i>Software &amp; Systems Modeling, 4</i>(2), 171–188.</div>
+        <div class="ref"><b>Dalpiaz, F., Franch, X., &amp; Horkoff, J. (2016).</b>
+          <span class="meta">iStar 2.0 language guide.</span>
+          <i>arXiv:1605.07767</i>.</div>
+        <div class="ref"><b>Fowler, M. (2010).</b> <i>Domain-Specific Languages.</i> Pearson Education.</div>
+        <div class="ref"><b>Mernik, M., Heering, J., &amp; Sloane, A. M. (2005).</b>
+          <span class="meta">When and how to develop domain-specific languages.</span>
+          <i>ACM Computing Surveys, 37</i>(4), 316–344.</div>
+        <div class="ref"><b>Pidd, M. (2000).</b> <i>Tools for Thinking — Modelling in Management Science.</i> Wiley.</div>
+        <div class="ref"><b>Selic, B. (2003).</b>
+          <span class="meta">The pragmatics of model-driven development.</span>
+          <i>IEEE Software, 20</i>(5), 19–25.</div>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">7</div>
+</section>
+
+</body>
+</html>

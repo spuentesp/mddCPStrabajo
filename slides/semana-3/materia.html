@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>S3 · Agentes, iStar 2.0, DSL PIM — Materia (UFRO)</title>
+<link rel="stylesheet" href="../template/slides.css">
+</head>
+<body>
+
+<!-- 1. TITLE -->
+<section class="slide title-bg">
+  <div class="title-zone">
+    <div class="kicker">EMI305 · Producción de Software · Sistemas Ciberfísicos</div>
+    <h1>Semana 3 — Orientación a agentes<br>y DSL para CPS</h1>
+    <p class="subtitle">Paradigma BDI · ¿Qué es un agente? · iStar 2.0 (constructos y vistas) ·
+      Del CIM al DSL PIM puente hacia la implementación.</p>
+    <div class="author-block">
+      Magíster en Ingeniería Informática · UFRO<br>
+      EMI305 · Producción de Software · 2026
+    </div>
+  </div>
+</section>
+
+<!-- 2. AGENDA -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">Agenda</div>
+    <h2>Qué vamos a recorrer</h2>
+    <div class="grid2">
+      <div>
+        <div class="flow-step"><span class="num">01</span> ¿Por qué agentes para CPS?</div>
+        <div class="flow-step"><span class="num">02</span> El paradigma BDI (Bratman, 1987)</div>
+        <div class="flow-step"><span class="num">03</span> Definición y propiedades de un agente</div>
+        <div class="flow-step"><span class="num">04</span> Evolución: programa → objeto → agente</div>
+        <div class="flow-step"><span class="num">05</span> iStar 2.0: constructos</div>
+      </div>
+      <div>
+        <div class="flow-step"><span class="num">06</span> La dependencia y sus 5 partes</div>
+        <div class="flow-step"><span class="num">07</span> Refinamientos, NeededBy, Qualification, Contribution</div>
+        <div class="flow-step"><span class="num">08</span> Vistas SD / SR / híbrida</div>
+        <div class="flow-step"><span class="num">09</span> Del CIM al DSL PIM: el puente</div>
+        <div class="flow-step"><span class="num">10</span> Referencias</div>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">2</div>
+</section>
+
+<!-- 3. POR QUÉ AGENTES -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">01 · Motivación</div>
+    <h2>¿Por qué agentes para CPS?</h2>
+    <div class="grid2">
+      <div>
+        <p>Los CPS involucran componentes <b>distribuidos</b> cuyos objetivos
+          <b>pueden entrar en conflicto</b>:</p>
+        <div class="pill-row">
+          <span class="tag">Ahorro de energía</span>
+          <span class="tag">vs.</span>
+          <span class="tag alt">Precisión de respuesta</span>
+        </div>
+        <p>La <b>Orientación a Agentes (OA)</b> es reconocida como paradigma
+          adecuado para modelar sistemas complejos, autónomos y distribuidos,
+          capturando <b>objetivos, responsabilidades y dependencias desde etapas
+          tempranas</b> (Cares, Sepúlveda y Navarro, 2019).</p>
+      </div>
+      <div class="card alt">
+        <div class="meta">Del CIM al DSL PIM</div>
+        <h3>¿Qué falta entre el CIM y la implementación?</h3>
+        <p>Los modelos AO capturan objetivos y dependencias de alto nivel, pero
+          las plataformas concretas (Arduino) exigen conceptos más específicos:
+          funciones, hilos, temporizadores, variables de estado, comunicación,
+          acceso a recursos físicos.</p>
+        <p style="margin-top:8px;">→ Hay <b>distancia considerable</b> entre ambos
+          niveles. Solución: una representación <b>puente</b>, independiente de
+          tecnología pero suficientemente específica: el <b>DSL PIM para CPS</b>.</p>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">3</div>
+</section>
+
+<!-- 4. BDI -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">02 · BDI</div>
+    <h2>El paradigma BDI (Bratman, 1987)</h2>
+    <div class="grid3">
+      <div class="card">
+        <div class="meta">B · Beliefs</div>
+        <h3>Creencias</h3>
+        <p>Lo que el agente considera verdadero del mundo.</p>
+        <p style="font-family:monospace; font-size:11px; color:#1f7fd8;">
+          → variables, BD, expresiones lógicas
+        </p>
+      </div>
+      <div class="card">
+        <div class="meta">D · Desires</div>
+        <h3>Deseos</h3>
+        <p>Estados del mundo que quisiera alcanzar.</p>
+        <p style="font-family:monospace; font-size:11px; color:#1f7fd8;">
+          → estructuras objetivo
+        </p>
+      </div>
+      <div class="card alt">
+        <div class="meta">I · Intentions</div>
+        <h3>Intenciones</h3>
+        <p>Compromisos prácticos para actuar → <b>planes</b>.</p>
+        <p style="font-family:monospace; font-size:11px; color:#c0334d;">
+          → hilos de ejecución, procedimientos
+        </p>
+      </div>
+    </div>
+    <div class="quote" style="margin-top:14px;">
+      Una <b>acción racional no es</b> una sucesión de reacciones aisladas;
+      <b>sí es</b> actividad organizada por planes e intenciones que persisten en el
+      tiempo. Las intenciones estabilizan el comportamiento y evitan reconsiderarlo
+      todo continuamente.
+      <br><span style="color:#6b7390;">— Codificación formal: Rao &amp; Georgeff (1995)</span>
+    </div>
+  </div>
+  <div class="pageno">4</div>
+</section>
+
+<!-- 5. PROPIEDADES DEL AGENTE -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">03 · Definición</div>
+    <h2>¿Qué es un agente (de software)?</h2>
+    <div class="grid2">
+      <div>
+        <div class="quote">
+          «Un agente es un sistema computacional <b>situado en un entorno</b>,
+          capaz de <b>acción autónoma flexible</b> para cumplir sus objetivos
+          de diseño» — Jennings, Sycara &amp; Wooldridge (1998).
+        </div>
+        <p>Propiedades según Wooldridge &amp; Ciancarini (2000):</p>
+        <table class="dense">
+          <tr><th>Propiedad</th><th>Significado</th></tr>
+          <tr><td><b>Autonomía</b></td><td>Estado interno propio; decide con base en él</td></tr>
+          <tr><td><b>Reactividad</b></td><td>Percibe su ambiente y responde a los cambios</td></tr>
+          <tr><td><b>Proactividad</b></td><td>Tiene objetivos propios y toma la iniciativa</td></tr>
+          <tr><td><b>Habilidad social</b></td><td>Coopera, colabora, negocia con otros agentes/humanos</td></tr>
+        </table>
+      </div>
+      <div>
+        <div class="card alt">
+          <div class="meta">Evolución conceptual</div>
+          <h3>programa → subrutina → objeto → <b>agente</b></h3>
+          <p>Lind (2001): el agente es <b>objeto + autonomía</b>:
+            estado local persistente + hilo de ejecución independiente + iniciativa.</p>
+          <div class="card-emphasis" style="margin-top:8px; text-align:center;">
+            <p style="font-size:16px;"><b>agente</b> = <b>objeto</b> + <b>autonomía</b></p>
+          </div>
+        </div>
+        <div class="card" style="margin-top:8px;">
+          <div class="meta">Dimensiones del entorno (Russell &amp; Norvig)</div>
+          <p style="font-size:12px;">observable · determinista · episódico · estático · discreto · individual</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">5</div>
+</section>
+
+<!-- 6. ISTAR CONSTRUCTOS -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">04 · iStar 2.0</div>
+    <h2>iStar 2.0: constructos (Dalpiaz, Franch &amp; Horkoff, 2016)</h2>
+    <div class="grid3">
+      <div class="card">
+        <div class="meta">Actores</div>
+        <h3>Tipos</h3>
+        <p><b>Actor</b> (genérico), <b>Agente</b> (instancia concreta),
+          <b>Rol</b> (función abstracta).</p>
+        <p style="font-size:11.5px;"><i>boundary</i> delimita lo interno.</p>
+      </div>
+      <div class="card">
+        <div class="meta">Intencionales</div>
+        <h3>Elementos</h3>
+        <p><b>Goal</b> (objetivo), <b>Quality/Softgoal</b> (cualidad sin
+          criterio nítido), <b>Task</b> (tarea), <b>Resource</b> (recurso).</p>
+      </div>
+      <div class="card alt">
+        <div class="meta">Enlaces</div>
+        <h3>Relaciones</h3>
+        <p><b>Dependency</b>, <b>Refinement</b> (AND/OR),
+          <b>NeededBy</b>, <b>Qualification</b>,
+          <b>Contribution</b> (make/help/hurt/break).</p>
+      </div>
+    </div>
+    <div class="card-emphasis" style="margin-top:14px;">
+      <h3>La dependencia tiene cinco partes</h3>
+      <div class="diagram" style="margin-top:6px;">
+        <svg viewBox="0 0 1080 110" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr-dep" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="#1f7fd8"/>
+            </marker>
+          </defs>
+          <rect x="10" y="30" width="170" height="55" rx="6" fill="#1f7fd8"/>
+          <text x="95" y="55" text-anchor="middle" fill="#fff" font-weight="700" font-size="12">depender</text>
+          <text x="95" y="72" text-anchor="middle" fill="#d9e6ff" font-size="10">(quien depende)</text>
+
+          <rect x="220" y="30" width="170" height="55" rx="6" fill="#1fb8d8"/>
+          <text x="305" y="55" text-anchor="middle" fill="#fff" font-weight="700" font-size="12">dependerElmnt</text>
+          <text x="305" y="72" text-anchor="middle" fill="#d9e6ff" font-size="10">(por qué)</text>
+
+          <rect x="430" y="20" width="170" height="75" rx="6" fill="#c0334d"/>
+          <text x="515" y="48" text-anchor="middle" fill="#fff" font-weight="700" font-size="13">dependum</text>
+          <text x="515" y="65" text-anchor="middle" fill="#ffe1e6" font-size="10">(qué)</text>
+          <text x="515" y="82" text-anchor="middle" fill="#ffe1e6" font-size="10" font-style="italic">recurso u objetivo</text>
+
+          <rect x="640" y="30" width="170" height="55" rx="6" fill="#5a6fd8"/>
+          <text x="725" y="55" text-anchor="middle" fill="#fff" font-weight="700" font-size="12">dependee</text>
+          <text x="725" y="72" text-anchor="middle" fill="#dde0ff" font-size="10">(quien provee)</text>
+
+          <rect x="850" y="30" width="220" height="55" rx="6" fill="#1fb8d8"/>
+          <text x="960" y="55" text-anchor="middle" fill="#fff" font-weight="700" font-size="12">dependeeElmnt</text>
+          <text x="960" y="72" text-anchor="middle" fill="#d9e6ff" font-size="10">(cómo)</text>
+
+          <line x1="180" y1="57" x2="218" y2="57" stroke="#1f7fd8" stroke-width="2" marker-end="url(#arr-dep)"/>
+          <line x1="390" y1="57" x2="428" y2="57" stroke="#1f7fd8" stroke-width="2" marker-end="url(#arr-dep)"/>
+          <line x1="600" y1="57" x2="638" y2="57" stroke="#1f7fd8" stroke-width="2" marker-end="url(#arr-dep)"/>
+          <line x1="810" y1="57" x2="848" y2="57" stroke="#1f7fd8" stroke-width="2" marker-end="url(#arr-dep)"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">6</div>
+</section>
+
+<!-- 7. VISTAS -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">05 · Vistas iStar</div>
+    <h2>Las dos vistas y la híbrida</h2>
+    <div class="grid3">
+      <div class="card">
+        <div class="meta">SD</div>
+        <h3>Strategic Dependency</h3>
+        <p>Sólo <b>actores</b> y <b>dependencias</b>.</p>
+        <p style="font-size:11.5px; color:#6b7390;">
+          Visión externa del sistema: quién depende de quién y para qué.
+        </p>
+      </div>
+      <div class="card">
+        <div class="meta">SR</div>
+        <h3>Strategic Rationale</h3>
+        <p>Detalle <b>interno</b>: refinamientos, recursos, contribuciones.</p>
+        <p style="font-size:11.5px; color:#6b7390;">
+          Visión interna de cada actor: cómo satisface sus dependencias.
+        </p>
+      </div>
+      <div class="card alt">
+        <div class="meta">SD/SR híbrida</div>
+        <h3>Vista combinada</h3>
+        <p>SD con <i>boundaries</i> de SR expandidas dentro.</p>
+        <p style="font-size:11.5px; color:#6b7390;">
+          Combina legibilidad externa y detalle interno.
+        </p>
+      </div>
+    </div>
+    <div class="quote" style="margin-top:14px;">
+      <b>Paso a paso sugerido en clase:</b>
+      (1) Dependency → (2) Refinement → (3) NeededBy →
+      (4) Qualification → (5) Contribution.
+    </div>
+  </div>
+  <div class="pageno">7</div>
+</section>
+
+<!-- 8. CIM a DSL PIM -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">06 · El puente</div>
+    <h2>Del CIM al DSL PIM: constructos puente</h2>
+    <table>
+      <tr><th>Constructo DSL PIM</th><th>Semántica</th><th style="width:28%;">Representa del CIM</th></tr>
+      <tr>
+        <td><b>Cyber-Physical Component (CPC)</b></td>
+        <td>Contenedor computacional de un nodo CPS (acciones, recursos, comunicación);
+          trazabilidad por <code>id</code>, <code>name</code>, <code>id_cim_parent</code>.</td>
+        <td>Actor / Agente / Rol</td>
+      </tr>
+      <tr>
+        <td><b>On Interval Action</b></td>
+        <td>Proceso evaluado periódicamente (atributo <code>interval_in_milliseconds</code>);
+          conserva softgoals vía <code>qualification_array</code> y <code>contribution_array</code>.</td>
+        <td>Goal</td>
+      </tr>
+      <tr>
+        <td><b>On Demand Action</b></td>
+        <td>Procedimiento ejecutado bajo demanda (evento o solicitud); con parámetros E/S
+          independientes de tecnología y modos de operación.</td>
+        <td>Task</td>
+      </tr>
+      <tr>
+        <td><b>SW Resource</b></td>
+        <td>Recurso de software con estructura de datos.</td>
+        <td>Resource (software)</td>
+      </tr>
+      <tr>
+        <td><b>HW Resource</b></td>
+        <td>Recurso físico requerido.</td>
+        <td>Resource (hardware)</td>
+      </tr>
+      <tr>
+        <td><b>Message Sender / Receiver</b></td>
+        <td>Hilos de comunicación que intercambian el <i>dependum</i>.</td>
+        <td>Dependency</td>
+      </tr>
+      <tr>
+        <td><b>AND / OR</b></td>
+        <td>Operadores de refinamiento.</td>
+        <td>Refinement</td>
+      </tr>
+      <tr>
+        <td><b>From-To Relation</b></td>
+        <td>Flujo entre constructos.</td>
+        <td>enlaces internos</td>
+      </tr>
+    </table>
+  </div>
+  <div class="pageno">8</div>
+</section>
+
+<!-- 9. SÍNTESIS -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">Síntesis · Semana 3</div>
+    <h2>En síntesis</h2>
+    <div class="card-emphasis">
+      <p>Los <b>agentes</b> (autonomía + reactividad + proactividad + habilidad social;
+        BDI: creencias–deseos–intenciones) permiten modelar CPS con
+        <b>objetivos en conflicto</b>.</p>
+      <p><b>iStar 2.0</b> expresa actores, dependencias, refinamientos y softgoals;
+        el <b>DSL PIM</b> traduce esos conceptos a constructos implementables
+        <b>sin fijar aún la tecnología</b>.</p>
+    </div>
+    <div class="grid2" style="margin-top:14px;">
+      <div class="card"><div class="meta">Próxima semana</div><h3>MDD4CPS</h3><p>De CIM → PIM → PSM → Code en SVIF.</p></div>
+      <div class="card alt"><div class="meta">Esta semana (actividad)</div><h3>iStar aplicado</h3><p>Construir el CIM del caso SVIF.</p></div>
+    </div>
+  </div>
+  <div class="pageno">9</div>
+</section>
+
+</body>
+</html>

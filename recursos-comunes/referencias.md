@@ -23,7 +23,7 @@
   security—A survey. *IEEE Internet of Things Journal, 4*(6), 1802–1831.
   https://doi.org/10.1109/JIOT.2017.2703172
 - Zanero, S. (2017). Cyber-physical systems. *Computer, 50*(4), 14–16.
-  (Verificable en IEEE Xplore, revista *Computer*, abril de 2017.)
+  https://doi.org/10.1109/MC.2017.105
 
 ## Fundamentos de CPS (Semana 1)
 
@@ -69,6 +69,7 @@
   agent-oriented model-driven development process for cyber-physical systems.
   *Anais do XXVIII Congresso Ibero-Americano em Engenharia de Software
   (CIbSE 2025)* (pp. 150–164). SBC.
-  https://sol.sbc.org.br/index.php/cibse/article/view/35298
+  https://doi.org/10.5753/cibse.2025.35298
+  (URL: https://sol.sbc.org.br/index.php/cibse/article/view/35298)
 - Repositorio MDD4CPS (herramientas y caso de estudio del curso):
   https://github.com/mdd4cps/aomdd4cps

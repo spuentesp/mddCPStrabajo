@@ -1,360 +1,360 @@
-<mxfile host="app.diagrams.net" agent="MDD4CPS" type="device">
-  <diagram name="SD - Dependencias Estrategicas" id="svif-sd">
-    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
-      <root>
-        <mxCell id="0" />
-        <mxCell id="1" parent="0" />
-        <object label="Administrador de Seguridad" id="cim-a3" type="actor">
-          <mxCell style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
-            <mxGeometry x="80" y="340" width="110" height="110" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="" id="cim-a1" type="agent">
-          <mxCell style="group" vertex="1" connectable="0" parent="1">
-            <mxGeometry x="900" y="100" width="90" height="90" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="Face Monitor Component" id="cim-a1-c" type="agent">
-          <mxCell style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="cim-a1">
-            <mxGeometry width="90" height="90" as="geometry" />
-          </mxCell>
-        </object>
-        <mxCell id="cim-a1-l" value="" style="endArrow=none;html=1;rounded=0;startSize=9;endSize=6;sourcePerimeterSpacing=0;jumpStyle=sharp;exitX=0;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0;entryDx=0;entryDy=0;strokeColor=#004C99;" edge="1" parent="cim-a1" source="cim-a1-c" target="cim-a1-c">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <object label="" id="cim-a2" type="agent">
-          <mxCell style="group" vertex="1" connectable="0" parent="1">
-            <mxGeometry x="900" y="560" width="90" height="90" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="Access Actuator Component" id="cim-a2-c" type="agent">
-          <mxCell style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="cim-a2">
-            <mxGeometry width="90" height="90" as="geometry" />
-          </mxCell>
-        </object>
-        <mxCell id="cim-a2-l" value="" style="endArrow=none;html=1;rounded=0;startSize=9;endSize=6;sourcePerimeterSpacing=0;jumpStyle=sharp;exitX=0;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0;entryDx=0;entryDy=0;strokeColor=#004C99;" edge="1" parent="cim-a2" source="cim-a2-c" target="cim-a2-c">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <object label="Acceso controlado al recinto" id="cim-d2" type="goal">
-          <mxCell style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1;fontSize=12;allowArrows=0;" vertex="1" parent="1">
-            <mxGeometry x="440" y="300" width="160" height="45" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="Registro de accesos" id="cim-d3" type="resource">
-          <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;allowArrows=0;" vertex="1" parent="1">
-            <mxGeometry x="440" y="500" width="130" height="44" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="Evento de identificación" id="cim-d1-sd" type="resource">
-          <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;allowArrows=0;" vertex="1" parent="1">
-            <mxGeometry x="880" y="380" width="140" height="44" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="D" id="cim-sd-dep0" type="dependency-link">
-          <mxCell style="endArrow=classic;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=1;endFill=0;endSize=11;fontSize=16;" edge="1" parent="1" source="cim-a3" target="cim-d2">
-            <mxGeometry relative="1" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="D" id="cim-sd-dep1" type="dependency-link">
-          <mxCell style="endArrow=classic;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=1;endFill=0;endSize=11;fontSize=16;" edge="1" parent="1" source="cim-d2" target="cim-a2-c">
-            <mxGeometry relative="1" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="D" id="cim-sd-dep2" type="dependency-link">
-          <mxCell style="endArrow=classic;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=1;endFill=0;endSize=11;fontSize=16;" edge="1" parent="1" source="cim-a3" target="cim-d3">
-            <mxGeometry relative="1" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="D" id="cim-sd-dep3" type="dependency-link">
-          <mxCell style="endArrow=classic;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=1;endFill=0;endSize=11;fontSize=16;" edge="1" parent="1" source="cim-d3" target="cim-a2-c">
-            <mxGeometry relative="1" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="D" id="cim-sd-dep4" type="dependency-link">
-          <mxCell style="endArrow=classic;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=1;endFill=0;endSize=11;fontSize=16;" edge="1" parent="1" source="cim-a2-c" target="cim-d1-sd">
-            <mxGeometry relative="1" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="D" id="cim-sd-dep5" type="dependency-link">
-          <mxCell style="endArrow=classic;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=1;endFill=0;endSize=11;fontSize=16;" edge="1" parent="1" source="cim-d1-sd" target="cim-a1-c">
-            <mxGeometry relative="1" as="geometry" />
-          </mxCell>
-        </object>
-      </root>
-    </mxGraphModel>
-  </diagram>
-  <diagram name="SR - Vista hibrida SD-SR" id="svif-sr">
-    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
-      <root>
-        <mxCell id="0" />
-        <mxCell id="1" parent="0" />
-        <object label="" id="cim-b1" type="boundary">
-          <mxCell style="ellipse;whiteSpace=wrap;html=1;strokeWidth=2;dashed=1;fillColor=#faffff;strokeColor=#6c8ebf;allowArrows=0;container=1;dropTarget=1;" vertex="1" parent="1">
-            <mxGeometry x="240" y="40" width="660" height="480" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="" id="cim-a1sr" type="agent">
-          <mxCell style="group" vertex="1" connectable="0" parent="1">
-            <mxGeometry x="140" y="150" width="90" height="90" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="Face Monitor Component" id="cim-a1sr-c" type="agent">
-          <mxCell style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="cim-a1sr">
-            <mxGeometry width="90" height="90" as="geometry" />
-          </mxCell>
-        </object>
-        <mxCell id="cim-a1sr-l" value="" style="endArrow=none;html=1;rounded=0;startSize=9;endSize=6;sourcePerimeterSpacing=0;jumpStyle=sharp;exitX=0;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0;entryDx=0;entryDy=0;strokeColor=#004C99;" edge="1" parent="cim-a1sr" source="cim-a1sr-c" target="cim-a1sr-c">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <object label="" id="cim-owns1" type="owns">
-          <mxCell style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;endSize=10;curved=1;rounded=0;" edge="1" parent="1" source="cim-a1sr-c" target="cim-b1">
-            <mxGeometry relative="1" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="Identificación oportuna" id="cim-q1" type="softgoal">
-          <mxCell style="shape=stencil(7ZjbboMwDIafJpeVcoC2u5zY9h4pTdeslCCgp7dfmhC0uJSewsUkpApkO3E+bPMLFbGkWvNCIIrXiH0gSiOsL9o8WHPemLwqRFpb356Xki8ycY6wT4Tfdfz8Y0mq8lwvkyqvvMifeFWXXOa1to82G4nsCSdrTq1ViFJuRS3KZpH1Ivp1d17q56XB8r55eeNQeSOfl+BQieOBgKcDFXg20EDMY583WIFn2EvMomAVBonnwUbCLwULN8SAOFiN6VDEdKgak6GmYvLKHLNEe67JNEsWPN18l2qXLztxCl6vOwIuvFV7gW4Ie/eTts+7K20K4uc4Ul/UjwyIMfEOObnljck86XsMwR3hECKAEAOE2Edox+AVhhgwTAFDK5ndDKAMT3ViBjrh1LRFwKi3E6AM7nV4EAKDOmAfotU14p/iKNzb3VI8143Yp4gABYUUoB0M1uK5uQQUFFAQfIMC1uKpjhDQkQkYCwImE3YEzsV9s5mpSlxdZSTuQqmM94q8sWSlStGjeyuZZVqH1abvVLvgIJf6ZP39bO73aHwmc/GjZK4tczN7mjrf2pfyQhvnq9lln6B31yjho4SPEj5K+D+UcF9oOzabbRdSbrz2Xw7j+AU=);whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;allowArrows=0;" vertex="1" parent="cim-b1">
-            <mxGeometry x="40" y="25" width="100" height="62" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="Monitorear presencia de personas" id="cim-g1" type="goal">
-          <mxCell style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1;fontSize=12;allowArrows=0;" vertex="1" parent="cim-b1">
-            <mxGeometry x="240" y="30" width="170" height="46" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="Privacidad de datos personales" id="cim-q2" type="softgoal">
-          <mxCell style="shape=stencil(7ZjbboMwDIafJpeVcoC2u5zY9h4pTdeslCCgp7dfmhC0uJSewsUkpApkO3E+bPMLFbGkWvNCIIrXiH0gSiOsL9o8WHPemLwqRFpb356Xki8ycY6wT4Tfdfz8Y0mq8lwvkyqvvMifeFWXXOa1to82G4nsCSdrTq1ViFJuRS3KZpH1Ivp1d17q56XB8r55eeNQeSOfl+BQieOBgKcDFXg20EDMY583WIFn2EvMomAVBonnwUbCLwULN8SAOFiN6VDEdKgak6GmYvLKHLNEe67JNEsWPN18l2qXLztxCl6vOwIuvFV7gW4Ie/eTts+7K20K4uc4Ul/UjwyIMfEOObnljck86XsMwR3hECKAEAOE2Edox+AVhhgwTAFDK5ndDKAMT3ViBjrh1LRFwKi3E6AM7nV4EAKDOmAfotU14p/iKNzb3VI8143Yp4gABYUUoB0M1uK5uQQUFFAQfIMC1uKpjhDQkQkYCwImE3YEzsV9s5mpSlxdZSTuQqmM94q8sWSlStGjeyuZZVqH1abvVLvgIJf6ZP39bO73aHwmc/GjZK4tczN7mjrf2pfyQhvnq9lln6B31yjho4SPEj5K+D+UcF9oOzabbRdSbrz2Xw7j+AU=);whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;allowArrows=0;" vertex="1" parent="cim-b1">
-            <mxGeometry x="500" y="25" width="120" height="70" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="Capturar imagen" id="cim-t1" type="task">
-          <mxCell style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;strokeWidth=1;fillColor=#dae8fc;strokeColor=#6c8ebf;size=10;fontSize=12;allowArrows=0;" vertex="1" parent="cim-b1">
-            <mxGeometry x="20" y="160" width="115" height="44" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="Detectar rostro" id="cim-t2" type="task">
-          <mxCell style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;strokeWidth=1;fillColor=#dae8fc;strokeColor=#6c8ebf;size=10;fontSize=12;allowArrows=0;" vertex="1" parent="cim-b1">
-            <mxGeometry x="155" y="160" width="112" height="44" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="Identificar rostro" id="cim-t3" type="task">
-          <mxCell style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;strokeWidth=1;fillColor=#dae8fc;strokeColor=#6c8ebf;size=10;fontSize=12;allowArrows=0;" vertex="1" parent="cim-b1">
-            <mxGeometry x="290" y="160" width="120" height="44" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="Publicar evento de identificación" id="cim-t5" type="task">
-          <mxCell style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;strokeWidth=1;fillColor=#dae8fc;strokeColor=#6c8ebf;size=10;fontSize=12;allowArrows=0;" vertex="1" parent="cim-b1">
-            <mxGeometry x="445" y="160" width="160" height="50" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="Comparar con rostros enrolados" id="cim-t4" type="task">
-          <mxCell style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;strokeWidth=1;fillColor=#dae8fc;strokeColor=#6c8ebf;size=10;fontSize=12;allowArrows=0;" vertex="1" parent="cim-b1">
-            <mxGeometry x="275" y="270" width="155" height="50" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="Sensor de cámara OV2640" id="cim-r1" type="resource">
-          <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;allowArrows=0;" vertex="1" parent="cim-b1">
-            <mxGeometry x="20" y="270" width="125" height="44" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="Base de rostros enrolados" id="cim-r2" type="resource">
-          <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;allowArrows=0;" vertex="1" parent="cim-b1">
-            <mxGeometry x="280" y="390" width="135" height="44" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="" id="cim-ref-g1-0" type="refinement" value="and">
-          <mxCell style="endArrow=ERone;html=1;rounded=0;endFill=0;endSize=10;labelPosition=right;verticalLabelPosition=top;align=left;verticalAlign=bottom;" edge="1" parent="1" source="cim-t1" target="cim-g1">
-            <mxGeometry relative="1" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="" id="cim-ref-g1-1" type="refinement" value="and">
-          <mxCell style="endArrow=ERone;html=1;rounded=0;endFill=0;endSize=10;labelPosition=right;verticalLabelPosition=top;align=left;verticalAlign=bottom;" edge="1" parent="1" source="cim-t2" target="cim-g1">
-            <mxGeometry relative="1" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="" id="cim-ref-g1-2" type="refinement" value="and">
-          <mxCell style="endArrow=ERone;html=1;rounded=0;endFill=0;endSize=10;labelPosition=right;verticalLabelPosition=top;align=left;verticalAlign=bottom;" edge="1" parent="1" source="cim-t3" target="cim-g1">
-            <mxGeometry relative="1" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="" id="cim-ref-g1-3" type="refinement" value="and">
-          <mxCell style="endArrow=ERone;html=1;rounded=0;endFill=0;endSize=10;labelPosition=right;verticalLabelPosition=top;align=left;verticalAlign=bottom;" edge="1" parent="1" source="cim-t5" target="cim-g1">
-            <mxGeometry relative="1" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="" id="cim-ref-t3" type="refinement" value="and">
-          <mxCell style="endArrow=ERone;html=1;rounded=0;endFill=0;endSize=10;labelPosition=right;verticalLabelPosition=top;align=left;verticalAlign=bottom;" edge="1" parent="1" source="cim-t4" target="cim-t3">
-            <mxGeometry relative="1" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="" id="cim-nb1" type="needed-by">
-          <mxCell style="endArrow=oval;html=1;rounded=0;endFill=1;endSize=10;labelPosition=right;verticalLabelPosition=top;align=left;verticalAlign=bottom;" edge="1" parent="1" source="cim-r1" target="cim-t1">
-            <mxGeometry relative="1" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="" id="cim-nb2" type="needed-by">
-          <mxCell style="endArrow=oval;html=1;rounded=0;endFill=1;endSize=10;labelPosition=right;verticalLabelPosition=top;align=left;verticalAlign=bottom;" edge="1" parent="1" source="cim-r2" target="cim-t4">
-            <mxGeometry relative="1" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="" id="cim-qual1" type="qualification-link">
-          <mxCell style="endArrow=none;dashed=1;html=1;strokeWidth=2;rounded=0;" edge="1" parent="1" source="cim-q1" target="cim-g1">
-            <mxGeometry relative="1" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="help" id="cim-c1" type="contribution" value="help">
-          <mxCell style="endArrow=open;html=1;rounded=0;endFill=0;endSize=10;labelPosition=right;verticalLabelPosition=top;align=left;verticalAlign=bottom;" edge="1" parent="1" source="cim-t4" target="cim-q2">
-            <mxGeometry relative="1" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="hurt" id="cim-c2" type="contribution" value="hurt">
-          <mxCell style="endArrow=open;html=1;rounded=0;endFill=0;endSize=10;labelPosition=right;verticalLabelPosition=top;align=left;verticalAlign=bottom;" edge="1" parent="1" source="cim-t5" target="cim-q2">
-            <mxGeometry relative="1" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="Evento de identificación" id="cim-d1" type="resource">
-          <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;allowArrows=0;" vertex="1" parent="1">
-            <mxGeometry x="700" y="565" width="145" height="44" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="" id="cim-b2" type="boundary">
-          <mxCell style="ellipse;whiteSpace=wrap;html=1;strokeWidth=2;dashed=1;fillColor=#faffff;strokeColor=#6c8ebf;allowArrows=0;container=1;dropTarget=1;" vertex="1" parent="1">
-            <mxGeometry x="240" y="660" width="660" height="480" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="" id="cim-a2sr" type="agent">
-          <mxCell style="group" vertex="1" connectable="0" parent="1">
-            <mxGeometry x="140" y="770" width="90" height="90" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="Access Actuator Component" id="cim-a2sr-c" type="agent">
-          <mxCell style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="cim-a2sr">
-            <mxGeometry width="90" height="90" as="geometry" />
-          </mxCell>
-        </object>
-        <mxCell id="cim-a2sr-l" value="" style="endArrow=none;html=1;rounded=0;startSize=9;endSize=6;sourcePerimeterSpacing=0;jumpStyle=sharp;exitX=0;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0;entryDx=0;entryDy=0;strokeColor=#004C99;" edge="1" parent="cim-a2sr" source="cim-a2sr-c" target="cim-a2sr-c">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <object label="" id="cim-owns2" type="owns">
-          <mxCell style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;endSize=10;curved=1;rounded=0;" edge="1" parent="1" source="cim-a2sr-c" target="cim-b2">
-            <mxGeometry relative="1" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="Oportunidad de la respuesta" id="cim-q3" type="softgoal">
-          <mxCell style="shape=stencil(7ZjbboMwDIafJpeVcoC2u5zY9h4pTdeslCCgp7dfmhC0uJSewsUkpApkO3E+bPMLFbGkWvNCIIrXiH0gSiOsL9o8WHPemLwqRFpb356Xki8ycY6wT4Tfdfz8Y0mq8lwvkyqvvMifeFWXXOa1to82G4nsCSdrTq1ViFJuRS3KZpH1Ivp1d17q56XB8r55eeNQeSOfl+BQieOBgKcDFXg20EDMY583WIFn2EvMomAVBonnwUbCLwULN8SAOFiN6VDEdKgak6GmYvLKHLNEe67JNEsWPN18l2qXLztxCl6vOwIuvFV7gW4Ie/eTts+7K20K4uc4Ul/UjwyIMfEOObnljck86XsMwR3hECKAEAOE2Edox+AVhhgwTAFDK5ndDKAMT3ViBjrh1LRFwKi3E6AM7nV4EAKDOmAfotU14p/iKNzb3VI8143Yp4gABYUUoB0M1uK5uQQUFFAQfIMC1uKpjhDQkQkYCwImE3YEzsV9s5mpSlxdZSTuQqmM94q8sWSlStGjeyuZZVqH1abvVLvgIJf6ZP39bO73aHwmc/GjZK4tczN7mjrf2pfyQhvnq9lln6B31yjho4SPEj5K+D+UcF9oOzabbRdSbrz2Xw7j+AU=);whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;allowArrows=0;" vertex="1" parent="cim-b2">
-            <mxGeometry x="40" y="25" width="105" height="64" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="Controlar acceso al recinto" id="cim-g2" type="goal">
-          <mxCell style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1;fontSize=12;allowArrows=0;" vertex="1" parent="cim-b2">
-            <mxGeometry x="240" y="30" width="165" height="46" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="Trazabilidad de accesos" id="cim-q4" type="softgoal">
-          <mxCell style="shape=stencil(7ZjbboMwDIafJpeVcoC2u5zY9h4pTdeslCCgp7dfmhC0uJSewsUkpApkO3E+bPMLFbGkWvNCIIrXiH0gSiOsL9o8WHPemLwqRFpb356Xki8ycY6wT4Tfdfz8Y0mq8lwvkyqvvMifeFWXXOa1to82G4nsCSdrTq1ViFJuRS3KZpH1Ivp1d17q56XB8r55eeNQeSOfl+BQieOBgKcDFXg20EDMY583WIFn2EvMomAVBonnwUbCLwULN8SAOFiN6VDEdKgak6GmYvLKHLNEe67JNEsWPN18l2qXLztxCl6vOwIuvFV7gW4Ie/eTts+7K20K4uc4Ul/UjwyIMfEOObnljck86XsMwR3hECKAEAOE2Edox+AVhhgwTAFDK5ndDKAMT3ViBjrh1LRFwKi3E6AM7nV4EAKDOmAfotU14p/iKNzb3VI8143Yp4gABYUUoB0M1uK5uQQUFFAQfIMC1uKpjhDQkQkYCwImE3YEzsV9s5mpSlxdZSTuQqmM94q8sWSlStGjeyuZZVqH1abvVLvgIJf6ZP39bO73aHwmc/GjZK4tczN7mjrf2pfyQhvnq9lln6B31yjho4SPEj5K+D+UcF9oOzabbRdSbrz2Xw7j+AU=);whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;allowArrows=0;" vertex="1" parent="cim-b2">
-            <mxGeometry x="510" y="25" width="110" height="62" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="Evaluar autorización" id="cim-t6" type="task">
-          <mxCell style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;strokeWidth=1;fillColor=#dae8fc;strokeColor=#6c8ebf;size=10;fontSize=12;allowArrows=0;" vertex="1" parent="cim-b2">
-            <mxGeometry x="20" y="160" width="130" height="46" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="Gestionar respuesta de acceso" id="cim-t7" type="task">
-          <mxCell style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;strokeWidth=1;fillColor=#dae8fc;strokeColor=#6c8ebf;size=10;fontSize=12;allowArrows=0;" vertex="1" parent="cim-b2">
-            <mxGeometry x="230" y="160" width="160" height="50" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="Registrar evento de acceso" id="cim-t10" type="task">
-          <mxCell style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;strokeWidth=1;fillColor=#dae8fc;strokeColor=#6c8ebf;size=10;fontSize=12;allowArrows=0;" vertex="1" parent="cim-b2">
-            <mxGeometry x="455" y="160" width="150" height="50" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="Desbloquear cerradura" id="cim-t8" type="task">
-          <mxCell style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;strokeWidth=1;fillColor=#dae8fc;strokeColor=#6c8ebf;size=10;fontSize=12;allowArrows=0;" vertex="1" parent="cim-b2">
-            <mxGeometry x="150" y="280" width="135" height="46" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="Activar alarma" id="cim-t9" type="task">
-          <mxCell style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;strokeWidth=1;fillColor=#dae8fc;strokeColor=#6c8ebf;size=10;fontSize=12;allowArrows=0;" vertex="1" parent="cim-b2">
-            <mxGeometry x="340" y="280" width="112" height="44" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="Cerradura electromecánica" id="cim-r3" type="resource">
-          <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;allowArrows=0;" vertex="1" parent="cim-b2">
-            <mxGeometry x="145" y="385" width="135" height="44" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="Alarma sonora" id="cim-r4" type="resource">
-          <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;allowArrows=0;" vertex="1" parent="cim-b2">
-            <mxGeometry x="340" y="385" width="112" height="44" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="Bitácora de accesos" id="cim-r5" type="resource">
-          <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;allowArrows=0;" vertex="1" parent="cim-b2">
-            <mxGeometry x="480" y="280" width="125" height="44" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="" id="cim-ref-g2-0" type="refinement" value="and">
-          <mxCell style="endArrow=ERone;html=1;rounded=0;endFill=0;endSize=10;labelPosition=right;verticalLabelPosition=top;align=left;verticalAlign=bottom;" edge="1" parent="1" source="cim-t6" target="cim-g2">
-            <mxGeometry relative="1" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="" id="cim-ref-g2-1" type="refinement" value="and">
-          <mxCell style="endArrow=ERone;html=1;rounded=0;endFill=0;endSize=10;labelPosition=right;verticalLabelPosition=top;align=left;verticalAlign=bottom;" edge="1" parent="1" source="cim-t7" target="cim-g2">
-            <mxGeometry relative="1" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="" id="cim-ref-g2-2" type="refinement" value="and">
-          <mxCell style="endArrow=ERone;html=1;rounded=0;endFill=0;endSize=10;labelPosition=right;verticalLabelPosition=top;align=left;verticalAlign=bottom;" edge="1" parent="1" source="cim-t10" target="cim-g2">
-            <mxGeometry relative="1" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="" id="cim-ref-or1" type="refinement" value="or">
-          <mxCell style="endArrow=block;html=1;rounded=0;endFill=1;endSize=10;labelPosition=right;verticalLabelPosition=top;align=left;verticalAlign=bottom;" edge="1" parent="1" source="cim-t8" target="cim-t7">
-            <mxGeometry relative="1" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="" id="cim-ref-or2" type="refinement" value="or">
-          <mxCell style="endArrow=block;html=1;rounded=0;endFill=1;endSize=10;labelPosition=right;verticalLabelPosition=top;align=left;verticalAlign=bottom;" edge="1" parent="1" source="cim-t9" target="cim-t7">
-            <mxGeometry relative="1" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="" id="cim-nb3" type="needed-by">
-          <mxCell style="endArrow=oval;html=1;rounded=0;endFill=1;endSize=10;labelPosition=right;verticalLabelPosition=top;align=left;verticalAlign=bottom;" edge="1" parent="1" source="cim-r3" target="cim-t8">
-            <mxGeometry relative="1" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="" id="cim-nb4" type="needed-by">
-          <mxCell style="endArrow=oval;html=1;rounded=0;endFill=1;endSize=10;labelPosition=right;verticalLabelPosition=top;align=left;verticalAlign=bottom;" edge="1" parent="1" source="cim-r4" target="cim-t9">
-            <mxGeometry relative="1" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="" id="cim-nb5" type="needed-by">
-          <mxCell style="endArrow=oval;html=1;rounded=0;endFill=1;endSize=10;labelPosition=right;verticalLabelPosition=top;align=left;verticalAlign=bottom;" edge="1" parent="1" source="cim-r5" target="cim-t10">
-            <mxGeometry relative="1" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="" id="cim-qual2" type="qualification-link">
-          <mxCell style="endArrow=none;dashed=1;html=1;strokeWidth=2;rounded=0;" edge="1" parent="1" source="cim-q3" target="cim-g2">
-            <mxGeometry relative="1" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="help" id="cim-c3" type="contribution" value="help">
-          <mxCell style="endArrow=open;html=1;rounded=0;endFill=0;endSize=10;labelPosition=right;verticalLabelPosition=top;align=left;verticalAlign=bottom;" edge="1" parent="1" source="cim-t10" target="cim-q4">
-            <mxGeometry relative="1" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="D" id="cim-dep-sr1" type="dependency-link">
-          <mxCell style="endArrow=classic;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=1;endFill=0;endSize=11;fontSize=16;" edge="1" parent="1" source="cim-t6" target="cim-d1">
-            <mxGeometry relative="1" as="geometry" />
-          </mxCell>
-        </object>
-        <object label="D" id="cim-dep-sr2" type="dependency-link">
-          <mxCell style="endArrow=classic;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=1;endFill=0;endSize=11;fontSize=16;" edge="1" parent="1" source="cim-d1" target="cim-t5">
-            <mxGeometry relative="1" as="geometry" />
-          </mxCell>
-        </object>
-      </root>
-    </mxGraphModel>
-  </diagram>
+<mxfile host="65bd71144e">
+    <diagram name="SD - Dependencias Estrategicas" id="svif-sd">
+        <mxGraphModel dx="786" dy="795" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <object label="Administrador de Seguridad" type="actor" id="cim-a3">
+                    <mxCell style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+                        <mxGeometry x="80" y="340" width="110" height="110" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="" type="agent" id="cim-a1">
+                    <mxCell style="group" parent="1" vertex="1" connectable="0">
+                        <mxGeometry x="900" y="100" width="90" height="90" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Face Monitor Component" type="agent" id="cim-a1-c">
+                    <mxCell style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="cim-a1" vertex="1">
+                        <mxGeometry width="90" height="90" as="geometry"/>
+                    </mxCell>
+                </object>
+                <mxCell id="cim-a1-l" value="" style="endArrow=none;html=1;rounded=0;startSize=9;endSize=6;sourcePerimeterSpacing=0;jumpStyle=sharp;exitX=0;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0;entryDx=0;entryDy=0;strokeColor=#004C99;" parent="cim-a1" source="cim-a1-c" target="cim-a1-c" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <object label="" type="agent" id="cim-a2">
+                    <mxCell style="group" parent="1" vertex="1" connectable="0">
+                        <mxGeometry x="900" y="560" width="90" height="90" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Access Actuator Component" type="agent" id="cim-a2-c">
+                    <mxCell style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="cim-a2" vertex="1">
+                        <mxGeometry width="90" height="90" as="geometry"/>
+                    </mxCell>
+                </object>
+                <mxCell id="cim-a2-l" value="" style="endArrow=none;html=1;rounded=0;startSize=9;endSize=6;sourcePerimeterSpacing=0;jumpStyle=sharp;exitX=0;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0;entryDx=0;entryDy=0;strokeColor=#004C99;" parent="cim-a2" source="cim-a2-c" target="cim-a2-c" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <object label="Acceso controlado al recinto" type="goal" id="cim-d2">
+                    <mxCell style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1;fontSize=12;allowArrows=0;" parent="1" vertex="1">
+                        <mxGeometry x="440" y="300" width="160" height="45" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Registro de accesos" type="resource" id="cim-d3">
+                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;allowArrows=0;" parent="1" vertex="1">
+                        <mxGeometry x="440" y="500" width="130" height="44" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Evento de identificación" type="resource" id="cim-d1-sd">
+                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;allowArrows=0;" parent="1" vertex="1">
+                        <mxGeometry x="880" y="380" width="140" height="44" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="D" type="dependency-link" id="cim-sd-dep0">
+                    <mxCell style="endArrow=classic;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=1;endFill=0;endSize=11;fontSize=16;" parent="1" source="cim-a3" target="cim-d2" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="D" type="dependency-link" id="cim-sd-dep1">
+                    <mxCell style="endArrow=classic;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=1;endFill=0;endSize=11;fontSize=16;" parent="1" source="cim-d2" target="cim-a2-c" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="D" type="dependency-link" id="cim-sd-dep2">
+                    <mxCell style="endArrow=classic;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=1;endFill=0;endSize=11;fontSize=16;" parent="1" source="cim-a3" target="cim-d3" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="D" type="dependency-link" id="cim-sd-dep3">
+                    <mxCell style="endArrow=classic;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=1;endFill=0;endSize=11;fontSize=16;" parent="1" source="cim-d3" target="cim-a2-c" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="D" type="dependency-link" id="cim-sd-dep4">
+                    <mxCell style="endArrow=classic;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=1;endFill=0;endSize=11;fontSize=16;" parent="1" source="cim-a2-c" target="cim-d1-sd" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="D" type="dependency-link" id="cim-sd-dep5">
+                    <mxCell style="endArrow=classic;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=1;endFill=0;endSize=11;fontSize=16;" parent="1" source="cim-d1-sd" target="cim-a1-c" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram name="SR - Vista hibrida SD-SR" id="svif-sr">
+        <mxGraphModel dx="786" dy="795" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <object label="" type="boundary" id="cim-b1">
+                    <mxCell style="ellipse;whiteSpace=wrap;html=1;strokeWidth=2;dashed=1;fillColor=#faffff;strokeColor=#6c8ebf;allowArrows=0;container=1;dropTarget=1;" parent="1" vertex="1">
+                        <mxGeometry x="240" y="40" width="660" height="480" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Identificación oportuna" type="softgoal" id="cim-q1">
+                    <mxCell style="shape=stencil(7ZjbboMwDIafJpeVcoC2u5zY9h4pTdeslCCgp7dfmhC0uJSewsUkpApkO3E+bPMLFbGkWvNCIIrXiH0gSiOsL9o8WHPemLwqRFpb356Xki8ycY6wT4Tfdfz8Y0mq8lwvkyqvvMifeFWXXOa1to82G4nsCSdrTq1ViFJuRS3KZpH1Ivp1d17q56XB8r55eeNQeSOfl+BQieOBgKcDFXg20EDMY583WIFn2EvMomAVBonnwUbCLwULN8SAOFiN6VDEdKgak6GmYvLKHLNEe67JNEsWPN18l2qXLztxCl6vOwIuvFV7gW4Ie/eTts+7K20K4uc4Ul/UjwyIMfEOObnljck86XsMwR3hECKAEAOE2Edox+AVhhgwTAFDK5ndDKAMT3ViBjrh1LRFwKi3E6AM7nV4EAKDOmAfotU14p/iKNzb3VI8143Yp4gABYUUoB0M1uK5uQQUFFAQfIMC1uKpjhDQkQkYCwImE3YEzsV9s5mpSlxdZSTuQqmM94q8sWSlStGjeyuZZVqH1abvVLvgIJf6ZP39bO73aHwmc/GjZK4tczN7mjrf2pfyQhvnq9lln6B31yjho4SPEj5K+D+UcF9oOzabbRdSbrz2Xw7j+AU=);whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;allowArrows=0;" parent="cim-b1" vertex="1">
+                        <mxGeometry x="40" y="25" width="100" height="62" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Monitorear presencia de personas" type="goal" id="cim-g1">
+                    <mxCell style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1;fontSize=12;allowArrows=0;" parent="cim-b1" vertex="1">
+                        <mxGeometry x="240" y="30" width="170" height="46" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Privacidad de datos personales" type="softgoal" id="cim-q2">
+                    <mxCell style="shape=stencil(7ZjbboMwDIafJpeVcoC2u5zY9h4pTdeslCCgp7dfmhC0uJSewsUkpApkO3E+bPMLFbGkWvNCIIrXiH0gSiOsL9o8WHPemLwqRFpb356Xki8ycY6wT4Tfdfz8Y0mq8lwvkyqvvMifeFWXXOa1to82G4nsCSdrTq1ViFJuRS3KZpH1Ivp1d17q56XB8r55eeNQeSOfl+BQieOBgKcDFXg20EDMY583WIFn2EvMomAVBonnwUbCLwULN8SAOFiN6VDEdKgak6GmYvLKHLNEe67JNEsWPN18l2qXLztxCl6vOwIuvFV7gW4Ie/eTts+7K20K4uc4Ul/UjwyIMfEOObnljck86XsMwR3hECKAEAOE2Edox+AVhhgwTAFDK5ndDKAMT3ViBjrh1LRFwKi3E6AM7nV4EAKDOmAfotU14p/iKNzb3VI8143Yp4gABYUUoB0M1uK5uQQUFFAQfIMC1uKpjhDQkQkYCwImE3YEzsV9s5mpSlxdZSTuQqmM94q8sWSlStGjeyuZZVqH1abvVLvgIJf6ZP39bO73aHwmc/GjZK4tczN7mjrf2pfyQhvnq9lln6B31yjho4SPEj5K+D+UcF9oOzabbRdSbrz2Xw7j+AU=);whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;allowArrows=0;" parent="cim-b1" vertex="1">
+                        <mxGeometry x="500" y="25" width="120" height="70" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Capturar imagen" type="task" id="cim-t1">
+                    <mxCell style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;strokeWidth=1;fillColor=#dae8fc;strokeColor=#6c8ebf;size=10;fontSize=12;allowArrows=0;" parent="cim-b1" vertex="1">
+                        <mxGeometry x="20" y="160" width="115" height="44" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Detectar rostro" type="task" id="cim-t2">
+                    <mxCell style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;strokeWidth=1;fillColor=#dae8fc;strokeColor=#6c8ebf;size=10;fontSize=12;allowArrows=0;" parent="cim-b1" vertex="1">
+                        <mxGeometry x="155" y="160" width="112" height="44" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Identificar rostro" type="task" id="cim-t3">
+                    <mxCell style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;strokeWidth=1;fillColor=#dae8fc;strokeColor=#6c8ebf;size=10;fontSize=12;allowArrows=0;" parent="cim-b1" vertex="1">
+                        <mxGeometry x="290" y="160" width="120" height="44" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Publicar evento de identificación" type="task" id="cim-t5">
+                    <mxCell style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;strokeWidth=1;fillColor=#dae8fc;strokeColor=#6c8ebf;size=10;fontSize=12;allowArrows=0;" parent="cim-b1" vertex="1">
+                        <mxGeometry x="445" y="160" width="160" height="50" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Comparar con rostros enrolados" type="task" id="cim-t4">
+                    <mxCell style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;strokeWidth=1;fillColor=#dae8fc;strokeColor=#6c8ebf;size=10;fontSize=12;allowArrows=0;" parent="cim-b1" vertex="1">
+                        <mxGeometry x="275" y="270" width="155" height="50" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Sensor de cámara OV2640" type="resource" id="cim-r1">
+                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;allowArrows=0;" parent="cim-b1" vertex="1">
+                        <mxGeometry x="20" y="270" width="125" height="44" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Base de rostros enrolados" type="resource" id="cim-r2">
+                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;allowArrows=0;" parent="cim-b1" vertex="1">
+                        <mxGeometry x="280" y="390" width="135" height="44" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="" type="agent" id="cim-a1sr">
+                    <mxCell style="group" parent="1" vertex="1" connectable="0">
+                        <mxGeometry x="140" y="150" width="90" height="90" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Face Monitor Component" type="agent" id="cim-a1sr-c">
+                    <mxCell style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="cim-a1sr" vertex="1">
+                        <mxGeometry width="90" height="90" as="geometry"/>
+                    </mxCell>
+                </object>
+                <mxCell id="cim-a1sr-l" value="" style="endArrow=none;html=1;rounded=0;startSize=9;endSize=6;sourcePerimeterSpacing=0;jumpStyle=sharp;exitX=0;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0;entryDx=0;entryDy=0;strokeColor=#004C99;" parent="cim-a1sr" source="cim-a1sr-c" target="cim-a1sr-c" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <object label="" type="owns" id="cim-owns1">
+                    <mxCell style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;endSize=10;curved=1;rounded=0;" parent="1" source="cim-a1sr-c" target="cim-b1" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="" type="refinement" value="and" id="cim-ref-g1-0">
+                    <mxCell style="endArrow=ERone;html=1;rounded=0;endFill=0;endSize=10;labelPosition=right;verticalLabelPosition=top;align=left;verticalAlign=bottom;" parent="1" source="cim-t1" target="cim-g1" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="" type="refinement" value="and" id="cim-ref-g1-1">
+                    <mxCell style="endArrow=ERone;html=1;rounded=0;endFill=0;endSize=10;labelPosition=right;verticalLabelPosition=top;align=left;verticalAlign=bottom;" parent="1" source="cim-t2" target="cim-g1" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="" type="refinement" value="and" id="cim-ref-g1-2">
+                    <mxCell style="endArrow=ERone;html=1;rounded=0;endFill=0;endSize=10;labelPosition=right;verticalLabelPosition=top;align=left;verticalAlign=bottom;" parent="1" source="cim-t3" target="cim-g1" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="" type="refinement" value="and" id="cim-ref-g1-3">
+                    <mxCell style="endArrow=ERone;html=1;rounded=0;endFill=0;endSize=10;labelPosition=right;verticalLabelPosition=top;align=left;verticalAlign=bottom;" parent="1" source="cim-t5" target="cim-g1" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="" type="refinement" value="and" id="cim-ref-t3">
+                    <mxCell style="endArrow=ERone;html=1;rounded=0;endFill=0;endSize=10;labelPosition=right;verticalLabelPosition=top;align=left;verticalAlign=bottom;" parent="1" source="cim-t4" target="cim-t3" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="" type="needed-by" id="cim-nb1">
+                    <mxCell style="endArrow=oval;html=1;rounded=0;endFill=1;endSize=10;labelPosition=right;verticalLabelPosition=top;align=left;verticalAlign=bottom;" parent="1" source="cim-r1" target="cim-t1" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="" type="needed-by" id="cim-nb2">
+                    <mxCell style="endArrow=oval;html=1;rounded=0;endFill=1;endSize=10;labelPosition=right;verticalLabelPosition=top;align=left;verticalAlign=bottom;" parent="1" source="cim-r2" target="cim-t4" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="" type="qualification-link" id="cim-qual1">
+                    <mxCell style="endArrow=none;dashed=1;html=1;strokeWidth=2;rounded=0;" parent="1" source="cim-q1" target="cim-g1" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="help" type="contribution" value="help" id="cim-c1">
+                    <mxCell style="endArrow=open;html=1;rounded=0;endFill=0;endSize=10;labelPosition=right;verticalLabelPosition=top;align=left;verticalAlign=bottom;" parent="1" source="cim-t4" target="cim-q2" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="hurt" type="contribution" value="hurt" id="cim-c2">
+                    <mxCell style="endArrow=open;html=1;rounded=0;endFill=0;endSize=10;labelPosition=right;verticalLabelPosition=top;align=left;verticalAlign=bottom;" parent="1" source="cim-t5" target="cim-q2" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Evento de identificación" type="resource" id="cim-d1">
+                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;allowArrows=0;" parent="1" vertex="1">
+                        <mxGeometry x="700" y="565" width="145" height="44" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="" type="boundary" id="cim-b2">
+                    <mxCell style="ellipse;whiteSpace=wrap;html=1;strokeWidth=2;dashed=1;fillColor=#faffff;strokeColor=#6c8ebf;allowArrows=0;container=1;dropTarget=1;" parent="1" vertex="1">
+                        <mxGeometry x="240" y="660" width="660" height="480" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Oportunidad de la respuesta" type="softgoal" id="cim-q3">
+                    <mxCell style="shape=stencil(7ZjbboMwDIafJpeVcoC2u5zY9h4pTdeslCCgp7dfmhC0uJSewsUkpApkO3E+bPMLFbGkWvNCIIrXiH0gSiOsL9o8WHPemLwqRFpb356Xki8ycY6wT4Tfdfz8Y0mq8lwvkyqvvMifeFWXXOa1to82G4nsCSdrTq1ViFJuRS3KZpH1Ivp1d17q56XB8r55eeNQeSOfl+BQieOBgKcDFXg20EDMY583WIFn2EvMomAVBonnwUbCLwULN8SAOFiN6VDEdKgak6GmYvLKHLNEe67JNEsWPN18l2qXLztxCl6vOwIuvFV7gW4Ie/eTts+7K20K4uc4Ul/UjwyIMfEOObnljck86XsMwR3hECKAEAOE2Edox+AVhhgwTAFDK5ndDKAMT3ViBjrh1LRFwKi3E6AM7nV4EAKDOmAfotU14p/iKNzb3VI8143Yp4gABYUUoB0M1uK5uQQUFFAQfIMC1uKpjhDQkQkYCwImE3YEzsV9s5mpSlxdZSTuQqmM94q8sWSlStGjeyuZZVqH1abvVLvgIJf6ZP39bO73aHwmc/GjZK4tczN7mjrf2pfyQhvnq9lln6B31yjho4SPEj5K+D+UcF9oOzabbRdSbrz2Xw7j+AU=);whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;allowArrows=0;" parent="cim-b2" vertex="1">
+                        <mxGeometry x="40" y="25" width="105" height="64" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Controlar acceso al recinto" type="goal" id="cim-g2">
+                    <mxCell style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1;fontSize=12;allowArrows=0;" parent="cim-b2" vertex="1">
+                        <mxGeometry x="240" y="30" width="165" height="46" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Trazabilidad de accesos" type="softgoal" id="cim-q4">
+                    <mxCell style="shape=stencil(7ZjbboMwDIafJpeVcoC2u5zY9h4pTdeslCCgp7dfmhC0uJSewsUkpApkO3E+bPMLFbGkWvNCIIrXiH0gSiOsL9o8WHPemLwqRFpb356Xki8ycY6wT4Tfdfz8Y0mq8lwvkyqvvMifeFWXXOa1to82G4nsCSdrTq1ViFJuRS3KZpH1Ivp1d17q56XB8r55eeNQeSOfl+BQieOBgKcDFXg20EDMY583WIFn2EvMomAVBonnwUbCLwULN8SAOFiN6VDEdKgak6GmYvLKHLNEe67JNEsWPN18l2qXLztxCl6vOwIuvFV7gW4Ie/eTts+7K20K4uc4Ul/UjwyIMfEOObnljck86XsMwR3hECKAEAOE2Edox+AVhhgwTAFDK5ndDKAMT3ViBjrh1LRFwKi3E6AM7nV4EAKDOmAfotU14p/iKNzb3VI8143Yp4gABYUUoB0M1uK5uQQUFFAQfIMC1uKpjhDQkQkYCwImE3YEzsV9s5mpSlxdZSTuQqmM94q8sWSlStGjeyuZZVqH1abvVLvgIJf6ZP39bO73aHwmc/GjZK4tczN7mjrf2pfyQhvnq9lln6B31yjho4SPEj5K+D+UcF9oOzabbRdSbrz2Xw7j+AU=);whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;allowArrows=0;" parent="cim-b2" vertex="1">
+                        <mxGeometry x="510" y="25" width="110" height="62" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Evaluar autorización" type="task" id="cim-t6">
+                    <mxCell style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;strokeWidth=1;fillColor=#dae8fc;strokeColor=#6c8ebf;size=10;fontSize=12;allowArrows=0;" parent="cim-b2" vertex="1">
+                        <mxGeometry x="20" y="160" width="130" height="46" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Gestionar respuesta de acceso" type="task" id="cim-t7">
+                    <mxCell style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;strokeWidth=1;fillColor=#dae8fc;strokeColor=#6c8ebf;size=10;fontSize=12;allowArrows=0;" parent="cim-b2" vertex="1">
+                        <mxGeometry x="230" y="160" width="160" height="50" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Registrar evento de acceso" type="task" id="cim-t10">
+                    <mxCell style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;strokeWidth=1;fillColor=#dae8fc;strokeColor=#6c8ebf;size=10;fontSize=12;allowArrows=0;" parent="cim-b2" vertex="1">
+                        <mxGeometry x="455" y="160" width="150" height="50" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Desbloquear cerradura" type="task" id="cim-t8">
+                    <mxCell style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;strokeWidth=1;fillColor=#dae8fc;strokeColor=#6c8ebf;size=10;fontSize=12;allowArrows=0;" parent="cim-b2" vertex="1">
+                        <mxGeometry x="150" y="280" width="135" height="46" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Activar alarma" type="task" id="cim-t9">
+                    <mxCell style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;strokeWidth=1;fillColor=#dae8fc;strokeColor=#6c8ebf;size=10;fontSize=12;allowArrows=0;" parent="cim-b2" vertex="1">
+                        <mxGeometry x="340" y="280" width="112" height="44" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Cerradura electromecánica" type="resource" id="cim-r3">
+                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;allowArrows=0;" parent="cim-b2" vertex="1">
+                        <mxGeometry x="145" y="385" width="135" height="44" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Alarma sonora" type="resource" id="cim-r4">
+                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;allowArrows=0;" parent="cim-b2" vertex="1">
+                        <mxGeometry x="340" y="385" width="112" height="44" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Bitácora de accesos" type="resource" id="cim-r5">
+                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fontSize=12;fillColor=#dae8fc;strokeColor=#6c8ebf;allowArrows=0;" parent="cim-b2" vertex="1">
+                        <mxGeometry x="480" y="280" width="125" height="44" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="" type="agent" id="cim-a2sr">
+                    <mxCell style="group" parent="1" vertex="1" connectable="0">
+                        <mxGeometry x="140" y="770" width="90" height="90" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Access Actuator Component" type="agent" id="cim-a2sr-c">
+                    <mxCell style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="cim-a2sr" vertex="1">
+                        <mxGeometry width="90" height="90" as="geometry"/>
+                    </mxCell>
+                </object>
+                <mxCell id="cim-a2sr-l" value="" style="endArrow=none;html=1;rounded=0;startSize=9;endSize=6;sourcePerimeterSpacing=0;jumpStyle=sharp;exitX=0;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0;entryDx=0;entryDy=0;strokeColor=#004C99;" parent="cim-a2sr" source="cim-a2sr-c" target="cim-a2sr-c" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <object label="" type="owns" id="cim-owns2">
+                    <mxCell style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;endSize=10;curved=1;rounded=0;" parent="1" source="cim-a2sr-c" target="cim-b2" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="" type="refinement" value="and" id="cim-ref-g2-0">
+                    <mxCell style="endArrow=ERone;html=1;rounded=0;endFill=0;endSize=10;labelPosition=right;verticalLabelPosition=top;align=left;verticalAlign=bottom;" parent="1" source="cim-t6" target="cim-g2" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="" type="refinement" value="and" id="cim-ref-g2-1">
+                    <mxCell style="endArrow=ERone;html=1;rounded=0;endFill=0;endSize=10;labelPosition=right;verticalLabelPosition=top;align=left;verticalAlign=bottom;" parent="1" source="cim-t7" target="cim-g2" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="" type="refinement" value="and" id="cim-ref-g2-2">
+                    <mxCell style="endArrow=ERone;html=1;rounded=0;endFill=0;endSize=10;labelPosition=right;verticalLabelPosition=top;align=left;verticalAlign=bottom;" parent="1" source="cim-t10" target="cim-g2" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="" type="refinement" value="or" id="cim-ref-or1">
+                    <mxCell style="endArrow=block;html=1;rounded=0;endFill=1;endSize=10;labelPosition=right;verticalLabelPosition=top;align=left;verticalAlign=bottom;" parent="1" source="cim-t8" target="cim-t7" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="" type="refinement" value="or" id="cim-ref-or2">
+                    <mxCell style="endArrow=block;html=1;rounded=0;endFill=1;endSize=10;labelPosition=right;verticalLabelPosition=top;align=left;verticalAlign=bottom;" parent="1" source="cim-t9" target="cim-t7" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="" type="needed-by" id="cim-nb3">
+                    <mxCell style="endArrow=oval;html=1;rounded=0;endFill=1;endSize=10;labelPosition=right;verticalLabelPosition=top;align=left;verticalAlign=bottom;" parent="1" source="cim-r3" target="cim-t8" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="" type="needed-by" id="cim-nb4">
+                    <mxCell style="endArrow=oval;html=1;rounded=0;endFill=1;endSize=10;labelPosition=right;verticalLabelPosition=top;align=left;verticalAlign=bottom;" parent="1" source="cim-r4" target="cim-t9" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="" type="needed-by" id="cim-nb5">
+                    <mxCell style="endArrow=oval;html=1;rounded=0;endFill=1;endSize=10;labelPosition=right;verticalLabelPosition=top;align=left;verticalAlign=bottom;" parent="1" source="cim-r5" target="cim-t10" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="" type="qualification-link" id="cim-qual2">
+                    <mxCell style="endArrow=none;dashed=1;html=1;strokeWidth=2;rounded=0;" parent="1" source="cim-q3" target="cim-g2" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="help" type="contribution" value="help" id="cim-c3">
+                    <mxCell style="endArrow=open;html=1;rounded=0;endFill=0;endSize=10;labelPosition=right;verticalLabelPosition=top;align=left;verticalAlign=bottom;" parent="1" source="cim-t10" target="cim-q4" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="D" type="dependency-link" id="cim-dep-sr1">
+                    <mxCell style="endArrow=classic;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=1;endFill=0;endSize=11;fontSize=16;" parent="1" source="cim-t6" target="cim-d1" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="D" type="dependency-link" id="cim-dep-sr2">
+                    <mxCell style="endArrow=classic;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=1;endFill=0;endSize=11;fontSize=16;" parent="1" source="cim-d1" target="cim-t5" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+            </root>
+        </mxGraphModel>
+    </diagram>
 </mxfile>

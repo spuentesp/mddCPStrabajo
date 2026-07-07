@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>S3 · Modelado iStar 2.0 de SVIF — Lo que presento (UFRO)</title>
+<link rel="stylesheet" href="../template/slides.css">
+</head>
+<body>
+
+<!-- 1. TITLE -->
+<section class="slide title-bg">
+  <div class="title-zone">
+    <div class="kicker">EMI305 · Producción de Software · Sistemas Ciberfísicos</div>
+    <h1>Modelado orientado a agentes<br>de SVIF con iStar 2.0</h1>
+    <p class="subtitle">Actividad Semana 3 — CIM del caso SVIF construido con la biblioteca<br>
+      <i>scratchpad iStar 2.0</i> · vistas SD y SR/híbrida · trazabilidad cim-*.</p>
+    <div class="author-block">
+      Magíster en Ingeniería Informática · UFRO<br>
+      EMI305 · Producción de Software · 2026
+    </div>
+  </div>
+</section>
+
+<!-- 2. JUSTIFICACIÓN -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">01 · Justificación</div>
+    <h2>¿Por qué orientación a agentes para SVIF?</h2>
+    <div class="grid2">
+      <div>
+        <p>SVIF involucra componentes de software y hardware que interactúan de
+          manera distribuida y persiguen objetivos que pueden entrar en conflicto:</p>
+        <div class="pill-row">
+          <span class="tag">Privacidad de datos</span>
+          <span class="tag alt">vs.</span>
+          <span class="tag">Oportunidad de la identificación</span>
+        </div>
+        <div class="pill-row">
+          <span class="tag">Seguridad del recinto</span>
+          <span class="tag alt">vs.</span>
+          <span class="tag">Eficiencia de recursos</span>
+        </div>
+        <p>La <b>orientación a agentes</b> permite capturar objetivos,
+          responsabilidades y dependencias desde etapas tempranas
+          (Cares, Sepúlveda &amp; Navarro, 2019).</p>
+        <p><b>iStar 2.0</b> (Dalpiaz, Franch &amp; Horkoff, 2016) provee los
+          constructos necesarios: actores, agentes y roles; objetivos, tareas,
+          recursos y cualidades; y enlaces de dependency, refinement, needed-by,
+          qualification y contribution.</p>
+      </div>
+      <div class="card alt">
+        <div class="meta">Entregable</div>
+        <h3>Modelo CIM en diagrams.net</h3>
+        <p>Archivo <code>cim-istar-svif.drawio</code> con dos páginas:</p>
+        <div class="pill-row">
+          <span class="tag">Vista SD</span>
+          <span class="tag">Vista SR/híbrida</span>
+        </div>
+        <p>Biblioteca: <code>scratchpad iStar 2.0</code>
+          (<code>../recursos-comunes/librerias-drawio/</code>).</p>
+        <p style="font-size:11.5px; color:#6b7390; margin-top:6px;">
+          26 elementos inventariados (3 actores · 2 goals · 10 tasks · 5 resources · 4 qualities · 3 dependums).
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">2</div>
+</section>
+
+<!-- 3. ACTORES -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">02 · Actores</div>
+    <h2>Identificación de actores</h2>
+    <table>
+      <tr><th style="width:22%;">Actor</th><th style="width:20%;">Tipo iStar</th><th>Justificación</th></tr>
+      <tr>
+        <td><b>Face Monitor Component</b></td>
+        <td><span class="tag">Agente</span></td>
+        <td>Entidad concreta (nodo ESP32-CAM) con autonomía para percibir y decidir.</td>
+      </tr>
+      <tr>
+        <td><b>Access Actuator Component</b></td>
+        <td><span class="tag">Agente</span></td>
+        <td>Entidad concreta (nodo ESP32) que actúa sobre el mundo físico.</td>
+      </tr>
+      <tr>
+        <td><b>Administrador de Seguridad</b></td>
+        <td><span class="tag alt">Actor</span></td>
+        <td>Interesado humano; depende del sistema para mantener el recinto controlado.</td>
+      </tr>
+    </table>
+    <div class="quote" style="margin-top:14px;">
+      Decisión de modelado: los nodos ciberfísicos se modelan como <b>agentes</b>
+      (instancias concretas con autonomía) y al humano como <b>actor</b> genérico,
+      siguiendo la distinción de iStar 2.0.
+    </div>
+  </div>
+  <div class="pageno">3</div>
+</section>
+
+<!-- 4. PASO A PASO (1-2) -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">03 · Aplicación del paso a paso</div>
+    <h2>Dependency &amp; Refinement</h2>
+    <div class="grid2">
+      <div>
+        <div class="card">
+          <div class="meta">Paso 1 · Dependency (vista SD)</div>
+          <h3>Tres dependencias clave</h3>
+          <ul>
+            <li>El <b>Administrador de Seguridad</b> depende del <b>Access Actuator</b>
+              para el goal <i>«Acceso controlado al recinto»</i> y el recurso
+              <i>«Registro de accesos»</i>.</li>
+            <li>El <b>Access Actuator</b> depende del <b>Face Monitor</b> para el
+              recurso <i>«Evento de identificación»</i>: no puede decidir sobre el
+              acceso sin que alguien perciba e identifique a la persona.</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="card alt">
+          <div class="meta">Paso 2 · Refinement (vista SR)</div>
+          <h3>AND en el monitor · AND + OR en el actuador</h3>
+          <p><b>Monitor</b> · «Monitorear presencia de personas» se refina
+            <b>AND</b> en:</p>
+          <ul style="font-size:12px;">
+            <li>Capturar imagen → Detectar rostro → Identificar rostro → Publicar evento</li>
+            <li>«Identificar rostro» se refina en «Comparar con rostros enrolados»</li>
+          </ul>
+          <p><b>Actuador</b> · «Controlar acceso al recinto» se refina <b>AND</b> en:</p>
+          <ul style="font-size:12px;">
+            <li>Evaluar autorización · Gestionar respuesta · Registrar evento</li>
+            <li>«Gestionar respuesta» se refina <b>OR</b> en:
+              <b>Desbloquear</b> ∨ <b>Activar alarma</b></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">4</div>
+</section>
+
+<!-- 5. PASO A PASO (3-5) -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">03 · Aplicación del paso a paso</div>
+    <h2>NeededBy · Qualification · Contribution</h2>
+    <div class="grid3">
+      <div class="card">
+        <div class="meta">Paso 3 · NeededBy</div>
+        <h3>Recursos por tarea</h3>
+        <ul style="font-size:12px;">
+          <li>Capturar imagen → <b>Sensor cámara OV2640</b></li>
+          <li>Comparar rostros → <b>Base de rostros enrolados</b></li>
+          <li>Desbloquear cerradura → <b>Cerradura electromecánica</b></li>
+          <li>Activar alarma → <b>Alarma sonora</b></li>
+          <li>Registrar evento → <b>Bitácora de accesos</b></li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="meta">Paso 4 · Qualification</div>
+        <h3>Cualidades</h3>
+        <ul style="font-size:12px;">
+          <li><b>«Identificación oportuna»</b> califica a
+            «Monitorear presencia de personas»</li>
+          <li><b>«Oportunidad de la respuesta»</b> califica a
+            «Controlar acceso al recinto»</li>
+        </ul>
+      </div>
+      <div class="card alt">
+        <div class="meta">Paso 5 · Contribution</div>
+        <h3>Aportes a softgoals</h3>
+        <ul style="font-size:12px;">
+          <li><b>Comparar con rostros enrolados</b> → <span class="check">help</span>
+            «Privacidad de datos personales»</li>
+          <li><b>Publicar evento de identificación</b> → <span class="cross">hurt</span>
+            «Privacidad» (transmite datos minimizados)</li>
+          <li><b>Registrar evento de acceso</b> → <span class="check">help</span>
+            «Trazabilidad de accesos»</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">5</div>
+</section>
+
+<!-- 6. DEPENDENCIA CENTRAL (DIAGRAMA) -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">04 · Dependencia central</div>
+    <h2>La dependencia que articula SVIF</h2>
+    <div class="diagram">
+      <svg viewBox="0 0 1100 220" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arr-depc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#c0334d"/>
+          </marker>
+        </defs>
+
+        <!-- depender (Access Actuator) -->
+        <rect x="20" y="60" width="260" height="100" rx="10" fill="#c0334d"/>
+        <text x="150" y="88" text-anchor="middle" fill="#fff" font-weight="700" font-size="14">Access Actuator</text>
+        <text x="150" y="106" text-anchor="middle" fill="#ffe1e6" font-size="11">(depender)</text>
+        <text x="150" y="135" text-anchor="middle" fill="#fff" font-size="12">«Evaluar autorización»</text>
+        <text x="150" y="151" text-anchor="middle" fill="#ffe1e6" font-size="10" font-style="italic">cim-t6 · por qué</text>
+
+        <!-- dependum -->
+        <rect x="380" y="50" width="280" height="120" rx="10" fill="#1fb8d8"/>
+        <text x="520" y="80" text-anchor="middle" fill="#fff" font-weight="700" font-size="14">Evento de identificación</text>
+        <text x="520" y="98" text-anchor="middle" fill="#d9e6ff" font-size="11">(dependum)</text>
+        <text x="520" y="125" text-anchor="middle" fill="#fff" font-size="11" font-style="italic">cim-d1</text>
+        <text x="520" y="145" text-anchor="middle" fill="#d9e6ff" font-size="10">timestamp · person_id · person_name</text>
+        <text x="520" y="160" text-anchor="middle" fill="#d9e6ff" font-size="10">confidence · authorized</text>
+
+        <!-- dependee (Face Monitor) -->
+        <rect x="760" y="60" width="320" height="100" rx="10" fill="#1f7fd8"/>
+        <text x="920" y="88" text-anchor="middle" fill="#fff" font-weight="700" font-size="14">Face Monitor</text>
+        <text x="920" y="106" text-anchor="middle" fill="#d9e6ff" font-size="11">(dependee)</text>
+        <text x="920" y="135" text-anchor="middle" fill="#fff" font-size="12">«Publicar evento de identificación»</text>
+        <text x="920" y="151" text-anchor="middle" fill="#d9e6ff" font-size="10" font-style="italic">cim-t5 · cómo</text>
+
+        <!-- arrows -->
+        <line x1="280" y1="110" x2="378" y2="110" stroke="#c0334d" stroke-width="2.5" marker-end="url(#arr-depc)"/>
+        <line x1="660" y1="110" x2="758" y2="110" stroke="#c0334d" stroke-width="2.5" marker-end="url(#arr-depc)"/>
+
+        <text x="550" y="205" text-anchor="middle" font-size="11" fill="#6b7390" font-style="italic">
+          Esta dependencia recorre toda la cadena: del CIM al dependum PIM, al hilo MQTT, al struct PSM y al callback en el actuador.
+        </text>
+      </svg>
+    </div>
+    <div class="quote" style="margin-top:8px;">
+      La dependencia <code>cim-d1</code> (<i>Evento de identificación</i>) es el
+      <b>eje</b> que recorre toda la cadena MDD: CIM → dependum del PIM →
+      hilo MQTT → struct PSM → callback en el actuador.
+    </div>
+  </div>
+  <div class="pageno">6</div>
+</section>
+
+<!-- 7. INVENTARIO -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">05 · Trazabilidad</div>
+    <h2>Inventario de elementos (cim-*)</h2>
+    <div class="grid2">
+      <div>
+        <p><b>Monitor (cim-a1)</b></p>
+        <table class="dense">
+          <tr><th>ID</th><th>Elemento</th><th>Tipo</th></tr>
+          <tr><td><code>cim-g1</code></td><td>Monitorear presencia de personas</td><td>goal</td></tr>
+          <tr><td><code>cim-t1..t5</code></td><td>Capturar / Detectar / Identificar / Comparar / Publicar</td><td>task</td></tr>
+          <tr><td><code>cim-r1</code></td><td>Sensor de cámara OV2640</td><td>resource HW</td></tr>
+          <tr><td><code>cim-r2</code></td><td>Base de rostros enrolados</td><td>resource SW</td></tr>
+          <tr><td><code>cim-q1</code></td><td>Identificación oportuna</td><td>quality</td></tr>
+          <tr><td><code>cim-q2</code></td><td>Privacidad de datos personales</td><td>quality</td></tr>
+        </table>
+      </div>
+      <div>
+        <p><b>Actuador (cim-a2)</b></p>
+        <table class="dense">
+          <tr><th>ID</th><th>Elemento</th><th>Tipo</th></tr>
+          <tr><td><code>cim-g2</code></td><td>Controlar acceso al recinto</td><td>goal</td></tr>
+          <tr><td><code>cim-t6..t10</code></td><td>Evaluar / Gestionar respuesta / Desbloquear / Alarmar / Registrar</td><td>task</td></tr>
+          <tr><td><code>cim-r3</code></td><td>Cerradura electromecánica</td><td>resource HW</td></tr>
+          <tr><td><code>cim-r4</code></td><td>Alarma sonora</td><td>resource HW</td></tr>
+          <tr><td><code>cim-r5</code></td><td>Bitácora de accesos</td><td>resource SW</td></tr>
+          <tr><td><code>cim-q3</code></td><td>Oportunidad de la respuesta</td><td>quality</td></tr>
+          <tr><td><code>cim-q4</code></td><td>Trazabilidad de accesos</td><td>quality</td></tr>
+        </table>
+      </div>
+    </div>
+    <p style="font-size:11.5px; margin-top:8px;"><b>Administrador (cim-a3)</b> +
+      dependums <code>cim-d1</code>, <code>cim-d2</code>, <code>cim-d3</code>.</p>
+  </div>
+  <div class="pageno">7</div>
+</section>
+
+<!-- 8. DECISIONES -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">06 · Decisiones de modelado y supuestos</div>
+    <h2>Lo que el modelo asume (y deja abierto)</h2>
+    <div class="grid2">
+      <div class="card">
+        <div class="meta">Asunciones tomadas</div>
+        <h3>Cerradas en el CIM</h3>
+        <ul>
+          <li>Los nodos ciberfísicos son <b>agentes</b>; el humano es <b>actor</b>.</li>
+          <li>El <b>OR</b> en la respuesta de acceso captura una decisión de diseño
+            <b>abierta a nivel CIM</b>: el modelo no prescribe cuándo desbloquear o alarmar.</li>
+          <li>Las cualidades se limitan a las <b>4 con influencia arquitectónica
+            demostrable</b> (oportunidad ×2, privacidad, trazabilidad).</li>
+        </ul>
+      </div>
+      <div class="card alt">
+        <div class="meta">Lo que se difiere</div>
+        <h3>Queda para fases siguientes</h3>
+        <ul>
+          <li><b>Lógica del OR</b>: cuándo desbloquear o alarmar (fase Code: política
+            de <code>evaluarAutorizacion</code>).</li>
+          <li>Otras cualidades (eficiencia energética, confiabilidad) → requisitos
+            en <code>diseno-del-sistema.md</code>.</li>
+          <li>Trazabilidad: IDs <code>cim-*</code> se conservan en el PIM mediante
+            <code>id_cim_parent</code> (Semana 4).</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">8</div>
+</section>
+
+<!-- 9. CIERRE -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">Cierre</div>
+    <h2>Qué entrega Semana 3</h2>
+    <div class="card-emphasis">
+      <p>✓ Modelo CIM en diagrams.net (<code>cim-istar-svif.drawio</code>) con la
+        biblioteca <i>scratchpad iStar 2.0</i>.</p>
+      <p>✓ Dos páginas: <b>Vista SD</b> (dependencias estratégicas) +
+        <b>Vista híbrida SD/SR</b> (rationale dentro de los límites).</p>
+      <p>✓ Paso a paso documentado: Dependency → Refinement → NeededBy →
+        Qualification → Contribution.</p>
+      <p>✓ Inventario cim-* (26 elementos) — base de la trazabilidad hacia el PIM
+        en la Semana 4.</p>
+    </div>
+    <div class="grid2" style="margin-top:14px;">
+      <div class="card">
+        <div class="meta">Referencias</div>
+        <div class="ref"><b>Cares, C., Sepúlveda, S., &amp; Navarro, C. (2019).</b>
+          <span class="meta">Agent-oriented engineering for cyber-physical systems.</span>
+          <i>ICITS 2019</i>. Springer.</div>
+        <div class="ref"><b>Dalpiaz, F., Franch, X., &amp; Horkoff, J. (2016).</b>
+          <span class="meta">iStar 2.0 language guide.</span>
+          <i>arXiv:1605.07767</i>.</div>
+      </div>
+      <div class="card alt">
+        <div class="meta">Próxima parada</div>
+        <h3>Semana 4 · MDD4CPS</h3>
+        <p>Transformar este CIM en PIM (DSL CPS) → PSM (C++ Arduino) → Code.</p>
+        <p style="font-size:11.5px; color:#6b7390;">
+          La trazabilidad <code>cim-*</code> se mantiene vía <code>id_cim_parent</code>.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">9</div>
+</section>
+
+</body>
+</html>

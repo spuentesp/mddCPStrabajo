@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>S4 · MDD4CPS aplicado a SVIF — Lo que presento (UFRO)</title>
+<link rel="stylesheet" href="../template/slides.css">
+</head>
+<body>
+
+<!-- 1. TITLE -->
+<section class="slide title-bg">
+  <div class="title-zone">
+    <div class="kicker">EMI305 · Producción de Software · Sistemas Ciberfísicos</div>
+    <h1>Desarrollo de SVIF mediante MDD4CPS</h1>
+    <p class="subtitle">Actividad Semana 4 — Cadena CIM → PIM → PSM → Code aplicada al caso<br>
+      de videovigilancia con identificación facial · análisis crítico del proceso.</p>
+    <div class="author-block">
+      Magíster en Ingeniería Informática · UFRO<br>
+      EMI305 · Producción de Software · 2026
+    </div>
+  </div>
+</section>
+
+<!-- 2. CONTEXTO Y CIM -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">01 · Caso y CIM</div>
+    <h2>SVIF: dos nodos ciberfísicos, un modelo iStar</h2>
+    <div class="grid2">
+      <div>
+        <p><b>SVIF</b>: sistema de videovigilancia con identificación facial.</p>
+        <ul>
+          <li><b>Face Monitor</b> (ESP32-CAM): captura, detecta e identifica rostros.</li>
+          <li><b>Access Actuator</b> (ESP32): cerradura o alarma.</li>
+        </ul>
+        <p><b>CIM</b> orientado a agentes (Semana 3):</p>
+        <ul>
+          <li>Agentes con límites; objetivos refinados en tareas (AND).</li>
+          <li><b>Refinamiento OR</b>: desbloquear ∨ alarmar.</li>
+          <li><b>Softgoals</b>: privacidad de datos, oportunidad, trazabilidad.</li>
+          <li>Dependencia central: recurso <i>«Evento de identificación»</i>
+            (depender: actuador → dependee: monitor).</li>
+        </ul>
+      </div>
+      <div class="card alt">
+        <div class="meta">Inspección del modelo</div>
+        <h3>(Mostrar <code>cim-istar-svif.drawio</code>)</h3>
+        <p>Vista SD — dependencias estratégicas entre los tres actores.</p>
+        <p>Vista híbrida SD/SR — detalle interno del monitor y del actuador
+          con sus refinamientos, recursos y contribuciones.</p>
+        <p style="font-size:11.5px; color:#6b7390;">
+          Trazabilidad: 26 IDs <code>cim-*</code> listos para propagarse al PIM.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">2</div>
+</section>
+
+<!-- 3. CIM -> PIM -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">02 · CIM → PIM</div>
+    <h2>Transformación CIM → PIM</h2>
+    <p>Correspondencias identificadas automáticamente (trazabilidad
+      <code>id_cim_parent</code>):</p>
+    <table class="dense">
+      <tr><th>CIM (iStar)</th><th>PIM (DSL)</th></tr>
+      <tr><td><code>Agent</code></td><td><code>CPComponent</code></td></tr>
+      <tr><td><code>Goal</code></td><td><code>OnIntervalAction</code></td></tr>
+      <tr><td><code>Task</code></td><td><code>OnDemandAction</code></td></tr>
+      <tr><td><code>Resource</code></td><td><code>SW Resource</code> / <code>HW Resource</code></td></tr>
+      <tr><td><code>Dependency</code></td><td><code>MessageSender</code> + <code>MessageReceiver</code></td></tr>
+      <tr><td>Refinamientos AND/OR</td><td>Operadores <code>AND</code> / <code>OR</code></td></tr>
+      <tr><td><code>Quality</code></td><td><code>qualification_array</code> / <code>contribution_array</code></td></tr>
+    </table>
+    <p style="margin-top:10px;"><b>Decisiones incorporadas por el diseñador</b>
+      (independientes de tecnología):</p>
+    <div class="pill-row">
+      <span class="tag">Períodos: 500 ms (monitor) · 250 ms (actuador)</span>
+      <span class="tag">Parámetros E/S de acciones</span>
+      <span class="tag alt">Estructura del dependum: timestamp, person_id, person_name, confidence, authorized</span>
+    </div>
+    <div class="quote" style="margin-top:8px;">
+      <b>Identidad sí, imagen nunca</b> — decisión de privacidad que se
+      propaga desde el CIM hasta el PSM.
+    </div>
+  </div>
+  <div class="pageno">3</div>
+</section>
+
+<!-- 4. PIM -> PSM -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">03 · PIM → PSM</div>
+    <h2>Materialización sobre ESP32 + MQTT</h2>
+    <p><b>Decisiones de plataforma</b>: Arduino/ESP32, MQTT, tipado concreto.</p>
+    <table class="dense">
+      <tr><th>PIM</th><th>PSM (código generado)</th></tr>
+      <tr><td><code>CPComponent</code></td><td><code>.ino</code> + <code>comm_utils.h</code> + <code>secrets.h</code></td></tr>
+      <tr><td><code>OnIntervalAction</code></td><td>Hilo FreeRTOS con <code>vTaskDelay(pdMS_TO_TICKS(500))</code></td></tr>
+      <tr><td><code>OnDemandAction</code></td><td>Función C++ con bloque de trazabilidad</td></tr>
+      <tr><td><code>Sender / Receiver</code></td><td>Hilos MQTT con la struct del <i>dependum</i></td></tr>
+      <tr><td><code>SWResource</code></td><td><code>struct</code> tipada (<code>EnrolledFace</code>, <code>AccessLogEntry</code>)</td></tr>
+      <tr><td><code>HWResource</code></td><td>Comentario + pin (<code>RELAY_PIN</code>, <code>BUZZER_PIN</code>)</td></tr>
+      <tr><td>OR del CIM</td><td>Condicional en <code>gestionarRespuestaAcceso()</code></td></tr>
+      <tr><td>Softgoals</td><td>Comentarios <code>Qualification/Contribution Array</code></td></tr>
+    </table>
+  </div>
+  <div class="pageno">4</div>
+</section>
+
+<!-- 5. FASE CODE Y VERIFICACIÓN -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">04 · Fase Code y verificación</div>
+    <h2>Completar manualmente y verificar de punta a punta</h2>
+    <div class="grid2">
+      <div>
+        <p><b>Completado manualmente:</b></p>
+        <ul>
+          <li>Credenciales (<code>secrets.h</code>) y broker MQTT.</li>
+          <li>Umbral de confianza.</li>
+          <li>Política de autorización.</li>
+          <li><code>SIMULATION_MODE</code> para validar sin hardware.</li>
+        </ul>
+        <p><b>Ejecución de punta a punta</b> contra Mosquitto:</p>
+        <div class="pill-row">
+          <span class="tag">detección</span>
+          <span class="tag">identificación local</span>
+          <span class="tag">publicación MQTT</span>
+          <span class="tag">evaluación</span>
+          <span class="tag alt">desbloqueo | alarma</span>
+          <span class="tag">bitácora</span>
+        </div>
+        <p><b>14 eventos</b> en la corrida: <b>10 desbloqueos + 4 alarmas</b>.</p>
+      </div>
+      <div class="card alt">
+        <div class="meta">Hallazgo de verificación</div>
+        <h3>La rama de alarma no se ejercitaba</h3>
+        <p>Con la regla sintética inicial, sólo se desbloqueaba.
+          <b>Criterio de aceptación</b>: cobertura de ambas ramas del OR.</p>
+        <p style="margin-top:8px;"><b>Acción:</b> se ajustó la política de
+          autorización para forzar la rama de alarma cuando
+          <code>confidence &lt; umbral</code> o <code>authorized = false</code>.</p>
+        <p style="font-size:11.5px; color:#6b7390; margin-top:8px;">
+          Demostración en vivo o captura de
+          <code>evidencia-de-pruebas.md</code>.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">5</div>
+</section>
+
+<!-- 6. AUTOMATIZACIÓN -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">05 · Análisis</div>
+    <h2>Generado vs. personalizado · ≈ 78 %</h2>
+    <div class="grid2">
+      <div class="card-emphasis" style="text-align:center;">
+        <div class="big-num">~78 %</div>
+        <p style="font-size:13px; margin-top:6px;">del código fue
+          <b>generado</b> — consistente con el caso del invernadero
+          (Navarro, Devia, Labra Gayo &amp; Cares, 2025).</p>
+      </div>
+      <div class="card alt">
+        <div class="meta">Desglose por componente</div>
+        <h3>Líneas generadas vs. personalizadas</h3>
+        <table class="dense">
+          <tr><th>CPC</th><th>Total</th><th>Personalizado</th><th>% gen.</th></tr>
+          <tr><td>Face Monitor</td><td>310</td><td>~70</td><td class="mono">~77 %</td></tr>
+          <tr><td>Access Actuator</td><td>315</td><td>~65</td><td class="mono">~79 %</td></tr>
+          <tr><td><b>Total</b></td><td><b>625</b></td><td><b>~135</b></td><td class="mono"><b>~78 %</b></td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="grid2" style="margin-top:14px;">
+      <div class="card">
+        <div class="meta">Fortalezas</div>
+        <h3>Lo que aporta MDD4CPS</h3>
+        <ul>
+          <li><b>Trazabilidad</b> softgoal → código (cada función enlaza con su tarea CIM).</li>
+          <li>Decisiones <b>postergadas al nivel correcto</b>.</li>
+          <li>Andamiaje <b>homogéneo</b> de hilos + comunicación.</li>
+        </ul>
+      </div>
+      <div class="card alt">
+        <div class="meta">Limitaciones</div>
+        <h3>Lo que falta</h3>
+        <ul>
+          <li>Sin restricciones temporales duras en el DSL.</li>
+          <li>Softgoals sólo como comentarios (no verificables automáticamente).</li>
+          <li>El OR pierde semántica: el criterio se reintroduce a mano en Code.</li>
+          <li>Herramienta en versión alfa (ajustes manuales en diagrams.net).</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">6</div>
+</section>
+
+<!-- 7. REFLEXIÓN -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">06 · Reflexión personal</div>
+    <h2>Lo que aprendí · lo que haría distinto</h2>
+    <div class="grid2">
+      <div class="card-emphasis">
+        <div class="meta">Aprendizajes</div>
+        <h3>¿Qué aprendí?</h3>
+        <ul>
+          <li>El <b>OR del CIM</b> no prescribe el criterio de selección — esa decisión
+            se reintroduce en Code: el modelo deja la política abierta a propósito.</li>
+          <li>La <b>trazabilidad cim-* → id_cim_parent</b> es lo que hace navegable
+            la búsqueda "qué softgoal sobrevive en qué función".</li>
+          <li>El <b>DSL no tiene restricciones temporales</b>: el período es un atributo,
+            no algo que se verifique → la simulación es esencial para detectar omisiones.</li>
+          <li>El <b>~22 % manual</b> no es ruido: son las decisiones que el modelo
+            no puede deducir (credenciales, política).</li>
+        </ul>
+      </div>
+      <div class="card alt">
+        <div class="meta">Para iterar</div>
+        <h3>¿Qué haría distinto?</h3>
+        <ul>
+          <li>Definir la <b>política de autorización</b> antes de la primera ejecución
+            (la regla sintética llevó a no cubrir la rama de alarma).</li>
+          <li>Modelar los <b>recursos HW con más detalle</b> en el PIM
+            (pines, polaridad, debouncing).</li>
+          <li>Documentar el <b>diccionario de softgoals → criterios de aceptación</b>
+            desde el CIM, no sólo como comentario.</li>
+          <li>Considerar <b>más de una dependencia</b> para mostrar cómo escalan
+            las transformaciones.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">7</div>
+</section>
+
+<!-- 8. CIERRE -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">Cierre</div>
+    <h2>Entregables de la actividad</h2>
+    <div class="grid2">
+      <div>
+        <p><b>Entregables declarados y su estado:</b></p>
+        <table class="dense">
+          <tr><th>Entregable</th><th>Estado</th><th>Archivo</th></tr>
+          <tr><td>CIM (.drawio)</td><td><span class="check">✓</span></td><td><code>cim-istar-svif.drawio</code></td></tr>
+          <tr><td>PIM/DSL (.drawio)</td><td><span class="check">✓</span></td><td><code>pim-dsl-svif.drawio</code></td></tr>
+          <tr><td>Código fuente</td><td><span class="check">✓</span></td><td><code>codigo/</code></td></tr>
+          <tr><td>Presentación</td><td><span class="check">✓</span></td><td>este PDF</td></tr>
+          <tr><td>Video 5–7 min</td><td><span class="warn">⬜</span></td><td>grabar (guion listo)</td></tr>
+          <tr><td>Encuesta experiencia</td><td><span class="warn">⬜</span></td><td>forms.gle/VPaL9qx7mhKttJgf8</td></tr>
+        </table>
+      </div>
+      <div>
+        <p><b>Referencias:</b></p>
+        <div class="ref"><b>Bézivin, J. (2005).</b>
+          <span class="meta">On the unification power of models.</span>
+          <i>Software &amp; Systems Modeling, 4</i>(2), 171–188.</div>
+        <div class="ref"><b>Dalpiaz, F., Franch, X., &amp; Horkoff, J. (2016).</b>
+          <span class="meta">iStar 2.0 language guide.</span>
+          <i>arXiv:1605.07767</i>.</div>
+        <div class="ref"><b>Navarro, C., Devia, L., Labra Gayo, J. E., &amp; Cares, C. (2025).</b>
+          <span class="meta">An agent-oriented model-driven development process for cyber-physical systems.</span>
+          <i>CIbSE 2025</i> (pp. 150–164). SBC.</div>
+        <div class="ref"><b>Repositorio MDD4CPS:</b>
+          <span class="meta">github.com/mdd4cps/aomdd4cps</span></div>
+      </div>
+    </div>
+    <div class="quote" style="margin-top:14px;">
+      <b>Balance:</b> para un CPS pequeño como SVIF, el costo del modelado se
+      amortiza en documentación y trazabilidad; el beneficio crece con el número
+      de componentes y dependencias, donde el andamiaje de comunicación es la
+      parte más propensa a error si se escribe a mano.
+    </div>
+  </div>
+  <div class="pageno">8</div>
+</section>
+
+</body>
+</html>

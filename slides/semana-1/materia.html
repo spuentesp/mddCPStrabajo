@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>S1 · CPS — Materia (UFRO)</title>
+<link rel="stylesheet" href="../template/slides.css">
+</head>
+<body>
+
+<!-- 1. TITLE -->
+<section class="slide title-bg">
+  <div class="title-zone">
+    <div class="kicker">EMI305 · Producción de Software · Sistemas Ciberfísicos</div>
+    <h1>Semana 1 — Introducción a los<br>Sistemas Ciberfísicos</h1>
+    <p class="subtitle">Origen en la cibernética · Definición y elementos · Desafíos abiertos ·
+      Arquitectura en capas · Hacia la disciplina CPS Engineering.</p>
+    <div class="author-block">
+      Magíster en Ingeniería Informática · UFRO<br>
+      EMI305 · Producción de Software · 2026
+    </div>
+  </div>
+</section>
+
+<!-- 2. AGENDA -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">Agenda</div>
+    <h2>Qué vamos a recorrer</h2>
+    <div class="grid2">
+      <div>
+        <div class="flow-step"><span class="num">01</span> Origen: la cibernética (Wiener, 1940)</div>
+        <div class="flow-step"><span class="num">02</span> ¿Qué es un sistema ciberfísico?</div>
+        <div class="flow-step"><span class="num">03</span> Los cuatro elementos constitutivos</div>
+        <div class="flow-step"><span class="num">04</span> CPS vs. IoT / Industria 4.0 / M2M</div>
+        <div class="flow-step"><span class="num">05</span> ¿Por qué auge ahora?</div>
+        <div class="flow-step"><span class="num">06</span> Desafíos abiertos (Marwedel &amp; Engel, 2016)</div>
+      </div>
+      <div>
+        <div class="flow-step"><span class="num">07</span> De los desafíos a la arquitectura en capas</div>
+        <div class="flow-step"><span class="num">08</span> El equipo de trabajo</div>
+        <div class="flow-step"><span class="num">09</span> Hacia una disciplina "CPS Engineering"</div>
+        <div class="flow-step"><span class="num">10</span> Aplicación: videovigilancia facial (SVIF)</div>
+        <div class="flow-step"><span class="num">11</span> Referencias bibliográficas</div>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">2</div>
+</section>
+
+<!-- 3. CIBERNÉTICA -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">01 · Origen</div>
+    <h2>La cibernética: percibir, decidir, actuar</h2>
+    <div class="grid2">
+      <div>
+        <p>Los términos <i>cyberspace</i> y <i>cyber-physical</i> provienen de la
+          <b>cibernética</b> (<i>cybernetics</i>), desarrollada por
+          <b>Norbert Wiener</b> en la década de 1940 para estudiar sistemas de control
+          y comunicación.</p>
+        <p>Su interés central: cómo un sistema puede <b>percibir</b> su entorno,
+          <b>tomar decisiones</b> y <b>actuar</b> sobre él. Para ello introdujo la
+          <b>retroalimentación</b> (<i>feedback</i>): las acciones futuras dependen
+          de los resultados observados previamente.</p>
+        <div class="quote">
+          Del griego <i>kybernetes</i> (κυβερνήτης): <b>timonel</b> o gobernador —
+          una metáfora de conducción y control.
+        </div>
+      </div>
+      <div>
+        <div class="card-emphasis" style="text-align:center;">
+          <h3>Ciclo cibernético</h3>
+          <svg viewBox="0 0 360 280" style="width:100%; max-width:340px; margin:6px auto; display:block;">
+            <defs>
+              <marker id="arr-cyber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M0,0 L10,5 L0,10 z" fill="#1f7fd8"/>
+              </marker>
+            </defs>
+            <!-- circle of nodes -->
+            <circle cx="180" cy="140" r="100" fill="none" stroke="#dde4f3" stroke-dasharray="4 4"/>
+            <!-- nodes -->
+            <g font-family="Helvetica" font-size="13" text-anchor="middle">
+              <circle cx="180" cy="40" r="36" fill="#1f7fd8"/>
+              <text x="180" y="38" fill="#fff" font-weight="700">PERCIBIR</text>
+              <text x="180" y="54" fill="#d9e6ff" font-size="10">Sensores</text>
+
+              <circle cx="290" cy="170" r="36" fill="#c0334d"/>
+              <text x="290" y="168" fill="#fff" font-weight="700">ACTUAR</text>
+              <text x="290" y="184" fill="#ffe1e6" font-size="10">Actuadores</text>
+
+              <circle cx="180" cy="240" r="36" fill="#1fb8d8"/>
+              <text x="180" y="238" fill="#fff" font-weight="700">DECIDIR</text>
+              <text x="180" y="254" fill="#d9e6ff" font-size="10">Cómputo</text>
+
+              <circle cx="70" cy="170" r="36" fill="#5a6fd8"/>
+              <text x="70" y="168" fill="#fff" font-weight="700">COMUNICAR</text>
+              <text x="70" y="184" fill="#dde0ff" font-size="10">Redes</text>
+            </g>
+            <!-- arrows clockwise -->
+            <path d="M210,60 A90,90 0 0 1 280,150" fill="none" stroke="#1f7fd8" stroke-width="2" marker-end="url(#arr-cyber)"/>
+            <path d="M270,200 A90,90 0 0 1 210,220" fill="none" stroke="#1f7fd8" stroke-width="2" marker-end="url(#arr-cyber)"/>
+            <path d="M150,220 A90,90 0 0 1 80,200" fill="none" stroke="#1f7fd8" stroke-width="2" marker-end="url(#arr-cyber)"/>
+            <path d="M80,140 A90,90 0 0 1 150,60" fill="none" stroke="#1f7fd8" stroke-width="2" marker-end="url(#arr-cyber)"/>
+          </svg>
+          <p style="font-size:11px; color:#6b7390; margin-top:4px;">
+            Lazo cerrado: la salida realimenta la siguiente decisión.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">3</div>
+</section>
+
+<!-- 4. ¿QUÉ ES UN CPS? -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">02 · Definición</div>
+    <h2>¿Qué es un sistema ciberfísico?</h2>
+    <div class="grid2">
+      <div>
+        <p>Dos definiciones complementarias vistas en clase:</p>
+        <div class="card">
+          <h3>Lee (2015)</h3>
+          <p style="font-style:italic;">«Un CPS es una <b>orquestación de computadoras
+            y sistemas físicos</b>».</p>
+        </div>
+        <div class="card alt">
+          <h3>Cares, Sepúlveda &amp; Navarro (2019)</h3>
+          <p style="font-style:italic;">«Los CPS son la <b>integración de hardware
+            distribuido controlado por software distribuido</b> con el propósito de
+            <b>controlar procesos físicos</b>».</p>
+        </div>
+        <p>En la práctica, un CPS debe integrar <b>cuatro elementos</b>:</p>
+        <div class="pill-row">
+          <span class="tag">Sensores</span>
+          <span class="tag">Actuadores</span>
+          <span class="tag">Cómputo</span>
+          <span class="tag">Comunicaciones</span>
+        </div>
+      </div>
+      <div>
+        <div class="card-emphasis">
+          <h3>CPS vs. conceptos vecinos</h3>
+          <table class="dense">
+            <tr><th>Concepto</th><th>Foco</th></tr>
+            <tr><td><b>CPS</b></td><td>Unir ingeniería cibernética con ingeniería física</td></tr>
+            <tr><td>IoT</td><td>Interconectar objetos (enfoque de implementación)</td></tr>
+            <tr><td>Industria 4.0</td><td>Aplicación industrial específica</td></tr>
+            <tr><td>M2M</td><td>Comunicación máquina-a-máquina</td></tr>
+            <tr><td>Industrial Internet</td><td>Industria + conectividad</td></tr>
+          </table>
+          <p style="margin-top:8px;"><b>CPS</b> es el concepto <b>más amplio y
+            fundamental</b>: no impone enfoque ni aplicación particular.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">4</div>
+</section>
+
+<!-- 5. CUATRO ELEMENTOS (con diagrama SVIF) -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">03 · Elementos constitutivos</div>
+    <h2>Los cuatro elementos de un CPS</h2>
+    <div class="diagram">
+      <svg viewBox="0 0 1100 250" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arr-svif" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#1f7fd8"/>
+          </marker>
+        </defs>
+        <!-- nodes (4 elements) -->
+        <g font-family="Helvetica" font-size="13" text-anchor="middle">
+          <!-- Sensor -->
+          <rect x="40" y="80" width="170" height="90" rx="10" fill="#1fb8d8"/>
+          <text x="125" y="105" fill="#fff" font-weight="700" font-size="14">SENSOR</text>
+          <text x="125" y="125" fill="#d9e6ff" font-size="11">Cámara OV2640</text>
+          <text x="125" y="143" fill="#d9e6ff" font-size="11">(ESP32-CAM)</text>
+
+          <!-- Cómputo -->
+          <rect x="270" y="80" width="170" height="90" rx="10" fill="#1f7fd8"/>
+          <text x="355" y="105" fill="#fff" font-weight="700" font-size="14">CÓMPUTO</text>
+          <text x="355" y="125" fill="#d9e6ff" font-size="11">ESP32</text>
+          <text x="355" y="143" fill="#d9e6ff" font-size="11">(identificación local)</text>
+
+          <!-- Comunicaciones -->
+          <rect x="500" y="80" width="170" height="90" rx="10" fill="#5a6fd8"/>
+          <text x="585" y="105" fill="#fff" font-weight="700" font-size="14">COMUNICACIONES</text>
+          <text x="585" y="125" fill="#dde0ff" font-size="11">MQTT</text>
+          <text x="585" y="143" fill="#dde0ff" font-size="11">sobre WiFi</text>
+
+          <!-- Actuador -->
+          <rect x="730" y="80" width="170" height="90" rx="10" fill="#c0334d"/>
+          <text x="815" y="105" fill="#fff" font-weight="700" font-size="14">ACTUADOR</text>
+          <text x="815" y="125" fill="#ffe1e6" font-size="11">Relé / cerradura</text>
+          <text x="815" y="143" fill="#ffe1e6" font-size="11">+ buzzer</text>
+        </g>
+        <!-- arrows between -->
+        <path d="M210,125 L270,125" stroke="#1f7fd8" stroke-width="2.5" marker-end="url(#arr-svif)"/>
+        <path d="M440,125 L500,125" stroke="#1f7fd8" stroke-width="2.5" marker-end="url(#arr-svif)"/>
+        <path d="M670,125 L730,125" stroke="#c0334d" stroke-width="2.5" marker-end="url(#arr-svif)"/>
+        <!-- feedback loop -->
+        <path d="M900,80 Q1000,30 125,80" fill="none" stroke="#6b7390" stroke-width="1.5" stroke-dasharray="6 4"/>
+        <text x="510" y="30" font-family="Helvetica" font-size="11" fill="#6b7390" text-anchor="middle" font-style="italic">
+          retroalimentación · siguiente ciclo de percepción
+        </text>
+        <!-- caption -->
+        <text x="550" y="220" font-family="Helvetica" font-size="12" fill="#353a52" text-anchor="middle">
+          <tspan font-weight="700" fill="#15182b">SVIF</tspan> — videovigilancia con identificación facial: los cuatro elementos operando en un solo sistema
+        </text>
+      </svg>
+    </div>
+    <div class="grid3" style="margin-top:14px;">
+      <div class="card"><div class="meta">Función</div><h3>Percibir</h3><p>Capturan variables del mundo real.</p></div>
+      <div class="card"><div class="meta">Función</div><h3>Decidir</h3><p>Software en dispositivos y computadores.</p></div>
+      <div class="card alt"><div class="meta">Función</div><h3>Actuar</h3><p>Modifican el mundo físico.</p></div>
+    </div>
+  </div>
+  <div class="pageno">5</div>
+</section>
+
+<!-- 6. AUGE -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">04 · Auge</div>
+    <h2>¿Por qué auge ahora? Factores facilitadores</h2>
+    <div class="grid4">
+      <div class="card">
+        <div class="meta">Cómputo embebido</div>
+        <h3 class="big-num">$5K</h3>
+        <p>CLP por un MCU (ESP32, Arduino) o SBC (Raspberry Pi, ODROID) con prestaciones suficientes.</p>
+      </div>
+      <div class="card alt">
+        <div class="meta">Sensing &amp; actuación</div>
+        <h3 class="big-num">~$1K</h3>
+        <p>CLP por sensores y actuadores (ultrasonido, PIR, cámara, relé, cerradura electrónica…).</p>
+      </div>
+      <div class="card">
+        <div class="meta">Conectividad</div>
+        <h3 class="big-num">SDN</h3>
+        <p>LAN/WAN ubicua y <b>S</b>oftware-<b>D</b>efined <b>N</b>etworking
+          (Kreutz et al., 2014): plano de control separado del de datos.</p>
+      </div>
+      <div class="card gray">
+        <div class="meta">Institucional</div>
+        <h3 class="big-num">2000s</h3>
+        <p>La <b>NSF</b> (EE. UU.) instala el CPS moderno como área de investigación prioritaria.</p>
+      </div>
+    </div>
+    <div class="quote" style="margin-top:14px;">
+      La confluencia de <b>hardware barato + sensores asequibles + conectividad ubicua +
+      voluntad institucional</b> hace económicamente viable construir CPS a escala.
+    </div>
+  </div>
+  <div class="pageno">6</div>
+</section>
+
+<!-- 7. DESAFÍOS ABIERTOS -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">05 · Desafíos</div>
+    <h2>Desafíos abiertos (Marwedel &amp; Engel, 2016)</h2>
+    <table>
+      <tr><th style="width:24%;">Desafío</th><th>Idea central</th></tr>
+      <tr><td><b>Safety</b> (seguridad física)</td><td>Posibilidad de daño a personas o entorno.</td></tr>
+      <tr><td><b>Security</b> (seguridad lógica)</td><td>Tríada CIA: <b>C</b>onfidencialidad,
+        <b>I</b>ntegridad, <b>D</b>isponibilidad.</td></tr>
+      <tr><td><b>Reliability</b></td><td>Probabilidad de que el CPS haga lo esperado.</td></tr>
+      <tr><td><b>Energy efficiency</b></td><td>Energía escasa (baterías, recolección).</td></tr>
+      <tr><td><b>Dynamism</b></td><td>Entornos cambiantes, componentes móviles, tolerancia a fallos.</td></tr>
+      <tr><td><b>Timing predictability</b></td><td>Responder dentro del intervalo dictado por el entorno (Lee, 2006).</td></tr>
+      <tr><td><b>Sampling intervals</b></td><td>Muestreo adecuado (teorema del muestreo).</td></tr>
+      <tr><td><b>Heterogeneity</b></td><td>Interoperar componentes de distintos fabricantes/protocolos.</td></tr>
+      <tr><td><b>Multidisciplinary nature</b></td><td>Diversidad de dominios, terminologías y expectativas.</td></tr>
+      <tr><td><b>Verification problem</b></td><td>¿Es correcto el CPS? Criterios de aceptación sobre modelos.</td></tr>
+      <tr><td><b>Legal / Human &amp; Social</b></td><td>Responsabilidad por las acciones; impacto en empleos y formas de vida.</td></tr>
+    </table>
+  </div>
+  <div class="pageno">7</div>
+</section>
+
+<!-- 8. CAPAS -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">06 · Arquitectura</div>
+    <h2>De los desafíos a la arquitectura en capas</h2>
+    <p>Si los desafíos se leen como <b>requerimientos</b>, emergen arquitecturas
+      organizadas por capas según el tiempo de respuesta (Prasad et al., 2019):</p>
+    <div class="diagram">
+      <svg viewBox="0 0 1100 280" xmlns="http://www.w3.org/2000/svg">
+        <!-- 4 horizontal bars, narrower to wider (from bottom to top in latency: edge is faster) -->
+        <g font-family="Helvetica" font-size="13">
+          <!-- Cloud (top, widest, slowest) -->
+          <rect x="20" y="20" width="1060" height="50" rx="6" fill="#eef3ff" stroke="#c5d6ee"/>
+          <text x="40" y="50" font-weight="700" fill="#1f7fd8">CLOUD</text>
+          <text x="120" y="50" fill="#353a52">Big data · lógica de negocio · data warehousing · gemelos digitales · AWS/Azure/Google IoT · ThingSpeak</text>
+
+          <!-- Fog -->
+          <rect x="120" y="80" width="860" height="50" rx="6" fill="#f4f7fc" stroke="#dde4f3"/>
+          <text x="140" y="110" font-weight="700" fill="#1f7fd8">FOG</text>
+          <text x="190" y="110" fill="#353a52">Análisis en red local · Brokers MQTT · Node-RED · Docker · bases de datos</text>
+
+          <!-- Edge -->
+          <rect x="220" y="140" width="660" height="50" rx="6" fill="#f4f7fc" stroke="#dde4f3"/>
+          <text x="240" y="170" font-weight="700" fill="#1f7fd8">EDGE</text>
+          <text x="290" y="170" fill="#353a52">Procesamiento en tiempo real · micro-almacenamiento · WiFi/LoRa/Zigbee/BLE/5G · MQTT/CoAP</text>
+
+          <!-- Data originators (bottom, narrowest, fastest) -->
+          <rect x="320" y="200" width="460" height="50" rx="6" fill="#fce6ea" stroke="#f1c4cf"/>
+          <text x="340" y="230" font-weight="700" fill="#c0334d">DATA ORIGINATORS</text>
+          <text x="510" y="230" fill="#353a52">Sensores y actuadores · I²C · SPI · UART · PWM · Modbus · CAN</text>
+        </g>
+        <!-- latency arrow -->
+        <line x1="1075" y1="50" x2="1075" y2="225" stroke="#6b7390" stroke-width="1.5"/>
+        <polygon points="1070,220 1080,220 1075,230" fill="#6b7390"/>
+        <text x="1085" y="135" font-family="Helvetica" font-size="11" fill="#6b7390" transform="rotate(90 1085 135)">tiempo de respuesta ↓</text>
+      </svg>
+    </div>
+    <div class="grid3" style="margin-top:10px;">
+      <div class="card"><div class="meta">SVIF</div><h3>Edge</h3><p>ESP32-CAM (detección + identificación facial local).</p></div>
+      <div class="card"><div class="meta">SVIF</div><h3>Fog</h3><p>Broker MQTT (Mosquitto) en la red local.</p></div>
+      <div class="card gray"><div class="meta">SVIF</div><h3>Data originators</h3><p>Cámara OV2640, relé, buzzer.</p></div>
+    </div>
+  </div>
+  <div class="pageno">8</div>
+</section>
+
+<!-- 9. EQUIPO -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">07 · Disciplina</div>
+    <h2>El equipo de trabajo y la disciplina CPS Engineering</h2>
+    <div class="grid2">
+      <div>
+        <p>Roles habituales en proyectos CPS:</p>
+        <div class="pill-row" style="margin-bottom:10px;">
+          <span class="tag">Arquitecto de soluciones</span>
+          <span class="tag">Ing. hardware</span>
+          <span class="tag">Ing. software/firmware</span>
+          <span class="tag">Seguridad</span>
+        </div>
+        <div class="pill-row" style="margin-bottom:10px;">
+          <span class="tag">Frontend / UX</span>
+          <span class="tag">Ciencia de datos</span>
+          <span class="tag">Redes</span>
+          <span class="tag">Gestor de proyecto</span>
+        </div>
+        <div class="pill-row" style="margin-bottom:10px;">
+          <span class="tag">Normas/regulación</span>
+          <span class="tag">Nube/backend</span>
+        </div>
+        <div class="quote">
+          Pregunta provocadora de la clase: <b>¿no falta un "ingeniero CPS"?</b>
+        </div>
+      </div>
+      <div class="card alt">
+        <div class="meta">Argumento (por analogía con 1968)</div>
+        <h3>Por qué una disciplina propia</h3>
+        <ul>
+          <li>Los CPS complejos a gran escala son <b>distintos</b> de construir controladores pequeños.</li>
+          <li>La mayoría de los proyectos científico-tecnológicos los involucra.</li>
+          <li>Deben producirse de forma costo-efectiva y gestionarse.</li>
+          <li>La ingeniería para CPS está en la <b>intersección</b> (no la unión) de lo físico y lo informático.</li>
+          <li>Requiere <b>modelos y métodos propios</b> (Lee, 2015).</li>
+        </ul>
+        <p style="font-size:11.5px; color:#6b7390; margin-top:6px;">
+          Definición por similitud con la IEEE: <i>Cyber-physical Systems Engineering</i>
+          es la aplicación de enfoques sistemáticos, disciplinados y medibles al
+          desarrollo, operación y mantenimiento de sistemas ciberfísicos.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">9</div>
+</section>
+
+<!-- 10. EN SÍNTESIS -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">Síntesis · Semana 1</div>
+    <h2>En síntesis</h2>
+    <div class="card-emphasis">
+      <p>Un <b>CPS</b> integra <b>sensores, actuadores, cómputo y comunicaciones</b>
+        para <b>controlar procesos físicos en lazo cerrado</b>.</p>
+      <p>Su <b>auge</b> se explica por hardware barato y conectividad ubicua.</p>
+      <p>Sus <b>desafíos</b> (tiempo, energía, seguridad, verificación…) se leen
+        como <b>requerimientos</b> que moldean arquitecturas
+        <b>cloud/fog/edge</b>.</p>
+      <p>Motivación de fondo: <b>una disciplina de ingeniería propia</b>,
+        en la intersección de lo físico y lo informático, con modelos y métodos
+        específicos.</p>
+    </div>
+    <div class="grid3" style="margin-top:14px;">
+      <div class="card"><div class="meta">Semana 2</div><h3>Modelos, DSL, MDD</h3><p>El "con qué pensar".</p></div>
+      <div class="card"><div class="meta">Semana 3</div><h3>Agentes, iStar 2.0</h3><p>El "cómo conceptualizar".</p></div>
+      <div class="card alt"><div class="meta">Semana 4</div><h3>MDD4CPS</h3><p>El "cómo producir" software para CPS.</p></div>
+    </div>
+  </div>
+  <div class="pageno">10</div>
+</section>
+
+<!-- 11. REFERENCIAS -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">Bibliografía · Semana 1</div>
+    <h2>Referencias</h2>
+    <div class="grid2">
+      <div>
+        <div class="ref"><b>Cares, C., Sepúlveda, S., &amp; Navarro, C. (2019).</b>
+          <span class="meta">Agent-oriented engineering for cyber-physical systems.</span>
+          <i>ICITS 2019</i> (pp. 93–102). Springer.</div>
+        <div class="ref"><b>Kreutz, D., Ramos, F. M. V., Veríssimo, P. E., Rothenberg, C. E., Azodolmolky, S., &amp; Uhlig, S. (2014).</b>
+          <span class="meta">Software-defined networking: A comprehensive survey.</span>
+          <i>Proceedings of the IEEE, 103</i>(1), 14–76.</div>
+        <div class="ref"><b>Lee, E. A. (2006).</b>
+          <span class="meta">Cyber-physical systems — Are computing foundations adequate?</span>
+          <i>NSF Workshop on CPS</i>.</div>
+        <div class="ref"><b>Lee, E. A. (2015).</b>
+          <span class="meta">The past, present and future of cyber-physical systems: A focus on models.</span>
+          <i>Sensors, 15</i>(3), 4837–4869.</div>
+      </div>
+      <div>
+        <div class="ref"><b>Mangharam, R., et al. (2016).</b>
+          <span class="meta">Three facets of cyber-physical systems.</span>
+          <i>National Science Foundation Workshop Report</i>.</div>
+        <div class="ref"><b>Marwedel, P., &amp; Engel, M. (2016).</b>
+          <span class="meta">Cyber-physical systems: opportunities, challenges and (some) solutions.</span>
+          <i>Management of Cyber Physical Objects in the Future Internet of Things</i> (pp. 1–30). Springer.</div>
+        <div class="ref"><b>Prasad, R. V., et al. (2019).</b>
+          <span class="meta">Edge, fog and cloud computing — An overview.</span>
+          <i>IEEE Internet of Things Journal</i>.</div>
+        <div class="ref"><b>Zanero, S. (2017).</b>
+          <span class="meta">Cyber-physical systems.</span>
+          <i>Computer, 50</i>(4), 14–16.</div>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">11</div>
+</section>
+
+</body>
+</html>

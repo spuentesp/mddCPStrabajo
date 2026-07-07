@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>S2 · Modelos, DSL y MDD — Materia (UFRO)</title>
+<link rel="stylesheet" href="../template/slides.css">
+</head>
+<body>
+
+<!-- 1. TITLE -->
+<section class="slide title-bg">
+  <div class="title-zone">
+    <div class="kicker">EMI305 · Producción de Software · Sistemas Ciberfísicos</div>
+    <h1>Semana 2 — Modelos, metamodelos,<br>DSL y Desarrollo Dirigido por Modelos</h1>
+    <p class="subtitle">¿Por qué modelamos? · Jerarquía de modelado · ¿Basta UML? ·
+      Sintaxis abstracta, concreta y semántica · MDD como cadena de transformaciones.</p>
+    <div class="author-block">
+      Magíster en Ingeniería Informática · UFRO<br>
+      EMI305 · Producción de Software · 2026
+    </div>
+  </div>
+</section>
+
+<!-- 2. AGENDA -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">Agenda</div>
+    <h2>Qué vamos a recorrer</h2>
+    <div class="grid2">
+      <div>
+        <div class="flow-step"><span class="num">01</span> ¿Qué es un modelo y para qué sirve?</div>
+        <div class="flow-step"><span class="num">02</span> Niveles de modelado (la pirámide)</div>
+        <div class="flow-step"><span class="num">03</span> Relación modelo ↔ paradigma de modelado</div>
+        <div class="flow-step"><span class="num">04</span> ¿Basta UML? → los DSL</div>
+        <div class="flow-step"><span class="num">05</span> Sintaxis abstracta · concreta · semántica</div>
+      </div>
+      <div>
+        <div class="flow-step"><span class="num">06</span> Ejemplos de DSL en otras industrias</div>
+        <div class="flow-step"><span class="num">07</span> MDD: el ciclo de vida como cadena de transformaciones</div>
+        <div class="flow-step"><span class="num">08</span> Aplicación al caso SVIF</div>
+        <div class="flow-step"><span class="num">09</span> En síntesis · Referencias</div>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">2</div>
+</section>
+
+<!-- 3. ¿QUÉ ES UN MODELO? -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">01 · Definición</div>
+    <h2>¿Qué es un modelo y para qué sirve?</h2>
+    <div class="grid2">
+      <div>
+        <div class="quote">
+          «Un modelo es una <b>representación de la realidad para algún propósito
+          definido</b>» — Pidd (2000).
+        </div>
+        <p>Ejemplo de clase: distintos <b>mapas de una ciudad</b> (transporte público,
+          ciclovías, ruidos) resaltan aspectos distintos según el propósito.</p>
+        <p>Un modelo es útil para:</p>
+        <div class="pill-row">
+          <span class="tag">Documentar</span>
+          <span class="tag">Razonar</span>
+          <span class="tag">Comunicar</span>
+        </div>
+        <p>Un modelo útil es (Selic, 2003):</p>
+        <div class="grid3">
+          <div class="card"><div class="meta">Calidad</div><h3>Abstracto</h3></div>
+          <div class="card"><div class="meta">Calidad</div><h3>Comprensible</h3></div>
+          <div class="card alt"><div class="meta">Calidad</div><h3>Preciso · Predictivo · Barato</h3></div>
+        </div>
+      </div>
+      <div>
+        <div class="card-emphasis">
+          <h3>Relaciones clave</h3>
+          <div class="diagram" style="margin-top:6px;">
+            <svg viewBox="0 0 380 160" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arr-rel" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M0,0 L10,5 L0,10 z" fill="#1f7fd8"/>
+                </marker>
+              </defs>
+              <rect x="20" y="55" width="120" height="50" rx="8" fill="#1f7fd8"/>
+              <text x="80" y="85" text-anchor="middle" fill="#fff" font-weight="700" font-size="13">SISTEMA</text>
+              <rect x="240" y="55" width="120" height="50" rx="8" fill="#1fb8d8"/>
+              <text x="300" y="85" text-anchor="middle" fill="#fff" font-weight="700" font-size="13">MODELO</text>
+
+              <line x1="140" y1="80" x2="238" y2="80" stroke="#1f7fd8" stroke-width="2" marker-end="url(#arr-rel)"/>
+              <text x="190" y="72" text-anchor="middle" font-size="11" fill="#15182b" font-style="italic">is-represented-by</text>
+
+              <text x="190" y="135" text-anchor="middle" font-size="12" fill="#353a52">
+                conforms-to
+              </text>
+              <text x="190" y="152" text-anchor="middle" font-size="10" fill="#6b7390">
+                (Aßmann, Zschaler &amp; Wagner, 2006)
+              </text>
+            </svg>
+          </div>
+          <p style="margin-top:8px;"><b>SVIF:</b> antes de escribir una línea de C++,
+            el sistema queda representado por modelos que permiten razonar sobre
+            objetivos en conflicto, documentar la arquitectura y comunicar decisiones.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">3</div>
+</section>
+
+<!-- 4. NIVELES DE MODELADO -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">02 · Pirámide de modelado</div>
+    <h2>Niveles de modelado: ¿quién define las reglas?</h2>
+    <p>Analogía cartográfica y su equivalente en software:</p>
+    <div class="diagram">
+      <svg viewBox="0 0 1100 290" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arr-niv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#1f7fd8"/>
+          </marker>
+        </defs>
+        <!-- 4 levels as nested rectangles (top = MOF, bottom = sistema) -->
+        <!-- M0 -->
+        <rect x="40" y="20" width="1020" height="50" rx="6" fill="#15182b"/>
+        <text x="60" y="40" fill="#9fc4ff" font-weight="700" font-size="12">M3 · Metametamodelo</text>
+        <text x="200" y="40" fill="#fff" font-size="12">MOF · mxGraph (XML de diagrams.net)</text>
+        <text x="900" y="40" fill="#9fc4ff" font-size="11" font-style="italic">se autodescribe</text>
+
+        <!-- M2 -->
+        <rect x="120" y="80" width="860" height="50" rx="6" fill="#1f7fd8"/>
+        <text x="140" y="100" fill="#d9e6ff" font-weight="700" font-size="12">M2 · Metamodelo</text>
+        <text x="280" y="100" fill="#fff" font-size="12">iStar 2.0 (Dalpiaz, 2016) · metamodelo del DSL PIM</text>
+        <text x="820" y="100" fill="#d9e6ff" font-size="11" font-style="italic">conforma a M3</text>
+
+        <!-- M1 -->
+        <rect x="220" y="140" width="660" height="50" rx="6" fill="#1fb8d8"/>
+        <text x="240" y="160" fill="#fff" font-weight="700" font-size="12">M1 · Modelo</text>
+        <text x="320" y="160" fill="#fff" font-size="12">cim-istar-svif.drawio · pim-dsl-svif.drawio</text>
+        <text x="720" y="160" fill="#d9e6ff" font-size="11" font-style="italic">conforma a M2</text>
+
+        <!-- M0 -->
+        <rect x="320" y="200" width="460" height="50" rx="6" fill="#c0334d"/>
+        <text x="340" y="220" fill="#fff" font-weight="700" font-size="12">M0 · Sistema (realidad)</text>
+        <text x="510" y="220" fill="#fff" font-size="12">Recinto + cámara + cerradura</text>
+        <text x="700" y="220" fill="#ffe1e6" font-size="11" font-style="italic">is-represented-by</text>
+
+        <!-- conforms-to arrows (down) -->
+        <line x1="320" y1="75" x2="320" y2="78" stroke="#1f7fd8" stroke-width="1.5" marker-end="url(#arr-niv)"/>
+        <line x1="420" y1="135" x2="420" y2="138" stroke="#1f7fd8" stroke-width="1.5" marker-end="url(#arr-niv)"/>
+        <line x1="520" y1="195" x2="520" y2="198" stroke="#1f7fd8" stroke-width="1.5" marker-end="url(#arr-niv)"/>
+
+        <!-- right side caption: visual / textual -->
+        <line x1="20" y1="20" x2="20" y2="250" stroke="#6b7390" stroke-width="1" stroke-dasharray="3 3"/>
+        <text x="-115" y="20" font-family="Helvetica" font-size="11" fill="#6b7390" transform="rotate(-90 -115 20)">espacio visual</text>
+        <text x="-115" y="170" font-family="Helvetica" font-size="11" fill="#6b7390" transform="rotate(-90 -115 170)">espacio textual</text>
+
+        <!-- bottom caption -->
+        <text x="550" y="280" text-anchor="middle" font-size="11" fill="#6b7390" font-style="italic">
+          Cada nivel "conforma-a" el superior; los niveles superiores son autodescriptivos (metacircularidad).
+        </text>
+      </svg>
+    </div>
+    <table style="margin-top:8px;">
+      <tr><th style="width:24%;">Nivel (mapa)</th><th>Espacio visual</th><th>Espacio textual</th></tr>
+      <tr><td>Ciudad (realidad)</td><td>Sistema</td><td>Sistema</td></tr>
+      <tr><td>Mapa</td><td><b>Modelo</b></td><td>Código fuente</td></tr>
+      <tr><td>Leyenda</td><td><b>Metamodelo</b> (p. ej., UML)</td><td>Sintaxis</td></tr>
+      <tr><td>Cartografía</td><td><b>Metametamodelo</b> (MOF)</td><td>Metalenguaje (EBNF)</td></tr>
+    </table>
+  </div>
+  <div class="pageno">4</div>
+</section>
+
+<!-- 5. ¿BASTA UML? -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">03 · La motivación de un DSL</div>
+    <h2>¿Basta UML? → los DSL</h2>
+    <div class="grid2">
+      <div>
+        <p>UML describe muy bien clases, objetos, componentes e interacciones,
+          pero dominios como los CPS incorporan <b>conceptos muy específicos</b>
+          (mecanismos físicos, hilos periódicos, recursos de hardware).</p>
+        <p>Extender UML es posible pero incrementa la complejidad. La alternativa:
+          <b>crear un lenguaje propio</b>.</p>
+        <div class="quote">
+          «Un <b>DSL</b> (<i>Domain-Specific Language</i>) es un lenguaje bien
+          definido diseñado para expresar soluciones utilizando conceptos
+          especializados de un dominio particular» — adaptado de Fowler (2010);
+          Mernik, Heering &amp; Sloane (2005).
+        </div>
+      </div>
+      <div>
+        <div class="card alt">
+          <div class="meta">Regla práctica</div>
+          <h3>¿Cuándo construir un DSL?</h3>
+          <p>El DSL debe aportar <b>suficiente valor al dominio</b> para justificar
+            construirlo y mantenerlo.</p>
+        </div>
+        <div class="grid2">
+          <div class="card">
+            <h3 style="color:#2f8f4f;">Ventajas</h3>
+            <ul>
+              <li>Conceptos expresivos</li>
+              <li>Modelos comprensibles para expertos del dominio</li>
+              <li>Menos complejidad y errores</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3 style="color:#c0334d;">Desventajas</h3>
+            <ul>
+              <li>Curva de aprendizaje</li>
+              <li>Falta de estándares/herramientas</li>
+              <li>Costo de evolución</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">5</div>
+</section>
+
+<!-- 6. ELEMENTOS DEL DSL -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">04 · Anatomía del DSL</div>
+    <h2>Todo DSL tiene tres elementos</h2>
+    <div class="grid3">
+      <div class="card">
+        <div class="meta">1 · Sintaxis abstracta</div>
+        <h3>Metamodelo</h3>
+        <p>Conceptos, relaciones y reglas de buena formación.</p>
+        <p style="font-family:monospace; font-size:11px; color:#1f7fd8; margin-top:6px;">
+          CPComponent, OnIntervalAction,<br>
+          OnDemandAction, SWResource,<br>
+          HWResource, MessageSender/Receiver
+        </p>
+      </div>
+      <div class="card">
+        <div class="meta">2 · Sintaxis concreta</div>
+        <h3>Notación</h3>
+        <p>Representación gráfica o textual.</p>
+        <p style="font-size:11.5px; margin-top:6px;">
+          Biblioteca de figuras para diagrams.net
+          (<i>scratchpad PIM-DSL</i>).
+        </p>
+      </div>
+      <div class="card alt">
+        <div class="meta">3 · Semántica</div>
+        <h3>Significado</h3>
+        <p>Cómo interpretar los conceptos; se define
+          traduciéndolos a un lenguaje destino conocido.</p>
+        <p style="font-family:monospace; font-size:11px; color:#c0334d; margin-top:6px;">
+          OnIntervalAction<br>→ hilo periódico en C++
+        </p>
+      </div>
+    </div>
+    <div style="margin-top:14px;">
+      <p><b>Ejemplos de DSL en otras industrias:</b></p>
+      <div class="pill-row">
+        <span class="tag">SQL</span> bases de datos
+        <span class="tag">HTML</span> documentos web
+        <span class="tag">Terraform</span> infraestructura
+        <span class="tag">Simulink</span> control
+        <span class="tag">BPMN</span> procesos de negocio
+      </div>
+    </div>
+  </div>
+  <div class="pageno">6</div>
+</section>
+
+<!-- 7. MDD -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">05 · MDD</div>
+    <h2>MDD: el ciclo de vida como cadena de transformaciones</h2>
+    <div class="grid2">
+      <div>
+        <p>Bézivin (2005) propone ver <b>el ciclo de vida del software como una
+          cadena de transformaciones de modelos</b>.</p>
+        <p>Dos artefactos principales:</p>
+        <div class="pill-row">
+          <span class="tag">Modelos</span>
+          <span class="tag">Transformaciones</span>
+        </div>
+        <div class="note">
+          <b>No es una idea nueva:</b> diagrama de clases → generación de código → Java
+          y código fuente → compilación → ejecutable ya son transformaciones
+          entrada-proceso-salida.
+        </div>
+      </div>
+      <div>
+        <div class="diagram">
+          <svg viewBox="0 0 480 220" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="arr-mdd" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M0,0 L10,5 L0,10 z" fill="#c0334d"/>
+              </marker>
+            </defs>
+            <rect x="10" y="30" width="100" height="50" rx="6" fill="#1f7fd8"/>
+            <text x="60" y="55" text-anchor="middle" fill="#fff" font-weight="700" font-size="13">CIM</text>
+            <text x="60" y="73" text-anchor="middle" fill="#d9e6ff" font-size="10">iStar 2.0</text>
+
+            <rect x="140" y="30" width="100" height="50" rx="6" fill="#1fb8d8"/>
+            <text x="190" y="55" text-anchor="middle" fill="#fff" font-weight="700" font-size="13">PIM</text>
+            <text x="190" y="73" text-anchor="middle" fill="#d9e6ff" font-size="10">DSL CPS</text>
+
+            <rect x="270" y="30" width="100" height="50" rx="6" fill="#5a6fd8"/>
+            <text x="320" y="55" text-anchor="middle" fill="#fff" font-weight="700" font-size="13">PSM</text>
+            <text x="320" y="73" text-anchor="middle" fill="#dde0ff" font-size="10">C++ Arduino</text>
+
+            <rect x="400" y="30" width="70" height="50" rx="6" fill="#c0334d"/>
+            <text x="435" y="55" text-anchor="middle" fill="#fff" font-weight="700" font-size="13">Code</text>
+
+            <line x1="110" y1="55" x2="138" y2="55" stroke="#c0334d" stroke-width="2" marker-end="url(#arr-mdd)"/>
+            <line x1="240" y1="55" x2="268" y2="55" stroke="#c0334d" stroke-width="2" marker-end="url(#arr-mdd)"/>
+            <line x1="370" y1="55" x2="398" y2="55" stroke="#c0334d" stroke-width="2" marker-end="url(#arr-mdd)"/>
+
+            <text x="125" y="42" text-anchor="middle" font-size="9" fill="#c0334d" font-style="italic">XSLT</text>
+            <text x="255" y="42" text-anchor="middle" font-size="9" fill="#c0334d" font-style="italic">Python</text>
+            <text x="385" y="42" text-anchor="middle" font-size="9" fill="#c0334d" font-style="italic">manual</text>
+
+            <text x="240" y="120" text-anchor="middle" font-size="11" fill="#353a52" font-style="italic">
+              Cada transformación preserva trazabilidad (<code style="background:#eef3ff; padding:1px 4px; border-radius:3px;">id_cim_parent</code>)
+            </text>
+            <text x="240" y="140" text-anchor="middle" font-size="11" fill="#353a52" font-style="italic">
+              e incorpora decisiones del siguiente nivel.
+            </text>
+
+            <rect x="20" y="160" width="440" height="48" rx="8" fill="#f4f7fc" stroke="#dde4f3"/>
+            <text x="240" y="180" text-anchor="middle" font-size="11" fill="#15182b">
+              <tspan font-weight="700">SVIF:</tspan> CIM (objetivos, softgoals) → PIM (períodos, dependum)
+            </text>
+            <text x="240" y="198" text-anchor="middle" font-size="11" fill="#15182b">
+              → PSM (ESP32 + MQTT, tipos concretos) → Code (credenciales, política).
+            </text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">7</div>
+</section>
+
+<!-- 8. EN SÍNTESIS -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">Síntesis · Semana 2</div>
+    <h2>En síntesis</h2>
+    <div class="card-emphasis">
+      <p>Modelamos para <b>razonar barato</b> y sin ambigüedad.</p>
+      <p>Las reglas del modelado viven en el <b>metamodelo</b> (M2), con un
+        <b>metametamodelo</b> (M3) que las autodescribe.</p>
+      <p>Cuando UML no expresa bien el dominio, se construye un <b>DSL</b>
+        (metamodelo + notación + semántica).</p>
+      <p><b>MDD</b> encadena transformaciones automáticas de modelos hasta llegar al producto.</p>
+    </div>
+    <div class="quote" style="margin-top:14px;">
+      Próxima parada (Semana 3): aplicar la orientación a agentes (<b>iStar 2.0</b>)
+      como CIM y construir el <b>DSL PIM</b> puente hacia el código CPS.
+    </div>
+    <div class="ref" style="margin-top:14px;"><b>Referencias clave:</b>
+      <span class="meta">Aßmann, Zschaler &amp; Wagner (2006); Bézivin (2005);
+        Fowler (2010); Mernik, Heering &amp; Sloane (2005); Pidd (2000);
+        Selic (2003).</span>
+    </div>
+  </div>
+  <div class="pageno">8</div>
+</section>
+
+</body>
+</html>

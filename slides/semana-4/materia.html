@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>S4 · MDD4CPS — Materia (UFRO)</title>
+<link rel="stylesheet" href="../template/slides.css">
+</head>
+<body>
+
+<!-- 1. TITLE -->
+<section class="slide title-bg">
+  <div class="title-zone">
+    <div class="kicker">EMI305 · Producción de Software · Sistemas Ciberfísicos</div>
+    <h1>Semana 4 — MDD4CPS:<br>Desarrollo Dirigido por Modelos para CPS</h1>
+    <p class="subtitle">La cadena de modelos · Tecnologías de transformación (XSLT, Python) ·
+      Correspondencias PIM → PSM · Grado de automatización · Herramientas.</p>
+    <div class="author-block">
+      Magíster en Ingeniería Informática · UFRO<br>
+      EMI305 · Producción de Software · 2026
+    </div>
+  </div>
+</section>
+
+<!-- 2. AGENDA -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">Agenda</div>
+    <h2>Qué vamos a recorrer</h2>
+    <div class="grid2">
+      <div>
+        <div class="flow-step"><span class="num">01</span> La cadena de modelos CIM → PIM → PSM → Code</div>
+        <div class="flow-step"><span class="num">02</span> Tecnologías: XSLT, Python, diagrams.net</div>
+        <div class="flow-step"><span class="num">03</span> CIM → PIM: lo que se decide</div>
+        <div class="flow-step"><span class="num">04</span> PIM → PSM: lo que se decide</div>
+        <div class="flow-step"><span class="num">05</span> La fase Code</div>
+      </div>
+      <div>
+        <div class="flow-step"><span class="num">06</span> Correspondencias constructo → código</div>
+        <div class="flow-step"><span class="num">07</span> Grado de automatización (~78 %)</div>
+        <div class="flow-step"><span class="num">08</span> Herramientas por fase</div>
+        <div class="flow-step"><span class="num">09</span> Aplicación al caso SVIF</div>
+        <div class="flow-step"><span class="num">10</span> En síntesis · Referencias</div>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">2</div>
+</section>
+
+<!-- 3. CADENA -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">01 · Cadena de modelos</div>
+    <h2>MDD organiza el desarrollo como cadena de modelos</h2>
+    <p>Cada transformación incorpora decisiones de diseño del siguiente nivel,
+      preservando la información relevante del anterior.</p>
+    <div class="diagram">
+      <svg viewBox="0 0 1100 240" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arr-mdd4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#c0334d"/>
+          </marker>
+        </defs>
+        <!-- 4 boxes -->
+        <rect x="30" y="60" width="220" height="120" rx="10" fill="#1f7fd8"/>
+        <text x="140" y="90" text-anchor="middle" fill="#fff" font-weight="700" font-size="18">CIM</text>
+        <text x="140" y="115" text-anchor="middle" fill="#d9e6ff" font-size="12">Computation Independent</text>
+        <text x="140" y="135" text-anchor="middle" fill="#fff" font-size="11">Diseño de contexto</text>
+        <text x="140" y="160" text-anchor="middle" fill="#d9e6ff" font-size="10" font-style="italic">iStar 2.0</text>
+
+        <rect x="290" y="60" width="220" height="120" rx="10" fill="#1fb8d8"/>
+        <text x="400" y="90" text-anchor="middle" fill="#fff" font-weight="700" font-size="18">PIM</text>
+        <text x="400" y="115" text-anchor="middle" fill="#d9e6ff" font-size="12">Platform Independent</text>
+        <text x="400" y="135" text-anchor="middle" fill="#fff" font-size="11">Funcional, sin tecnología</text>
+        <text x="400" y="160" text-anchor="middle" fill="#d9e6ff" font-size="10" font-style="italic">DSL para CPS</text>
+
+        <rect x="550" y="60" width="220" height="120" rx="10" fill="#5a6fd8"/>
+        <text x="660" y="90" text-anchor="middle" fill="#fff" font-weight="700" font-size="18">PSM</text>
+        <text x="660" y="115" text-anchor="middle" fill="#dde0ff" font-size="12">Platform Specific</text>
+        <text x="660" y="135" text-anchor="middle" fill="#fff" font-size="11">Código plataforma elegida</text>
+        <text x="660" y="160" text-anchor="middle" fill="#dde0ff" font-size="10" font-style="italic">C++ Arduino</text>
+
+        <rect x="810" y="60" width="220" height="120" rx="10" fill="#c0334d"/>
+        <text x="920" y="90" text-anchor="middle" fill="#fff" font-weight="700" font-size="18">Code</text>
+        <text x="920" y="115" text-anchor="middle" fill="#ffe1e6" font-size="12">Personalización</text>
+        <text x="920" y="135" text-anchor="middle" fill="#fff" font-size="11">Configuración manual</text>
+        <text x="920" y="160" text-anchor="middle" fill="#ffe1e6" font-size="10" font-style="italic">C++ Arduino</text>
+
+        <line x1="252" y1="120" x2="288" y2="120" stroke="#c0334d" stroke-width="2.5" marker-end="url(#arr-mdd4)"/>
+        <line x1="512" y1="120" x2="548" y2="120" stroke="#c0334d" stroke-width="2.5" marker-end="url(#arr-mdd4)"/>
+        <line x1="772" y1="120" x2="808" y2="120" stroke="#c0334d" stroke-width="2.5" marker-end="url(#arr-mdd4)"/>
+
+        <text x="270" y="105" text-anchor="middle" font-size="10" fill="#c0334d" font-style="italic">XSLT</text>
+        <text x="530" y="105" text-anchor="middle" font-size="10" fill="#c0334d" font-style="italic">Python</text>
+        <text x="790" y="105" text-anchor="middle" font-size="10" fill="#c0334d" font-style="italic">manual</text>
+
+        <text x="550" y="220" text-anchor="middle" font-size="11" fill="#6b7390" font-style="italic">
+          Cada nivel agrega información no derivable del anterior;
+          la trazabilidad se mantiene con identificadores (id_cim_parent).
+        </text>
+      </svg>
+    </div>
+  </div>
+  <div class="pageno">3</div>
+</section>
+
+<!-- 4. TECNOLOGÍAS -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">02 · Tecnologías</div>
+    <h2>Cómo se implementan las transformaciones</h2>
+    <div class="grid2">
+      <div>
+        <p>Opciones en el estado del arte:</p>
+        <div class="pill-row">
+          <span class="tag">ATL</span>
+          <span class="tag">QVT</span>
+          <span class="tag">Acceleo</span>
+          <span class="tag">EMF</span>
+          <span class="tag">XML + XSLT</span>
+        </div>
+        <p>MDD4CPS optó por <b>tecnologías abiertas</b>:</p>
+        <ul>
+          <li>Modelado visual en <b>diagrams.net</b> → serializa a <b>XML</b>.</li>
+          <li>Transformaciones con <b>XSLT</b> (CIM → PIM) y <b>Python</b> (PIM → PSM).</li>
+          <li><b>Herramienta web</b> guía al diseñador en la captura de lo no derivable.</li>
+        </ul>
+        <div class="note">
+          <b>XSLT</b> es declarativo: reconoce elementos del modelo de entrada y
+          genera automáticamente la estructura correspondiente en el de salida —
+          la misma idea de MDD.
+        </div>
+      </div>
+      <div class="card alt">
+        <div class="meta">¿Qué agrega el diseñador?</div>
+        <h3>Lo no derivable</h3>
+        <p><b>CIM → PIM</b> (aún independiente de tecnología):</p>
+        <ul style="font-size:12.5px;">
+          <li>Periodicidad de las <code>OnIntervalAction</code>.</li>
+          <li>Parámetros E/S de las <code>OnDemandAction</code>.</li>
+          <li>Estructura del <i>dependum</i> y de los <code>SWResource</code>.</li>
+        </ul>
+        <p><b>PIM → PSM</b> (decisiones de plataforma):</p>
+        <ul style="font-size:12.5px;">
+          <li>Plataforma objetivo (Arduino), MQTT, tipado, pines.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">4</div>
+</section>
+
+<!-- 5. CORRESPONDENCIAS -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">03 · Materialización</div>
+    <h2>Qué genera cada constructo (PIM → PSM)</h2>
+    <table>
+      <tr><th style="width:30%;">Constructo PIM</th><th>Se materializa como</th></tr>
+      <tr>
+        <td><b>CPComponent</b></td>
+        <td><b>Unidad de despliegue:</b> <code>.ino</code> + <code>comm_utils.h</code> + <code>secrets.h</code></td>
+      </tr>
+      <tr>
+        <td><b>OnDemandAction</b></td>
+        <td><b>Función ejecutable</b> con firma derivada de los parámetros del PIM</td>
+      </tr>
+      <tr>
+        <td><b>OnIntervalAction</b></td>
+        <td><b>Hilo periódico</b> (FreeRTOS en Arduino MKR1010) cuyo período proviene de <code>interval_in_milliseconds</code></td>
+      </tr>
+      <tr>
+        <td><b>MessageSender / MessageReceiver</b></td>
+        <td><b>Hilos de comunicación</b>: publicar/suscribir, serializar/deserializar el <i>dependum</i></td>
+      </tr>
+      <tr>
+        <td><b>SWResource</b></td>
+        <td><b>Estructuras de datos / variables tipadas</b></td>
+      </tr>
+      <tr>
+        <td><b>HWResource</b></td>
+        <td><b>Comentarios estructurados</b> y marcas de trazabilidad para integrar el hardware</td>
+      </tr>
+      <tr>
+        <td><b>Softgoals</b></td>
+        <td>No generan código ejecutable: <b>comentarios de trazabilidad</b> (<code>Qualification/Contribution Array</code>)</td>
+      </tr>
+      <tr>
+        <td><b>Refinamientos AND/OR</b></td>
+        <td><b>Estructuras lógicas</b> (condicionales / funciones de evaluación)</td>
+      </tr>
+    </table>
+  </div>
+  <div class="pageno">5</div>
+</section>
+
+<!-- 6. AUTOMATIZACIÓN -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">04 · Grado de automatización</div>
+    <h2>¿Cuánto del código se genera automáticamente?</h2>
+    <div class="grid2">
+      <div>
+        <div class="card-emphasis" style="text-align:center;">
+          <div class="big-num">~78 %</div>
+          <p style="font-size:13px;">del código final fue <b>generado</b> en el caso
+            de estudio del curso (invernadero, Arduino MKR1010):
+            <b>1216 de 1567 líneas</b>.</p>
+          <p style="font-size:11.5px; color:#6b7390; margin-top:6px;">
+            El ~22 % restante es configuración de plataforma y lógica propia.
+            Comparable con otros procesos MDD (~31.5 % personalizado; Romano, 2019).
+          </p>
+        </div>
+        <p style="margin-top:10px;">Herramientas por fase:</p>
+        <div class="pill-row">
+          <span class="tag">CIM</span>
+          <span class="tag">PIM</span> → diagrams.net
+          <span class="tag alt">PSM</span>
+          <span class="tag alt">Code</span> → C++ Arduino
+        </div>
+      </div>
+      <div class="card alt">
+        <div class="meta">Comparativa</div>
+        <h3>MDD4CPS vs. otros MDD</h3>
+        <table class="dense">
+          <tr><th>Proceso</th><th>% personalizado</th></tr>
+          <tr><td>MDD4CPS (Navarro et al., 2025)</td><td class="mono">~22 %</td></tr>
+          <tr><td>Romano (2019) — otros MDD</td><td class="mono">~31.5 %</td></tr>
+        </table>
+        <p style="font-size:11.5px; margin-top:8px;">
+          Repositorio público del proceso:
+          <code>https://github.com/mdd4cps/aomdd4cps</code>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">6</div>
+</section>
+
+<!-- 7. HERRAMIENTAS -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">05 · Herramientas</div>
+    <h2>Toolchain de MDD4CPS</h2>
+    <div class="grid4">
+      <div class="card">
+        <div class="meta">Modelado visual</div>
+        <h3>diagrams.net</h3>
+        <p>Editores gráficos + bibliotecas personalizadas
+          (iStar 2.0, DSL PIM).</p>
+      </div>
+      <div class="card">
+        <div class="meta">Serialización</div>
+        <h3>XML (mxGraph)</h3>
+        <p>Los modelos se guardan como XML; susceptibles a
+          transformaciones XML estándar.</p>
+      </div>
+      <div class="card alt">
+        <div class="meta">Transformación</div>
+        <h3>XSLT</h3>
+        <p>CIM → PIM: declarativo, basado en reglas
+          sobre el XML de diagrams.net.</p>
+      </div>
+      <div class="card alt">
+        <div class="meta">Generación</div>
+        <h3>Python</h3>
+        <p>PIM → PSM: scripts que materializan hilos,
+          funciones, structs y comentarios.</p>
+      </div>
+    </div>
+    <div class="quote" style="margin-top:14px;">
+      Las transformaciones son <b>semiautomáticas y guiadas por el usuario</b>:
+      la herramienta web solicita sólo los datos necesarios para el siguiente nivel.
+    </div>
+  </div>
+  <div class="pageno">7</div>
+</section>
+
+<!-- 8. APLICACIÓN SVIF -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">06 · Aplicación</div>
+    <h2>SVIF recorre el ciclo completo</h2>
+    <div class="grid2">
+      <div class="card">
+        <div class="meta">CIM</div>
+        <h3>iStar 2.0 → 2 nodos agentes</h3>
+        <p>Face Monitor (ESP32-CAM) y Access Actuator (ESP32) con objetivos,
+          dependencias y softgoals. <b>26 elementos cim-*</b>.</p>
+      </div>
+      <div class="card">
+        <div class="meta">PIM</div>
+        <h3>DSL CPS → arquitectura</h3>
+        <p>2 CPComponent, 2 OnIntervalAction (500 ms / 250 ms),
+          10 OnDemandAction, SW/HW Resources, Message Sender/Receiver.</p>
+      </div>
+      <div class="card alt">
+        <div class="meta">PSM</div>
+        <h3>C++ Arduino → ESP32 + MQTT</h3>
+        <p><code>FaceMonitorComponent.ino</code> +
+          <code>AccessActuatorComponent.ino</code> +
+          <code>comm_utils.h</code> + <code>secrets.h</code>.</p>
+      </div>
+      <div class="card alt">
+        <div class="meta">Code</div>
+        <h3>Personalización</h3>
+        <p>Credenciales, broker, umbral de confianza, política
+          de autorización, <code>SIMULATION_MODE</code>.</p>
+      </div>
+    </div>
+    <div class="card-emphasis" style="margin-top:14px; text-align:center;">
+      <p><b>~78 % del código generado</b> · 14 eventos en la ejecución real
+        (10 desbloqueos + 4 alarmas) · Rama del OR corregida tras hallazgo
+        de verificación.</p>
+    </div>
+  </div>
+  <div class="pageno">8</div>
+</section>
+
+<!-- 9. SÍNTESIS -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">Síntesis · Semana 4</div>
+    <h2>En síntesis</h2>
+    <div class="card-emphasis">
+      <p><b>MDD4CPS</b> concreta el MDD para CPS con la cadena
+        <b>iStar → DSL → C++ Arduino → código final</b>.</p>
+      <p>Las transformaciones (<b>XSLT/Python</b>) capturan automáticamente lo
+        trazable (<i>ids, nombres, relaciones, softgoals</i>) y piden al diseñador
+        solo lo nuevo de cada nivel (períodos, <i>dependum</i>, plataforma, tipos).</p>
+      <p>Resultado: <b>~78 %</b> del código generado y <b>trazabilidad completa</b>
+        desde el objetivo de negocio hasta el hilo que lo ejecuta.</p>
+    </div>
+    <div class="grid3" style="margin-top:14px;">
+      <div class="card"><div class="meta">Fortaleza</div><h3>Trazabilidad</h3><p>softgoal → código.</p></div>
+      <div class="card"><div class="meta">Fortaleza</div><h3>Decisiones</h3><p>postergadas al nivel correcto.</p></div>
+      <div class="card alt"><div class="meta">Limitación</div><h3>Restricciones</h3><p>temporales duras no expresables en el DSL.</p></div>
+    </div>
+    <div class="ref" style="margin-top:12px;"><b>Referencias:</b>
+      <span class="meta">Bézivin (2005); Navarro, Devia, Labra Gayo &amp; Cares (2025); Romano (2019).</span>
+    </div>
+  </div>
+  <div class="pageno">9</div>
+</section>
+
+</body>
+</html>
