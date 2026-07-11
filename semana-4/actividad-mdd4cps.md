@@ -118,9 +118,21 @@ del *dependum*) que reduce errores de concurrencia típicos en Arduino.
 cumplimiento.
 (ii) Los **softgoals se preservan solo como comentarios** en el PSM: la
 trazabilidad es informativa, no verificable automáticamente.
-(iii) El refinamiento **OR pierde semántica** en la transformación: el criterio de
-selección de rama (¿cuándo alarma y cuándo desbloqueo?) debió reintroducirse
-manualmente en la fase Code.
+(iii) **Limitación verificada empíricamente — de la herramienta `aomdd4cps`,
+no del proceso MDD4CPS en sí.** Al ejecutar la herramienta oficial sobre el
+mismo CIM ([`comparativa-agente-vs-app.md`](comparativa-agente-vs-app.md)),
+ésta descartó los operadores de refinamiento AND/OR en la transformación
+CIM→PIM: el PSM generado
+([`comparativa-app/modelos/svif-04-PSM.xml`](comparativa-app/modelos/svif-04-PSM.xml))
+tiene 0 `<and_ref_operator>` y 0 `<or_ref_operator>`, por lo que la rama OR
+no se propaga al código emitido. **La vía agente (skill), en cambio, sí
+preserva el OR** hasta el código final: el condicional de
+`gestionarRespuestaAcceso()` en
+`codigo/AccessActuatorComponent/AccessActuatorComponent.ino` realiza la rama
+«desbloqueo ∨ alarma» que el CIM especificaba. El criterio de selección
+(umbral de confianza + `authorized`) sí debió añadirse en la fase Code,
+porque ningún modelo deduce la política de autorización — esa parte es
+general a MDD4CPS y se mantiene como observación aparte.
 (iv) Al tratarse de una herramienta en versión alfa con fines académicos, la
 edición manual del PIM en diagrams.net sigue siendo necesaria para ajustar
 disposición y atributos no solicitados por el cuestionario guiado.
@@ -129,6 +141,59 @@ disposición y atributos no solicitados por el cuestionario guiado.
 modelado se amortiza principalmente en documentación y trazabilidad; el beneficio
 crecería con el número de componentes y dependencias, donde la generación del
 andamiaje de comunicación es la parte más propensa a error si se escribe a mano.
+
+---
+
+## Al final — comparativa agente (skill) vs. herramienta `aomdd4cps`
+
+Como cierre de la actividad, ofrezco la validación empírica del proceso MDD4CPS
+ejecutado de las dos maneras posibles sobre **el mismo CIM de SVIF**:
+
+- **Vía A — agente libre (skill):** un agente LLM aplica las reglas de
+  transformación CIM → PIM → PSM → Code razonando en lenguaje natural.
+  Es el método con que se produjo el `codigo/` de esta entrega.
+- **Vía B — herramienta `aomdd4cps`:** la aplicación oficial del profesor
+  ([repositorio](https://github.com/mdd4cps/aomdd4cps), Flask + SaxonC/XSLT +
+  Docker Compose) corre las transformaciones XSLT y emite código. La ejecuté
+  completa sobre SVIF (4 modelos XML generados, código emitido para 2 CPC).
+
+**Qué se comparó** (en [`comparativa-agente-vs-app.md`](comparativa-agente-vs-app.md)):
+
+| Dimensión | Veredicto |
+|---|---|
+| Conteo de constructos por fase (CIM→PIM, PIM→PSM, PSM→Code) | tabla con 9 constructos, ambas vías |
+| Determinismo y homogeneidad del andamiaje | gana la herramienta (XSLT puro) |
+| Compilabilidad del código y plataforma (ESP32) | gana el agente (la app emite MKR 1010 con sintaxis inválida) |
+| **Preservación de la semántica AND/OR del CIM** | **gana el agente** (la herramienta descarta los operadores en CIM→PIM) |
+| Cobertura de la fase Code | gana el agente (la app deja 22 *stubs*) |
+| Verificación punta a punta con broker MQTT real | gana el agente (la app no compila) |
+| Garantías de proceso (trazabilidad, auditabilidad) | gana la herramienta |
+
+**Conclusión.** No son sustitutos, se complementan. La herramienta es el
+patrón de oro en rigor y reproducibilidad; el agente, en corrección,
+plataforma y cobertura de la fase Code. La combinación ideal — usar la
+herramienta para el andamiaje determinista y un agente para la fase Code y
+la semántica que el DSL aún no expresa — es exactamente lo que esta entrega
+implementa en su primera mitad.
+
+**Artefactos para reproducir la comparativa:**
+
+- Análisis detallado: [`comparativa-agente-vs-app.md`](comparativa-agente-vs-app.md)
+  (6 secciones: ejecución de cada vía, resultados por fase, lectura del ~78 %,
+  síntesis con tabla de 9 criterios, reproducibilidad, referencias).
+- Evidencia empírica: [`comparativa-app/`](comparativa-app/)
+  ├─ `modelos/` — cadena CIM → PIM → PrePSM → PSM generada por la herramienta
+  ├─ `codigo-generado/` — código emitido para MKR 1010 (no compila, conservado
+  │  como evidencia del estado alfa de la herramienta)
+  └─ `scripts/` — `inject_svif.py`, `inject_psm.py`, `drive.py` (emulan los
+     formularios de la app y llaman al backend XSLT).
+
+**Resultado neto:** aplicar MDD4CPS con un agente (Vía A) entregó un sistema
+funcional, verificado de punta a punta, con todas las ramas del modelo
+ejercitadas. Validar el proceso corriendo su herramienta oficial (Vía B)
+reveló dos limitaciones concretas de `aomdd4cps` en su versión actual —
+descarte de AND/OR y código no compilable — sin las cuales esta memoria no
+habría podido refinar la limitación (iii) de §3.
 
 ## Referencias
 

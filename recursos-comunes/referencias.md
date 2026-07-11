@@ -30,7 +30,7 @@
 - Lee, E. A. (2006). *Cyber-physical systems—Are computing foundations
   adequate?* Position paper, NSF Workshop on Cyber-Physical Systems: Research
   Motivation, Techniques and Roadmap. Austin, TX.
-  (Disponible en el sitio de publicaciones de Ptolemy Project, UC Berkeley.)
+  https://ptolemy.eecs.berkeley.edu/publications/papers/06/CPSPositionPaper/
 - Lee, E. A. (2015). The past, present and future of cyber-physical systems:
   A focus on models. *Sensors, 15*(3), 4837–4869.
   https://doi.org/10.3390/s150304837
@@ -38,21 +38,23 @@
   challenges and (some) solutions. En A. Guerrieri, V. Loscri, A. Rovella y
   G. Fortino (Eds.), *Management of Cyber Physical Objects in the Future
   Internet of Things* (pp. 1–30). Springer.
+  https://doi.org/10.1007/978-3-319-26869-9_1
 
 ## Modelado, DSL y MDD (Semanas 2–4)
 
 - Aßmann, U., Zschaler, S., & Wagner, G. (2006). Ontologies, meta-models, and
   the model-driven paradigm. En C. Calero, F. Ruiz y M. Piattini (Eds.),
   *Ontologies for Software Engineering and Software Technology* (pp. 249–273).
-  Springer.
+  Springer. https://doi.org/10.1007/3-540-34518-3_9
 - Bézivin, J. (2005). On the unification power of models. *Software & Systems
   Modeling, 4*(2), 171–188. https://doi.org/10.1007/s10270-005-0079-0
-- Fowler, M. (2010). *Domain-specific languages*. Addison-Wesley.
+- Fowler, M. (2010). *Domain-specific languages* (Addison-Wesley Signature
+  Series). Addison-Wesley. ISBN 978-0-321-71294-3.
 - Mernik, M., Heering, J., & Sloane, A. M. (2005). When and how to develop
   domain-specific languages. *ACM Computing Surveys, 37*(4), 316–344.
   https://doi.org/10.1145/1118890.1118892
 - Pidd, M. (2003). *Tools for thinking: Modelling in management science*
-  (2.ª ed.). Wiley.
+  (2.ª ed.). Wiley. ISBN 978-0-470-84795-4.
 - Selic, B. (2003). The pragmatics of model-driven development. *IEEE
   Software, 20*(5), 19–25. https://doi.org/10.1109/MS.2003.1231146
 
@@ -73,3 +75,13 @@
   (URL: https://sol.sbc.org.br/index.php/cibse/article/view/35298)
 - Repositorio MDD4CPS (herramientas y caso de estudio del curso):
   https://github.com/mdd4cps/aomdd4cps
+
+## Evidencia empírica del proceso (Semana 4)
+
+- SVIF ejecutado por la herramienta oficial `aomdd4cps` (Flask + SaxonC/XSLT,
+  Docker Compose): https://github.com/mdd4cps/aomdd4cps. Artefactos
+  producidos y scripts reproducibles en `semana-4/comparativa-app/`
+  (`modelos/`, `codigo-generado/`, `scripts/`).
+- Comparativa empírica agente libre (skill) vs. `aomdd4cps` sobre el mismo
+  CIM de SVIF: `semana-4/comparativa-agente-vs-app.md` (conteo por fase,
+  tabla de fortalezas y balance final).

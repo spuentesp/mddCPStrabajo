@@ -1,0 +1,307 @@
+<?xml version="1.0" ?>
+<mxfile host="65bd71144e">
+	<diagram name="SD - Dependencias Estrategicas" id="svif-sd">
+		<mxGraphModel dx="786" dy="795" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+			<root>
+				
+                
+				<mxCell id="0"/>
+				
+                
+				<mxCell id="1" parent="0"/>
+				
+                
+                
+                
+                
+				<mxCell id="cim-a1-l" value="" style="endArrow=none;html=1;rounded=0;startSize=9;endSize=6;sourcePerimeterSpacing=0;jumpStyle=sharp;exitX=0;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0;entryDx=0;entryDy=0;strokeColor=#004C99;" parent="cim-a1" source="cim-a1-c" target="cim-a1-c" edge="1">
+					
+                    
+					<mxGeometry relative="1" as="geometry"/>
+					
+                
+				</mxCell>
+				
+                
+                
+                
+				<mxCell id="cim-a2-l" value="" style="endArrow=none;html=1;rounded=0;startSize=9;endSize=6;sourcePerimeterSpacing=0;jumpStyle=sharp;exitX=0;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0;entryDx=0;entryDy=0;strokeColor=#004C99;" parent="cim-a2" source="cim-a2-c" target="cim-a2-c" edge="1">
+					
+                    
+					<mxGeometry relative="1" as="geometry"/>
+					
+                
+				</mxCell>
+				
+                
+                
+                
+                
+                
+                
+                
+                
+                
+            
+			</root>
+		</mxGraphModel>
+	</diagram>
+	<diagram name="SR - Vista hibrida SD-SR" id="svif-sr">
+		<mxGraphModel dx="786" dy="795" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+			<root>
+				
+                
+				<mxCell id="0"/>
+				
+                
+				<mxCell id="1" parent="0"/>
+				
+                
+                
+                
+				<object label="Monitorear presencia de personas" type="operational_goal" id_cim_parent="cim-g1" id="cim-g1" name="Monitorear presencia de personas" qualification_array="[{ &quot;softgoal_id&quot;: &quot;cim-q1&quot;, &quot;name&quot;: &quot;Identificación oportuna&quot;}]" contribution_array="[]" operation_modes_enabled="false" operation_modes_description="" interval_in_milliseconds="500">
+					<mxCell style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="cim-b1">
+						<mxGeometry x="240" y="30" width="170" height="170" as="geometry"/>
+					</mxCell>
+				</object>
+				
+                
+                
+				<object label="Capturar imagen" type="action" id_cim_parent="cim-t1" id="cim-t1" name="Capturar imagen" input_parameters="[]" output_parameters="[{&quot;name&quot;: &quot;frame&quot;, &quot;description&quot;: &quot;Cuadro capturado por la camara.&quot;}]" qualification_array="[]" contribution_array="[]" operation_modes_enabled="false" operation_modes_description="">
+					<mxCell style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="cim-b1">
+						<mxGeometry x="20" y="160" width="115" height="44" as="geometry"/>
+					</mxCell>
+				</object>
+				
+                
+				<object label="Detectar rostro" type="action" id_cim_parent="cim-t2" id="cim-t2" name="Detectar rostro" input_parameters="[{&quot;name&quot;: &quot;frame&quot;, &quot;description&quot;: &quot;Cuadro capturado por la camara.&quot;}]" output_parameters="[{&quot;name&quot;: &quot;face&quot;, &quot;description&quot;: &quot;Region de rostro detectada.&quot;}]" qualification_array="[]" contribution_array="[]" operation_modes_enabled="false" operation_modes_description="">
+					<mxCell style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="cim-b1">
+						<mxGeometry x="155" y="160" width="112" height="44" as="geometry"/>
+					</mxCell>
+				</object>
+				
+                
+				<object label="Identificar rostro" type="action" id_cim_parent="cim-t3" id="cim-t3" name="Identificar rostro" input_parameters="[{&quot;name&quot;: &quot;frame&quot;, &quot;description&quot;: &quot;Cuadro capturado por la camara.&quot;}]" output_parameters="[{&quot;name&quot;: &quot;identification_event&quot;, &quot;description&quot;: &quot;Evento de identificacion resultante.&quot;}]" qualification_array="[]" contribution_array="[]" operation_modes_enabled="false" operation_modes_description="">
+					<mxCell style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="cim-b1">
+						<mxGeometry x="290" y="160" width="120" height="44" as="geometry"/>
+					</mxCell>
+				</object>
+				
+                
+				<object label="Publicar evento de identificación" type="action" id_cim_parent="cim-t5" id="cim-t5" name="Publicar evento de identificación" input_parameters="[{&quot;name&quot;: &quot;identification_event&quot;, &quot;description&quot;: &quot;Evento de identificacion a publicar.&quot;}]" output_parameters="[]" qualification_array="[]" contribution_array="[{ &quot;softgoal_id&quot;: &quot;cim-q2&quot;, &quot;name&quot;: &quot;Privacidad de datos personales&quot;, &quot;contribution&quot;: &quot;hurt&quot;}]" operation_modes_enabled="false" operation_modes_description="">
+					<mxCell style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="cim-b1">
+						<mxGeometry x="445" y="160" width="160" height="50" as="geometry"/>
+					</mxCell>
+				</object>
+				
+                
+				<object label="Comparar con rostros enrolados" type="action" id_cim_parent="cim-t4" id="cim-t4" name="Comparar con rostros enrolados" input_parameters="[{&quot;name&quot;: &quot;face&quot;, &quot;description&quot;: &quot;Region de rostro detectada.&quot;}]" output_parameters="[{&quot;name&quot;: &quot;match&quot;, &quot;description&quot;: &quot;Coincidencia con la base de enrolados.&quot;}]" qualification_array="[]" contribution_array="[{ &quot;softgoal_id&quot;: &quot;cim-q2&quot;, &quot;name&quot;: &quot;Privacidad de datos personales&quot;, &quot;contribution&quot;: &quot;help&quot;}]" operation_modes_enabled="false" operation_modes_description="">
+					<mxCell style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="cim-b1">
+						<mxGeometry x="275" y="270" width="155" height="50" as="geometry"/>
+					</mxCell>
+				</object>
+				
+                
+				<object label="Sensor de cámara OV2640" type="hw_resource" id_cim_parent="cim-r1" id="cim-r1" name="Sensor de cámara OV2640" qualification_array="[]" contribution_array="[]">
+					<mxCell style="verticalAlign=middle;align=center;shape=cube;spacingTop=8;spacingLeft=2;spacingRight=12;size=10;direction=south;fontStyle=0;html=1;whiteSpace=wrap;" vertex="1" parent="cim-b1">
+						<mxGeometry x="20" y="270" width="125" height="44" as="geometry"/>
+					</mxCell>
+				</object>
+				
+                
+				<object label="Base de rostros enrolados" type="sw_resource" id_cim_parent="cim-r2" id="cim-r2" name="Base de rostros enrolados" qualification_array="[]" contribution_array="[]" data_structure="[{&quot;name&quot;: &quot;person_id&quot;, &quot;description&quot;: &quot;Identificador del enrolado.&quot;}, {&quot;name&quot;: &quot;person_name&quot;, &quot;description&quot;: &quot;Nombre del enrolado.&quot;}, {&quot;name&quot;: &quot;face_template&quot;, &quot;description&quot;: &quot;Plantilla biometrica local.&quot;}]">
+					<mxCell style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="cim-b1">
+						<mxGeometry x="280" y="390" width="135" height="44" as="geometry"/>
+					</mxCell>
+				</object>
+				
+                
+                
+				<object label="Face Monitor Component" type="cps_component" id_cim_parent="cim-a1sr-c" id="cim-b1" name="Face Monitor Component" description="">
+					<mxCell style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+						<mxGeometry x="" y="" width="" height="" as="geometry">
+							<mxRectangle x="44" width="49.05" height="44" as="alternateBounds"/>
+						</mxGeometry>
+					</mxCell>
+				</object>
+				
+                
+				<mxCell id="cim-a1sr-l" value="" style="endArrow=none;html=1;rounded=0;startSize=9;endSize=6;sourcePerimeterSpacing=0;jumpStyle=sharp;exitX=0;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0;entryDx=0;entryDy=0;strokeColor=#004C99;" parent="cim-a1sr" source="cim-a1sr-c" target="cim-a1sr-c" edge="1">
+					
+                    
+					<mxGeometry relative="1" as="geometry"/>
+					
+                
+				</mxCell>
+				
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+				<object type="listener_thread" label="Evento de identificación - message receiver" id="cim-d1-listener_thread" name="Evento de identificación - message receiver" id_cim_parent="cim-d1" id_cim_type="task" cim_dependerElmnt_is_softgoal="false" ifsg_softgoal_id="" ifsg_softgoal_name="" qualification_array="" contribution_array="">
+					<mxCell style="shape=trapezoid;perimeter=trapezoidPerimeter;whiteSpace=wrap;html=1;fixedSize=1;flipV=1;" vertex="1" parent="cim-b2">
+						<mxGeometry x="NaN" y="NaN" width="120" height="60" as="geometry"/>
+					</mxCell>
+				</object>
+				<object type="comm_thread" label="Evento de identificación - message sender" id="cim-d1-comm_thread" name="Evento de identificación - message sender" id_cim_parent="cim-d1" id_cim_type="task" cim_dependeeElmnt_is_softgoal="false" ifsg_softgoal_id="" ifsg_softgoal_name="" qualification_array="" contribution_array="" dependum_data_structure="[{&quot;name&quot;: &quot;timestamp&quot;, &quot;description&quot;: &quot;Marca de tiempo del evento.&quot;}, {&quot;name&quot;: &quot;person_id&quot;, &quot;description&quot;: &quot;Identificador de la persona.&quot;}, {&quot;name&quot;: &quot;person_name&quot;, &quot;description&quot;: &quot;Nombre de la persona.&quot;}, {&quot;name&quot;: &quot;confidence&quot;, &quot;description&quot;: &quot;Confianza de la identificacion.&quot;}, {&quot;name&quot;: &quot;authorized&quot;, &quot;description&quot;: &quot;Indicador de autorizacion.&quot;}]" interval_in_milliseconds="500" operation_modes_enabled="false" operation_modes_description="">
+					<mxCell style="shape=trapezoid;perimeter=trapezoidPerimeter;whiteSpace=wrap;html=1;fixedSize=1;flipH=0;flipV=0;" vertex="1" parent="cim-b1">
+						<mxGeometry x="NaN" y="NaN" width="120" height="60" as="geometry"/>
+					</mxCell>
+				</object>
+				<object label="" type="comm_relation" id="cim-d1-comm_relation" id_cim_parent="cim-d1">
+					<mxCell style="endArrow=classic;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle; " edge="1" parent="1" source="cim-d1-comm_thread" target="cim-d1-listener_thread">
+						<mxGeometry relative="1" as="geometry">
+							<mxPoint x="230" y="580" as="sourcePoint"/>
+							<mxPoint x="210" y="400" as="targetPoint"/>
+						</mxGeometry>
+					</mxCell>
+				</object>
+				<object id="cim-d1-mail_symbol" type="mail_symbol" id_cim_parent="cim-d1">
+					<mxCell style="shape=message;html=1;outlineConnect=0;" vertex="1" parent="cim-d1-comm_relation">
+						<mxGeometry width="20" height="14" relative="1" as="geometry">
+							<mxPoint x="-10" y="-7" as="offset"/>
+						</mxGeometry>
+					</mxCell>
+				</object>
+				<object label="" type="comm_relation" id="cim-d1-comm_relation_dependee" id_cim_parent="cim-d1">
+					<mxCell style="endArrow=classic;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle; " edge="1" parent="cim-b1" source="cim-t5" target="cim-d1-comm_thread">
+						<mxGeometry relative="1" as="geometry">
+							<mxPoint x="230" y="580" as="sourcePoint"/>
+							<mxPoint x="210" y="400" as="targetPoint"/>
+						</mxGeometry>
+					</mxCell>
+				</object>
+				<object id="cim-d1-mail_symbol_dependee" type="mail_symbol" id_cim_parent="cim-d1">
+					<mxCell style="shape=message;html=1;outlineConnect=0;" vertex="1" parent="cim-d1-comm_relation_dependee">
+						<mxGeometry width="20" height="14" relative="1" as="geometry">
+							<mxPoint x="-10" y="-7" as="offset"/>
+						</mxGeometry>
+					</mxCell>
+				</object>
+				<object label="" type="comm_relation" id="cim-d1-comm_relation_depender" id_cim_parent="cim-d1">
+					<mxCell style="endArrow=classic;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle; " edge="1" parent="cim-b2" source="cim-d1-listener_thread" target="cim-t6">
+						<mxGeometry relative="1" as="geometry">
+							<mxPoint x="230" y="580" as="sourcePoint"/>
+							<mxPoint x="210" y="400" as="targetPoint"/>
+						</mxGeometry>
+					</mxCell>
+				</object>
+				<object id="cim-d1-mail_symbol_depender" type="mail_symbol" id_cim_parent="cim-d1">
+					<mxCell style="shape=message;html=1;outlineConnect=0;" vertex="1" parent="cim-d1-comm_relation_depender">
+						<mxGeometry width="20" height="14" relative="1" as="geometry">
+							<mxPoint x="-10" y="-7" as="offset"/>
+						</mxGeometry>
+					</mxCell>
+				</object>
+				
+                
+                
+                
+				<object label="Controlar acceso al recinto" type="operational_goal" id_cim_parent="cim-g2" id="cim-g2" name="Controlar acceso al recinto" qualification_array="[{ &quot;softgoal_id&quot;: &quot;cim-q3&quot;, &quot;name&quot;: &quot;Oportunidad de la respuesta&quot;}]" contribution_array="[]" operation_modes_enabled="false" operation_modes_description="" interval_in_milliseconds="250">
+					<mxCell style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="cim-b2">
+						<mxGeometry x="240" y="30" width="165" height="165" as="geometry"/>
+					</mxCell>
+				</object>
+				
+                
+                
+				<object label="Evaluar autorización" type="action" id_cim_parent="cim-t6" id="cim-t6" name="Evaluar autorización" input_parameters="[{&quot;name&quot;: &quot;identification_event&quot;, &quot;description&quot;: &quot;Evento de identificacion recibido.&quot;}]" output_parameters="[{&quot;name&quot;: &quot;decision&quot;, &quot;description&quot;: &quot;Decision de autorizacion.&quot;}]" qualification_array="[]" contribution_array="[]" operation_modes_enabled="false" operation_modes_description="">
+					<mxCell style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="cim-b2">
+						<mxGeometry x="20" y="160" width="130" height="46" as="geometry"/>
+					</mxCell>
+				</object>
+				
+                
+				<object label="Gestionar respuesta de acceso" type="action" id_cim_parent="cim-t7" id="cim-t7" name="Gestionar respuesta de acceso" input_parameters="[{&quot;name&quot;: &quot;decision&quot;, &quot;description&quot;: &quot;Decision de autorizacion.&quot;}]" output_parameters="[]" qualification_array="[]" contribution_array="[]" operation_modes_enabled="false" operation_modes_description="">
+					<mxCell style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="cim-b2">
+						<mxGeometry x="230" y="160" width="160" height="50" as="geometry"/>
+					</mxCell>
+				</object>
+				
+                
+				<object label="Registrar evento de acceso" type="action" id_cim_parent="cim-t10" id="cim-t10" name="Registrar evento de acceso" input_parameters="[{&quot;name&quot;: &quot;access_event&quot;, &quot;description&quot;: &quot;Evento de acceso a registrar.&quot;}]" output_parameters="[]" qualification_array="[]" contribution_array="[{ &quot;softgoal_id&quot;: &quot;cim-q4&quot;, &quot;name&quot;: &quot;Trazabilidad de accesos&quot;, &quot;contribution&quot;: &quot;help&quot;}]" operation_modes_enabled="false" operation_modes_description="">
+					<mxCell style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="cim-b2">
+						<mxGeometry x="455" y="160" width="150" height="50" as="geometry"/>
+					</mxCell>
+				</object>
+				
+                
+				<object label="Desbloquear cerradura" type="action" id_cim_parent="cim-t8" id="cim-t8" name="Desbloquear cerradura" input_parameters="[]" output_parameters="[]" qualification_array="[]" contribution_array="[]" operation_modes_enabled="false" operation_modes_description="">
+					<mxCell style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="cim-b2">
+						<mxGeometry x="150" y="280" width="135" height="46" as="geometry"/>
+					</mxCell>
+				</object>
+				
+                
+				<object label="Activar alarma" type="action" id_cim_parent="cim-t9" id="cim-t9" name="Activar alarma" input_parameters="[]" output_parameters="[]" qualification_array="[]" contribution_array="[]" operation_modes_enabled="false" operation_modes_description="">
+					<mxCell style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="cim-b2">
+						<mxGeometry x="340" y="280" width="112" height="44" as="geometry"/>
+					</mxCell>
+				</object>
+				
+                
+				<object label="Cerradura electromecánica" type="hw_resource" id_cim_parent="cim-r3" id="cim-r3" name="Cerradura electromecánica" qualification_array="[]" contribution_array="[]">
+					<mxCell style="verticalAlign=middle;align=center;shape=cube;spacingTop=8;spacingLeft=2;spacingRight=12;size=10;direction=south;fontStyle=0;html=1;whiteSpace=wrap;" vertex="1" parent="cim-b2">
+						<mxGeometry x="145" y="385" width="135" height="44" as="geometry"/>
+					</mxCell>
+				</object>
+				
+                
+				<object label="Alarma sonora" type="hw_resource" id_cim_parent="cim-r4" id="cim-r4" name="Alarma sonora" qualification_array="[]" contribution_array="[]">
+					<mxCell style="verticalAlign=middle;align=center;shape=cube;spacingTop=8;spacingLeft=2;spacingRight=12;size=10;direction=south;fontStyle=0;html=1;whiteSpace=wrap;" vertex="1" parent="cim-b2">
+						<mxGeometry x="340" y="385" width="112" height="44" as="geometry"/>
+					</mxCell>
+				</object>
+				
+                
+				<object label="Bitácora de accesos" type="sw_resource" id_cim_parent="cim-r5" id="cim-r5" name="Bitácora de accesos" qualification_array="[]" contribution_array="[]" data_structure="[{&quot;name&quot;: &quot;timestamp&quot;, &quot;description&quot;: &quot;Marca de tiempo del acceso.&quot;}, {&quot;name&quot;: &quot;person_id&quot;, &quot;description&quot;: &quot;Identificador de la persona.&quot;}, {&quot;name&quot;: &quot;decision&quot;, &quot;description&quot;: &quot;Resultado de la autorizacion.&quot;}]">
+					<mxCell style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="cim-b2">
+						<mxGeometry x="480" y="280" width="125" height="44" as="geometry"/>
+					</mxCell>
+				</object>
+				
+                
+                
+				<object label="Access Actuator Component" type="cps_component" id_cim_parent="cim-a2sr-c" id="cim-b2" name="Access Actuator Component" description="">
+					<mxCell style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+						<mxGeometry x="" y="" width="" height="" as="geometry">
+							<mxRectangle x="44" width="49.05" height="44" as="alternateBounds"/>
+						</mxGeometry>
+					</mxCell>
+				</object>
+				
+                
+				<mxCell id="cim-a2sr-l" value="" style="endArrow=none;html=1;rounded=0;startSize=9;endSize=6;sourcePerimeterSpacing=0;jumpStyle=sharp;exitX=0;exitY=0;exitDx=0;exitDy=0;entryX=1;entryY=0;entryDx=0;entryDy=0;strokeColor=#004C99;" parent="cim-a2sr" source="cim-a2sr-c" target="cim-a2sr-c" edge="1">
+					
+                    
+					<mxGeometry relative="1" as="geometry"/>
+					
+                
+				</mxCell>
+				
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+            
+			</root>
+		</mxGraphModel>
+	</diagram>
+</mxfile>

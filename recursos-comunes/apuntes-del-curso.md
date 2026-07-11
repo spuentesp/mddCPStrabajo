@@ -92,8 +92,9 @@ distribuida, telemedicina (Zanero, 2017).
 ### 1.6 De los desafíos a la arquitectura
 
 **Si los desafíos se interpretan como requerimientos**, emergen arquitecturas
-apropiadas, organizadas por capas según el tiempo de respuesta (Prasad et al.,
-2019):
+apropiadas, organizadas por capas según el tiempo de respuesta (organización de
+referencia, cf. taxonomías edge/fog/cloud discutidas en la literatura, p. ej.
+Satyanarayanan, 2017):
 
 | Capa | Rol | Tiempo de respuesta | Tecnologías típicas |
 |---|---|---|---|
@@ -414,8 +415,7 @@ La lista APA 7 completa, con DOI/URL verificables, está en
 [`referencias.md`](referencias.md). Fuentes principales por semana:
 
 - **S1:** Lee (2006, 2015); Cares, Sepúlveda y Navarro (2019); Marwedel y
-  Engel (2016); Zanero (2017); Kreutz et al. (2014); Mangharam et al. (2016);
-  Prasad et al. (2019).
+  Engel (2016); Zanero (2017); Kreutz et al. (2014); Mangharam et al. (2016).
 - **S2:** Pidd (2000/2003); Selic (2003); Aßmann, Zschaler y Wagner (2006);
   Fowler (2010); Mernik, Heering y Sloane (2005); Bézivin (2005); Kleppe et
   al. (2003).
