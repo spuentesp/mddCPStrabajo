@@ -24,6 +24,12 @@ import paho.mqtt.client as mqtt
 
 TOPIC = "svif/eventos/identificacion"
 
+# Compatibilidad con paho-mqtt 1.x y 2.0+
+try:
+    CLIENT_API_VERSION = mqtt.CallbackAPIVersion.VERSION2
+except AttributeError:
+    CLIENT_API_VERSION = None
+
 # SW Resource pim-fm-06 (CIM: cim-r2) — Base de rostros enrolados
 ENROLLED_FACES = [
     {"person_id": 1, "person_name": "Ana Perez",   "face_embedding": 0.11, "authorized": True},
@@ -40,8 +46,10 @@ class FaceMonitorComponent(threading.Thread):
     def __init__(self, broker: str, port: int, stop: threading.Event):
         super().__init__(name="FaceMonitor", daemon=True)
         self.stop = stop
-        self.client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2,
-                                  client_id="svif-face-monitor-sim")
+        if CLIENT_API_VERSION:
+            self.client = mqtt.Client(CLIENT_API_VERSION, client_id="svif-face-monitor-sim")
+        else:
+            self.client = mqtt.Client(client_id="svif-face-monitor-sim")
         self.client.connect(broker, port)
         self.client.loop_start()
 
@@ -101,8 +109,10 @@ class AccessActuatorComponent(threading.Thread):
         self.pending = None
         self.lock = threading.Lock()
         self.bitacora = []  # SW Resource pim-aa-09 (cim-r5)
-        self.client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2,
-                                  client_id="svif-access-actuator-sim")
+        if CLIENT_API_VERSION:
+            self.client = mqtt.Client(CLIENT_API_VERSION, client_id="svif-access-actuator-sim")
+        else:
+            self.client = mqtt.Client(client_id="svif-access-actuator-sim")
         self.client.on_message = self.receiver_callback
         self.client.connect(broker, port)
         self.client.subscribe(TOPIC)
