@@ -41,7 +41,7 @@ El **CIM** se construyó en iStar 2.0 con:
 - Softgoals de privacidad, oportunidad y trazabilidad.
 - Una dependencia entre los dos nodos: el recurso *«Evento de identificación»*.
 
-![CIM iStar 2.0 de SVIF](slides/semana-4/img/cim-istar-svif.png)
+![CIM iStar 2.0 de SVIF](../slides/semana-4/img/cim-istar-svif.png)
 
 *Fuente: `cim-istar-svif.drawio`.*
 
@@ -90,7 +90,7 @@ tipado concreto en C++. Resultado (realización del agente):
 | OR del CIM | Condicional en `gestionarRespuestaAcceso()` |
 | Softgoals | Comentarios `Qualification/Contribution Array` |
 
-![PIM DSL para CPS de SVIF](slides/semana-4/img/pim-dsl-svif.png)
+![PIM DSL para CPS de SVIF](../slides/semana-4/img/pim-dsl-svif.png)
 
 *Fuente: `pim-dsl-svif.drawio`.*
 

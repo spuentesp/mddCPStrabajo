@@ -21,7 +21,7 @@ utilizando un DSL orientado a sistemas ciberfísicos.
 | Seleccione un CPS de su interés | SVIF — `../recursos-comunes/diseno-del-sistema.md` |
 | Identifique al menos **dos componentes ciberfísicos (nodos)** que colaboren | *Face Monitor Component* y *Access Actuator Component* — `actividad-modelado-istar.md`, §2 |
 | Modele los actores y sus dependencias mediante una **vista SD o híbrida SD/SR** | `cim-istar-svif.drawio`: páginas «SD - Dependencias Estrategicas» y «SR - Vista hibrida SD-SR» |
-| Incorpore **Goals, Softgoals, Tasks y Resources** | `actividad-modelado-istar.md`, §3 y §4 (inventario de 26 elementos) |
+| Incorpore **Goals, Softgoals, Tasks y Resources** | `actividad-modelado-istar.md`, §3 y §4 (inventario de 27 elementos) |
 | Identifique **al menos una dependencia** entre los actores | «Evento de identificación» (cim-d1) — `actividad-modelado-istar.md`, §4 |
 | Construya una **representación equivalente** con la biblioteca DSL | `pim-dsl-svif.drawio` |
 | Explique **cómo los principales elementos del modelo AO fueron representados en el DSL** | `actividad-modelado-istar.md`, §5 (tabla de correspondencia, instancias y análisis de la traducción) |
@@ -48,3 +48,5 @@ Las bibliotecas de símbolos están en `../recursos-comunes/librerias-drawio/`
 > por lo que `semana-4/pim-dsl-svif.drawio` es una copia de este archivo, igual que
 > `semana-4/cim-istar-svif.drawio` lo es del modelo iStar. Cada carpeta queda
 > autocontenida y puede entregarse por separado.
+
+**Guion hablado lámina por lámina:** `../recursos-comunes/guion-de-presentaciones.md`.

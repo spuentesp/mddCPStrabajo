@@ -54,3 +54,5 @@ caso de estudio del proyecto, como preparación para las Semanas 3 y 4:
 > `../slides/semana-2/analisis-dsl.html`. Se descartó como entrega porque el DSL se
 > analiza en profundidad en las Semanas 3 y 4; C4 permite una reflexión crítica más
 > independiente.
+
+**Guion hablado lámina por lámina:** `../recursos-comunes/guion-de-presentaciones.md`.

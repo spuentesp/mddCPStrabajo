@@ -62,6 +62,7 @@ código personalizado (Code).
 │   └── evidencia-de-pruebas.md   #   corrida real de punta a punta
 └── recursos-comunes/             # Apoyos transversales (no son entregables)
     ├── apuntes-del-curso.md      #   TODA la materia S1–S4: seccionada y resumida
+    ├── guion-de-presentaciones.md#   guion hablado lámina por lámina (4 mazos)
     ├── diseno-del-sistema.md     #   arquitectura del CPS
     ├── referencias.md            #   APA 7 con DOI/URL verificables
     ├── librerias-drawio/         #   bibliotecas de símbolos del curso
