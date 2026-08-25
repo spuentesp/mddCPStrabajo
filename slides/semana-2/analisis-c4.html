@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>S2 · Análisis del modelo C4 — Arquitectura de sistemas (UFRO)</title>
+<link rel="stylesheet" href="../template/slides.css">
+<style>
+  /* extras locales para esta presentación */
+  .c4-box {
+    background: #eef3ff; border: 2px solid #1f7fd8; border-radius: 6px;
+    padding: 8px 12px; margin: 4px 0; font-size: 12px;
+  }
+  .c4-box.person { background: #fce6ea; border-color: #c0334d; }
+  .c4-box.system { background: #e8f5f7; border-color: #1fb8d8; }
+  .c4-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .level-indicator {
+    display: inline-block; padding: 2px 8px; border-radius: 12px;
+    background: #1f7fd8; color: white; font-size: 10px; font-weight: 700;
+    margin-right: 6px; text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<!-- 1. TITLE -->
+<section class="slide title-bg">
+  <div class="title-zone">
+    <div class="kicker">EMI305 · Producción de Software · Sistemas Ciberfísicos</div>
+    <h1>Análisis del modelo C4:<br>Arquitectura de sistemas en 4 niveles</h1>
+    <p class="subtitle">Constructos, notación, metamodelo y semántica de un lenguaje visual para describir arquitectura de software aplicado a un sistema ciberfísico.</p>
+    <div class="author-block">
+      Magíster en Ingeniería Informática · UFRO<br>
+      EMI305 · Producción de Software · 2026
+    </div>
+  </div>
+</section>
+
+<!-- 2. DESCRIPCIÓN GENERAL -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">01 · Descripción general</div>
+    <h2>¿Qué es el modelo C4?</h2>
+    <div class="grid2">
+      <div>
+        <p><b>Origen.</b> Creado por Simon Brown (2006+) como respuesta a las limitaciones de UML para arquitectura de software. Hoy es estándar de facto en la industria.</p>
+        <p><b>Propósito.</b> Describir la <b>arquitectura</b> de un sistema de software en <b>4 niveles de abstracción</b>, desde visión empresarial hasta código, facilitando comunicación entre stakeholders técnicos y no técnicos.</p>
+        <p><b>¿Por qué 4 niveles?</b> Porque arquitectura no es una vista única. El contexto importa al CTO, los contenedores al DevOps, los componentes al arquitecto, el código al desarrollador.</p>
+      </div>
+      <div class="card">
+        <div class="meta">Los 4 niveles</div>
+        <div class="c4-box" style="background:#fce6ea; border-color:#c0334d;">
+          <b>Level 1: Context</b><br>
+          <span style="font-size:11px;">Sistema + usuarios + sistemas externos</span>
+        </div>
+        <div class="c4-box" style="background:#e8f5f7; border-color:#1fb8d8;">
+          <b>Level 2: Container</b><br>
+          <span style="font-size:11px;">Aplicaciones, bases de datos, nodos físicos</span>
+        </div>
+        <div class="c4-box" style="background:#f0f8e8; border-color:#2f8f4f;">
+          <b>Level 3: Component</b><br>
+          <span style="font-size:11px;">Módulos funcionales dentro de un container</span>
+        </div>
+        <div class="c4-box" style="background:#fff8e8; border-color:#b8860b;">
+          <b>Level 4: Code</b><br>
+          <span style="font-size:11px;">Clases, funciones, métodos</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">2</div>
+</section>
+
+<!-- 3. SINTAXIS ABSTRACTA -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">02 · Sintaxis abstracta</div>
+    <h2>Constructos y conceptos del modelo C4</h2>
+    <div class="grid2">
+      <div>
+        <table class="dense">
+          <tr><th>Constructo</th><th>Rol</th></tr>
+          <tr><td><b>System</b></td><td>El software que se describe</td></tr>
+          <tr><td><b>Person</b></td><td>Usuario o actor externo</td></tr>
+          <tr><td><b>Software System</b></td><td>Sistema externo que interactúa</td></tr>
+          <tr><td><b>Container</b></td><td>Aplicación, BD, nodo, microservicio</td></tr>
+          <tr><td><b>Component</b></td><td>Módulo lógico dentro de un container</td></tr>
+          <tr><td><b>Code</b></td><td>Clases, métodos, funciones</td></tr>
+          <tr><td><b>Relationship</b></td><td>Interacción: Uses, Sends, Calls</td></tr>
+        </table>
+      </div>
+      <div>
+        <div class="card">
+          <div class="meta">Restricciones (buena formación)</div>
+          <ul style="margin-top:6px; font-size:12px;">
+            <li>Un <b>System</b> contiene <b>≥ 1 Container</b>.</li>
+            <li>Un <b>Container</b> contiene <b>≥ 1 Component</b> (o es atómico).</li>
+            <li>Un <b>Component</b> contiene <b>≥ 1 Code unit</b>.</li>
+            <li>Las relaciones <b>Uses</b> representan sincronía (HTTP, RPC).</li>
+            <li>Las relaciones <b>Sends</b> representan asincronía (MQTT, EventBus).</li>
+            <li>Solo se conectan elementos del <b>mismo nivel</b> (no Container → Code).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">3</div>
+</section>
+
+<!-- 4. METAMODELO -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">03 · Metamodelo</div>
+    <h2>Relaciones entre constructos (diagrama de clases simplificado)</h2>
+    <div class="diagram">
+      <svg viewBox="0 0 1100 280" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica Neue, Arial, sans-serif">
+        <defs>
+          <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#5a6fd8"/>
+          </marker>
+          <marker id="diamond" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7">
+            <circle cx="5" cy="5" r="2" fill="#15182b"/>
+          </marker>
+        </defs>
+
+        <!-- Element (superclass) -->
+        <g>
+          <rect x="480" y="10" width="140" height="50" rx="4" fill="#ffffff" stroke="#c5d6ee" stroke-width="1.5"/>
+          <text x="550" y="25" text-anchor="middle" fill="#1f7fd8" font-size="10" font-weight="700">Element</text>
+          <text x="487" y="42" fill="#353a52" font-size="9">name, description</text>
+          <text x="487" y="54" fill="#353a52" font-size="9">responsibility</text>
+        </g>
+
+        <!-- Composition diamonds and lines from Element to Level classes -->
+        <g stroke="#15182b" stroke-width="1.2" fill="none" marker-end="url(#arr)">
+          <path d="M480,45 L300,120"/>
+          <path d="M550,60 L550,120"/>
+          <path d="M620,60 L620,120"/>
+          <path d="M750,60 L800,120"/>
+        </g>
+
+        <!-- Person -->
+        <g>
+          <rect x="220" y="120" width="160" height="60" rx="4" fill="#ffffff" stroke="#c0334d" stroke-width="1.5"/>
+          <text x="300" y="135" text-anchor="middle" fill="#c0334d" font-size="10" font-weight="700">Person</text>
+          <line x1="220" y1="142" x2="380" y2="142" stroke="#c0334d"/>
+          <text x="227" y="156" fill="#353a52" font-size="9">interacts_with: System</text>
+          <text x="227" y="170" fill="#353a52" font-size="9">role: string</text>
+        </g>
+
+        <!-- System -->
+        <g>
+          <rect x="470" y="120" width="160" height="60" rx="4" fill="#ffffff" stroke="#1fb8d8" stroke-width="1.5"/>
+          <text x="550" y="135" text-anchor="middle" fill="#1fb8d8" font-size="10" font-weight="700">System</text>
+          <line x1="470" y1="142" x2="630" y2="142" stroke="#1fb8d8"/>
+          <text x="477" y="156" fill="#353a52" font-size="9">contains: Container [1..*]</text>
+          <text x="477" y="170" fill="#353a52" font-size="9">boundary: scope</text>
+        </g>
+
+        <!-- Software System (external) -->
+        <g>
+          <rect x="720" y="120" width="160" height="60" rx="4" fill="#ffffff" stroke="#6b7390" stroke-width="1.5"/>
+          <text x="800" y="135" text-anchor="middle" fill="#6b7390" font-size="10" font-weight="700">Software System</text>
+          <line x1="720" y1="142" x2="880" y2="142" stroke="#6b7390"/>
+          <text x="727" y="156" fill="#353a52" font-size="9">external: boolean</text>
+          <text x="727" y="170" fill="#353a52" font-size="9">interacts_with: System</text>
+        </g>
+
+        <!-- Container -->
+        <g>
+          <rect x="470" y="220" width="160" height="50" rx="4" fill="#ffffff" stroke="#1f7fd8" stroke-width="1.5"/>
+          <text x="550" y="235" text-anchor="middle" fill="#1f7fd8" font-size="10" font-weight="700">Container</text>
+          <line x1="470" y1="242" x2="630" y2="242" stroke="#1f7fd8"/>
+          <text x="477" y="256" fill="#353a52" font-size="9">type: {App, DB, Queue, Node}</text>
+        </g>
+
+        <!-- Relationship -->
+        <g>
+          <rect x="70" y="220" width="160" height="50" rx="4" fill="#ffffff" stroke="#2f8f4f" stroke-width="1.5"/>
+          <text x="150" y="235" text-anchor="middle" fill="#2f8f4f" font-size="10" font-weight="700">Relationship</text>
+          <line x1="70" y1="242" x2="230" y2="242" stroke="#2f8f4f"/>
+          <text x="77" y="256" fill="#353a52" font-size="9">type: {Uses, Sends}</text>
+        </g>
+
+        <!-- Arrow from System to Relationship -->
+        <path d="M470,160 Q300,180 230,225" stroke="#15182b" stroke-width="1.2" fill="none" marker-end="url(#arr)" stroke-dasharray="4,3"/>
+        <text x="350" y="190" fill="#6b7390" font-size="9">has</text>
+
+        <!-- Legend -->
+        <text x="70" y="300" fill="#6b7390" font-size="9" font-style="italic">Relaciones: is-a (herencia), contains (composición), has (asociación)</text>
+      </svg>
+    </div>
+  </div>
+  <div class="pageno">4</div>
+</section>
+
+<!-- 5. SINTAXIS CONCRETA -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">04 · Sintaxis concreta</div>
+    <h2>Notación visual estándar de C4</h2>
+    <div class="grid2">
+      <div>
+        <div style="margin-bottom:14px;">
+          <b style="color:#c0334d;">Person</b>
+          <div class="diagram">
+            <svg viewBox="0 0 180 100" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="90" cy="30" r="15" fill="#fce6ea" stroke="#c0334d" stroke-width="2"/>
+              <ellipse cx="90" cy="60" rx="20" ry="25" fill="#fce6ea" stroke="#c0334d" stroke-width="2"/>
+              <text x="90" y="85" text-anchor="middle" font-size="11" font-weight="700">Usuario</text>
+            </svg>
+          </div>
+        </div>
+        <div style="margin-bottom:14px;">
+          <b style="color:#1fb8d8;">System</b>
+          <div class="diagram">
+            <svg viewBox="0 0 180 100" xmlns="http://www.w3.org/2000/svg">
+              <rect x="20" y="20" width="140" height="50" rx="4" fill="#e8f5f7" stroke="#1fb8d8" stroke-width="2"/>
+              <text x="90" y="50" text-anchor="middle" font-size="12" font-weight="700" fill="#1fb8d8">Sistema SVIF</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div style="margin-bottom:14px;">
+          <b style="color:#1f7fd8;">Container</b>
+          <div class="diagram">
+            <svg viewBox="0 0 180 100" xmlns="http://www.w3.org/2000/svg">
+              <rect x="20" y="20" width="140" height="50" rx="4" fill="#eef3ff" stroke="#1f7fd8" stroke-width="2"/>
+              <text x="90" y="35" text-anchor="middle" font-size="10" font-weight="700" fill="#1f7fd8">Face Monitor</text>
+              <text x="90" y="50" text-anchor="middle" font-size="9" fill="#5a6fd8">[ESP32-CAM]</text>
+              <text x="90" y="65" text-anchor="middle" font-size="8" fill="#6b7390" font-style="italic">periódico 500ms</text>
+            </svg>
+          </div>
+        </div>
+        <div style="margin-bottom:14px;">
+          <b style="color:#2f8f4f;">Relationship (MQTT)</b>
+          <div class="diagram">
+            <svg viewBox="0 0 180 70" xmlns="http://www.w3.org/2000/svg">
+              <rect x="20" y="10" width="60" height="30" rx="2" fill="#eef3ff" stroke="#1f7fd8" stroke-width="1.5"/>
+              <text x="50" y="30" text-anchor="middle" font-size="9" fill="#1f7fd8">Sender</text>
+              <path d="M80,25 L130,25 M125,20 L130,25 L125,30" stroke="#2f8f4f" stroke-width="2" fill="none"/>
+              <text x="105" y="45" text-anchor="middle" font-size="8" fill="#2f8f4f" font-weight="700">Sends (MQTT)</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">5</div>
+</section>
+
+<!-- 6. SEMÁNTICA -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">05 · Semántica</div>
+    <h2>¿Qué significa cada nivel? (Transformación de abstracción)</h2>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+      <div>
+        <div class="flow-step">
+          <span class="num">1</span><b>Context</b><br>
+          <span style="font-size:12px;">¿Quiénes son los usuarios? ¿Qué otros sistemas existen? ¿Límites del sistema?</span>
+        </div>
+        <div class="flow-step">
+          <span class="num">2</span><b>Container</b><br>
+          <span style="font-size:12px;">¿Qué aplicaciones/nodos/DBs hay? ¿Cómo se despliegan? ¿Tecnología base?</span>
+        </div>
+        <div class="flow-step">
+          <span class="num">3</span><b>Component</b><br>
+          <span style="font-size:12px;">¿Qué módulos funcionales hay dentro? ¿Cómo se comunican? ¿Responsabilidades?</span>
+        </div>
+        <div class="flow-step">
+          <span class="num">4</span><b>Code</b><br>
+          <span style="font-size:12px;">¿Qué clases/métodos implementan? ¿Patrones de diseño? ¿Detalles técnicos?</span>
+        </div>
+      </div>
+      <div>
+        <div class="card gray">
+          <div class="meta">En SVIF:</div>
+          <p style="font-size:12px;"><b>Context:</b> Usuario quiere acceder, cámara detecta, cerradura se abre.</p>
+          <p style="font-size:12px;"><b>Container:</b> Dos nodos ESP32 (Face Monitor + Access Actuator) comunicados por MQTT.</p>
+          <p style="font-size:12px;"><b>Component:</b> Dentro de Face Monitor: captura, detección, identificación, MQTT sender.</p>
+          <p style="font-size:12px;"><b>Code:</b> monitorearPresenciaTask(), capturarImagen(), identificarRostro(), publicIdentificationEvent().</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">6</div>
+</section>
+
+<!-- 7. C4 EN SVIF: CONTEXT -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">06a · C4 aplicado a SVIF</div>
+    <h2><span class="level-indicator">Level 1</span>Context: Sistema en contexto</h2>
+    <div class="diagram">
+      <svg viewBox="0 0 1100 330" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica Neue, Arial, sans-serif">
+        <!-- Personas -->
+        <g>
+          <!-- Usuario autorizado -->
+          <circle cx="120" cy="80" r="20" fill="#fce6ea" stroke="#c0334d" stroke-width="2"/>
+          <rect x="80" y="105" width="80" height="30" rx="4" fill="#fce6ea" stroke="#c0334d" stroke-width="1"/>
+          <text x="120" y="125" text-anchor="middle" font-size="11" font-weight="700" fill="#c0334d">Usuario</text>
+          <text x="120" y="250" text-anchor="middle" font-size="10" fill="#353a52">Intenta acceder</text>
+        </g>
+
+        <!-- Sistema central -->
+        <g>
+          <rect x="420" y="30" width="260" height="280" rx="8" fill="#e8f5f7" stroke="#1fb8d8" stroke-width="2.5"/>
+          <text x="550" y="55" text-anchor="middle" font-size="14" font-weight="700" fill="#1fb8d8">SVIF</text>
+          <text x="550" y="73" text-anchor="middle" font-size="11" fill="#5a6fd8">(Videovigilancia con identificación facial)</text>
+
+          <!-- Interior markings -->
+          <text x="435" y="110" font-size="10" fill="#6b7390">Contiene:</text>
+          <text x="435" y="128" font-size="10" fill="#6b7390">• Face Monitor (ESP32-CAM)</text>
+          <text x="435" y="145" font-size="10" fill="#6b7390">• Access Actuator (ESP32)</text>
+          <text x="435" y="162" font-size="10" fill="#6b7390">• MQTT Broker</text>
+        </g>
+
+        <!-- External systems -->
+        <g>
+          <!-- MQTT Broker (external) -->
+          <rect x="780" y="100" width="140" height="60" rx="4" fill="#f0f0f0" stroke="#6b7390" stroke-width="1.5" stroke-dasharray="3,3"/>
+          <text x="850" y="120" text-anchor="middle" font-size="10" font-weight="700" fill="#6b7390">MQTT Broker</text>
+          <text x="850" y="137" text-anchor="middle" font-size="9" fill="#6b7390">(Mosquitto - local)</text>
+          <text x="850" y="152" text-anchor="middle" font-size="8" fill="#8a91a8" font-style="italic">[Externo]</text>
+        </g>
+
+        <!-- Relations/Arrows -->
+        <defs>
+          <marker id="arrowblue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#1fb8d8"/>
+          </marker>
+        </defs>
+
+        <!-- Usuario to SVIF -->
+        <path d="M160,100 Q320,80 420,180" stroke="#c0334d" stroke-width="2.5" fill="none" marker-end="url(#arrowblue)"/>
+        <text x="280" y="65" font-size="10" fill="#353a52" font-weight="700">intenta acceder</text>
+
+        <!-- SVIF to MQTT -->
+        <path d="M680,150 L780,130" stroke="#2f8f4f" stroke-width="2.5" fill="none" marker-end="url(#arrowblue)"/>
+        <text x="720" y="135" font-size="10" fill="#353a52">publica eventos</text>
+
+        <!-- MQTT to SVIF (feedback) -->
+        <path d="M780,170 L680,200" stroke="#2f8f4f" stroke-width="2.5" fill="none" marker-end="url(#arrowblue)" stroke-dasharray="4,2"/>
+        <text x="710" y="200" font-size="10" fill="#353a52">suscribe</text>
+
+        <!-- Output/Actions -->
+        <g>
+          <!-- Cerradura -->
+          <rect x="70" y="280" width="100" height="35" rx="4" fill="#fff8e8" stroke="#b8860b" stroke-width="1.5"/>
+          <text x="120" y="302" text-anchor="middle" font-size="11" font-weight="700" fill="#b8860b">Cerradura</text>
+          <path d="M520,310 L170,310" stroke="#b8860b" stroke-width="2" fill="none" marker-end="url(#arrowblue)"/>
+          <text x="350" y="330" font-size="10" fill="#353a52" text-anchor="middle">desbloquea o alarma</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+  <div class="pageno">7</div>
+</section>
+
+<!-- 8. C4 EN SVIF: CONTAINER -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">06b · C4 aplicado a SVIF</div>
+    <h2><span class="level-indicator">Level 2</span>Container: Nodos y tecnología</h2>
+    <div class="diagram">
+      <svg viewBox="0 0 1100 320" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica Neue, Arial, sans-serif">
+        <defs>
+          <marker id="mqtt-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#2f8f4f"/>
+          </marker>
+        </defs>
+
+        <!-- Face Monitor Container -->
+        <g>
+          <rect x="80" y="30" width="300" height="250" rx="6" fill="#eef3ff" stroke="#1f7fd8" stroke-width="2.5"/>
+          <text x="230" y="55" text-anchor="middle" font-size="13" font-weight="700" fill="#1f7fd8">Face Monitor Component</text>
+          <text x="230" y="72" text-anchor="middle" font-size="10" fill="#5a6fd8">[Container: ESP32-CAM]</text>
+
+          <!-- Sub-elements -->
+          <g>
+            <rect x="95" y="90" width="85" height="45" rx="3" fill="#ffffff" stroke="#1f7fd8" stroke-width="1"/>
+            <text x="137" y="108" text-anchor="middle" font-size="10" font-weight="700" fill="#1f7fd8">OV2640</text>
+            <text x="137" y="125" text-anchor="middle" font-size="9" fill="#6b7390">Sensor</text>
+          </g>
+
+          <g>
+            <rect x="200" y="90" width="85" height="45" rx="3" fill="#ffffff" stroke="#1f7fd8" stroke-width="1"/>
+            <text x="242" y="108" text-anchor="middle" font-size="10" font-weight="700" fill="#1f7fd8">Face Detect</text>
+            <text x="242" y="125" text-anchor="middle" font-size="9" fill="#6b7390">Algoritmo</text>
+          </g>
+
+          <g>
+            <rect x="95" y="160" width="85" height="45" rx="3" fill="#ffffff" stroke="#1f7fd8" stroke-width="1"/>
+            <text x="137" y="178" text-anchor="middle" font-size="10" font-weight="700" fill="#1f7fd8">Enrolled</text>
+            <text x="137" y="195" text-anchor="middle" font-size="9" fill="#6b7390">Faces DB</text>
+          </g>
+
+          <g>
+            <rect x="200" y="160" width="85" height="45" rx="3" fill="#ffffff" stroke="#1f7fd8" stroke-width="1"/>
+            <text x="242" y="178" text-anchor="middle" font-size="10" font-weight="700" fill="#1f7fd8">MQTT</text>
+            <text x="242" y="195" text-anchor="middle" font-size="9" fill="#6b7390">Sender</text>
+          </g>
+
+          <!-- Thread info -->
+          <text x="95" y="230" font-size="9" fill="#6b7390" font-weight="700">Período: 500 ms</text>
+          <text x="95" y="245" font-size="8" fill="#6b7390">Hilo FreeRTOS</text>
+          <text x="95" y="258" font-size="8" fill="#6b7390">vTaskDelay(500)</text>
+        </g>
+
+        <!-- MQTT Broker -->
+        <g>
+          <rect x="450" y="80" width="180" height="170" rx="4" fill="#f0f8e8" stroke="#2f8f4f" stroke-width="2"/>
+          <text x="540" y="105" text-anchor="middle" font-size="12" font-weight="700" fill="#2f8f4f">MQTT Broker</text>
+          <text x="540" y="125" text-anchor="middle" font-size="10" fill="#6b7390">Topic: svif/eventos/</text>
+          <text x="540" y="142" text-anchor="middle" font-size="10" fill="#6b7390">identificacion</text>
+          <text x="540" y="165" text-anchor="middle" font-size="10" fill="#6b7390">Mensaje JSON:</text>
+          <text x="540" y="182" text-anchor="middle" font-size="8" fill="#353a52" font-family="monospace">{timestamp, person_id,</text>
+          <text x="540" y="195" text-anchor="middle" font-size="8" fill="#353a52" font-family="monospace">confidence, authorized}</text>
+        </g>
+
+        <!-- Access Actuator Container -->
+        <g>
+          <rect x="720" y="30" width="300" height="250" rx="6" fill="#fff0e6" stroke="#b8860b" stroke-width="2.5"/>
+          <text x="870" y="55" text-anchor="middle" font-size="13" font-weight="700" fill="#b8860b">Access Actuator Component</text>
+          <text x="870" y="72" text-anchor="middle" font-size="10" fill="#d4a76a">[Container: ESP32 + Relé]</text>
+
+          <!-- Sub-elements -->
+          <g>
+            <rect x="735" y="90" width="85" height="45" rx="3" fill="#ffffff" stroke="#b8860b" stroke-width="1"/>
+            <text x="777" y="108" text-anchor="middle" font-size="10" font-weight="700" fill="#b8860b">MQTT</text>
+            <text x="777" y="125" text-anchor="middle" font-size="9" fill="#6b7390">Receiver</text>
+          </g>
+
+          <g>
+            <rect x="840" y="90" width="85" height="45" rx="3" fill="#ffffff" stroke="#b8860b" stroke-width="1"/>
+            <text x="882" y="108" text-anchor="middle" font-size="10" font-weight="700" fill="#b8860b">Evaluar</text>
+            <text x="882" y="125" text-anchor="middle" font-size="9" fill="#6b7390">Autorización</text>
+          </g>
+
+          <g>
+            <rect x="735" y="160" width="85" height="45" rx="3" fill="#ffffff" stroke="#b8860b" stroke-width="1"/>
+            <text x="777" y="178" text-anchor="middle" font-size="10" font-weight="700" fill="#b8860b">Relé (GPIO)</text>
+            <text x="777" y="195" text-anchor="middle" font-size="9" fill="#6b7390">Pin 26</text>
+          </g>
+
+          <g>
+            <rect x="840" y="160" width="85" height="45" rx="3" fill="#ffffff" stroke="#b8860b" stroke-width="1"/>
+            <text x="882" y="178" text-anchor="middle" font-size="10" font-weight="700" fill="#b8860b">Buzzer (GPIO)</text>
+            <text x="882" y="195" text-anchor="middle" font-size="9" fill="#6b7390">Pin 27</text>
+          </g>
+
+          <!-- Thread info -->
+          <text x="735" y="230" font-size="9" fill="#6b7390" font-weight="700">Período: 250 ms</text>
+          <text x="735" y="245" font-size="8" fill="#6b7390">Hilo FreeRTOS</text>
+          <text x="735" y="258" font-size="8" fill="#6b7390">vTaskDelay(250)</text>
+        </g>
+
+        <!-- Arrows -->
+        <path d="M380,155 L450,130" stroke="#2f8f4f" stroke-width="2.5" fill="none" marker-end="url(#mqtt-arrow)"/>
+        <text x="410" y="138" font-size="9" fill="#353a52" font-weight="700">Sends</text>
+
+        <path d="M630,155 L720,180" stroke="#2f8f4f" stroke-width="2.5" fill="none" marker-end="url(#mqtt-arrow)"/>
+        <text x="670" y="175" font-size="9" fill="#353a52" font-weight="700">Receives</text>
+      </svg>
+    </div>
+  </div>
+  <div class="pageno">8</div>
+</section>
+
+<!-- 9. C4 EN SVIF: COMPONENT (Face Monitor) -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">06c · C4 aplicado a SVIF</div>
+    <h2><span class="level-indicator">Level 3</span>Component: Dentro de Face Monitor</h2>
+    <div class="diagram">
+      <svg viewBox="0 0 1100 340" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica Neue, Arial, sans-serif">
+        <defs>
+          <marker id="comp-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#5a6fd8"/>
+          </marker>
+        </defs>
+
+        <!-- Container boundary -->
+        <rect x="60" y="20" width="1000" height="300" rx="6" fill="none" stroke="#1f7fd8" stroke-width="2" stroke-dasharray="4,2"/>
+        <text x="80" y="45" font-size="11" font-weight="700" fill="#1f7fd8">Face Monitor Component (Container)</text>
+
+        <!-- OnIntervalAction -->
+        <g>
+          <circle cx="150" cy="120" r="25" fill="#eef3ff" stroke="#5a6fd8" stroke-width="2"/>
+          <text x="150" y="115" text-anchor="middle" font-size="9" font-weight="700" fill="#5a6fd8">⏱</text>
+          <text x="150" y="160" text-anchor="middle" font-size="10" font-weight="700" fill="#5a6fd8">monitorear</text>
+          <text x="150" y="175" text-anchor="middle" font-size="8" fill="#6b7390">500 ms</text>
+        </g>
+
+        <!-- Image Capture Component -->
+        <g>
+          <rect x="260" y="95" width="100" height="50" rx="4" fill="#f0f8e8" stroke="#2f8f4f" stroke-width="1.5"/>
+          <text x="310" y="115" text-anchor="middle" font-size="10" font-weight="700" fill="#2f8f4f">capturar</text>
+          <text x="310" y="132" text-anchor="middle" font-size="8" fill="#6b7390">Imagen</text>
+        </g>
+
+        <!-- Face Detection Component -->
+        <g>
+          <rect x="410" y="95" width="100" height="50" rx="4" fill="#f0f8e8" stroke="#2f8f4f" stroke-width="1.5"/>
+          <text x="460" y="115" text-anchor="middle" font-size="10" font-weight="700" fill="#2f8f4f">detectar</text>
+          <text x="460" y="132" text-anchor="middle" font-size="8" fill="#6b7390">Rostro</text>
+        </g>
+
+        <!-- Face Recognition Component -->
+        <g>
+          <rect x="560" y="95" width="100" height="50" rx="4" fill="#f0f8e8" stroke="#2f8f4f" stroke-width="1.5"/>
+          <text x="610" y="115" text-anchor="middle" font-size="10" font-weight="700" fill="#2f8f4f">identificar</text>
+          <text x="610" y="132" text-anchor="middle" font-size="8" fill="#6b7390">Rostro</text>
+        </g>
+
+        <!-- Enrolled Faces Database -->
+        <g>
+          <ellipse cx="760" cy="120" rx="45" ry="30" fill="#fff8e8" stroke="#b8860b" stroke-width="1.5"/>
+          <text x="760" y="118" text-anchor="middle" font-size="9" font-weight="700" fill="#b8860b">Enrolled</text>
+          <text x="760" y="132" text-anchor="middle" font-size="9" font-weight="700" fill="#b8860b">Faces</text>
+        </g>
+
+        <!-- MQTT Sender Component -->
+        <g>
+          <rect x="880" y="95" width="100" height="50" rx="4" fill="#f0f8e8" stroke="#2f8f4f" stroke-width="1.5"/>
+          <text x="930" y="115" text-anchor="middle" font-size="10" font-weight="700" fill="#2f8f4f">publicar</text>
+          <text x="930" y="132" text-anchor="middle" font-size="8" fill="#6b7390">MQTT</text>
+        </g>
+
+        <!-- Data flow: OnDemandAction -->
+        <g>
+          <rect x="200" y="220" width="780" height="70" rx="4" fill="#fff0e6" stroke="#b8860b" stroke-width="1.5"/>
+          <text x="220" y="240" font-size="9" font-weight="700" fill="#b8860b">SWResource: IdentificationEvent</text>
+          <text x="220" y="258" font-size="8" fill="#353a52" font-family="monospace">{timestamp, person_id, person_name[32], confidence, authorized}</text>
+          <text x="220" y="275" font-size="8" fill="#6b7390">Fluye entre capturar → detectar → identificar → publicar</text>
+        </g>
+
+        <!-- Arrows (flow) -->
+        <path d="M175,120 L260,120" stroke="#5a6fd8" stroke-width="2" fill="none" marker-end="url(#comp-arrow)"/>
+        <path d="M360,120 L410,120" stroke="#5a6fd8" stroke-width="2" fill="none" marker-end="url(#comp-arrow)"/>
+        <path d="M510,120 L560,120" stroke="#5a6fd8" stroke-width="2" fill="none" marker-end="url(#comp-arrow)"/>
+        <path d="M660,120 L715,120" stroke="#5a6fd8" stroke-width="1.5" fill="none" marker-end="url(#comp-arrow)"/>
+        <path d="M805,120 L880,120" stroke="#5a6fd8" stroke-width="2" fill="none" marker-end="url(#comp-arrow)"/>
+
+        <!-- External: MQTT Broker -->
+        <g>
+          <rect x="880" y="30" width="120" height="40" rx="4" fill="#f0f0f0" stroke="#6b7390" stroke-width="1.5" stroke-dasharray="2,2"/>
+          <text x="940" y="58" text-anchor="middle" font-size="9" fill="#6b7390">MQTT Broker</text>
+        </g>
+        <path d="M930,145 L930,180" stroke="#2f8f4f" stroke-width="2.5" fill="none" marker-end="url(#comp-arrow)"/>
+        <text x="950" y="165" font-size="8" fill="#353a52">envía</text>
+      </svg>
+    </div>
+  </div>
+  <div class="pageno">9</div>
+</section>
+
+<!-- 10. REFLEXIÓN PERSONAL -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">07 · Reflexión personal y crítica</div>
+    <h2>¿Por qué C4 es útil y cuáles son sus limitaciones para CPS?</h2>
+    <div class="grid2">
+      <div>
+        <div class="card">
+          <div class="meta">✅ Fortalezas de C4</div>
+          <ul style="font-size:12.5px; margin-top:6px;">
+            <li><b>Escalable.</b> 4 niveles claros permiten comunicar desde CEO hasta desarrollador sin abrumar.</li>
+            <li><b>Agnóstico.</b> No asume tecnología; funciona igual para Java, Node, Go, IoT.</li>
+            <li><b>Composable.</b> Se puede expandir con diagramas adicionales (deployment, infraestructura).</li>
+            <li><b>Bidireccional.</b> El código puede generar C4 (inversión) o C4 guiar el código (forward-engineering).</li>
+            <li><b>Comunicación.</b> Diagramas visuales ayudan a stakeholders no técnicos a entender estructura.</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="card alt">
+          <div class="meta">❌ Limitaciones para CPS</div>
+          <ul style="font-size:12.5px; margin-top:6px;">
+            <li><b>No muestra tiempo.</b> ¿Cada cuánto se ejecuta monitorear? (500 ms en SVIF) → necesita anotación.</li>
+            <li><b>No muestra transiciones.</b> ¿Qué ocurre si authorized=true vs false? → necesita lógica de control.</li>
+            <li><b>No muestra hardware.</b> ¿Qué pin? ¿Qué sensor? → apenas menciona HWResource.</li>
+            <li><b>No muestra restricciones temporales duras.</b> ¿Deadline? ¿Jitter tolerable? → requiere DSL más específico.</li>
+            <li><b>Abstracción variable.</b> Un "Container" puede ser app web o nodo ESP32 con 2KB RAM → demasiado genérico.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:14px; background:#fffbef; border-color:#b8860b;">
+      <div class="meta">🔍 Reflexión: ¿C4 o DSL PIM?</div>
+      <p style="font-size:12px; line-height:1.5;"><b>C4 es excelente para arquitectura de software general.</b> Comunica limpiamente "Face Monitor y Access Actuator son nodos separados, conectados por MQTT." Pero <b>CPS añade requisitos que C4 no contempla:</b> periodicidad, hardware específico, refinamientos de decisión (if authorized then unlock else alarm), trazabilidad a objetivos (iStar 2.0). Por eso en el proceso MDD4CPS, después de definir CIM (iStar) y Level 2 (C4), necesitamos un <b>DSL PIM especializado</b> que capture esos detalles antes de llegar a código.</p>
+      <p style="font-size:12px; line-height:1.5; margin-top:6px;"><b>Conclusión:</b> C4 es el "contexto y contenedores"; DSL PIM es el "comportamiento y timing". Complementarios.</p>
+    </div>
+  </div>
+  <div class="pageno">10</div>
+</section>
+
+<!-- 11. REFERENCIAS -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">Referencias</div>
+    <h2>Fuentes consultadas</h2>
+    <div style="columns:2; column-gap:24px;">
+      <div class="ref">
+        <b>Brown, S.</b> (2006–2024). <i>C4 Model.</i> https://c4model.com
+        <div class="meta">Language and tool for visualizing software architecture at four levels of abstraction.</div>
+      </div>
+      <div class="ref">
+        <b>Fowler, M.</b> (2010). <i>Domain-Specific Languages.</i> Addison-Wesley.
+        <div class="meta">Comprehensive guide to designing and implementing DSLs; discusses C4 within broader modeling context.</div>
+      </div>
+      <div class="ref">
+        <b>Navarro, C., Devia, L., Labra Gayo, J. E., & Cares, C.</b> (2025). An agent-oriented model-driven development process for cyber-physical systems. <i>CIbSE 2025</i> (pp. 150–164). SBC.
+        <div class="meta">Process combining iStar 2.0 (CIM), DSL PIM, and C++ PSM; includes C4 for Level 2 container view.</div>
+      </div>
+      <div class="ref">
+        <b>UML 2.5.1 Specification.</b> (2017). Object Management Group (OMG). https://www.omg.org/spec/UML/
+        <div class="meta">Standard for unified modeling language; C4 is positioned as simpler alternative for architecture views.</div>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">11</div>
+</section>
+
+</body>
+</html>

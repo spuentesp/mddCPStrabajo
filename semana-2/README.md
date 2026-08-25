@@ -4,17 +4,19 @@
 
 Analizar un lenguaje de modelado visual identificando sus constructos,
 relaciones, restricciones y mecanismos de representación. Lenguaje elegido: el
-**DSL PIM para CPS** (AO-MDD4CPS), el mismo que el proyecto usa en las Semanas 3
-y 4 — máxima coherencia y reflexión personal vivida.
+**modelo C4** para arquitectura de software, aplicado al caso de estudio SVIF.
 
-La presentación cubre las seis secciones pedidas: descripción general · sintaxis
-abstracta · metamodelo (diagrama de clases) · sintaxis concreta · semántica ·
-reflexión personal.
+C4 (Context-Container-Component-Code) es un lenguaje visual estandarizado,
+bien documentado en la industria, y perfectamente aplicable a sistemas
+ciberfísicos. La presentación cubre las seis secciones pedidas: descripción
+general · sintaxis abstracta · metamodelo · sintaxis concreta · semántica ·
+reflexión personal (incluyendo análisis crítico de por qué C4 requiere extensiones
+para capturar totalmente los requisitos de CPS, motivando así el DSL PIM).
 
 | Entregable | Archivo |
 |---|---|
-| Presentación (8 slides, fuente HTML) | `../slides/semana-2/analisis-dsl.html` |
-| Presentación (PDF exportado) | `../slides/semana-2/analisis-dsl.pdf` |
+| Presentación (11 slides, fuente HTML) | `../slides/semana-2/analisis-c4.html` |
+| Presentación (PDF exportado) | `../slides/semana-2/analisis-c4.pdf` |
 | Video individual (5–7 min) | ⬜ grabar |
 
 ## Material puente (no evaluado)
