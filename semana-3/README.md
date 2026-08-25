@@ -1,17 +1,50 @@
-# Entrega Semana 3 — Modelado orientado a agentes con iStar 2.0
+# Entrega Semana 3 — Modelado de un CPS mediante AO y DSL
 
-**Lo solicitado en las diapositivas** (Semana 3: paso a paso sugerido para el
-modelado AO mediante iStar 2.0; el modelo resultante es el insumo declarado de
-la actividad de la Semana 4):
+**Objetivo de la actividad** (diapositiva «Actividad semanal», Semana 3): aplicar
+conceptos de orientación a agentes mediante iStar y analizar cómo las decisiones
+arquitectónicas capturadas en dichos modelos pueden representarse posteriormente
+utilizando un DSL orientado a sistemas ciberfísicos.
 
-| Requisito | Estado | Archivo |
+## Entregables declarados
+
+| Entregable (diapositiva) | Estado | Archivo |
 |---|---|---|
-| Modelo iStar 2.0 en diagrams.net con la biblioteca del curso (*scratchpad iStar 2.0*) | ✅ | `cim-istar-svif.drawio` |
-| Vista SD (dependencias estratégicas) | ✅ página «SD - Dependencias Estrategicas» | ídem |
-| Vista SR/híbrida con límites de actores | ✅ página «SR - Vista hibrida SD-SR» | ídem |
-| Paso a paso: Dependency → Refinement → NeededBy → Qualification → Contribution | ✅ documentado paso por paso | `actividad-modelado-istar.md` |
-| Trazabilidad (IDs estables para el proceso MDD4CPS) | ✅ inventario cim-* | `actividad-modelado-istar.md`, §4 |
+| Archivo fuente (`.drawio`) del modelo iStar | ✅ | `cim-istar-svif.drawio` |
+| Archivo fuente (`.drawio`) del modelo DSL | ✅ | `pim-dsl-svif.drawio` |
+| Presentación utilizada en la exposición (PDF o PowerPoint) | ✅ 12 diapositivas | `../slides/semana-3/presentacion.pdf` |
+| Video individual de 5–7 min | ⬜ Grabar (guion cronometrado listo) | `guion-video.md` |
 
-**Cómo abrirlo:** app.diagrams.net → File → Open → `cim-istar-svif.drawio`.
-La biblioteca de símbolos está en `../recursos-comunes/librerias-drawio/`
-(File → Open Library).
+## Instrucciones cubiertas
+
+| Instrucción (diapositiva) | Dónde se responde |
+|---|---|
+| Seleccione un CPS de su interés | SVIF — `../recursos-comunes/diseno-del-sistema.md` |
+| Identifique al menos **dos componentes ciberfísicos (nodos)** que colaboren | *Face Monitor Component* y *Access Actuator Component* — `actividad-modelado-istar.md`, §2 |
+| Modele los actores y sus dependencias mediante una **vista SD o híbrida SD/SR** | `cim-istar-svif.drawio`: páginas «SD - Dependencias Estrategicas» y «SR - Vista hibrida SD-SR» |
+| Incorpore **Goals, Softgoals, Tasks y Resources** | `actividad-modelado-istar.md`, §3 y §4 (inventario de 26 elementos) |
+| Identifique **al menos una dependencia** entre los actores | «Evento de identificación» (cim-d1) — `actividad-modelado-istar.md`, §4 |
+| Construya una **representación equivalente** con la biblioteca DSL | `pim-dsl-svif.drawio` |
+| Explique **cómo los principales elementos del modelo AO fueron representados en el DSL** | `actividad-modelado-istar.md`, §5 (tabla de correspondencia, instancias y análisis de la traducción) |
+
+## Cobertura de la rúbrica
+
+| Criterio de la rúbrica | Evidencia |
+|---|---|
+| Modelado AO (iStar) | `cim-istar-svif.drawio`, dos vistas |
+| Uso de constructos iStar | Paso a paso Dependency → Refinement → NeededBy → Qualification → Contribution, documentado en §3 |
+| Representación en DSL | `pim-dsl-svif.drawio` con CP Component, On Interval/On Demand Action, HW/SW Resource, AND/OR, Message Sender/Receiver |
+| Correspondencia AO–DSL | §5 y §5.1: tabla constructo-a-constructo e instancias `cim-*` → `pim-*` |
+| Análisis y explicación | §5.2: qué se gana y qué se pierde en la traducción |
+| Comunicación oral | `guion-video.md` |
+
+## Cómo abrir los modelos
+
+app.diagrams.net → **File → Open** → el `.drawio` correspondiente.
+Las bibliotecas de símbolos están en `../recursos-comunes/librerias-drawio/`
+(**File → Open Library**): `scratchpad_istar2.0.xml` para el modelo iStar y
+`scratchpad_pimdsl.xml` para el modelo DSL.
+
+> **Nota sobre la Semana 4.** El mismo modelo DSL es el insumo del proceso MDD4CPS,
+> por lo que `semana-4/pim-dsl-svif.drawio` es una copia de este archivo, igual que
+> `semana-4/cim-istar-svif.drawio` lo es del modelo iStar. Cada carpeta queda
+> autocontenida y puede entregarse por separado.

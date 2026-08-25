@@ -1,0 +1,232 @@
+<mxfile host="65bd71144e">
+    <diagram name="PIM - DSL para CPS" id="svif-pim">
+        <mxGraphModel dx="786" dy="795" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <object label="Face Monitor Component" type="cps_component" id_cim_parent="cim-a1" name="Face_Monitor_Component" description="Nodo ESP32-CAM: captura, detecta e identifica rostros y publica eventos de identificacion" id="pim-fm-00">
+                    <mxCell style="swimlane;whiteSpace=wrap;html=1;startSize=25;" parent="1" vertex="1">
+                        <mxGeometry x="40" y="40" width="620" height="600" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Capturar imagen" type="action" id_cim_parent="cim-t1" name="capturarImagen" input_parameters="[]" output_parameters="[{&quot;name&quot;: &quot;frame&quot;, &quot;description&quot;: &quot;Imagen capturada por la camara&quot;}]" qualification_array="[]" contribution_array="[]" operation_modes_enabled="false" operation_modes_description="" id="pim-fm-02">
+                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="pim-fm-00" vertex="1">
+                        <mxGeometry x="193" y="290" width="120" height="45" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Detectar rostro" type="action" id_cim_parent="cim-t2" name="detectarRostro" input_parameters="[{&quot;name&quot;: &quot;frame&quot;, &quot;description&quot;: &quot;Imagen capturada&quot;}]" output_parameters="[{&quot;name&quot;: &quot;face_detected&quot;, &quot;description&quot;: &quot;true si hay un rostro en la imagen&quot;}]" qualification_array="[]" contribution_array="[]" operation_modes_enabled="false" operation_modes_description="" id="pim-fm-03">
+                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="pim-fm-00" vertex="1">
+                        <mxGeometry x="30" y="140" width="120" height="45" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Identificar rostro" type="action" id_cim_parent="cim-t3" name="identificarRostro" input_parameters="[{&quot;name&quot;: &quot;frame&quot;, &quot;description&quot;: &quot;Imagen con rostro detectado&quot;}]" output_parameters="[{&quot;name&quot;: &quot;identification_event&quot;, &quot;description&quot;: &quot;Evento de identificacion resultante&quot;}]" qualification_array="[{&quot;softgoal_id&quot;: &quot;cim-q1&quot;, &quot;name&quot;: &quot;Identificacion oportuna&quot;}]" contribution_array="[]" operation_modes_enabled="false" operation_modes_description="" id="pim-fm-04">
+                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="pim-fm-00" vertex="1">
+                        <mxGeometry x="30" y="220" width="120" height="45" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Comparar con rostros enrolados" type="action" id_cim_parent="cim-t4" name="compararConRostrosEnrolados" input_parameters="[{&quot;name&quot;: &quot;face_embedding&quot;, &quot;description&quot;: &quot;Caracteristicas extraidas del rostro&quot;}]" output_parameters="[{&quot;name&quot;: &quot;person_id&quot;, &quot;description&quot;: &quot;Identidad mas cercana&quot;}, {&quot;name&quot;: &quot;confidence&quot;, &quot;description&quot;: &quot;Confianza de la comparacion&quot;}]" qualification_array="[]" contribution_array="[{&quot;softgoal_id&quot;: &quot;cim-q2&quot;, &quot;name&quot;: &quot;Privacidad de datos personales&quot;, &quot;contribution&quot;: &quot;help&quot;}]" operation_modes_enabled="false" operation_modes_description="" id="pim-fm-05">
+                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="pim-fm-00" vertex="1">
+                        <mxGeometry x="30" y="320" width="140" height="50" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="AND" type="and_ref_operator" id_cim_parent="cim-g1" name="and_monitorear" id="pim-fm-a1">
+                    <mxCell style="shape=or;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="pim-fm-00" vertex="1">
+                        <mxGeometry x="230" y="140" width="46" height="60" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Monitorear presencia de personas" type="operational_goal" id_cim_parent="cim-g1" name="monitorearPresenciaDePersonas" qualification_array="[{&quot;softgoal_id&quot;: &quot;cim-q1&quot;, &quot;name&quot;: &quot;Identificacion oportuna&quot;}]" contribution_array="[]" operation_modes_enabled="false" operation_modes_description="" interval_in_milliseconds="500" id="pim-fm-01">
+                    <mxCell style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="pim-fm-00" vertex="1">
+                        <mxGeometry x="350" y="90" width="120" height="120" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Evento de identificación (sender)" type="comm_thread" id_cim_parent="cim-d1" id_cim_type="resource" name="eventoIdentificacionSender" cim_dependeeElmnt_is_softgoal="false" ifsg_softgoal_id="" ifsg_softgoal_name="" qualification_array="[]" contribution_array="[{&quot;softgoal_id&quot;: &quot;cim-q2&quot;, &quot;name&quot;: &quot;Privacidad de datos personales&quot;, &quot;contribution&quot;: &quot;hurt&quot;}]" dependum_data_structure="[{&quot;name&quot;: &quot;timestamp&quot;, &quot;description&quot;: &quot;Marca de tiempo del evento (ms)&quot;}, {&quot;name&quot;: &quot;person_id&quot;, &quot;description&quot;: &quot;Identificador del rostro enrolado (-1 = desconocido)&quot;}, {&quot;name&quot;: &quot;person_name&quot;, &quot;description&quot;: &quot;Nombre asociado al rostro enrolado&quot;}, {&quot;name&quot;: &quot;confidence&quot;, &quot;description&quot;: &quot;Confianza de la identificacion (0.0-1.0)&quot;}, {&quot;name&quot;: &quot;authorized&quot;, &quot;description&quot;: &quot;true si pertenece a la lista de autorizados&quot;}]" interval_in_milliseconds="500" operation_modes_enabled="false" operation_modes_description="" id="pim-fm-08">
+                    <mxCell style="shape=trapezoid;perimeter=trapezoidPerimeter;whiteSpace=wrap;html=1;fixedSize=1;flipH=0;flipV=0;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="pim-fm-00" vertex="1">
+                        <mxGeometry x="350" y="320" width="160" height="45" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Base de rostros enrolados" type="sw_resource" id_cim_parent="cim-r2" name="baseDeRostrosEnrolados" qualification_array="[]" contribution_array="[]" data_structure="[{&quot;name&quot;: &quot;person_id&quot;, &quot;description&quot;: &quot;Identificador del enrolado&quot;}, {&quot;name&quot;: &quot;person_name&quot;, &quot;description&quot;: &quot;Nombre de la persona&quot;}, {&quot;name&quot;: &quot;face_embedding&quot;, &quot;description&quot;: &quot;Plantilla facial almacenada&quot;}, {&quot;name&quot;: &quot;authorized&quot;, &quot;description&quot;: &quot;Autorizacion de acceso&quot;}]" id="pim-fm-06">
+                    <mxCell style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="pim-fm-00" vertex="1">
+                        <mxGeometry x="30" y="440" width="120" height="75" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Cámara OV2640" type="hw_resource" id_cim_parent="cim-r1" name="camaraOV2640" qualification_array="[]" contribution_array="[]" id="pim-fm-07">
+                    <mxCell style="verticalAlign=middle;align=center;shape=cube;spacingTop=8;spacingLeft=2;spacingRight=12;size=10;direction=south;fontStyle=0;html=1;whiteSpace=wrap;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="pim-fm-00" vertex="1">
+                        <mxGeometry x="198" y="455" width="110" height="60" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="" type="relation_from_to" id_cim_parent="" id="pim-fm-e0">
+                    <mxCell style="endArrow=classic;html=1;rounded=0;" parent="pim-fm-00" source="pim-fm-02" target="pim-fm-a1" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="" type="relation_from_to" id_cim_parent="" id="pim-fm-e1">
+                    <mxCell style="endArrow=classic;html=1;rounded=0;" parent="pim-fm-00" source="pim-fm-03" target="pim-fm-a1" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="" type="relation_from_to" id_cim_parent="" id="pim-fm-e2">
+                    <mxCell style="endArrow=classic;html=1;rounded=0;" parent="pim-fm-00" source="pim-fm-04" target="pim-fm-a1" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="" type="relation_from_to" id_cim_parent="" id="pim-fm-e3">
+                    <mxCell style="endArrow=classic;html=1;rounded=0;" parent="pim-fm-00" source="pim-fm-a1" target="pim-fm-01" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="" type="relation_from_to" id_cim_parent="" id="pim-fm-e4">
+                    <mxCell style="endArrow=classic;html=1;rounded=0;" parent="pim-fm-00" source="pim-fm-05" target="pim-fm-04" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="" type="relation_from_to" id_cim_parent="" id="pim-fm-e5">
+                    <mxCell style="endArrow=classic;html=1;rounded=0;" parent="pim-fm-00" source="pim-fm-06" target="pim-fm-05" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="" type="relation_from_to" id_cim_parent="" id="pim-fm-e6">
+                    <mxCell style="endArrow=classic;html=1;rounded=0;" parent="pim-fm-00" source="pim-fm-07" target="pim-fm-02" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="" type="relation_from_to" id_cim_parent="" id="pim-fm-e7">
+                    <mxCell style="endArrow=classic;html=1;rounded=0;" parent="pim-fm-00" source="pim-fm-01" target="pim-fm-08" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Access Actuator Component" type="cps_component" id_cim_parent="cim-a2" name="Access_Actuator_Component" description="Nodo ESP32: recibe eventos de identificacion, evalua autorizacion y acciona cerradura o alarma" id="pim-aa-00">
+                    <mxCell style="swimlane;whiteSpace=wrap;html=1;startSize=25;" parent="1" vertex="1">
+                        <mxGeometry x="780" y="40" width="620" height="600" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Evento de identificación (receiver)" type="listener_thread" id_cim_parent="cim-d1" id_cim_type="resource" name="eventoIdentificacionReceiver" cim_dependerElmnt_is_softgoal="false" ifsg_softgoal_id="" ifsg_softgoal_name="" qualification_array="[]" contribution_array="[]" id="pim-aa-10">
+                    <mxCell style="shape=trapezoid;perimeter=trapezoidPerimeter;whiteSpace=wrap;html=1;fixedSize=1;flipV=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="pim-aa-00" vertex="1">
+                        <mxGeometry x="30" y="90" width="160" height="45" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Evaluar autorización" type="action" id_cim_parent="cim-t6" name="evaluarAutorizacion" input_parameters="[{&quot;name&quot;: &quot;identification_event&quot;, &quot;description&quot;: &quot;Evento recibido desde el Face Monitor&quot;}]" output_parameters="[{&quot;name&quot;: &quot;access_granted&quot;, &quot;description&quot;: &quot;true si corresponde desbloquear&quot;}]" qualification_array="[]" contribution_array="[]" operation_modes_enabled="false" operation_modes_description="" id="pim-aa-02">
+                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="pim-aa-00" vertex="1">
+                        <mxGeometry x="30" y="190" width="130" height="45" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Desbloquear cerradura" type="action" id_cim_parent="cim-t8" name="desbloquearCerradura" input_parameters="[{&quot;name&quot;: &quot;unlock_seconds&quot;, &quot;description&quot;: &quot;Duracion del desbloqueo&quot;}]" output_parameters="[]" qualification_array="[]" contribution_array="[]" operation_modes_enabled="false" operation_modes_description="" id="pim-aa-04">
+                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="pim-aa-00" vertex="1">
+                        <mxGeometry x="10" y="345" width="130" height="45" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Activar alarma" type="action" id_cim_parent="cim-t9" name="activarAlarma" input_parameters="[{&quot;name&quot;: &quot;alarm_seconds&quot;, &quot;description&quot;: &quot;Duracion de la alarma&quot;}]" output_parameters="[]" qualification_array="[]" contribution_array="[]" operation_modes_enabled="false" operation_modes_description="" id="pim-aa-05">
+                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="pim-aa-00" vertex="1">
+                        <mxGeometry x="100" y="410" width="130" height="45" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="OR" type="or_ref_operator" id_cim_parent="cim-t7" name="or_respuesta" id="pim-aa-o1">
+                    <mxCell style="shape=xor;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="pim-aa-00" vertex="1">
+                        <mxGeometry x="200" y="330" width="46" height="60" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Gestionar respuesta de acceso" type="action" id_cim_parent="cim-t7" name="gestionarRespuestaAcceso" input_parameters="[{&quot;name&quot;: &quot;access_granted&quot;, &quot;description&quot;: &quot;Resultado de la evaluacion de autorizacion&quot;}]" output_parameters="[]" qualification_array="[{&quot;softgoal_id&quot;: &quot;cim-q3&quot;, &quot;name&quot;: &quot;Oportunidad de la respuesta&quot;}]" contribution_array="[]" operation_modes_enabled="false" operation_modes_description="" id="pim-aa-03">
+                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="pim-aa-00" vertex="1">
+                        <mxGeometry x="290" y="330" width="145" height="50" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Registrar evento de acceso" type="action" id_cim_parent="cim-t10" name="registrarEventoAcceso" input_parameters="[{&quot;name&quot;: &quot;identification_event&quot;, &quot;description&quot;: &quot;Evento a registrar&quot;}, {&quot;name&quot;: &quot;action_taken&quot;, &quot;description&quot;: &quot;Accion ejecutada (desbloqueo/alarma)&quot;}]" output_parameters="[]" qualification_array="[]" contribution_array="[{&quot;softgoal_id&quot;: &quot;cim-q4&quot;, &quot;name&quot;: &quot;Trazabilidad de accesos&quot;, &quot;contribution&quot;: &quot;help&quot;}]" operation_modes_enabled="false" operation_modes_description="" id="pim-aa-06">
+                    <mxCell style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="pim-aa-00" vertex="1">
+                        <mxGeometry x="470" y="295" width="145" height="50" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="AND" type="and_ref_operator" id_cim_parent="cim-g2" name="and_controlar" id="pim-aa-a1">
+                    <mxCell style="shape=or;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="pim-aa-00" vertex="1">
+                        <mxGeometry x="470" y="200" width="46" height="60" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Controlar acceso al recinto" type="operational_goal" id_cim_parent="cim-g2" name="controlarAccesoAlRecinto" qualification_array="[{&quot;softgoal_id&quot;: &quot;cim-q3&quot;, &quot;name&quot;: &quot;Oportunidad de la respuesta&quot;}]" contribution_array="[]" operation_modes_enabled="false" operation_modes_description="" interval_in_milliseconds="250" id="pim-aa-01">
+                    <mxCell style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="pim-aa-00" vertex="1">
+                        <mxGeometry x="460" y="60" width="120" height="120" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Relé de cerradura" type="hw_resource" id_cim_parent="cim-r3" name="releCerradura" qualification_array="[]" contribution_array="[]" id="pim-aa-07">
+                    <mxCell style="verticalAlign=middle;align=center;shape=cube;spacingTop=8;spacingLeft=2;spacingRight=12;size=10;direction=south;fontStyle=0;html=1;whiteSpace=wrap;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="pim-aa-00" vertex="1">
+                        <mxGeometry x="30" y="470" width="110" height="60" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Buzzer de alarma" type="hw_resource" id_cim_parent="cim-r4" name="buzzerAlarma" qualification_array="[]" contribution_array="[]" id="pim-aa-08">
+                    <mxCell style="verticalAlign=middle;align=center;shape=cube;spacingTop=8;spacingLeft=2;spacingRight=12;size=10;direction=south;fontStyle=0;html=1;whiteSpace=wrap;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="pim-aa-00" vertex="1">
+                        <mxGeometry x="170" y="470" width="110" height="60" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="Bitácora de accesos" type="sw_resource" id_cim_parent="cim-r5" name="bitacoraDeAccesos" qualification_array="[]" contribution_array="[]" data_structure="[{&quot;name&quot;: &quot;timestamp&quot;, &quot;description&quot;: &quot;Momento del acceso&quot;}, {&quot;name&quot;: &quot;person_id&quot;, &quot;description&quot;: &quot;Identidad reportada&quot;}, {&quot;name&quot;: &quot;action_taken&quot;, &quot;description&quot;: &quot;Desbloqueo o alarma&quot;}, {&quot;name&quot;: &quot;confidence&quot;, &quot;description&quot;: &quot;Confianza reportada&quot;}]" id="pim-aa-09">
+                    <mxCell style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="pim-aa-00" vertex="1">
+                        <mxGeometry x="460" y="440" width="120" height="75" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="" type="relation_from_to" id_cim_parent="" id="pim-aa-e0">
+                    <mxCell style="endArrow=classic;html=1;rounded=0;" parent="pim-aa-00" source="pim-aa-10" target="pim-aa-02" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="" type="relation_from_to" id_cim_parent="" id="pim-aa-e1">
+                    <mxCell style="endArrow=classic;html=1;rounded=0;" parent="pim-aa-00" source="pim-aa-02" target="pim-aa-a1" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="" type="relation_from_to" id_cim_parent="" id="pim-aa-e2">
+                    <mxCell style="endArrow=classic;html=1;rounded=0;" parent="pim-aa-00" source="pim-aa-06" target="pim-aa-a1" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="" type="relation_from_to" id_cim_parent="" id="pim-aa-e3">
+                    <mxCell style="endArrow=classic;html=1;rounded=0;" parent="pim-aa-00" source="pim-aa-03" target="pim-aa-a1" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="" type="relation_from_to" id_cim_parent="" id="pim-aa-e4">
+                    <mxCell style="endArrow=classic;html=1;rounded=0;" parent="pim-aa-00" source="pim-aa-a1" target="pim-aa-01" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="" type="relation_from_to" id_cim_parent="" id="pim-aa-e5">
+                    <mxCell style="endArrow=classic;html=1;rounded=0;" parent="pim-aa-00" source="pim-aa-04" target="pim-aa-o1" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="" type="relation_from_to" id_cim_parent="" id="pim-aa-e6">
+                    <mxCell style="endArrow=classic;html=1;rounded=0;" parent="pim-aa-00" source="pim-aa-05" target="pim-aa-o1" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="" type="relation_from_to" id_cim_parent="" id="pim-aa-e7">
+                    <mxCell style="endArrow=classic;html=1;rounded=0;" parent="pim-aa-00" source="pim-aa-o1" target="pim-aa-03" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="" type="relation_from_to" id_cim_parent="" id="pim-aa-e8">
+                    <mxCell style="endArrow=classic;html=1;rounded=0;" parent="pim-aa-00" source="pim-aa-07" target="pim-aa-04" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="" type="relation_from_to" id_cim_parent="" id="pim-aa-e9">
+                    <mxCell style="endArrow=classic;html=1;rounded=0;" parent="pim-aa-00" source="pim-aa-08" target="pim-aa-05" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="" type="relation_from_to" id_cim_parent="" id="pim-aa-e10">
+                    <mxCell style="endArrow=classic;html=1;rounded=0;" parent="pim-aa-00" source="pim-aa-09" target="pim-aa-06" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object label="MQTT: svif/eventos/identificacion" type="comm_relation" id_cim_parent="cim-d1" id="pim-comm-1">
+                    <mxCell style="endArrow=classic;html=1;rounded=0;" parent="1" source="pim-fm-08" target="pim-aa-10" edge="1">
+                        <mxGeometry relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object type="mail_symbol" id_cim_parent="cim-d1" id="pim-comm-1-mail">
+                    <mxCell style="shape=message;html=1;outlineConnect=0;" parent="pim-comm-1" vertex="1">
+                        <mxGeometry width="20" height="14" relative="1" as="geometry">
+                            <mxPoint x="-10" y="-7" as="offset"/>
+                        </mxGeometry>
+                    </mxCell>
+                </object>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

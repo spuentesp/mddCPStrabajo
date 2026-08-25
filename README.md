@@ -32,18 +32,26 @@ código personalizado (Code).
 
 ```
 .
+├── slides/                       # Diapositivas de todas las entregas (HTML → PDF)
+│   ├── semana-1/ … semana-4/     #   presentacion.* · materia.* · analisis-c4.*
+│   ├── template/                 #   plantilla UFRO compartida (slides.css)
+│   └── scripts/render.sh         #   HTML → PDF
 ├── semana-1/                     # ENTREGA 1: desafío abierto en CPS
 │   ├── README.md                 #   checklist contra lo pedido en las diapositivas
 │   ├── actividad-desafio-abierto.md
 │   ├── presentacion.md           #   diapositivas (Marp → PDF/PPTX)
 │   └── guion-video.md            #   video 3–5 min
-├── semana-2/                     # (sin actividad evaluada; material puente)
-│   └── fundamentos-de-modelado.md
-├── semana-3/                     # ENTREGA 2: modelado iStar 2.0
+├── semana-2/                     # ENTREGA 2: análisis de un lenguaje de modelado
+│   ├── README.md                 #   checklist contra el enunciado y la rúbrica
+│   ├── guion-video.md            #   video 5–7 min
+│   └── fundamentos-de-modelado.md#   material puente (no evaluado)
+├── semana-3/                     # ENTREGA 3: modelado de un CPS con AO y DSL
 │   ├── README.md
-│   ├── actividad-modelado-istar.md
-│   └── cim-istar-svif.drawio     #   EL MODELO (vistas SD y SD/SR)
-├── semana-4/                     # ENTREGA 3: proceso MDD4CPS completo
+│   ├── actividad-modelado-istar.md #  modelo + correspondencia AO→DSL
+│   ├── cim-istar-svif.drawio     #   MODELO iStar (vistas SD y SD/SR)
+│   ├── pim-dsl-svif.drawio       #   MODELO DSL (representación equivalente)
+│   └── guion-video.md            #   video 5–7 min
+├── semana-4/                     # ENTREGA 4: proceso MDD4CPS completo
 │   ├── README.md
 │   ├── actividad-mdd4cps.md      #   transformaciones + análisis crítico
 │   ├── cim-istar-svif.drawio     #   entregable declarado (copia de semana-3)

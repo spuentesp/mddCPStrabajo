@@ -42,9 +42,22 @@
     <h2>¿Qué es el modelo C4?</h2>
     <div class="grid2">
       <div>
-        <p><b>Origen.</b> Creado por Simon Brown (2006+) como respuesta a las limitaciones de UML para arquitectura de software. Hoy es estándar de facto en la industria.</p>
-        <p><b>Propósito.</b> Describir la <b>arquitectura</b> de un sistema de software en <b>4 niveles de abstracción</b>, desde visión empresarial hasta código, facilitando comunicación entre stakeholders técnicos y no técnicos.</p>
-        <p><b>¿Por qué 4 niveles?</b> Porque arquitectura no es una vista única. El contexto importa al CTO, los contenedores al DevOps, los componentes al arquitecto, el código al desarrollador.</p>
+        <p><b>Origen.</b> Creado por Simon Brown (2006–2024) como respuesta a la
+          dificultad de comunicar arquitectura con UML. Hoy es estándar de facto en
+          la industria y cuenta con herramientas propias (<i>Structurizr</i>).</p>
+        <p><b>¿Cuál es su propósito?</b> Describir la <b>arquitectura estática</b> de un
+          sistema de software mediante un conjunto de <b>mapas jerárquicos</b>, cada
+          uno dirigido a una audiencia distinta — «zoom» progresivo desde el contexto
+          de negocio hasta el código.</p>
+        <p><b>¿Qué tipo de sistemas permite representar?</b> Cualquier sistema de
+          software compuesto por <b>unidades desplegables que se comunican</b>: web,
+          microservicios, móviles, integraciones y también <b>sistemas
+          ciberfísicos</b>, donde los nodos físicos se modelan como contenedores.</p>
+        <p><b>¿En qué contexto se utiliza?</b> Documentación de arquitectura,
+          <i>onboarding</i> de equipos, revisiones de diseño y comunicación con
+          <i>stakeholders</i> no técnicos. Su premisa: la arquitectura no es una
+          vista única — el contexto le importa al negocio, los contenedores a
+          operaciones, los componentes al desarrollador.</p>
       </div>
       <div class="card">
         <div class="meta">Los 4 niveles</div>
@@ -78,26 +91,35 @@
     <div class="grid2">
       <div>
         <table class="dense">
-          <tr><th>Constructo</th><th>Rol</th></tr>
-          <tr><td><b>System</b></td><td>El software que se describe</td></tr>
-          <tr><td><b>Person</b></td><td>Usuario o actor externo</td></tr>
-          <tr><td><b>Software System</b></td><td>Sistema externo que interactúa</td></tr>
-          <tr><td><b>Container</b></td><td>Aplicación, BD, nodo, microservicio</td></tr>
-          <tr><td><b>Component</b></td><td>Módulo lógico dentro de un container</td></tr>
-          <tr><td><b>Code</b></td><td>Clases, métodos, funciones</td></tr>
-          <tr><td><b>Relationship</b></td><td>Interacción: Uses, Sends, Calls</td></tr>
+          <tr><th>Constructo</th><th>Rol</th><th>Nivel</th></tr>
+          <tr><td><b>Person</b></td><td>Usuario o actor humano</td><td>1</td></tr>
+          <tr><td><b>SoftwareSystem</b></td><td>El sistema descrito, o uno externo con el que interactúa</td><td>1</td></tr>
+          <tr><td><b>Container</b></td><td>Unidad desplegable y ejecutable: app, BD, cola, <b>nodo físico</b></td><td>2</td></tr>
+          <tr><td><b>Component</b></td><td>Agrupación lógica dentro de un contenedor</td><td>3</td></tr>
+          <tr><td><b>CodeUnit</b></td><td>Clase, función o método</td><td>4</td></tr>
+          <tr><td><b>Relationship</b></td><td>Interacción dirigida: <i>Uses</i> / <i>Sends</i></td><td>todos</td></tr>
         </table>
+        <div class="note" style="margin-top:8px;">
+          <b>Cómo se relacionan.</b> Los cuatro primeros forman una cadena estricta de
+          <b>composición</b>: SoftwareSystem ◆→ Container ◆→ Component ◆→ CodeUnit.
+          <b>Relationship</b> es transversal: conecta dos <i>Element</i> cualesquiera.
+        </div>
       </div>
       <div>
         <div class="card">
-          <div class="meta">Restricciones (buena formación)</div>
+          <div class="meta">Restricciones (reglas de buena formación)</div>
           <ul style="margin-top:6px; font-size:12px;">
-            <li>Un <b>System</b> contiene <b>≥ 1 Container</b>.</li>
-            <li>Un <b>Container</b> contiene <b>≥ 1 Component</b> (o es atómico).</li>
-            <li>Un <b>Component</b> contiene <b>≥ 1 Code unit</b>.</li>
-            <li>Las relaciones <b>Uses</b> representan sincronía (HTTP, RPC).</li>
-            <li>Las relaciones <b>Sends</b> representan asincronía (MQTT, EventBus).</li>
-            <li>Solo se conectan elementos del <b>mismo nivel</b> (no Container → Code).</li>
+            <li>Un <b>SoftwareSystem</b> propio contiene <b>1..*</b> Containers; uno
+              externo se modela como caja negra, <b>sin</b> contenido.</li>
+            <li>Un <b>Container</b> contiene <b>1..*</b> Components.</li>
+            <li>Una <b>Relationship</b> solo conecta elementos del <b>mismo nivel de
+              abstracción</b> — no existe Container → CodeUnit.</li>
+            <li>Toda Relationship es <b>dirigida</b> y debe llevar descripción; las de
+              tipo <i>Sends</i> declaran además la tecnología del canal.</li>
+            <li>Cada diagrama representa <b>un solo nivel</b>: mezclar niveles en una
+              misma vista invalida el modelo.</li>
+            <li>Todo elemento tiene <b>name</b> y <b>description</b> (heredados de
+              <i>Element</i>).</li>
           </ul>
         </div>
       </div>
@@ -112,83 +134,117 @@
     <div class="kicker-small">03 · Metamodelo</div>
     <h2>Relaciones entre constructos (diagrama de clases simplificado)</h2>
     <div class="diagram">
-      <svg viewBox="0 0 1100 280" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica Neue, Arial, sans-serif">
+      <svg viewBox="0 0 1100 430" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica Neue, Arial, sans-serif">
         <defs>
-          <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-            <path d="M0,0 L10,5 L0,10 z" fill="#5a6fd8"/>
+          <!-- UML generalization: hollow triangle -->
+          <marker id="gen" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="11" markerHeight="11" orient="auto">
+            <path d="M0,0 L12,6 L0,12 z" fill="#ffffff" stroke="#15182b" stroke-width="1.2"/>
           </marker>
-          <marker id="diamond" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7">
-            <circle cx="5" cy="5" r="2" fill="#15182b"/>
+          <!-- UML composition: filled diamond at the source end -->
+          <marker id="comp" viewBox="0 0 14 10" refX="1" refY="5" markerWidth="13" markerHeight="10" orient="auto">
+            <path d="M0,5 L7,0 L14,5 L7,10 z" fill="#15182b"/>
+          </marker>
+          <!-- open arrow for navigable association -->
+          <marker id="nav" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+            <path d="M0,0 L10,5 L0,10" fill="none" stroke="#2f8f4f" stroke-width="1.4"/>
           </marker>
         </defs>
 
-        <!-- Element (superclass) -->
-        <g>
-          <rect x="480" y="10" width="140" height="50" rx="4" fill="#ffffff" stroke="#c5d6ee" stroke-width="1.5"/>
-          <text x="550" y="25" text-anchor="middle" fill="#1f7fd8" font-size="10" font-weight="700">Element</text>
-          <text x="487" y="42" fill="#353a52" font-size="9">name, description</text>
-          <text x="487" y="54" fill="#353a52" font-size="9">responsibility</text>
+        <!-- ===== Element (abstract superclass) ===== -->
+        <rect x="450" y="12" width="200" height="52" rx="3" fill="#ffffff" stroke="#15182b" stroke-width="1.5"/>
+        <text x="550" y="28" text-anchor="middle" fill="#15182b" font-size="11" font-weight="700" font-style="italic">Element</text>
+        <line x1="450" y1="34" x2="650" y2="34" stroke="#15182b"/>
+        <text x="458" y="47" fill="#353a52" font-size="9">+ name : String</text>
+        <text x="458" y="59" fill="#353a52" font-size="9">+ description : String</text>
+
+        <!-- ===== Generalization: subclasses -> Element ===== -->
+        <!-- vertical spine under Element -->
+        <path d="M550,64 L550,92" stroke="#15182b" stroke-width="1.2" fill="none"/>
+        <path d="M155,92 L945,92" stroke="#15182b" stroke-width="1.2" fill="none"/>
+        <path d="M155,92 L155,128" stroke="#15182b" stroke-width="1.2" fill="none" marker-end="url(#gen)"/>
+        <path d="M420,92 L420,128" stroke="#15182b" stroke-width="1.2" fill="none" marker-end="url(#gen)"/>
+        <path d="M680,92 L680,128" stroke="#15182b" stroke-width="1.2" fill="none" marker-end="url(#gen)"/>
+        <path d="M945,92 L945,128" stroke="#15182b" stroke-width="1.2" fill="none" marker-end="url(#gen)"/>
+
+        <!-- ===== Person ===== -->
+        <rect x="65" y="140" width="180" height="56" rx="3" fill="#fdf1f3" stroke="#c0334d" stroke-width="1.5"/>
+        <text x="155" y="156" text-anchor="middle" fill="#c0334d" font-size="11" font-weight="700">Person</text>
+        <line x1="65" y1="162" x2="245" y2="162" stroke="#c0334d"/>
+        <text x="73" y="175" fill="#353a52" font-size="9">+ role : String</text>
+        <text x="73" y="187" fill="#353a52" font-size="9">+ external : Boolean</text>
+
+        <!-- ===== SoftwareSystem ===== -->
+        <rect x="330" y="140" width="180" height="56" rx="3" fill="#e8f5f7" stroke="#1fb8d8" stroke-width="1.5"/>
+        <text x="420" y="156" text-anchor="middle" fill="#1fb8d8" font-size="11" font-weight="700">SoftwareSystem</text>
+        <line x1="330" y1="162" x2="510" y2="162" stroke="#1fb8d8"/>
+        <text x="338" y="175" fill="#353a52" font-size="9">+ external : Boolean</text>
+        <text x="338" y="187" fill="#353a52" font-size="9">+ scope : String</text>
+
+        <!-- ===== Container ===== -->
+        <rect x="590" y="140" width="180" height="56" rx="3" fill="#eef3ff" stroke="#1f7fd8" stroke-width="1.5"/>
+        <text x="680" y="156" text-anchor="middle" fill="#1f7fd8" font-size="11" font-weight="700">Container</text>
+        <line x1="590" y1="162" x2="770" y2="162" stroke="#1f7fd8"/>
+        <text x="598" y="175" fill="#353a52" font-size="9">+ technology : String</text>
+        <text x="598" y="187" fill="#353a52" font-size="9">+ type : ContainerType</text>
+
+        <!-- ===== Component ===== -->
+        <rect x="855" y="140" width="180" height="56" rx="3" fill="#f0f8e8" stroke="#2f8f4f" stroke-width="1.5"/>
+        <text x="945" y="156" text-anchor="middle" fill="#2f8f4f" font-size="11" font-weight="700">Component</text>
+        <line x1="855" y1="162" x2="1035" y2="162" stroke="#2f8f4f"/>
+        <text x="863" y="175" fill="#353a52" font-size="9">+ technology : String</text>
+        <text x="863" y="187" fill="#353a52" font-size="9">+ responsibility : String</text>
+
+        <!-- ===== Composition chain: SoftwareSystem ◆-> Container ◆-> Component ◆-> CodeUnit ===== -->
+        <!-- SoftwareSystem -> Container -->
+        <path d="M512,168 L588,168" stroke="#15182b" stroke-width="1.3" fill="none" marker-start="url(#comp)"/>
+        <text x="550" y="162" text-anchor="middle" fill="#c0334d" font-size="9" font-weight="700">1..*</text>
+        <!-- Container -> Component -->
+        <path d="M772,168 L853,168" stroke="#15182b" stroke-width="1.3" fill="none" marker-start="url(#comp)"/>
+        <text x="812" y="162" text-anchor="middle" fill="#c0334d" font-size="9" font-weight="700">1..*</text>
+        <!-- Component -> CodeUnit (down) -->
+        <path d="M945,198 L945,258" stroke="#15182b" stroke-width="1.3" fill="none" marker-start="url(#comp)"/>
+        <text x="960" y="232" fill="#c0334d" font-size="9" font-weight="700">1..*</text>
+
+        <!-- ===== CodeUnit ===== -->
+        <rect x="855" y="260" width="180" height="44" rx="3" fill="#fff8e8" stroke="#b8860b" stroke-width="1.5"/>
+        <text x="945" y="276" text-anchor="middle" fill="#b8860b" font-size="11" font-weight="700">CodeUnit</text>
+        <line x1="855" y1="282" x2="1035" y2="282" stroke="#b8860b"/>
+        <text x="863" y="295" fill="#353a52" font-size="9">+ kind : {Class, Function}</text>
+
+        <!-- ===== Relationship (association class on Element) ===== -->
+        <rect x="330" y="290" width="215" height="68" rx="3" fill="#ffffff" stroke="#2f8f4f" stroke-width="1.5"/>
+        <text x="437" y="306" text-anchor="middle" fill="#2f8f4f" font-size="11" font-weight="700">Relationship</text>
+        <line x1="330" y1="312" x2="545" y2="312" stroke="#2f8f4f"/>
+        <text x="338" y="325" fill="#353a52" font-size="9">+ type : {Uses, Sends}</text>
+        <text x="338" y="337" fill="#353a52" font-size="9">+ technology : String</text>
+        <text x="338" y="349" fill="#353a52" font-size="9">+ description : String</text>
+
+        <!-- Relationship source/target -> Element (ruteados por el margen izquierdo) -->
+        <path d="M380,288 L380,238 L30,238 L30,32 L448,32" stroke="#2f8f4f" stroke-width="1.2" fill="none" marker-end="url(#nav)"/>
+        <text x="300" y="250" fill="#2f8f4f" font-size="9" font-weight="700">source 1</text>
+        <path d="M425,288 L425,220 L46,220 L46,52 L448,52" stroke="#2f8f4f" stroke-width="1.2" fill="none" marker-end="url(#nav)"/>
+        <text x="300" y="214" fill="#2f8f4f" font-size="9" font-weight="700">target 1</text>
+
+        <!-- ===== Nota de restricciones ===== -->
+        <rect x="60" y="290" width="235" height="68" rx="3" fill="#fffbef" stroke="#b8860b" stroke-width="1" stroke-dasharray="3,2"/>
+        <text x="70" y="306" fill="#8a6d00" font-size="9" font-weight="700">«restricción»</text>
+        <text x="70" y="320" fill="#5d4c10" font-size="8.5">Una Relationship solo conecta</text>
+        <text x="70" y="332" fill="#5d4c10" font-size="8.5">elementos del mismo nivel de</text>
+        <text x="70" y="344" fill="#5d4c10" font-size="8.5">abstracción (no Container → CodeUnit).</text>
+
+        <!-- ===== Leyenda ===== -->
+        <g transform="translate(650,290)">
+          <path d="M10,14 L48,14" stroke="#15182b" stroke-width="1.2" fill="none" marker-end="url(#gen)"/>
+          <text x="66" y="18" fill="#6b7390" font-size="9">generalización (is-a)</text>
+          <path d="M14,36 L48,36" stroke="#15182b" stroke-width="1.3" fill="none" marker-start="url(#comp)"/>
+          <text x="66" y="40" fill="#6b7390" font-size="9">composición (contiene)</text>
+          <path d="M10,58 L48,58" stroke="#2f8f4f" stroke-width="1.2" fill="none" marker-end="url(#nav)"/>
+          <text x="66" y="62" fill="#6b7390" font-size="9">asociación navegable</text>
         </g>
-
-        <!-- Composition diamonds and lines from Element to Level classes -->
-        <g stroke="#15182b" stroke-width="1.2" fill="none" marker-end="url(#arr)">
-          <path d="M480,45 L300,120"/>
-          <path d="M550,60 L550,120"/>
-          <path d="M620,60 L620,120"/>
-          <path d="M750,60 L800,120"/>
-        </g>
-
-        <!-- Person -->
-        <g>
-          <rect x="220" y="120" width="160" height="60" rx="4" fill="#ffffff" stroke="#c0334d" stroke-width="1.5"/>
-          <text x="300" y="135" text-anchor="middle" fill="#c0334d" font-size="10" font-weight="700">Person</text>
-          <line x1="220" y1="142" x2="380" y2="142" stroke="#c0334d"/>
-          <text x="227" y="156" fill="#353a52" font-size="9">interacts_with: System</text>
-          <text x="227" y="170" fill="#353a52" font-size="9">role: string</text>
-        </g>
-
-        <!-- System -->
-        <g>
-          <rect x="470" y="120" width="160" height="60" rx="4" fill="#ffffff" stroke="#1fb8d8" stroke-width="1.5"/>
-          <text x="550" y="135" text-anchor="middle" fill="#1fb8d8" font-size="10" font-weight="700">System</text>
-          <line x1="470" y1="142" x2="630" y2="142" stroke="#1fb8d8"/>
-          <text x="477" y="156" fill="#353a52" font-size="9">contains: Container [1..*]</text>
-          <text x="477" y="170" fill="#353a52" font-size="9">boundary: scope</text>
-        </g>
-
-        <!-- Software System (external) -->
-        <g>
-          <rect x="720" y="120" width="160" height="60" rx="4" fill="#ffffff" stroke="#6b7390" stroke-width="1.5"/>
-          <text x="800" y="135" text-anchor="middle" fill="#6b7390" font-size="10" font-weight="700">Software System</text>
-          <line x1="720" y1="142" x2="880" y2="142" stroke="#6b7390"/>
-          <text x="727" y="156" fill="#353a52" font-size="9">external: boolean</text>
-          <text x="727" y="170" fill="#353a52" font-size="9">interacts_with: System</text>
-        </g>
-
-        <!-- Container -->
-        <g>
-          <rect x="470" y="220" width="160" height="50" rx="4" fill="#ffffff" stroke="#1f7fd8" stroke-width="1.5"/>
-          <text x="550" y="235" text-anchor="middle" fill="#1f7fd8" font-size="10" font-weight="700">Container</text>
-          <line x1="470" y1="242" x2="630" y2="242" stroke="#1f7fd8"/>
-          <text x="477" y="256" fill="#353a52" font-size="9">type: {App, DB, Queue, Node}</text>
-        </g>
-
-        <!-- Relationship -->
-        <g>
-          <rect x="70" y="220" width="160" height="50" rx="4" fill="#ffffff" stroke="#2f8f4f" stroke-width="1.5"/>
-          <text x="150" y="235" text-anchor="middle" fill="#2f8f4f" font-size="10" font-weight="700">Relationship</text>
-          <line x1="70" y1="242" x2="230" y2="242" stroke="#2f8f4f"/>
-          <text x="77" y="256" fill="#353a52" font-size="9">type: {Uses, Sends}</text>
-        </g>
-
-        <!-- Arrow from System to Relationship -->
-        <path d="M470,160 Q300,180 230,225" stroke="#15182b" stroke-width="1.2" fill="none" marker-end="url(#arr)" stroke-dasharray="4,3"/>
-        <text x="350" y="190" fill="#6b7390" font-size="9">has</text>
-
-        <!-- Legend -->
-        <text x="70" y="300" fill="#6b7390" font-size="9" font-style="italic">Relaciones: is-a (herencia), contains (composición), has (asociación)</text>
       </svg>
     </div>
+    <div class="src">Metamodelo simplificado propuesto a partir de la especificación del C4 model
+      (Brown, 2006–2024) y de la estructura de datos del <i>Structurizr DSL</i>.</div>
   </div>
   <div class="pageno">4</div>
 </section>
@@ -588,10 +644,30 @@
       </div>
     </div>
 
-    <div class="card" style="margin-top:14px; background:#fffbef; border-color:#b8860b;">
-      <div class="meta">🔍 Reflexión: ¿C4 o DSL PIM?</div>
-      <p style="font-size:12px; line-height:1.5;"><b>C4 es excelente para arquitectura de software general.</b> Comunica limpiamente "Face Monitor y Access Actuator son nodos separados, conectados por MQTT." Pero <b>CPS añade requisitos que C4 no contempla:</b> periodicidad, hardware específico, refinamientos de decisión (if authorized then unlock else alarm), trazabilidad a objetivos (iStar 2.0). Por eso en el proceso MDD4CPS, después de definir CIM (iStar) y Level 2 (C4), necesitamos un <b>DSL PIM especializado</b> que capture esos detalles antes de llegar a código.</p>
-      <p style="font-size:12px; line-height:1.5; margin-top:6px;"><b>Conclusión:</b> C4 es el "contexto y contenedores"; DSL PIM es el "comportamiento y timing". Complementarios.</p>
+    <div class="card" style="margin-top:12px; background:#fffbef; border-color:#b8860b;">
+      <div class="meta">¿Qué aspectos podrían mejorarse? · ¿Es adecuado para mi dominio?</div>
+      <div class="grid2" style="gap:16px;">
+        <div>
+          <p style="font-size:12px; line-height:1.45;"><b>Mejoras que propondría.</b>
+            (i) Un atributo estándar de <b>periodicidad</b> en Container/Component, hoy
+            relegado a la descripción libre. (ii) <b>Estereotipos de hardware</b> para
+            distinguir un nodo embebido de un servicio en la nube. (iii) Un
+            <b>enlace explícito a requisitos</b> o a objetivos, que permita justificar
+            por qué existe cada contenedor. (iv) Reglas de validación formales: hoy la
+            «buena formación» es convención documentada, no un metamodelo verificable
+            —salvo que se use Structurizr DSL.</p>
+        </div>
+        <div>
+          <p style="font-size:12px; line-height:1.45;"><b>¿Adecuado para CPS?</b>
+            <b>Sí, pero parcialmente.</b> El nivel 2 describe SVIF con precisión —dos
+            nodos y un canal MQTT— y es la vista que efectivamente usaría para
+            explicar el sistema. Lo que no alcanza a expresar son los <b>500 ms</b> de
+            muestreo, el pin del relé y la bifurcación <i>desbloquear ∨ alarmar</i>.
+            Esa carencia es justamente lo que motiva un <b>DSL propio para CPS</b>:
+            C4 aporta contexto y contenedores; el DSL aporta comportamiento y tiempo.
+            <b>Son complementarios, no competidores.</b></p>
+        </div>
+      </div>
     </div>
   </div>
   <div class="pageno">10</div>

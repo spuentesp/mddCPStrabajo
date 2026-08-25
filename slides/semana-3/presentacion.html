@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>S3 · Modelado iStar 2.0 de SVIF — Lo que presento (UFRO)</title>
+<title>S3 · Modelado de un CPS mediante AO y DSL — SVIF (UFRO)</title>
 <link rel="stylesheet" href="../template/slides.css">
 </head>
 <body>
@@ -11,9 +11,9 @@
 <section class="slide title-bg">
   <div class="title-zone">
     <div class="kicker">EMI305 · Producción de Software · Sistemas Ciberfísicos</div>
-    <h1>Modelado orientado a agentes<br>de SVIF con iStar 2.0</h1>
-    <p class="subtitle">Actividad Semana 3 — CIM del caso SVIF construido con la biblioteca<br>
-      <i>scratchpad iStar 2.0</i> · vistas SD y SR/híbrida · trazabilidad cim-*.</p>
+    <h1>Modelado de un CPS mediante<br>orientación a agentes y DSL</h1>
+    <p class="subtitle">Actividad Semana 3 — caso SVIF: modelo iStar 2.0 (vistas SD y SR/híbrida),<br>
+      su representación equivalente en el DSL para CPS y la correspondencia entre ambos.</p>
     <div class="author-block">
       Magíster en Ingeniería Informática · UFRO<br>
       EMI305 · Producción de Software · 2026
@@ -311,20 +311,176 @@
   <div class="pageno">8</div>
 </section>
 
-<!-- 9. CIERRE -->
+<!-- 9. EL DSL PARA CPS -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">07 · Representación equivalente en DSL</div>
+    <h2>El DSL para CPS: constructos más cercanos a la implementación</h2>
+    <div class="grid2">
+      <div>
+        <p>El modelo AO captura <b>objetivos, responsabilidades y dependencias</b>,
+          pero una plataforma concreta necesita <b>hilos, funciones, temporizadores,
+          variables de estado y acceso a recursos físicos</b>.</p>
+        <p>El DSL es el <b>puente</b>: conserva las decisiones del modelo AO, pero las
+          expresa con conceptos fáciles de mapear al software, de forma
+          <b>independiente de tecnología</b>.</p>
+        <div class="note">
+          <b>Archivo entregado:</b> <code>pim-dsl-svif.drawio</code>, construido con la
+          biblioteca <i>scratchpad PIM-DSL</i> de diagrams.net.
+        </div>
+      </div>
+      <div class="card">
+        <div class="meta">Constructos del DSL usados en SVIF</div>
+        <table class="dense">
+          <tr><th>Constructo</th><th>Rol</th></tr>
+          <tr><td><b>CP Component</b></td><td>Contenedor de un nodo CPS</td></tr>
+          <tr><td><b>On Interval Action</b></td><td>Proceso periódico (<code>interval_in_milliseconds</code>)</td></tr>
+          <tr><td><b>On Demand Action</b></td><td>Procedimiento activado por evento</td></tr>
+          <tr><td><b>HW Resource</b></td><td>Sensor / actuador / E-S</td></tr>
+          <tr><td><b>SW Resource</b></td><td>Datos (<code>data_structure</code>)</td></tr>
+          <tr><td><b>AND / OR</b></td><td>Operadores de refinamiento</td></tr>
+          <tr><td><b>Message Sender / Receiver</b></td><td>Comunicación entre CPC</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">9</div>
+</section>
+
+<!-- 10. CORRESPONDENCIA AO → DSL -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">08 · Correspondencia AO → DSL</div>
+    <h2>Cómo se representó cada elemento del modelo iStar</h2>
+    <div class="grid2">
+      <div>
+        <table class="dense">
+          <tr><th>iStar 2.0</th><th>DSL</th><th>Por qué</th></tr>
+          <tr><td><b>Agent</b></td><td>CP Component</td><td>Nodo computacional</td></tr>
+          <tr><td><b>Goal</b></td><td>On Interval Action</td><td>Objetivo persistente → evaluación continua</td></tr>
+          <tr><td><b>Task</b></td><td>On Demand Action</td><td>Procedimiento concreto</td></tr>
+          <tr><td><b>Resource</b> físico</td><td>HW Resource</td><td>Elemento del mundo físico</td></tr>
+          <tr><td><b>Resource</b> informacional</td><td>SW Resource</td><td>Estructura de datos</td></tr>
+          <tr><td><b>AND / OR</b></td><td>Operadores AND / OR</td><td>Se conservan explícitos</td></tr>
+          <tr><td><b>NeededBy</b></td><td>From-To Relation</td><td>Acción → recurso requerido</td></tr>
+          <tr><td><b>Dependency</b></td><td>Sender + Receiver</td><td>Delegación → mensaje en red</td></tr>
+          <tr><td><b>Quality</b></td><td><code>qualification_array</code><br><code>contribution_array</code></td><td>Sin símbolo propio: atributo</td></tr>
+        </table>
+      </div>
+      <div>
+        <div class="card">
+          <div class="meta">La dependencia central, traducida</div>
+          <div class="diagram">
+            <svg viewBox="0 0 460 210" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica Neue, Arial, sans-serif">
+              <defs>
+                <marker id="s3ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M0,0 L10,5 L0,10 z" fill="#5a6fd8"/>
+                </marker>
+              </defs>
+              <!-- CIM row -->
+              <text x="8" y="14" font-size="9" font-weight="700" fill="#6b7390">CIM (iStar)</text>
+              <ellipse cx="60" cy="45" rx="42" ry="22" fill="#eaf3ea" stroke="#2f8f4f" stroke-width="1.5"/>
+              <text x="60" y="43" text-anchor="middle" font-size="8" fill="#15182b">Access</text>
+              <text x="60" y="53" text-anchor="middle" font-size="8" fill="#15182b">Actuator</text>
+              <rect x="160" y="30" width="130" height="30" rx="2" fill="#eaf3ea" stroke="#2f8f4f" stroke-width="1.5"/>
+              <text x="225" y="43" text-anchor="middle" font-size="8" fill="#15182b">Evento de</text>
+              <text x="225" y="54" text-anchor="middle" font-size="8" fill="#15182b">identificación</text>
+              <ellipse cx="390" cy="45" rx="42" ry="22" fill="#eaf3ea" stroke="#2f8f4f" stroke-width="1.5"/>
+              <text x="390" y="43" text-anchor="middle" font-size="8" fill="#15182b">Face</text>
+              <text x="390" y="53" text-anchor="middle" font-size="8" fill="#15182b">Monitor</text>
+              <path d="M102,45 L158,45" stroke="#2f8f4f" stroke-width="1.4" fill="none"/>
+              <text x="128" y="41" text-anchor="middle" font-size="9" font-weight="700" fill="#2f8f4f">D</text>
+              <path d="M292,45 L346,45" stroke="#2f8f4f" stroke-width="1.4" fill="none"/>
+              <text x="318" y="41" text-anchor="middle" font-size="9" font-weight="700" fill="#2f8f4f">D</text>
+
+              <!-- transform arrow -->
+              <path d="M225,72 L225,102" stroke="#5a6fd8" stroke-width="2.5" fill="none" marker-end="url(#s3ar)"/>
+              <text x="235" y="92" font-size="8" fill="#5a6fd8" font-style="italic">se traduce en</text>
+
+              <!-- PIM row -->
+              <text x="8" y="124" font-size="9" font-weight="700" fill="#6b7390">PIM (DSL)</text>
+              <rect x="20" y="140" width="150" height="55" rx="3" fill="#fdf3e3" stroke="#d79b00" stroke-width="1.5"/>
+              <text x="95" y="155" text-anchor="middle" font-size="8" font-weight="700" fill="#8a6d00">Access Actuator CPC</text>
+              <rect x="35" y="163" width="120" height="24" rx="2" fill="#ffffff" stroke="#d79b00"/>
+              <text x="95" y="178" text-anchor="middle" font-size="8" fill="#15182b">Message Receiver</text>
+
+              <rect x="290" y="140" width="150" height="55" rx="3" fill="#fdf3e3" stroke="#d79b00" stroke-width="1.5"/>
+              <text x="365" y="155" text-anchor="middle" font-size="8" font-weight="700" fill="#8a6d00">Face Monitor CPC</text>
+              <rect x="305" y="163" width="120" height="24" rx="2" fill="#ffffff" stroke="#d79b00"/>
+              <text x="365" y="178" text-anchor="middle" font-size="8" fill="#15182b">Message Sender</text>
+
+              <path d="M288,175 L172,175" stroke="#d79b00" stroke-width="1.6" fill="none" marker-end="url(#s3ar)"/>
+              <rect x="216" y="168" width="16" height="12" rx="1" fill="#ffffff" stroke="#d79b00"/>
+              <path d="M216,168 L224,176 L232,168" stroke="#d79b00" stroke-width="1" fill="none"/>
+            </svg>
+          </div>
+          <p style="font-size:11.5px; margin-top:6px;">El <i>dependum</i> pasa a ser el
+            <code>dependum_data_structure</code> del mensaje:
+            <code>timestamp, person_id, person_name, confidence, authorized</code>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">10</div>
+</section>
+
+<!-- 11. GANANCIAS Y PÉRDIDAS -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">09 · Análisis de la traducción</div>
+    <h2>Qué se gana y qué se pierde al pasar de AO a DSL</h2>
+    <div class="grid2">
+      <div class="card">
+        <div class="meta">Se gana</div>
+        <h3>Información que el DSL exige</h3>
+        <ul>
+          <li><b>Períodos</b>: <code>interval_in_milliseconds</code> — 500 ms percepción,
+            250 ms actuación.</li>
+          <li><b>Estructura de los datos</b>: <code>data_structure</code> de los recursos SW
+            y <code>dependum_data_structure</code> del mensaje.</li>
+          <li><b>Parámetros de entrada/salida</b> de cada acción.</li>
+        </ul>
+        <p style="font-size:11.5px; color:#6b7390;">Decisiones que el modelo AO
+          deliberadamente <b>no</b> fijaba, y que aquí hay que tomar.</p>
+      </div>
+      <div class="card alt">
+        <div class="meta">Se pierde</div>
+        <h3>Expresividad que el DSL no dibuja</h3>
+        <ul>
+          <li><b>Los softgoals dejan de ser nodos</b>: la contribución <i>hurt</i> de
+            «Publicar evento» sobre la privacidad pasa de arista visible a atributo
+            que hay que ir a leer.</li>
+          <li><b>Actor / rol / agente</b> colapsan en <code>CP Component</code>.</li>
+          <li>El <b>actor humano</b> (Administrador) queda fuera: el DSL modela nodos
+            computacionales.</li>
+          <li>El <b>criterio del OR</b> no se expresa: se reintroduce en el código.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="quote" style="margin-top:12px;">
+      No es un defecto del DSL: cada nivel retiene lo que necesita para la
+      transformación siguiente. <b><code>id_cim_parent</code> es el mecanismo que
+      permite volver al CIM a recuperar el «porqué».</b>
+    </div>
+  </div>
+  <div class="pageno">11</div>
+</section>
+
+<!-- 12. CIERRE -->
 <section class="slide content-bg">
   <div class="content-zone">
     <div class="kicker-small">Cierre</div>
     <h2>Qué entrega Semana 3</h2>
     <div class="card-emphasis">
-      <p>✓ Modelo CIM en diagrams.net (<code>cim-istar-svif.drawio</code>) con la
-        biblioteca <i>scratchpad iStar 2.0</i>.</p>
-      <p>✓ Dos páginas: <b>Vista SD</b> (dependencias estratégicas) +
-        <b>Vista híbrida SD/SR</b> (rationale dentro de los límites).</p>
-      <p>✓ Paso a paso documentado: Dependency → Refinement → NeededBy →
-        Qualification → Contribution.</p>
-      <p>✓ Inventario cim-* (26 elementos) — base de la trazabilidad hacia el PIM
-        en la Semana 4.</p>
+      <p>✓ <b>Modelo iStar</b> (<code>cim-istar-svif.drawio</code>): vista SD +
+        vista híbrida SD/SR, con Goals, Softgoals, Tasks y Resources, y la
+        dependencia «Evento de identificación» entre los dos CPC.</p>
+      <p>✓ <b>Modelo DSL</b> (<code>pim-dsl-svif.drawio</code>): representación
+        equivalente con la biblioteca <i>scratchpad PIM-DSL</i>.</p>
+      <p>✓ <b>Correspondencia AO–DSL</b> explicada elemento por elemento, con el
+        análisis de lo que se gana y lo que se pierde en la traducción.</p>
+      <p>✓ Trazabilidad <code>cim-*</code> → <code>id_cim_parent</code>, base del
+        proceso MDD4CPS de la Semana 4.</p>
     </div>
     <div class="grid2" style="margin-top:14px;">
       <div class="card">
@@ -335,18 +491,19 @@
         <div class="ref"><b>Dalpiaz, F., Franch, X., &amp; Horkoff, J. (2016).</b>
           <span class="meta">iStar 2.0 language guide.</span>
           <i>arXiv:1605.07767</i>.</div>
+        <div class="ref"><b>Navarro, C., Devia, L., Labra Gayo, J. E., &amp; Cares, C. (2025).</b>
+          <span class="meta">An agent-oriented model-driven development process for CPS.</span>
+          <i>CIbSE 2025</i>. SBC.</div>
       </div>
       <div class="card alt">
         <div class="meta">Próxima parada</div>
         <h3>Semana 4 · MDD4CPS</h3>
-        <p>Transformar este CIM en PIM (DSL CPS) → PSM (C++ Arduino) → Code.</p>
-        <p style="font-size:11.5px; color:#6b7390;">
-          La trazabilidad <code>cim-*</code> se mantiene vía <code>id_cim_parent</code>.
-        </p>
+        <p>Transformar este PIM en PSM (C++ Arduino) → Code, y medir cuánto del
+          código se genera automáticamente.</p>
       </div>
     </div>
   </div>
-  <div class="pageno">9</div>
+  <div class="pageno">12</div>
 </section>
 
 </body>
