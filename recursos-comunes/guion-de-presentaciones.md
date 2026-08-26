@@ -19,11 +19,43 @@ concreta**, en el orden en que aparecen.
 |---|---|---|---|
 | 1 | `presentacion` — Desafío abierto en CPS | 8 | 3–5 min |
 | 2 | `analisis-c4` — Análisis del modelo C4 | 11 | 5–7 min |
-| 3 | `presentacion` — Modelado con AO y DSL | 12 | 5–7 min |
+| 3 | `presentacion` — Modelado con AO y DSL | 14 | 5–7 min |
 | 4 | `presentacion` — Proceso MDD4CPS | 10 | 5–7 min |
 
 > **Regla transversal de las cuatro rúbricas:** el video debe mostrar al expositor
 > de forma continua. No se aceptan avatares sintéticos ni narración automática.
+
+## Dónde se juega cada criterio de la rúbrica
+
+Los seis criterios de cada rúbrica no se reparten parejo entre las láminas. Esta
+tabla dice **en qué lámina se gana o se pierde cada punto**, para saber dónde
+gastar el tiempo cuando el reloj aprieta.
+
+**Semana 2 — Análisis de un lenguaje de modelado**
+
+| Criterio | Lámina que lo sostiene | Riesgo |
+|---|---|---|
+| Comprensión del lenguaje | 2 (descripción general) · 6 (semántica) | Quedarse en «C4 tiene 4 niveles» sin decir para qué sirve cada uno |
+| Identificación de constructos | 3 (sintaxis abstracta) | Listar los constructos sin nombrar las **restricciones** |
+| Metamodelo propuesto | **4** | No explicar los tres tipos de flecha; leer las cajas en vez de las relaciones |
+| Notación y semántica | 5 (notación) · 6 (semántica) | Describir la notación sin decir por qué es deliberadamente pobre |
+| Reflexión crítica | **10** | Quedarse en «ventajas y desventajas» sin fundamentar ni proponer mejoras |
+| Comunicación oral | todas | Leer la lámina |
+
+**Semana 3 — Modelado de un CPS mediante AO y DSL**
+
+| Criterio | Lámina que lo sostiene | Riesgo |
+|---|---|---|
+| Modelado AO (iStar) | **4** (el modelo) · 5–7 (paso a paso) | Describir el modelo sin mostrarlo |
+| Uso de constructos iStar | 5 · 6 · 7 | Omitir NeededBy o Qualification, que son los que menos se recuerdan |
+| Representación en DSL | **11** (el modelo DSL) · 10 (constructos) | Mostrar solo la tabla de constructos y nunca el modelo |
+| Correspondencia AO–DSL | **12** | Enumerar los pares sin justificar **por qué** cada uno |
+| Análisis y explicación | **13** | Describir la traducción sin decir qué se pierde en ella |
+| Comunicación oral | todas | Perder tiempo en el iStar y llegar apurado al DSL |
+
+> En Semana 3, **cuatro de los seis criterios viven en la segunda mitad del mazo**
+> (láminas 10 a 13). Es el error de reparto más fácil de cometer: el modelo iStar
+> es lo más vistoso, pero el DSL y la correspondencia son los que puntúan.
 
 ---
 
@@ -304,9 +336,11 @@ fundamentada y no opinión.
 
 # Semana 3 — Modelado de un CPS mediante AO y DSL
 
-**Duración objetivo: 5–7 min.** Doce láminas, y **dos modelos que mostrar en
+**Duración objetivo: 5–7 min.** Catorce láminas, y **dos modelos que mostrar en
 pantalla**. Tener `cim-istar-svif.drawio` y `pim-dsl-svif.drawio` abiertos en
-pestañas antes de empezar a grabar.
+pestañas antes de empezar a grabar — aunque ambos modelos ya están incrustados en
+las láminas 4 y 11, así que si algo falla en la demostración en vivo, el mazo se
+sostiene solo.
 
 La rúbrica tiene seis criterios y **cuatro de ellos viven en la segunda mitad**
 (representación en DSL, correspondencia, análisis, comunicación). No gastar el
@@ -349,7 +383,27 @@ enunciado.
 > Administrador de Seguridad lo modelé como **actor** genérico, porque no me
 > interesa una persona en particular sino el rol.»
 
-### Lámina 4 · Dependency & Refinement
+### Lámina 4 · El modelo iStar completo
+
+**Idea única:** aquí está el modelo, y se lee de una forma concreta.
+
+*Los dos límites de actor aparecen lado a lado en la lámina.*
+
+> «Este es el modelo. A la izquierda el límite del **Face Monitor**, a la derecha
+> el del **Access Actuator** — cada línea punteada encierra a un agente.
+>
+> Dentro de cada límite se lee igual: arriba el **objetivo**, refinado hacia abajo
+> en **tareas**, y cada tarea apunta a los **recursos** que necesita, con el punto
+> relleno del NeededBy.
+>
+> Las nubes de los costados son los **softgoals**, y hacia ellas llegan las
+> contribuciones. La línea que sale por abajo a la izquierda y entra por arriba a
+> la derecha, marcada con **D**, es la dependencia — la detallo en un momento.»
+
+*Nota:* 25 segundos, no más. Es orientación de lectura, no análisis. El detalle
+fino va en el archivo `.drawio` durante el video.
+
+### Lámina 5 · Dependency & Refinement
 
 **Idea única:** la dependencia central, y el refinamiento **OR**.
 
@@ -368,7 +422,7 @@ enunciado.
 
 *Nota:* dejar sembrado que el OR queda abierto: se cobra en la lámina 11.
 
-### Lámina 5 · NeededBy · Qualification · Contribution
+### Lámina 6 · NeededBy · Qualification · Contribution
 
 **Idea única:** aquí aparecen los **softgoals**, y con ellos el conflicto.
 
@@ -385,7 +439,7 @@ enunciado.
 
 *Señalar:* las dos aristas, help y hurt, llegando al mismo softgoal.
 
-### Lámina 6 · La dependencia que articula SVIF
+### Lámina 7 · La dependencia que articula SVIF
 
 **Idea única:** las cinco partes de una dependencia iStar.
 
@@ -395,7 +449,7 @@ enunciado.
 > el *Evento de identificación*, el **qué**; el **dependee** es el Face Monitor; y
 > el **dependeeElmnt** es *Publicar evento*, que explica **cómo** se provee.»
 
-### Lámina 7 · Inventario de elementos (cim-*)
+### Lámina 8 · Inventario de elementos (cim-*)
 
 **Idea única:** la trazabilidad no es decorativa, es el mecanismo que sostiene
 todo lo que viene después.
@@ -408,7 +462,7 @@ todo lo que viene después.
 > `id_cim_parent`, y de ahí al código. Es lo que me permite preguntar, frente a una
 > función en C++, de qué objetivo venía.»
 
-### Lámina 8 · Lo que el modelo asume (y deja abierto)
+### Lámina 9 · Lo que el modelo asume (y deja abierto)
 
 **Idea única:** distinguir lo decidido de lo diferido es parte del método.
 
@@ -419,7 +473,7 @@ todo lo que viene después.
 > Y dos quedan **abiertas a propósito**: el criterio del OR —cuándo desbloquear y
 > cuándo alarmar— y los tiempos. Ninguna de las dos pertenece a este nivel.»
 
-### Lámina 9 · El DSL para CPS
+### Lámina 11 · El DSL para CPS
 
 **Idea única:** el DSL es un **puente**, y existe por una razón concreta.
 
@@ -435,7 +489,25 @@ todo lo que viene después.
 > Sus constructos son: CP Component, On Interval Action, On Demand Action, HW y SW
 > Resource, los operadores AND y OR, y Message Sender y Receiver.»
 
-### Lámina 10 · Correspondencia AO → DSL
+### Lámina 11 · El modelo DSL completo
+
+**Idea única:** el mismo sistema, dibujado con otros constructos — y la dependencia
+por fin es explícita.
+
+> «Este es el modelo DSL, y conviene compararlo con el de recién: **es el mismo
+> sistema**. Los dos rectángulos mayores son los **CP Components**; los círculos,
+> las **On Interval Actions**; los rectángulos internos, las **On Demand Actions**;
+> los cilindros y los cubos, los recursos de software y de hardware.
+>
+> Y miren el centro: los dos trapecios son el **Message Sender** y el **Message
+> Receiver**, unidos por el enlace con el sobre. Lo que en iStar era una
+> dependencia abstracta, aquí ya es un canal con un tópico:
+> `svif/eventos/identificacion`.»
+
+*Señalar:* pasar el cursor del trapecio izquierdo al derecho siguiendo el sobre.
+Es la traducción más visible de todo el mazo.
+
+### Lámina 12 · Correspondencia AO → DSL
 
 **Idea única:** cada constructo iStar tiene su contraparte, y hay una razón para
 cada par.
@@ -463,7 +535,7 @@ cada par.
 *Señalar:* el diagrama de la derecha, que muestra la misma dependencia arriba en
 iStar y abajo traducida a Sender/Receiver.
 
-### Lámina 11 · Qué se gana y qué se pierde
+### Lámina 13 · Qué se gana y qué se pierde
 
 **Idea única:** la traducción **no es neutra**, y decirlo es el análisis.
 
@@ -494,7 +566,7 @@ iStar y abajo traducida a Sender/Receiver.
 *Nota:* esta es la lámina del criterio «Análisis y explicación». Es la que
 distingue una entrega que describe de una que analiza. ~60 segundos.
 
-### Lámina 12 · Cierre
+### Lámina 14 · Cierre
 
 > «En resumen: modelé SVIF con iStar 2.0 en vistas SD y SR híbrida, con goals,
 > softgoals, tasks y resources, y con la dependencia *Evento de identificación*

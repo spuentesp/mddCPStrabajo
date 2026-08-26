@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <title>S3 · Modelado de un CPS mediante AO y DSL — SVIF (UFRO)</title>
 <link rel="stylesheet" href="../template/slides.css">
+<style>
+  /* Centrado vertical del contenido: evita la banda vacía sobre el pie.
+     Override local — no toca la plantilla compartida con las otras semanas. */
+  .slide.content-bg .content-zone {
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .slide.content-bg .content-zone > h2 { flex: 0 0 auto; }
+</style>
 </head>
 <body>
 
@@ -99,10 +107,52 @@
   <div class="pageno">3</div>
 </section>
 
-<!-- 4. PASO A PASO (1-2) -->
+<!-- 4. EL MODELO iStar COMPLETO -->
 <section class="slide content-bg">
   <div class="content-zone">
-    <div class="kicker-small">03 · Aplicación del paso a paso</div>
+    <div class="kicker-small">03 · El modelo</div>
+    <h2>Modelo iStar 2.0 de SVIF — vista híbrida SD/SR</h2>
+    <div class="row" style="gap:14px; align-items:stretch;">
+      <div class="col">
+        <div class="diagram" style="padding:4px;">
+          <img src="img/cim-face-monitor.png" alt="Límite del agente Face Monitor Component"
+               style="width:100%; height:auto; display:block;">
+        </div>
+      </div>
+      <div class="col">
+        <div class="diagram" style="padding:4px;">
+          <img src="img/cim-access-actuator.png" alt="Límite del agente Access Actuator Component"
+               style="width:100%; height:auto; display:block;">
+        </div>
+      </div>
+    </div>
+    <div class="row" style="gap:14px; margin-top:8px;">
+      <div class="col">
+        <div class="note" style="margin:0;">
+          <b>Qué mirar.</b> Cada <b>límite de actor</b> (punteado) encierra un agente.
+          Dentro, el <b>objetivo</b> se refina en <b>tareas</b> y estas apuntan a sus
+          <b>recursos</b> (NeededBy, punto relleno). Los <b>softgoals</b> (nubes)
+          reciben las contribuciones <span class="check">help</span> y
+          <span class="cross">hurt</span>.
+        </div>
+      </div>
+      <div class="col">
+        <div class="note" style="margin:0; border-left-color:#c0334d; background:#fdf1f3; color:#7a2233;">
+          <b>La línea con <span class="mono" style="color:#7a2233;">D</span> que sale
+          por abajo y por arriba</b> es la misma dependencia: une ambos límites a
+          través del dependum <i>Evento de identificación</i>. Se detalla en la
+          lámina 7. Archivo: <code>cim-istar-svif.drawio</code>.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">4</div>
+</section>
+
+<!-- 5. PASO A PASO (1-2) -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">04 · Aplicación del paso a paso</div>
     <h2>Dependency &amp; Refinement</h2>
     <div class="grid2">
       <div>
@@ -139,13 +189,13 @@
       </div>
     </div>
   </div>
-  <div class="pageno">4</div>
+  <div class="pageno">5</div>
 </section>
 
 <!-- 5. PASO A PASO (3-5) -->
 <section class="slide content-bg">
   <div class="content-zone">
-    <div class="kicker-small">03 · Aplicación del paso a paso</div>
+    <div class="kicker-small">04 · Aplicación del paso a paso</div>
     <h2>NeededBy · Qualification · Contribution</h2>
     <div class="grid3">
       <div class="card">
@@ -183,13 +233,13 @@
       </div>
     </div>
   </div>
-  <div class="pageno">5</div>
+  <div class="pageno">6</div>
 </section>
 
 <!-- 6. DEPENDENCIA CENTRAL (DIAGRAMA) -->
 <section class="slide content-bg">
   <div class="content-zone">
-    <div class="kicker-small">04 · Dependencia central</div>
+    <div class="kicker-small">05 · Dependencia central</div>
     <h2>La dependencia que articula SVIF</h2>
     <div class="diagram">
       <svg viewBox="0 0 1100 220" xmlns="http://www.w3.org/2000/svg">
@@ -236,13 +286,13 @@
       hilo MQTT → struct PSM → callback en el actuador.
     </div>
   </div>
-  <div class="pageno">6</div>
+  <div class="pageno">7</div>
 </section>
 
 <!-- 7. INVENTARIO -->
 <section class="slide content-bg">
   <div class="content-zone">
-    <div class="kicker-small">05 · Trazabilidad</div>
+    <div class="kicker-small">06 · Trazabilidad</div>
     <h2>Inventario de elementos (cim-*)</h2>
     <div class="grid2">
       <div>
@@ -274,13 +324,13 @@
     <p style="font-size:11.5px; margin-top:8px;"><b>Administrador (cim-a3)</b> +
       dependums <code>cim-d1</code>, <code>cim-d2</code>, <code>cim-d3</code>.</p>
   </div>
-  <div class="pageno">7</div>
+  <div class="pageno">8</div>
 </section>
 
 <!-- 8. DECISIONES -->
 <section class="slide content-bg">
   <div class="content-zone">
-    <div class="kicker-small">06 · Decisiones de modelado y supuestos</div>
+    <div class="kicker-small">07 · Decisiones de modelado y supuestos</div>
     <h2>Lo que el modelo asume (y deja abierto)</h2>
     <div class="grid2">
       <div class="card">
@@ -308,13 +358,13 @@
       </div>
     </div>
   </div>
-  <div class="pageno">8</div>
+  <div class="pageno">9</div>
 </section>
 
 <!-- 9. EL DSL PARA CPS -->
 <section class="slide content-bg">
   <div class="content-zone">
-    <div class="kicker-small">07 · Representación equivalente en DSL</div>
+    <div class="kicker-small">08 · Representación equivalente en DSL</div>
     <h2>El DSL para CPS: constructos más cercanos a la implementación</h2>
     <div class="grid2">
       <div>
@@ -344,13 +394,43 @@
       </div>
     </div>
   </div>
-  <div class="pageno">9</div>
+  <div class="pageno">10</div>
 </section>
 
-<!-- 10. CORRESPONDENCIA AO → DSL -->
+<!-- MODELO DSL COMPLETO -->
 <section class="slide content-bg">
   <div class="content-zone">
-    <div class="kicker-small">08 · Correspondencia AO → DSL</div>
+    <div class="kicker-small">09 · El modelo DSL</div>
+    <h2>Representación equivalente en el DSL para CPS</h2>
+    <div class="diagram" style="padding:5px; text-align:center;">
+      <img src="img/pim-dsl-svif.png" alt="Modelo PIM en el DSL para CPS de SVIF"
+           style="height:352px; width:auto; display:inline-block;">
+    </div>
+    <div class="row" style="gap:14px; margin-top:8px;">
+      <div class="col">
+        <div class="note" style="margin:0;">
+          <b>Mismo sistema, otros constructos.</b> Los dos <b>CP Components</b> son
+          los rectángulos mayores; los círculos son <b>On Interval Actions</b>; los
+          rectángulos internos, <b>On Demand Actions</b>; los cilindros y cubos, los
+          recursos <b>SW</b> y <b>HW</b>.
+        </div>
+      </div>
+      <div class="col">
+        <div class="note" style="margin:0; border-left-color:#c0334d; background:#fdf1f3; color:#7a2233;">
+          <b>La dependencia, ahora explícita.</b> Los dos trapecios son el
+          <b>Message Sender</b> y el <b>Message Receiver</b>, unidos por el enlace
+          con el sobre: <code>MQTT: svif/eventos/identificacion</code>.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pageno">11</div>
+</section>
+
+<!-- CORRESPONDENCIA AO → DSL -->
+<section class="slide content-bg">
+  <div class="content-zone">
+    <div class="kicker-small">10 · Correspondencia AO → DSL</div>
     <h2>Cómo se representó cada elemento del modelo iStar</h2>
     <div class="grid2">
       <div>
@@ -421,13 +501,13 @@
       </div>
     </div>
   </div>
-  <div class="pageno">10</div>
+  <div class="pageno">12</div>
 </section>
 
 <!-- 11. GANANCIAS Y PÉRDIDAS -->
 <section class="slide content-bg">
   <div class="content-zone">
-    <div class="kicker-small">09 · Análisis de la traducción</div>
+    <div class="kicker-small">11 · Análisis de la traducción</div>
     <h2>Qué se gana y qué se pierde al pasar de AO a DSL</h2>
     <div class="grid2">
       <div class="card">
@@ -463,7 +543,7 @@
       permite volver al CIM a recuperar el «porqué».</b>
     </div>
   </div>
-  <div class="pageno">11</div>
+  <div class="pageno">13</div>
 </section>
 
 <!-- 12. CIERRE -->
@@ -503,7 +583,7 @@
       </div>
     </div>
   </div>
-  <div class="pageno">12</div>
+  <div class="pageno">14</div>
 </section>
 
 </body>
