@@ -342,12 +342,15 @@ lenguaje adecuado:
 
 - Opciones en el estado del arte: ATL, QVT, Acceleo, EMF, XML. MDD4CPS optó
   por **tecnologías abiertas**: modelado visual en **diagrams.net** (que
-  serializa a **XML**) y transformaciones con **XSLT** (CIM→PIM) y scripts
-  Python (PIM→PSM).
+  serializa a **XML**) y transformaciones con **XSLT** (CIM→PIM **y** PIM→PSM)
+  y un script **Python** para la generación final de código (PSM→Code).
 - **XSLT** es un lenguaje declarativo que transforma documentos XML en otros
   documentos: una transformación **reconoce elementos del modelo de entrada y
   genera automáticamente la estructura correspondiente en el de salida** — la
-  misma idea de MDD.
+  misma idea de MDD. La etapa PIM→PSM reestructura el modelo (aún en XML)
+  para dejarlo listo para la generación de código; el script Python
+  (`psm_to_code-arduinomkr1010.py` en la herramienta oficial `aomdd4cps`) es
+  el que produce las fuentes finales.
 - **Pero no todo es deducible automáticamente**: el diseñador incorpora
   progresivamente la información ausente en el nivel anterior. Una
   **herramienta web** guía esa captura, solicitando solo los datos necesarios.

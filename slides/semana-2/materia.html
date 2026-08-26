@@ -293,7 +293,7 @@
       </div>
       <div>
         <div class="diagram">
-          <svg viewBox="0 0 480 220" xmlns="http://www.w3.org/2000/svg">
+          <svg viewBox="0 0 480 236" xmlns="http://www.w3.org/2000/svg">
             <defs>
               <marker id="arr-mdd" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
                 <path d="M0,0 L10,5 L0,10 z" fill="#c0334d"/>
@@ -318,9 +318,9 @@
             <line x1="240" y1="55" x2="268" y2="55" stroke="#c0334d" stroke-width="2" marker-end="url(#arr-mdd)"/>
             <line x1="370" y1="55" x2="398" y2="55" stroke="#c0334d" stroke-width="2" marker-end="url(#arr-mdd)"/>
 
-            <text x="125" y="42" text-anchor="middle" font-size="9" fill="#c0334d" font-style="italic">XSLT</text>
-            <text x="255" y="42" text-anchor="middle" font-size="9" fill="#c0334d" font-style="italic">Python</text>
-            <text x="385" y="42" text-anchor="middle" font-size="9" fill="#c0334d" font-style="italic">manual</text>
+            <text x="125" y="42" text-anchor="middle" font-size="9" fill="#c0334d" font-style="italic">agente</text>
+            <text x="255" y="42" text-anchor="middle" font-size="9" fill="#c0334d" font-style="italic">agente</text>
+            <text x="385" y="42" text-anchor="middle" font-size="9" fill="#c0334d" font-style="italic">agente</text>
 
             <text x="240" y="120" text-anchor="middle" font-size="11" fill="#353a52" font-style="italic">
               Cada transformación preserva trazabilidad (<code style="background:#eef3ff; padding:1px 4px; border-radius:3px;">id_cim_parent</code>)
@@ -335,6 +335,10 @@
             </text>
             <text x="240" y="198" text-anchor="middle" font-size="11" fill="#15182b">
               → PSM (ESP32 + MQTT, tipos concretos) → Code (credenciales, política).
+            </text>
+            <text x="240" y="222" text-anchor="middle" font-size="9.5" fill="#6b7390" font-style="italic">
+              "agente": lo aplicó directamente el diseñador. La herramienta oficial
+              aomdd4cps automatiza CIM→PIM y PIM→PSM con XSLT, y PSM→Code con Python.
             </text>
           </svg>
         </div>

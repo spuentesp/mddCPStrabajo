@@ -157,3 +157,57 @@ Quedan sin verificar contra fuente primaria (bloqueadas por el proxy: `c4model.c
 Leanpub, arXiv, portal SBC): el rango exacto 2006–2011 de creación de C4 y el año
 2016 del libro de Brown. Ambos coinciden en múltiples fuentes secundarias, pero no
 se pudo leer la fuente primaria directamente.
+
+### Ronda adicional: scripts, rutas relativas y una cita más
+
+- **`semana-4/codigo/README.md`**: los comandos de ejemplo usaban
+  `../recursos-comunes/herramientas/...`, pero el archivo vive dos niveles
+  bajo la raíz (`semana-4/codigo/`), no uno. Verificado con `ls` (la ruta de
+  un nivel falla; la de dos niveles existe). Corregido a `../../`.
+- **`semana-4/run_demo.sh`**: no hacía `cd` a su propio directorio antes de
+  invocar el simulador embebido; ese simulador resolvía la ruta de
+  `simular_sistema.py` vía `Path(__file__).parent` (que para un script leído
+  por stdin equivale al cwd, no a la ubicación real del script) con un
+  fallback hardcodeado a `~/mddCPStrabajo`. Ejecutado tal como lo haría un
+  usuario (`cd semana-4 && ./run_demo.sh`), el script fallaba con "No se
+  encontró simular_sistema.py". Confirmado el fallo y luego la corrección
+  ejecutando la simulación real contra un broker Mosquitto local.
+- **`comparativa-app/scripts/{drive,inject_psm,inject_svif}.py`**: revisados
+  contra `actividad-mdd4cps.md` y el código Arduino real — intervalos (500/250
+  ms), tipos C++ del PSM, y pines `RELAY_PIN`/`BUZZER_PIN` coinciden
+  exactamente (`grep` sobre los `.ino`). Sin errores.
+- **`semana-1/presentacion.md`, `slides.html`, `guion-video.md`**: citas
+  (Humayed 2017, Erkin 2009, Chen & Ran 2019, Lee 2006, Zanero 2017)
+  consistentes con `referencias.md`. Sin errores.
+- **Wooldridge & Ciancarini — año incorrecto (2000 → 2001):** el paper
+  "Agent-oriented software engineering: the state of the art" (LNCS 1957,
+  Springer, DOI `10.1007/3-540-44564-1_1`) se publicó en 2001; la página
+  oficial de Springer lo confirma. `referencias.md` ya tenía el año correcto,
+  pero `slides/semana-3/materia.html` y `recursos-comunes/apuntes-del-curso.md`
+  (dos veces) citaban "(2000)". Corregido en las tres ubicaciones.
+
+### Ronda adicional: qué tecnología implementa cada transformación de MDD4CPS
+
+Tres piezas de la materia (`slides/semana-2/materia.html`,
+`slides/semana-2/presentacion.html`, `slides/semana-4/materia.html`) y
+`recursos-comunes/apuntes-del-curso.md` afirmaban «XSLT (CIM→PIM) y Python
+(PIM→PSM)». Se verificó contra la fuente primaria — el documento
+`MDD4CPS_repository_structure_and_transformations.md` del propio repositorio
+`mdd4cps/aomdd4cps` (`raw.githubusercontent.com`, accesible pese a que
+`api.github.com` está bloqueado por el proxy) — y **ambas** transformaciones
+CIM→PIM y PIM→PSM se implementan con **XSLT** (`CIM-PIM.xsl`, `PIM-PSM.xsl`);
+Python (`psm_to_code-arduinomkr1010.py`) es quien genera el **código** a
+partir del PSM (PSM→Code), no quien produce el PSM. Corregido:
+
+- `slides/semana-4/materia.html`: arrows y texto de "Cómo se implementan las
+  transformaciones" y de la tarjeta "Herramientas" (Python pasó de PIM→PSM a
+  PSM→Code; XSLT pasó a cubrir ambas etapas de modelo a modelo).
+- `recursos-comunes/apuntes-del-curso.md` (§4.2): misma corrección.
+- `slides/semana-2/materia.html` y `slides/semana-2/presentacion.html`: estos
+  dos describen la **cadena concreta de SVIF** (no la herramienta oficial), y
+  en SVIF las tres transformaciones las aplicó el diseñador/agente
+  directamente sobre los modelos — no se corrió ninguna XSLT ni script Python
+  para producir los artefactos entregados. Se relabeled las flechas a
+  "agente" y se añadió una nota aclarando que la herramienta oficial
+  `aomdd4cps` sí automatiza el proceso con XSLT/Python, para no confundir
+  ambos hechos.
