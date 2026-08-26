@@ -92,9 +92,9 @@ fase Code:
 
 | CPC | Líneas totales | Personalizadas (aprox.) | % generado |
 |---|---|---|---|
-| Face Monitor Component (`.ino` + `comm_utils.h`) | 310 | ~70 (simulación, umbral, credenciales) | ~77 % |
+| Face Monitor Component (`.ino` + `comm_utils.h`) | 312 | ~70 (simulación, umbral, credenciales) | ~78 % |
 | Access Actuator Component (`.ino` + `comm_utils.h`) | 315 | ~65 (política, pines, duraciones) | ~79 % |
-| **Total** | **625** | **~135** | **~78 %** |
+| **Total** | **627** | **~135** | **~78 %** |
 
 El resultado es consistente con el grado de automatización reportado para el caso
 de estudio del invernadero en MDD4CPS (≈78 %; Navarro et al., 2025).

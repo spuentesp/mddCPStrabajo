@@ -61,7 +61,7 @@ la ingeniería del mundo cibernético con la del mundo físico**.
   servos, relés, cerraduras electrónicas… (cientos a miles de CLP).
 - **Conectividad ubicua** LAN/WAN y tecnologías como **SDN** (*Software-Defined
   Networking*), que separa el plano de control del plano de datos y permite
-  «programar la red» (Kreutz et al., 2014).
+  «programar la red» (Kreutz et al., 2015).
 - Impulso institucional: a comienzos de los 2000, la **NSF** (EE. UU.) instaló
   el concepto moderno de CPS como área de investigación prioritaria.
 
@@ -381,8 +381,6 @@ del broker, integración con pines).
 - En el caso de estudio del curso (invernadero automatizado, Arduino MKR1010),
   la generación automática produjo **≈78 % del código final** (1216 de 1567
   líneas); el ~22 % restante es configuración de plataforma y lógica propia.
-  Comparable con otros procesos MDD, donde el código personalizado ronda el
-  31,5 % (Romano, 2019).
 - Herramientas por fase: CIM y PIM se modelan en **diagrams.net** con
   bibliotecas personalizadas (representación gráfica y XML); PSM y Code son
   textuales (C++ Arduino). Las transformaciones son **semiautomáticas y
@@ -415,12 +413,11 @@ La lista APA 7 completa, con DOI/URL verificables, está en
 [`referencias.md`](referencias.md). Fuentes principales por semana:
 
 - **S1:** Lee (2006, 2015); Cares, Sepúlveda y Navarro (2019); Marwedel y
-  Engel (2016); Zanero (2017); Kreutz et al. (2014); Mangharam et al. (2016).
+  Engel (2016); Zanero (2017); Kreutz et al. (2015).
 - **S2:** Pidd (2000/2003); Selic (2003); Aßmann, Zschaler y Wagner (2006);
   Fowler (2010); Mernik, Heering y Sloane (2005); Bézivin (2005); Kleppe et
   al. (2003).
 - **S3:** Bratman (1987); Rao y Georgeff (1995); Jennings, Sycara y Wooldridge
   (1998); Wooldridge y Ciancarini (2000); Nwana (1996); Lind (2001); Russell y
   Norvig (2004); Dalpiaz, Franch y Horkoff (2016).
-- **S4:** Bézivin (2005); Navarro, Devia, Labra Gayo y Cares (2025); Romano
-  (2019).
+- **S4:** Bézivin (2005); Navarro, Devia, Labra Gayo y Cares (2025).

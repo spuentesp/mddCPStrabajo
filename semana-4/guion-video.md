@@ -110,7 +110,7 @@ encontré tres cosas:
 
 «Para estimar cuánto código generó la transformación, conté las líneas del
 `.ino` y de `comm_utils.h`, y resté lo que completé a mano en la fase Code.
-Sobre 625 líneas totales, ~135 son personalizadas — eso da el **~78 %** que
+Sobre 627 líneas totales, ~135 son personalizadas — eso da el **~78 %** que
 reporta el paper para el caso del invernadero. Pero esa cifra **mide el
 volumen de andamiaje** —hilos, funciones, structs, comunicación y
 trazabilidad—, no el código funcional: en la herramienta todo ese andamiaje

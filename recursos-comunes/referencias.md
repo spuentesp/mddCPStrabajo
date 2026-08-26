@@ -39,6 +39,10 @@
   G. Fortino (Eds.), *Management of Cyber Physical Objects in the Future
   Internet of Things* (pp. 1–30). Springer.
   https://doi.org/10.1007/978-3-319-26869-9_1
+- Kreutz, D., Ramos, F. M. V., Veríssimo, P. E., Rothenberg, C. E.,
+  Azodolmolky, S., & Uhlig, S. (2015). Software-defined networking: A
+  comprehensive survey. *Proceedings of the IEEE, 103*(1), 14–76.
+  https://arxiv.org/abs/1406.0440
 
 ## Modelado, DSL y MDD (Semanas 2–4)
 
@@ -83,6 +87,29 @@
   *Information Technology and Systems. ICITS 2019* (Advances in Intelligent
   Systems and Computing, Vol. 918, pp. 93–102). Springer.
   https://doi.org/10.1007/978-3-030-11890-7_10
+- Bratman, M. E. (1987). *Intention, plans, and practical reason*. Harvard
+  University Press.
+- Rao, A. S., & Georgeff, M. P. (1995). BDI agents: From theory to practice.
+  En *Proceedings of the First International Conference on Multiagent
+  Systems (ICMAS-95)* (pp. 312–319). AAAI Press.
+  https://cdn.aaai.org/ICMAS/1995/ICMAS95-042.pdf
+- Jennings, N. R., Sycara, K., & Wooldridge, M. (1998). A roadmap of agent
+  research and development. *Autonomous Agents and Multi-Agent Systems,
+  1*(1), 7–38. https://doi.org/10.1023/A:1010090405266
+- Wooldridge, M., & Ciancarini, P. (2001). Agent-oriented software
+  engineering: The state of the art. En P. Ciancarini y M. Wooldridge (Eds.),
+  *Agent-Oriented Software Engineering* (AOSE 2000, Lecture Notes in
+  Computer Science, Vol. 1957, pp. 1–28). Springer.
+  https://doi.org/10.1007/3-540-44564-1_1
+- Lind, J. (2001). Issues in agent-oriented software engineering. En
+  P. Ciancarini y M. Wooldridge (Eds.), *Agent-Oriented Software Engineering*
+  (AOSE 2000, Lecture Notes in Computer Science, Vol. 1957, pp. 45–58).
+  Springer.
+- Nwana, H. S. (1996). Software agents: An overview. *The Knowledge
+  Engineering Review, 11*(3), 205–244.
+  https://www.cambridge.org/core/journals/knowledge-engineering-review/article/abs/software-agents-an-overview/66832B4C8D509136A8E1AC2E61EB70D0
+- Russell, S. J., & Norvig, P. (2004). *Inteligencia artificial: Un enfoque
+  moderno* (2.ª ed.). Pearson Educación. ISBN 978-84-205-4003-0.
 - Dalpiaz, F., Franch, X., & Horkoff, J. (2016). *iStar 2.0 language guide*.
   arXiv. https://arxiv.org/abs/1605.07767
 - Navarro, C., Devia, L., Labra Gayo, J. E., & Cares, C. (2025). An

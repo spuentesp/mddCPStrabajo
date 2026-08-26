@@ -149,9 +149,9 @@ secciones completadas manualmente en la fase Code.
 
 | CPC | Líneas totales | Personalizadas | % generado |
 |---|---|---|---|
-| Face Monitor Component | 310 | ~70 | ~77 % |
+| Face Monitor Component | 312 | ~70 | ~78 % |
 | Access Actuator Component | 315 | ~65 | ~79 % |
-| **Total** | **625** | **~135** | **~78 %** |
+| **Total** | **627** | **~135** | **~78 %** |
 
 El ~78 % coincide con lo reportado por Navarro et al. (2025) para el caso
 del invernadero.

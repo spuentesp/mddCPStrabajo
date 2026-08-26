@@ -734,7 +734,7 @@ declarada. Contarlo entero.
 
 > «Contando como generado el esqueleto estructural —hilos, funciones, structs,
 > comunicación y comentarios de trazabilidad— y como personalizado lo que completé
-> en la fase Code, el resultado es **alrededor de 78 % generado** sobre unas 625
+> en la fase Code, el resultado es **alrededor de 78 % generado** sobre unas 627
 > líneas.
 >
 > Es consistente con lo que Navarro y coautores reportan para el caso del
