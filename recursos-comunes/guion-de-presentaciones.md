@@ -261,7 +261,11 @@ existen.
 > Y hay reglas de buena formación. La más importante: **una relación solo conecta
 > el alcance del diagrama**: cada diagrama muestra un solo nivel de zoom. Las
 > relaciones, en cambio, **sí cruzan niveles** — una Person se conecta con un
-> Container. Y el nivel 4 no tiene notación propia: C4 remite a UML.»
+> Container—, llevan descripción y tecnología, y distinguen **síncrono de
+> asíncrono**. Y el nivel 4 no tiene elemento en el metamodelo: C4 remite a UML.»
+
+*Nota:* si preguntan por la fuente de estos atributos, están verificados sobre el
+código de `structurizr/java` — ver `semana-2/verificacion-de-fuentes.md`.
 
 ### Lámina 4 · Metamodelo
 

@@ -54,6 +54,12 @@
   <br>*(Obra donde el autor desarrolla el modelo C4, creado entre 2006 y 2011.
   Edición Leanpub de actualización continua; la especificación en línea,
   mantenida por el mismo autor, está en https://c4model.com)*
+- Structurizr. (s. f.). *structurizr/java — metamodelo de C4, paquete
+  `com.structurizr.model`* [código fuente]. GitHub.
+  https://github.com/structurizr/java
+  <br>*(Implementación de referencia del metamodelo de C4, mantenida por Simon
+  Brown. Usada para verificar constructos, atributos y cardinalidades; véase
+  `semana-2/verificacion-de-fuentes.md`.)*
 - Kleppe, A. G., Warmer, J., & Bast, W. (2003). *MDA explained: The model
   driven architecture — Practice and promise*. Addison-Wesley.
   ISBN 978-0-321-19442-8.

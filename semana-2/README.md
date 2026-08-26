@@ -56,3 +56,7 @@ caso de estudio del proyecto, como preparación para las Semanas 3 y 4:
 > independiente.
 
 **Guion hablado lámina por lámina:** `../recursos-comunes/guion-de-presentaciones.md`.
+
+**Verificación de fuentes:** `verificacion-de-fuentes.md` — cada afirmación
+estructural sobre C4, contra qué fuente se comprobó y con qué resultado, más los
+errores detectados y corregidos.

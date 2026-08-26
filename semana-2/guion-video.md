@@ -58,10 +58,13 @@ Responder las tres preguntas del enunciado, en orden:
 > Y hay **reglas de buena formación**, pero conviene enunciarlas bien: la regla
 > central **no es sobre las relaciones, es sobre el alcance del diagrama**. Cada
 > diagrama muestra un solo nivel de zoom; poner componentes en un diagrama de
-> contexto es el error más común. Un sistema externo se modela como caja negra. Y
-> toda relación es dirigida y debe llevar descripción.
+> contexto es el error más común. Un sistema externo se modela como caja negra.
 >
-> Vale la pena notar que el nivel 4 **no tiene notación propia**: C4 remite a UML.»
+> Toda relación es dirigida, lleva descripción, puede declarar la tecnología del
+> canal y, algo interesante, distingue **comunicación síncrona de asíncrona**.
+>
+> Y una precisión: el nivel 4 **ni siquiera tiene un elemento** en el metamodelo.
+> C4 remite a UML para ese nivel.»
 
 ---
 
@@ -189,4 +192,6 @@ fundamentada». Es la parte que más pesa: no apurarla.
 - [ ] Duración entre 5 y 7 minutos (medir en un ensayo previo).
 - [ ] Los dos entregables listos: el video y el archivo de presentación.
 - [ ] Nombrar la fuente principal al menos una vez: **Brown, S. (2016)** y la
-      especificación en línea, c4model.com.
+      especificación en línea, c4model.com. Si preguntan de dónde salen los
+      atributos del metamodelo: del código de `structurizr/java`, la
+      implementación de referencia del mismo autor.

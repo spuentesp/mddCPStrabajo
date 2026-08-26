@@ -102,18 +102,22 @@
           <tr><td><b>SoftwareSystem</b></td><td>El sistema descrito, o uno externo con el que interactúa</td><td>1</td></tr>
           <tr><td><b>Container</b></td><td>Unidad desplegable y ejecutable: app, BD, cola, <b>nodo físico</b></td><td>2</td></tr>
           <tr><td><b>Component</b></td><td>Agrupación lógica dentro de un contenedor</td><td>3</td></tr>
-          <tr><td><b>Code element</b></td><td>Clase, interfaz, función. C4 <b>no</b> define notación propia: se usa UML</td><td>4</td></tr>
-          <tr><td><b>Relationship</b></td><td>Interacción dirigida, con <i>description</i> y <i>technology</i></td><td>todos</td></tr>
+          <tr><td><i>(nivel Code)</i></td><td><b>No hay elemento</b> en el metamodelo: C4 remite a UML</td><td>4</td></tr>
+          <tr><td><b>Relationship</b></td><td><i>description</i>, <i>technology</i> e <i>interactionStyle</i>: <b>Sync / Async</b></td><td>todos</td></tr>
         </table>
         <div class="note" style="margin-top:8px;">
-          <b>Cómo se relacionan.</b> Los cuatro estructurales forman una jerarquía de
-          <b>composición</b>: SoftwareSystem ◆→ Container ◆→ Component ◆→ Code element.
-          <b>Relationship</b> es transversal: conecta dos <i>Element</i> cualesquiera,
-          <b>incluso de niveles distintos</b> (una Person usa un Container).
-          <br><span style="font-size:11px;">C4 añade además vistas suplementarias
-          —<i>System Landscape</i>, <i>Dynamic</i> y <i>Deployment</i>— con sus propios
-          elementos (<span class="mono">deploymentNode</span>).</span>
+          <b>Cómo se relacionan.</b> Los cuatro estructurales heredan de
+          <span class="mono">StaticStructureElement</span> y se componen:
+          SoftwareSystem ◆→ Container ◆→ Component. El nivel 4 <b>no llega</b> a la
+          jerarquía. <b>Relationship</b> es transversal: conecta dos <i>Element</i>
+          cualesquiera, <b>incluso de niveles distintos</b> (una Person usa un Container).
+          <br><span style="font-size:11px;">Rama aparte para despliegue:
+          <span class="mono">DeploymentNode</span>, <span class="mono">ContainerInstance</span>,
+          <span class="mono">InfrastructureNode</span>.</span>
         </div>
+        <div class="src">Verificado sobre <span class="mono">structurizr/java</span>,
+          paquete <span class="mono">com.structurizr.model</span> (metamodelo de
+          referencia del autor de C4).</div>
       </div>
       <div>
         <div class="card">
@@ -125,8 +129,9 @@
             <li>Las <b>relaciones sí cruzan niveles</b>: una <i>Person</i> se conecta
               con un <i>Container</i>, y en un diagrama de contenedores aparecen las
               personas y sistemas externos que tocan esos contenedores.</li>
-            <li>Un <b>SoftwareSystem</b> externo se modela como <b>caja negra</b>: no
-              se abre aunque sepamos qué contiene.</li>
+            <li>Un <b>SoftwareSystem</b> externo se modela como <b>caja negra</b>: no se abre
+              aunque sepamos qué contiene. «Externo» <b>no es un atributo</b>: se marca
+              con un <i>tag</i>, y el tag decide el estilo visual.</li>
             <li>Toda Relationship es <b>dirigida</b> y debe llevar <i>description</i>;
               declarar la <i>technology</i> es opcional pero recomendado.</li>
             <li>Todo elemento tiene <b>name</b> y <b>description</b>.</li>
@@ -169,8 +174,8 @@
         <rect x="450" y="12" width="200" height="52" rx="3" fill="#ffffff" stroke="#15182b" stroke-width="1.5"/>
         <text x="550" y="28" text-anchor="middle" fill="#15182b" font-size="11" font-weight="700" font-style="italic">Element</text>
         <line x1="450" y1="34" x2="650" y2="34" stroke="#15182b"/>
-        <text x="458" y="47" fill="#353a52" font-size="9">+ name : String</text>
-        <text x="458" y="59" fill="#353a52" font-size="9">+ description : String</text>
+        <text x="458" y="47" fill="#353a52" font-size="9">+ name · + description : String</text>
+        <text x="458" y="59" fill="#353a52" font-size="9">+ tags : Set&lt;String&gt;   (de ModelItem)</text>
 
         <!-- ===== Generalization: subclasses -> Element ===== -->
         <!-- vertical spine under Element -->
@@ -185,31 +190,31 @@
         <rect x="65" y="140" width="180" height="56" rx="3" fill="#fdf1f3" stroke="#c0334d" stroke-width="1.5"/>
         <text x="155" y="156" text-anchor="middle" fill="#c0334d" font-size="11" font-weight="700">Person</text>
         <line x1="65" y1="162" x2="245" y2="162" stroke="#c0334d"/>
-        <text x="73" y="175" fill="#353a52" font-size="9">+ role : String</text>
-        <text x="73" y="187" fill="#353a52" font-size="9">+ external : Boolean</text>
+        <text x="73" y="175" fill="#8a91a8" font-size="8.5" font-style="italic">sin atributos propios</text>
+        <text x="73" y="187" fill="#8a91a8" font-size="8.5" font-style="italic">(todo lo hereda)</text>
 
         <!-- ===== SoftwareSystem ===== -->
         <rect x="330" y="140" width="180" height="56" rx="3" fill="#e8f5f7" stroke="#1fb8d8" stroke-width="1.5"/>
         <text x="420" y="156" text-anchor="middle" fill="#1fb8d8" font-size="11" font-weight="700">SoftwareSystem</text>
         <line x1="330" y1="162" x2="510" y2="162" stroke="#1fb8d8"/>
-        <text x="338" y="175" fill="#353a52" font-size="9">+ external : Boolean</text>
-        <text x="338" y="187" fill="#353a52" font-size="9">+ scope : String</text>
+        <text x="338" y="175" fill="#353a52" font-size="9">+ containers : Set&lt;Container&gt;</text>
+        <text x="338" y="187" fill="#8a91a8" font-size="8.5" font-style="italic">«externo» = un tag, no un campo</text>
 
         <!-- ===== Container ===== -->
         <rect x="590" y="140" width="180" height="56" rx="3" fill="#eef3ff" stroke="#1f7fd8" stroke-width="1.5"/>
         <text x="680" y="156" text-anchor="middle" fill="#1f7fd8" font-size="11" font-weight="700">Container</text>
         <line x1="590" y1="162" x2="770" y2="162" stroke="#1f7fd8"/>
         <text x="598" y="175" fill="#353a52" font-size="9">+ technology : String</text>
-        <text x="598" y="187" fill="#353a52" font-size="9">+ type : ContainerType</text>
+        <text x="598" y="187" fill="#353a52" font-size="9">+ components : Set&lt;Component&gt;</text>
 
         <!-- ===== Component ===== -->
         <rect x="855" y="140" width="180" height="56" rx="3" fill="#f0f8e8" stroke="#2f8f4f" stroke-width="1.5"/>
         <text x="945" y="156" text-anchor="middle" fill="#2f8f4f" font-size="11" font-weight="700">Component</text>
         <line x1="855" y1="162" x2="1035" y2="162" stroke="#2f8f4f"/>
         <text x="863" y="175" fill="#353a52" font-size="9">+ technology : String</text>
-        <text x="863" y="187" fill="#353a52" font-size="9">+ responsibility : String</text>
+        <text x="863" y="187" fill="#8a91a8" font-size="8.5" font-style="italic">(sin más atributos propios)</text>
 
-        <!-- ===== Composition chain: SoftwareSystem ◆-> Container ◆-> Component ◆-> Code element ===== -->
+        <!-- ===== Composition chain: SoftwareSystem ◆-> Container ◆-> Component; nivel 4 fuera del metamodelo ===== -->
         <!-- SoftwareSystem -> Container -->
         <path d="M512,168 L588,168" stroke="#15182b" stroke-width="1.3" fill="none" marker-start="url(#comp)"/>
         <text x="550" y="162" text-anchor="middle" fill="#c0334d" font-size="9" font-weight="700">1..*</text>
@@ -218,13 +223,13 @@
         <text x="812" y="162" text-anchor="middle" fill="#c0334d" font-size="9" font-weight="700">0..*</text>
         <!-- Component -> Code element (down) -->
         <path d="M945,198 L945,258" stroke="#15182b" stroke-width="1.3" fill="none" marker-start="url(#comp)"/>
-        <text x="960" y="232" fill="#c0334d" font-size="9" font-weight="700">0..*</text>
+        
 
-        <!-- ===== Code element ===== -->
-        <rect x="855" y="260" width="180" height="44" rx="3" fill="#fff8e8" stroke="#b8860b" stroke-width="1.5"/>
-        <text x="945" y="276" text-anchor="middle" fill="#b8860b" font-size="11" font-weight="700">Code element</text>
+        <!-- ===== nivel 4: sin elemento en el metamodelo ===== -->
+        <rect x="855" y="260" width="180" height="44" rx="3" fill="#faf7f0" stroke="#b8860b" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <text x="945" y="276" text-anchor="middle" fill="#b8860b" font-size="10.5" font-weight="700" font-style="italic">(nivel 4: Code)</text>
         <line x1="855" y1="282" x2="1035" y2="282" stroke="#b8860b"/>
-        <text x="863" y="295" fill="#353a52" font-size="9">notación: UML, no C4</text>
+        <text x="863" y="295" fill="#8a6d00" font-size="8.5">sin elemento propio → UML</text>
 
         <!-- ===== Relationship (association class on Element) ===== -->
         <rect x="330" y="290" width="215" height="68" rx="3" fill="#ffffff" stroke="#2f8f4f" stroke-width="1.5"/>
@@ -232,7 +237,7 @@
         <line x1="330" y1="312" x2="545" y2="312" stroke="#2f8f4f"/>
         <text x="338" y="325" fill="#353a52" font-size="9">+ description : String</text>
         <text x="338" y="337" fill="#353a52" font-size="9">+ technology : String [0..1]</text>
-        <text x="338" y="349" fill="#353a52" font-size="9">dirigida: source → target</text>
+        <text x="338" y="349" fill="#353a52" font-size="9">+ interactionStyle : {Sync, Async}</text>
 
         <!-- Relationship source/target -> Element (ruteados por el margen izquierdo) -->
         <path d="M380,288 L380,238 L30,238 L30,32 L448,32" stroke="#2f8f4f" stroke-width="1.2" fill="none" marker-end="url(#nav)"/>
@@ -258,8 +263,13 @@
         </g>
       </svg>
     </div>
-    <div class="src">Metamodelo simplificado propuesto a partir de la especificación del C4 model
-      (Brown, 2016) y de la estructura de datos del <i>Structurizr DSL</i>.</div>
+    <div class="src">Metamodelo simplificado, derivado del código del metamodelo de referencia:
+      <span class="mono">structurizr/java</span> · <span class="mono">com.structurizr.model</span>
+      (<span class="mono">Element</span>, <span class="mono">StaticStructureElement</span>,
+      <span class="mono">Person</span>, <span class="mono">SoftwareSystem</span>,
+      <span class="mono">Container</span>, <span class="mono">Component</span>,
+      <span class="mono">Relationship</span>, <span class="mono">InteractionStyle</span>,
+      <span class="mono">DeploymentNode</span>). Conceptos: Brown (2016).</div>
   </div>
   <div class="pageno">4</div>
 </section>
@@ -314,7 +324,7 @@
         <rect x="1012" y="52" width="80" height="34" rx="4" fill="#fdf3e3" stroke="#d79b00" stroke-width="1.5"/>
         <text x="1052" y="73" text-anchor="middle" font-size="9" fill="#8a6d00">Actuator</text>
         <text x="925" y="140" text-anchor="middle" font-size="9" fill="#6b7390">Flecha dirigida, siempre etiquetada.</text>
-        <text x="925" y="153" text-anchor="middle" font-size="9" fill="#6b7390">Conviene declarar la tecnología del canal.</text>
+        <text x="925" y="153" text-anchor="middle" font-size="9" fill="#6b7390">El estilo <tspan font-weight="700">Async</tspan> se marca con línea punteada.</text>
 
         <!-- separadores -->
         <line x1="232" y1="30" x2="232" y2="160" stroke="#e2e7f3"/>
@@ -718,6 +728,11 @@
       <div class="ref">
         <b>UML 2.5.1 Specification.</b> (2017). Object Management Group (OMG). https://www.omg.org/spec/UML/
         <div class="meta">Standard for unified modeling language; C4 is positioned as simpler alternative for architecture views.</div>
+      </div>
+      <div class="ref">
+        <b>Structurizr (s. f.).</b> <i>structurizr/java — paquete <span class="mono">com.structurizr.model</span>.</i>
+        https://github.com/structurizr/java
+        <div class="meta">Metamodelo de referencia implementado por el autor de C4; fuente de los constructos, atributos y cardinalidades de la lámina 4.</div>
       </div>
     </div>
   </div>
