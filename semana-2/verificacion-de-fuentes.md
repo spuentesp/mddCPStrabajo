@@ -211,3 +211,16 @@ partir del PSM (PSM→Code), no quien produce el PSM. Corregido:
   "agente" y se añadió una nota aclarando que la herramienta oficial
   `aomdd4cps` sí automatiza el proceso con XSLT/Python, para no confundir
   ambos hechos.
+
+### Auto-corrección: regresión introducida por un fix anterior
+
+Un chequeo mecánico de todos los enlaces relativos del repo (`.md` con
+`[texto](ruta)`, spans con backticks tipo ruta, y `href`/`src` de los mazos
+`.html`) encontró que el fix de `semana-4/codigo/README.md` de esta misma
+ronda (rutas `../recursos-comunes/...` → `../../recursos-comunes/...`)
+había sobrecorregido el enlace a `evidencia-de-pruebas.md`: ese archivo vive
+en `semana-4/evidencia-de-pruebas.md` (un nivel arriba de `codigo/`), no en
+la raíz del repo, así que la ruta correcta era `../evidencia-de-pruebas.md`,
+no `../../evidencia-de-pruebas.md`. Corregido. El barrido mecánico completo
+(enlaces `.md` + spans de ruta + `href`/`src` de `.html`) no encontró
+ningún otro enlace roto en todo el repositorio.

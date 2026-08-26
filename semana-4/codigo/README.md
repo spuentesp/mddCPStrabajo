@@ -53,7 +53,7 @@ del proceso MDD4CPS:
    ```
 
    La evidencia de una corrida real está en
-   [`../../evidencia-de-pruebas.md`](../../evidencia-de-pruebas.md).
+   [`../evidencia-de-pruebas.md`](../evidencia-de-pruebas.md).
 
 5. **Nodos ESP32**: compilar con Arduino IDE (core ESP32 + librería
    `PubSubClient`), copiando antes `secrets.h.example` → `secrets.h`. El
