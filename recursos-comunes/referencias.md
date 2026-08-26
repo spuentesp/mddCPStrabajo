@@ -48,10 +48,11 @@
   Springer. https://doi.org/10.1007/3-540-34518-3_9
 - Bézivin, J. (2005). On the unification power of models. *Software & Systems
   Modeling, 4*(2), 171–188. https://doi.org/10.1007/s10270-005-0079-0
-- Brown, S. (2018). *Software architecture for developers. Volume 2:
+- Brown, S. (2016). *Software architecture for developers. Volume 2:
   Visualise, document and explore your software architecture*. Leanpub.
   https://leanpub.com/visualising-software-architecture
-  <br>*(Obra donde el autor desarrolla el modelo C4; la especificación en línea,
+  <br>*(Obra donde el autor desarrolla el modelo C4, creado entre 2006 y 2011.
+  Edición Leanpub de actualización continua; la especificación en línea,
   mantenida por el mismo autor, está en https://c4model.com)*
 - Kleppe, A. G., Warmer, J., & Bast, W. (2003). *MDA explained: The model
   driven architecture — Practice and promise*. Addison-Wesley.

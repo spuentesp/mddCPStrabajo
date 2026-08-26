@@ -47,17 +47,21 @@ Responder las tres preguntas del enunciado, en orden:
 ## 1:10 – 1:55 · Sintaxis abstracta *(diapositiva 3)*
 
 > «Los constructos principales son seis: **Person**, **SoftwareSystem**,
-> **Container**, **Component**, **CodeUnit** y **Relationship**.
+> **Container**, **Component**, **Code element** y **Relationship**.
 >
-> Los cuatro estructurales forman una **cadena estricta de composición**: un sistema
+> Los cuatro estructurales forman una **jerarquía de composición**: un sistema
 > contiene contenedores, un contenedor contiene componentes, un componente contiene
-> unidades de código. Relationship es transversal: conecta dos elementos
-> cualesquiera.
+> elementos de código. Relationship es transversal: conecta dos elementos
+> cualesquiera, **incluso de niveles distintos** — una Person se conecta con un
+> Container.
 >
-> Y hay **reglas de buena formación**. La más importante: una relación solo puede
-> conectar elementos del **mismo nivel de abstracción**. No existe un enlace de
-> Container a CodeUnit. Cada diagrama representa un solo nivel; mezclarlos invalida
-> el modelo. Además, toda relación es dirigida y debe llevar descripción.»
+> Y hay **reglas de buena formación**, pero conviene enunciarlas bien: la regla
+> central **no es sobre las relaciones, es sobre el alcance del diagrama**. Cada
+> diagrama muestra un solo nivel de zoom; poner componentes en un diagrama de
+> contexto es el error más común. Un sistema externo se modela como caja negra. Y
+> toda relación es dirigida y debe llevar descripción.
+>
+> Vale la pena notar que el nivel 4 **no tiene notación propia**: C4 remite a UML.»
 
 ---
 
@@ -66,18 +70,19 @@ Responder las tres preguntas del enunciado, en orden:
 Mostrar el diagrama de clases y recorrerlo:
 
 > «Este es el metamodelo simplificado que propongo. Arriba está la clase abstracta
-> **Element**, con `name` y `description`, de la que heredan los cinco constructos
+> **Element**, con `name` y `description`, de la que heredan los constructos
 > concretos —esas son las flechas de generalización, con triángulo hueco.
 >
 > Los rombos rellenos son **composiciones**: SoftwareSystem contiene uno o más
-> Containers, Container contiene uno o más Components, y Component contiene una o
-> más CodeUnits. Las cardinalidades están marcadas en rojo.
+> Containers, Container puede contener Components, y Component puede contener uno o
+> más elementos de código. Las cardinalidades están marcadas en rojo.
 >
 > **Relationship** aparece como una clase asociativa con dos extremos navegables,
 > `source` y `target`, ambos apuntando a Element: por eso puede conectar cualquier
 > par de elementos. La restricción de que ambos extremos estén en el mismo nivel
-> está anotada aparte, porque el metamodelo por sí solo no la impide —y esa es una
-> observación que retomo en la reflexión.»
+> anotada aparte dice algo importante: las relaciones **sí** cruzan niveles; lo que
+> se mantiene por nivel es el diagrama. Y ninguna de estas reglas la impone una
+> gramática: son convenciones documentadas. Eso lo retomo en la reflexión.»
 
 ---
 
@@ -183,5 +188,5 @@ fundamentada». Es la parte que más pesa: no apurarla.
 - [ ] `analisis-c4.pdf` abierto en pantalla completa.
 - [ ] Duración entre 5 y 7 minutos (medir en un ensayo previo).
 - [ ] Los dos entregables listos: el video y el archivo de presentación.
-- [ ] Nombrar la fuente principal al menos una vez: **Brown, S. (2006–2024),
-      c4model.com**.
+- [ ] Nombrar la fuente principal al menos una vez: **Brown, S. (2016)** y la
+      especificación en línea, c4model.com.

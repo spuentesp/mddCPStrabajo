@@ -252,15 +252,16 @@ Container, Component, Code.
 existen.
 
 > «Los constructos son seis: **Person, SoftwareSystem, Container, Component,
-> CodeUnit y Relationship**.
+> Code element y Relationship**.
 >
 > Los cuatro estructurales forman una **cadena estricta de composición**: un
 > sistema contiene contenedores, un contenedor contiene componentes, un componente
 > contiene unidades de código. Relationship es transversal.
 >
 > Y hay reglas de buena formación. La más importante: **una relación solo conecta
-> elementos del mismo nivel de abstracción**. No existe un enlace de Container a
-> CodeUnit. Cada diagrama representa un solo nivel.»
+> el alcance del diagrama**: cada diagrama muestra un solo nivel de zoom. Las
+> relaciones, en cambio, **sí cruzan niveles** — una Person se conecta con un
+> Container. Y el nivel 4 no tiene notación propia: C4 remite a UML.»
 
 ### Lámina 4 · Metamodelo
 
@@ -275,7 +276,7 @@ notación UML bien usada.
 >
 > Los **rombos rellenos** son composiciones, con sus cardinalidades: SoftwareSystem
 > contiene uno o más Containers, Container uno o más Components, Component una o más
-> CodeUnits.
+> elementos de código.
 >
 > **Relationship** aparece como clase asociativa, con dos extremos navegables
 > —`source` y `target`— que apuntan a Element: por eso puede conectar cualquier par.
