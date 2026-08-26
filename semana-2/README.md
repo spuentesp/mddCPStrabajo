@@ -14,7 +14,7 @@ crítica genuina al confrontarlo con el dominio CPS del curso.
 
 | Entregable (diapositiva) | Estado | Archivo |
 |---|---|---|
-| Archivo de presentación utilizado en la exposición | ✅ 11 diapositivas | `../slides/semana-2/analisis-c4.pdf` (fuente: `.html`) |
+| Archivo de presentación utilizado en la exposición | ✅ 9 diapositivas | `../slides/semana-2/analisis-c4.pdf` (fuente: `.html`) |
 | Video individual de 5–7 min | ⬜ Grabar (guion cronometrado listo) | `guion-video.md` |
 
 ## Aspectos exigidos por el enunciado
@@ -25,8 +25,8 @@ crítica genuina al confrontarlo con el dominio CPS del curso.
 | **Sintaxis abstracta**: constructos, cómo se relacionan, restricciones | 3 | ✅ 6 constructos + cadena de composición + 6 reglas de buena formación |
 | **Metamodelo**: representación simplificada mediante **diagrama de clases** | 4 | ✅ clase abstracta `Element`, generalizaciones, composiciones con cardinalidad, `Relationship` como clase asociativa |
 | **Sintaxis concreta**: representación visual de los constructos | 5 | ✅ notación de cada elemento y de las relaciones |
-| **Semántica**: significado de los constructos, cómo interpretar los modelos | 6 (+ 7–9 aplicado a SVIF) | ✅ qué abstrae cada nivel, ilustrado en los niveles 1–3 |
-| **Reflexión personal**: ¿adecuado para su dominio?, ventajas y limitaciones, ¿qué mejoraría? | 10 | ✅ las tres preguntas respondidas |
+| **Semántica**: significado de los constructos, cómo interpretar los modelos | 6 (+ 7 aplicado a SVIF) | ✅ qué abstrae cada nivel, ilustrado en los niveles 1–3 |
+| **Reflexión personal**: ¿adecuado para su dominio?, ventajas y limitaciones, ¿qué mejoraría? | 8 | ✅ las tres preguntas respondidas |
 
 ## Cobertura de la rúbrica
 
@@ -35,8 +35,8 @@ crítica genuina al confrontarlo con el dominio CPS del curso.
 | Comprensión del lenguaje | Diapositiva 2 (propósito, alcance, contexto) |
 | Identificación de constructos | Diapositiva 3 (constructos, relaciones y restricciones) |
 | Metamodelo propuesto | Diapositiva 4 (diagrama de clases con notación UML correcta) |
-| Notación y semántica | Diapositivas 5 y 6, aplicadas en 7–9 |
-| Reflexión crítica | Diapositiva 10 (ventajas, limitaciones y mejoras propuestas) |
+| Notación y semántica | Diapositivas 5 y 6, aplicadas en 7 |
+| Reflexión crítica | Diapositiva 8 (ventajas, limitaciones y mejoras propuestas) |
 | Comunicación oral | `guion-video.md` |
 
 ## Material puente (no evaluado)

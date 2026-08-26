@@ -18,7 +18,7 @@ concreta**, en el orden en que aparecen.
 | Semana | Mazo | Láminas | Video |
 |---|---|---|---|
 | 1 | `presentacion` — Desafío abierto en CPS | 8 | 3–5 min |
-| 2 | `analisis-c4` — Análisis del modelo C4 | 11 | 5–7 min |
+| 2 | `analisis-c4` — Análisis del modelo C4 | 9 | 5–7 min |
 | 3 | `presentacion` — Modelado con AO y DSL | 14 | 5–7 min |
 | 4 | `presentacion` — Proceso MDD4CPS | 10 | 5–7 min |
 
@@ -39,7 +39,7 @@ gastar el tiempo cuando el reloj aprieta.
 | Identificación de constructos | 3 (sintaxis abstracta) | Listar los constructos sin nombrar las **restricciones** |
 | Metamodelo propuesto | **4** | No explicar los tres tipos de flecha; leer las cajas en vez de las relaciones |
 | Notación y semántica | 5 (notación) · 6 (semántica) | Describir la notación sin decir por qué es deliberadamente pobre |
-| Reflexión crítica | **10** | Quedarse en «ventajas y desventajas» sin fundamentar ni proponer mejoras |
+| Reflexión crítica | **8** | Quedarse en «ventajas y desventajas» sin fundamentar ni proponer mejoras |
 | Comunicación oral | todas | Leer la lámina |
 
 **Semana 3 — Modelado de un CPS mediante AO y DSL**
@@ -63,19 +63,23 @@ gastar el tiempo cuando el reloj aprieta.
 > `semana-N/guion-video.md`. Esta tabla los resume; si hay que cambiar un tiempo,
 > se cambia allá y se refleja aquí — nunca al revés, y nunca solo en uno de los dos.
 
-**Semana 2 — 11 láminas · total 6:25 · margen 0:35 sobre el límite de 7:00**
+**Semana 2 — 9 láminas · total 5:25 · margen sobre ambos límites (5:00–7:00)**
+
+Versión compacta: las tres láminas "C4 aplicado a SVIF" (antes 7–9) se fusionaron
+en una sola (lámina 7), y el resto de los bloques se ajustó un poco para dejar
+más aire de habla. Bajó de 6:25 a 5:25 en total.
 
 | Láminas | Bloque | Tiempo |
 |---|---|---|
-| 1 | Presentación y elección del lenguaje | 25 s |
-| 2 | Descripción general | 45 s |
-| 3 | Sintaxis abstracta | 45 s |
-| 4 | **Metamodelo** | 55 s |
-| 5 | Sintaxis concreta | 40 s |
-| 6 | Semántica | 35 s |
-| 7–9 | C4 aplicado a SVIF | 45 s |
-| 10 | **Reflexión crítica** | 75 s |
-| 11 | Cierre | 20 s |
+| 1 | Presentación y elección del lenguaje | 20 s |
+| 2 | Descripción general | 40 s |
+| 3 | Sintaxis abstracta | 40 s |
+| 4 | **Metamodelo** | 50 s |
+| 5 | Sintaxis concreta | 35 s |
+| 6 | Semántica | 30 s |
+| 7 | C4 aplicado a SVIF (los 3 niveles, una lámina) | 25 s |
+| 8 | **Reflexión crítica** | 70 s |
+| 9 | Cierre | 15 s |
 
 **Semana 3 — 14 láminas · total 6:15 · margen 0:45**
 
@@ -90,10 +94,10 @@ gastar el tiempo cuando el reloj aprieta.
 | 13 | **Análisis: qué se gana y qué se pierde** | 55 s |
 | 14 | Cierre | 20 s |
 
-**Si el ensayo se pasa de 7:00**, comprimir en este orden: Semana 2 → las láminas
-7–9 (son ilustración); Semana 3 → las láminas 8–9 (ninguna sostiene un criterio
-por sí sola). **Nunca** recortar la lámina 10 de Semana 2 ni la 13 de Semana 3:
-son los criterios con más recorrido de cada rúbrica.
+**Si el ensayo se pasa de 7:00**, comprimir en este orden: Semana 2 → la lámina 7
+(es ilustración, ya viene compacta); Semana 3 → las láminas 8–9 (ninguna sostiene
+un criterio por sí sola). **Nunca** recortar la lámina 8 de Semana 2 ni la 13 de
+Semana 3: son los criterios con más recorrido de cada rúbrica.
 
 > **Semana 3 es un mazo denso:** 14 láminas en 6:15 son ~27 s por lámina. El ensayo
 > cronometrado no es opcional.
@@ -214,9 +218,10 @@ aquellas, este bloque queda sin soporte visual.
 
 # Semana 2 — Análisis del modelo C4
 
-**Duración objetivo: 5–7 min.** Once láminas. Las láminas 7–9 son un ejemplo
-aplicado: se recorren rápido, son ilustración, no análisis. El peso está en la 4
-(metamodelo) y la 10 (reflexión).
+**Duración objetivo: 5–7 min** (versión compacta: apunta a ~5:25). Nueve láminas
+— las tres del ejemplo aplicado a SVIF (antes 7–9) se fusionaron en una sola
+lámina 7. Se recorre rápido, es ilustración, no análisis. El peso está en la 4
+(metamodelo) y la 8 (reflexión).
 
 ### Lámina 1 · Portada
 
@@ -293,7 +298,7 @@ notación UML bien usada.
 
 *Nota:* la rúbrica evalúa «Metamodelo propuesto» como criterio independiente.
 Recorrer el diagrama nombrando los tres tipos de flecha es lo que separa un 2 de un
-3. Dejar caer el detalle de la restricción prepara el terreno de la lámina 10.
+3. Dejar caer el detalle de la restricción prepara el terreno de la lámina 8.
 
 ### Lámina 5 · Sintaxis concreta
 
@@ -320,53 +325,31 @@ Recorrer el diagrama nombrando los tres tipos de flecha es lo que separa un 2 de
 > Un modelo C4 se interpreta entonces como una **jerarquía de contención con flujos
 > de interacción**: dice qué existe, dentro de qué, y quién habla con quién.»
 
-> **Las tres láminas siguientes son el mismo sistema con tres zooms.** Van
-> encadenadas en un solo bloque (ver *Presupuesto de tiempo*): son ilustración, no
-> análisis. Si el reloj aprieta, esta es la sección que se comprime.
+### Lámina 7 · C4 aplicado a SVIF: los tres niveles en una vista
 
-### Lámina 7 · Nivel 1 — Context
-
-**Idea única:** en el nivel 1 el sistema **no se abre**, y eso es una regla, no una
-omisión.
+**Idea única:** el mismo sistema con tres zooms — en el nivel 1 el sistema **no se
+abre** (regla, no omisión), en el nivel 2 sí aparece la tecnología, y el nivel 3
+llega a los módulos internos. Es ilustración, no análisis: recorrer rápido.
 
 > «Lo apliqué a **SVIF**, un control de acceso con identificación facial.
+> En **Context** hay dos personas —usuario y administrador— y el sistema como
+> **una sola caja**; la cerradura y la alarma van rotuladas como **extensión
+> propia**, porque el *System Context* se define sobre personas y otros sistemas
+> de software. Fíjense en lo que no está: los dos nodos ESP32 y el broker MQTT
+> son contenedores, y aparecen recién en el siguiente nivel.
 >
-> En el nivel 1 hay dos personas —el usuario que se presenta ante la cámara y el
-> administrador que consulta el registro— y el sistema como **una sola caja**. La
-> cerradura y la alarma van rotuladas como **extensión propia**: el *System Context*
-> de C4 se define sobre personas y otros sistemas de software, y un actuador no es
-> ninguna de las dos cosas.
+> En **Container** —para mí, el nivel más valioso de C4— el sistema se abre en
+> el *Face Monitor* sobre ESP32-CAM y el *Access Actuator* sobre ESP32 con relé
+> y buzzer, conectados por MQTT: aquí sí aparece la tecnología.
 >
-> Fíjense en lo que **no** está: los dos nodos ESP32 y el broker MQTT. Son
-> contenedores, y abrirlos aquí sería mezclar niveles de abstracción, que es
-> justamente lo que las reglas de buena formación prohíben. Aparecen en el nivel
-> siguiente.»
+> Y en **Component**, dentro del Face Monitor, la cadena capturar → detectar →
+> identificar → publicar, apoyada en la base de rostros enrolados.»
 
-*Nota:* señalar la nota al pie del diagrama. Decir en voz alta por qué el sistema
-es caja negra es lo que distingue «comprensión adecuada» de «comprensión profunda»
-en la rúbrica.
+*Nota:* señalar la nota al pie del diagrama de Container. Decir en voz alta por
+qué el sistema es caja negra en el nivel 1 es lo que distingue «comprensión
+adecuada» de «comprensión profunda» en la rúbrica.
 
-### Lámina 8 · Nivel 2 — Container
-
-**Idea única:** este es el nivel que de verdad describe SVIF.
-
-> «En el nivel 2 el sistema se abre en sus dos nodos: el *Face Monitor* sobre
-> ESP32-CAM y el *Access Actuator* sobre ESP32 con relé y buzzer, conectados por
-> MQTT. Aquí sí aparece la tecnología.
->
-> **Para mí este es el nivel más valioso de C4**: describe la arquitectura real del
-> sistema en un solo diagrama, y es el que usaría para explicárselo a alguien que
-> se suma al proyecto.»
-
-### Lámina 9 · Nivel 3 — Component
-
-**Idea única:** el zoom llega hasta los módulos internos de un contenedor.
-
-> «Y en el nivel 3 entro al Face Monitor y veo la cadena: capturar, detectar,
-> identificar, publicar, apoyada en la base de rostros enrolados. Un nivel más
-> abajo estaría el código, que en este caso son las funciones del `.ino`.»
-
-### Lámina 10 · Reflexión personal y crítica
+### Lámina 8 · Reflexión personal y crítica
 
 **Idea única:** C4 es adecuado **parcialmente**, y los límites señalan dónde
 empieza a hacer falta otro lenguaje.
@@ -400,7 +383,7 @@ empieza a hacer falta otro lenguaje.
 todo el mazo. Notar cómo la crítica se apoya en la lámina 4: eso es lo que la
 vuelve fundamentada y no opinión.
 
-### Lámina 11 · Referencias
+### Lámina 9 · Referencias
 
 > «La fuente principal es Simon Brown, tanto el libro de 2016 como la
 > especificación en línea en c4model.com. Complementan Fowler y Parsons 2010 sobre lenguajes

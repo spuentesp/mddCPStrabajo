@@ -389,77 +389,20 @@
   <div class="pageno">6</div>
 </section>
 
-<!-- 7. C4 EN SVIF: CONTEXT -->
+<!-- 7. C4 EN SVIF: LOS TRES NIVELES -->
 <section class="slide content-bg">
   <div class="content-zone">
-    <div class="kicker-small">06a · C4 aplicado a SVIF</div>
-    <h2><span class="level-indicator">Level 1</span>Context: Sistema en contexto</h2>
-    <div class="diagram">
-      <svg viewBox="0 0 1100 300" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica Neue, Arial, sans-serif">
-        <defs>
-          <marker id="ctxar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-            <path d="M0,0 L10,5 L0,10 z" fill="#5a6fd8"/>
-          </marker>
-        </defs>
-
-        <!-- Persona: Usuario -->
-        <circle cx="115" cy="52" r="15" fill="#fce6ea" stroke="#c0334d" stroke-width="2"/>
-        <rect x="70" y="72" width="90" height="40" rx="4" fill="#fce6ea" stroke="#c0334d" stroke-width="2"/>
-        <text x="115" y="89" text-anchor="middle" font-size="10.5" font-weight="700" fill="#8d2338">Usuario</text>
-        <text x="115" y="103" text-anchor="middle" font-size="8" fill="#a35569">[Person]</text>
-
-        <!-- Persona: Administrador -->
-        <circle cx="115" cy="180" r="15" fill="#fce6ea" stroke="#c0334d" stroke-width="2"/>
-        <rect x="60" y="200" width="110" height="40" rx="4" fill="#fce6ea" stroke="#c0334d" stroke-width="2"/>
-        <text x="115" y="217" text-anchor="middle" font-size="10.5" font-weight="700" fill="#8d2338">Administrador</text>
-        <text x="115" y="231" text-anchor="middle" font-size="8" fill="#a35569">[Person]</text>
-
-        <!-- Sistema: caja NEGRA -->
-        <rect x="400" y="70" width="300" height="130" rx="6" fill="#e8f5f7" stroke="#1fb8d8" stroke-width="2.5"/>
-        <text x="550" y="105" text-anchor="middle" font-size="16" font-weight="700" fill="#12788c">SVIF</text>
-        <text x="550" y="124" text-anchor="middle" font-size="10" fill="#3f97a8">[Software System]</text>
-        <text x="550" y="148" text-anchor="middle" font-size="9.5" fill="#4a5070">Identifica rostros y controla el acceso</text>
-        <text x="550" y="163" text-anchor="middle" font-size="9.5" fill="#4a5070">a un recinto, registrando cada evento.</text>
-        <text x="550" y="185" text-anchor="middle" font-size="8.5" fill="#8a91a8" font-style="italic">caja negra en este nivel</text>
-
-        <!-- Hardware externo -->
-        <rect x="880" y="60" width="180" height="52" rx="4" fill="#fff8e8" stroke="#b8860b" stroke-width="2"/>
-        <text x="970" y="82" text-anchor="middle" font-size="11" font-weight="700" fill="#8a6d00">Cerradura electromecánica</text>
-        <text x="970" y="98" text-anchor="middle" font-size="8.5" fill="#a68a3a">[extensión: no es C4]</text>
-
-        <rect x="880" y="160" width="180" height="52" rx="4" fill="#fff8e8" stroke="#b8860b" stroke-width="2"/>
-        <text x="970" y="182" text-anchor="middle" font-size="11" font-weight="700" fill="#8a6d00">Alarma sonora</text>
-        <text x="970" y="198" text-anchor="middle" font-size="8.5" fill="#a68a3a">[extensión: no es C4]</text>
-
-        <!-- Relaciones -->
-        <path d="M162,92 L398,110" stroke="#5a6fd8" stroke-width="1.8" fill="none" marker-end="url(#ctxar)"/>
-        <text x="280" y="88" text-anchor="middle" font-size="9" fill="#353a52" font-weight="700">se presenta ante la cámara</text>
-
-        <path d="M172,215 L398,175" stroke="#5a6fd8" stroke-width="1.8" fill="none" marker-end="url(#ctxar)"/>
-        <text x="285" y="212" text-anchor="middle" font-size="9" fill="#353a52" font-weight="700">consulta el registro de accesos</text>
-
-        <path d="M702,115 L876,92" stroke="#b8860b" stroke-width="1.8" fill="none" marker-end="url(#ctxar)"/>
-        <text x="789" y="94" text-anchor="middle" font-size="9" fill="#353a52" font-weight="700">desbloquea</text>
-
-        <path d="M702,158 L876,182" stroke="#b8860b" stroke-width="1.8" fill="none" marker-end="url(#ctxar)"/>
-        <text x="789" y="182" text-anchor="middle" font-size="9" fill="#353a52" font-weight="700">activa</text>
-
-        <!-- Nota -->
-        <rect x="8" y="256" width="1084" height="38" rx="4" fill="#fffbef" stroke="#b8860b" stroke-width="1" stroke-dasharray="3,2"/>
-        <text x="20" y="273" fill="#8a6d00" font-size="9.5" font-weight="700">Dos cosas que mirar en este nivel.</text>
-        <text x="222" y="273" fill="#5d4c10" font-size="9">(1) El sistema <tspan font-weight="700">no se abre</tspan>: los nodos ESP32 y el broker son contenedores y aparecen en el nivel 2. (2) La cerradura y la alarma</text>
-        <text x="222" y="286" fill="#5d4c10" font-size="9">son una <tspan font-weight="700">extensión propia</tspan>: el System Context de C4 se define sobre «personas y otros sistemas de software», y un actuador no es ninguno.</text>
-      </svg>
+    <div class="kicker-small">06 · C4 aplicado a SVIF</div>
+    <h2>Los tres niveles en una vista: Context → Container → Component</h2>
+    <div class="note" style="margin-bottom:6px; font-size:11.5px;">
+      <span class="level-indicator" style="background:#c0334d;">Nivel 1</span>
+      <b>Context:</b> dos personas (usuario, administrador) y SVIF como <b>caja negra</b> —
+      la cerradura y la alarma van rotuladas como <i>extensión propia</i>, no como elementos C4.
+      &nbsp;·&nbsp;
+      <span class="level-indicator" style="background:#2f8f4f;">Nivel 3</span>
+      <b>Component</b> (dentro de Face Monitor): capturar → detectar → identificar → publicar,
+      apoyado en la base de rostros enrolados.
     </div>
-  </div>
-  <div class="pageno">7</div>
-</section>
-
-<!-- 8. C4 EN SVIF: CONTAINER -->
-<section class="slide content-bg">
-  <div class="content-zone">
-    <div class="kicker-small">06b · C4 aplicado a SVIF</div>
-    <h2><span class="level-indicator">Level 2</span>Container: Nodos y tecnología</h2>
     <div class="diagram">
       <svg viewBox="0 0 1100 320" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica Neue, Arial, sans-serif">
         <defs>
@@ -562,98 +505,10 @@
       </svg>
     </div>
   </div>
-  <div class="pageno">8</div>
+  <div class="pageno">7</div>
 </section>
 
-<!-- 9. C4 EN SVIF: COMPONENT (Face Monitor) -->
-<section class="slide content-bg">
-  <div class="content-zone">
-    <div class="kicker-small">06c · C4 aplicado a SVIF</div>
-    <h2><span class="level-indicator">Level 3</span>Component: Dentro de Face Monitor</h2>
-    <div class="diagram">
-      <svg viewBox="0 0 1100 340" xmlns="http://www.w3.org/2000/svg" font-family="Helvetica Neue, Arial, sans-serif">
-        <defs>
-          <marker id="comp-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
-            <path d="M0,0 L10,5 L0,10 z" fill="#5a6fd8"/>
-          </marker>
-        </defs>
-
-        <!-- Container boundary -->
-        <rect x="60" y="20" width="1000" height="300" rx="6" fill="none" stroke="#1f7fd8" stroke-width="2" stroke-dasharray="4,2"/>
-        <text x="80" y="45" font-size="11" font-weight="700" fill="#1f7fd8">Face Monitor Component (Container)</text>
-
-        <!-- OnIntervalAction -->
-        <g>
-          <circle cx="150" cy="120" r="25" fill="#eef3ff" stroke="#5a6fd8" stroke-width="2"/>
-          <text x="150" y="115" text-anchor="middle" font-size="9" font-weight="700" fill="#5a6fd8">⏱</text>
-          <text x="150" y="160" text-anchor="middle" font-size="10" font-weight="700" fill="#5a6fd8">monitorear</text>
-          <text x="150" y="175" text-anchor="middle" font-size="8" fill="#6b7390">500 ms</text>
-        </g>
-
-        <!-- Image Capture Component -->
-        <g>
-          <rect x="260" y="95" width="100" height="50" rx="4" fill="#f0f8e8" stroke="#2f8f4f" stroke-width="1.5"/>
-          <text x="310" y="115" text-anchor="middle" font-size="10" font-weight="700" fill="#2f8f4f">capturar</text>
-          <text x="310" y="132" text-anchor="middle" font-size="8" fill="#6b7390">Imagen</text>
-        </g>
-
-        <!-- Face Detection Component -->
-        <g>
-          <rect x="410" y="95" width="100" height="50" rx="4" fill="#f0f8e8" stroke="#2f8f4f" stroke-width="1.5"/>
-          <text x="460" y="115" text-anchor="middle" font-size="10" font-weight="700" fill="#2f8f4f">detectar</text>
-          <text x="460" y="132" text-anchor="middle" font-size="8" fill="#6b7390">Rostro</text>
-        </g>
-
-        <!-- Face Recognition Component -->
-        <g>
-          <rect x="560" y="95" width="100" height="50" rx="4" fill="#f0f8e8" stroke="#2f8f4f" stroke-width="1.5"/>
-          <text x="610" y="115" text-anchor="middle" font-size="10" font-weight="700" fill="#2f8f4f">identificar</text>
-          <text x="610" y="132" text-anchor="middle" font-size="8" fill="#6b7390">Rostro</text>
-        </g>
-
-        <!-- Enrolled Faces Database -->
-        <g>
-          <ellipse cx="760" cy="120" rx="45" ry="30" fill="#fff8e8" stroke="#b8860b" stroke-width="1.5"/>
-          <text x="760" y="118" text-anchor="middle" font-size="9" font-weight="700" fill="#b8860b">Enrolled</text>
-          <text x="760" y="132" text-anchor="middle" font-size="9" font-weight="700" fill="#b8860b">Faces</text>
-        </g>
-
-        <!-- MQTT Sender Component -->
-        <g>
-          <rect x="880" y="95" width="100" height="50" rx="4" fill="#f0f8e8" stroke="#2f8f4f" stroke-width="1.5"/>
-          <text x="930" y="115" text-anchor="middle" font-size="10" font-weight="700" fill="#2f8f4f">publicar</text>
-          <text x="930" y="132" text-anchor="middle" font-size="8" fill="#6b7390">MQTT</text>
-        </g>
-
-        <!-- Data flow: OnDemandAction -->
-        <g>
-          <rect x="200" y="220" width="780" height="70" rx="4" fill="#fff0e6" stroke="#b8860b" stroke-width="1.5"/>
-          <text x="220" y="240" font-size="9" font-weight="700" fill="#b8860b">SWResource: IdentificationEvent</text>
-          <text x="220" y="258" font-size="8" fill="#353a52" font-family="monospace">{timestamp, person_id, person_name[32], confidence, authorized}</text>
-          <text x="220" y="275" font-size="8" fill="#6b7390">Fluye entre capturar → detectar → identificar → publicar</text>
-        </g>
-
-        <!-- Arrows (flow) -->
-        <path d="M175,120 L260,120" stroke="#5a6fd8" stroke-width="2" fill="none" marker-end="url(#comp-arrow)"/>
-        <path d="M360,120 L410,120" stroke="#5a6fd8" stroke-width="2" fill="none" marker-end="url(#comp-arrow)"/>
-        <path d="M510,120 L560,120" stroke="#5a6fd8" stroke-width="2" fill="none" marker-end="url(#comp-arrow)"/>
-        <path d="M660,120 L715,120" stroke="#5a6fd8" stroke-width="1.5" fill="none" marker-end="url(#comp-arrow)"/>
-        <path d="M805,120 L880,120" stroke="#5a6fd8" stroke-width="2" fill="none" marker-end="url(#comp-arrow)"/>
-
-        <!-- External: MQTT Broker -->
-        <g>
-          <rect x="880" y="30" width="120" height="40" rx="4" fill="#f0f0f0" stroke="#6b7390" stroke-width="1.5" stroke-dasharray="2,2"/>
-          <text x="940" y="58" text-anchor="middle" font-size="9" fill="#6b7390">MQTT Broker</text>
-        </g>
-        <path d="M930,145 L930,180" stroke="#2f8f4f" stroke-width="2.5" fill="none" marker-end="url(#comp-arrow)"/>
-        <text x="950" y="165" font-size="8" fill="#353a52">envía</text>
-      </svg>
-    </div>
-  </div>
-  <div class="pageno">9</div>
-</section>
-
-<!-- 10. REFLEXIÓN PERSONAL -->
+<!-- 8. REFLEXIÓN PERSONAL -->
 <section class="slide content-bg">
   <div class="content-zone">
     <div class="kicker-small">07 · Reflexión personal y crítica</div>
@@ -724,10 +579,10 @@
       </div>
     </div>
   </div>
-  <div class="pageno">10</div>
+  <div class="pageno">8</div>
 </section>
 
-<!-- 11. REFERENCIAS -->
+<!-- 9. REFERENCIAS -->
 <section class="slide content-bg">
   <div class="content-zone">
     <div class="kicker-small">Referencias</div>
@@ -758,7 +613,7 @@
       </div>
     </div>
   </div>
-  <div class="pageno">11</div>
+  <div class="pageno">9</div>
 </section>
 
 </body>

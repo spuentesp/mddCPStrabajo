@@ -4,203 +4,149 @@
 **Lenguaje analizado:** el **modelo C4** (Simon Brown), aplicado al caso SVIF.
 **Formato exigido:** video individual, con el expositor visible de forma continua.
 No se aceptan avatares sintéticos ni narración automática.
-**Apoyo:** `../slides/semana-2/analisis-c4.pdf` (11 diapositivas).
+**Apoyo:** `../slides/semana-2/analisis-c4.pdf` (9 diapositivas).
 
-> Los tiempos suman ≈ 6:25, con ~35 s de margen sobre el límite de 7:00. El texto es la línea argumental, no un libreto para
-> leer: la rúbrica evalúa «Comunicación oral» y «Comprensión del lenguaje».
-
----
-
-## 0:00 – 0:25 · Presentación y elección del lenguaje *(diapositiva 1)*
-
-> «El lenguaje visual que elegí analizar es el **modelo C4**, de Simon Brown. Lo
-> elegí porque es el que efectivamente se usa para documentar arquitectura en la
-> industria y porque quería comprobar hasta dónde sirve para describir un sistema
-> ciberfísico, que es el dominio del curso.
->
-> Voy a analizarlo en las seis dimensiones pedidas: descripción general, sintaxis
-> abstracta, metamodelo, sintaxis concreta, semántica y una reflexión crítica.»
+> Versión compacta: los tiempos suman ≈ 5:25, con margen tanto sobre el piso (5:00)
+> como sobre el techo (7:00) del enunciado. Las diapositivas «C4 aplicado a SVIF»
+> se fusionaron en una sola lámina (antes 3) para dejar más aire y bajar el ritmo
+> de habla. El texto es la línea argumental, no un libreto para leer: la rúbrica
+> evalúa «Comunicación oral» y «Comprensión del lenguaje».
 
 ---
 
-## 0:25 – 1:10 · Descripción general *(diapositiva 2)*
+## 0:00 – 0:20 · Presentación y elección del lenguaje *(diapositiva 1)*
 
-Responder las tres preguntas del enunciado, en orden:
-
-> «**Propósito.** C4 describe la arquitectura de un sistema mediante un conjunto de
-> mapas jerárquicos. La idea central es el *zoom*: cada nivel es un acercamiento del
-> anterior, dirigido a una audiencia distinta. El eje es la estructura, pero el
-> modelo también cubre comportamiento y despliegue.
->
-> **Qué permite representar.** Cualquier sistema compuesto por unidades desplegables
-> que se comunican: web, microservicios, integraciones. En un sistema ciberfísico el
-> **firmware** de cada nodo encaja como contenedor, pero el hardware en sí no tiene
-> elemento propio — y eso lo retomo al final.
->
-> **En qué contexto se usa.** Documentación de arquitectura, incorporación de gente
-> nueva al equipo, revisiones de diseño y conversaciones con gente no técnica.
->
-> Los cuatro niveles son: **Context**, el sistema y quiénes lo rodean; **Container**,
-> las unidades desplegables; **Component**, los módulos dentro de cada unidad; y
-> **Code**, las clases y funciones.»
+> «El lenguaje visual que elegí analizar es el **modelo C4**, de Simon Brown: se
+> usa de verdad para documentar arquitectura en la industria, y quería probar
+> hasta dónde sirve para describir un sistema ciberfísico, el dominio del curso.
+> Lo analizo en las seis dimensiones pedidas: descripción general, sintaxis
+> abstracta, metamodelo, sintaxis concreta, semántica y reflexión crítica.»
 
 ---
 
-## 1:10 – 1:55 · Sintaxis abstracta *(diapositiva 3)*
+## 0:20 – 1:00 · Descripción general *(diapositiva 2)*
 
-> «Los constructos son **Person**, **SoftwareSystem**, **Container**, **Component**
-> y **Relationship**.
+Responder las tres preguntas del enunciado, sin detenerse en ninguna:
+
+> «**Propósito:** describir la arquitectura de un sistema mediante mapas
+> jerárquicos — la idea central es el *zoom*, cada nivel dirigido a una audiencia
+> distinta. El eje es la estructura, pero también cubre comportamiento y despliegue.
 >
-> Los cuatro estructurales forman una **jerarquía de composición**: un sistema
-> contiene contenedores y un contenedor contiene componentes. Relationship es
-> transversal: conecta dos elementos cualesquiera, **incluso de niveles distintos**
-> — una Person se conecta con un Container.
+> **Qué representa:** cualquier sistema de unidades desplegables que se comunican.
+> En un CPS, el firmware de cada nodo encaja como contenedor; el hardware en sí no
+> tiene elemento propio — lo retomo en la reflexión.
 >
-> Y hay **reglas de buena formación**, pero conviene enunciarlas bien: la regla
-> central **no es sobre las relaciones, es sobre el alcance del diagrama**. Cada
-> diagrama muestra un solo nivel de zoom; poner componentes en un diagrama de
-> contexto es el error más común. Un sistema externo se modela como caja negra.
->
-> Toda relación es dirigida, lleva descripción, puede declarar la tecnología del
-> canal y, algo interesante, distingue **comunicación síncrona de asíncrona**.
->
-> Y una precisión: el nivel 4 **ni siquiera tiene un elemento** en el metamodelo.
-> C4 remite a UML para ese nivel.»
+> **Contexto de uso:** documentación de arquitectura, *onboarding*, revisiones de
+> diseño. Los cuatro niveles: Context, Container, Component y Code.»
 
 ---
 
-## 1:55 – 2:50 · Metamodelo *(diapositiva 4)*
+## 1:00 – 1:40 · Sintaxis abstracta *(diapositiva 3)*
 
-Mostrar el diagrama de clases y recorrerlo:
-
-> «Este es el metamodelo simplificado que propongo. Arriba está la clase abstracta
-> **Element**, con `name` y `description`, de la que heredan los constructos
-> concretos —esas son las flechas de generalización, con triángulo hueco.
+> «Los constructos son **Person, SoftwareSystem, Container, Component** y
+> **Relationship**. Los cuatro estructurales forman una jerarquía de composición;
+> Relationship es transversal, conecta cualquier par **incluso de niveles
+> distintos** — una Person con un Container.
 >
-> Los rombos rellenos son **composiciones**: SoftwareSystem contiene uno o más
-> Containers y Container puede contener Components. Fíjense en que el **nivel 4
-> aparece punteado y fuera de la jerarquía**: no hay elemento para él.
->
-> **Relationship** aparece como clase asociativa con dos extremos navegables,
-> `source` y `target`, ambos apuntando a Element: por eso conecta cualquier par. La
-> nota al costado dice algo importante: las relaciones **sí** cruzan niveles; lo que
-> se mantiene por nivel es el diagrama. Y ninguna de estas reglas la impone una
-> gramática: son convenciones. Eso lo retomo en la reflexión.»
+> La regla central de buena formación **no es sobre las relaciones, es sobre el
+> alcance del diagrama**: cada uno muestra un solo nivel de zoom. Un sistema
+> externo se modela como caja negra. Y una precisión: el **nivel 4 no tiene
+> elemento** en el metamodelo — C4 remite a UML.»
 
 ---
 
-## 2:50 – 3:30 · Sintaxis concreta *(diapositiva 5)*
+## 1:40 – 2:30 · Metamodelo *(diapositiva 4)*
 
-> «La notación es deliberadamente pobre, y eso es una decisión de diseño. Una
-> **Person** se dibuja como figura humana; los demás elementos son **cajas** que se
-> distinguen por color y por una etiqueta de tipo entre corchetes —por ejemplo
-> `[Container: ESP32-CAM]`.
+Mostrar el diagrama de clases y recorrerlo — no apurar, es criterio propio de la rúbrica:
+
+> «Este es el metamodelo simplificado que propongo. Arriba, la clase abstracta
+> **Element**, de la que heredan los constructos concretos —generalización, con
+> triángulo hueco. Los rombos rellenos son **composiciones**: SoftwareSystem
+> contiene Containers, Container contiene Components. El **nivel 4 aparece
+> punteado y fuera de la jerarquía**.
 >
-> Las **relaciones** son flechas dirigidas, siempre etiquetadas, y el estilo
-> asíncrono se marca con línea punteada.
->
-> Y algo que verifiqué en el metamodelo: la forma es solo una **opción de estilo**
-> —hay diecinueve, desde Box y Cylinder hasta Person y Robot—, y lo que cada caja
-> muestra lo gobiernan dos banderas, `metadata` y `description`. Por eso lo esencial
-> no es la forma sino los tres datos: **nombre, tipo y descripción**.»
+> **Relationship** es una clase asociativa con dos extremos navegables, `source`
+> y `target`, ambos apuntando a Element: por eso conecta cualquier par. Y algo
+> importante: las relaciones **sí cruzan niveles**; lo que se mantiene por nivel
+> es el diagrama. Ninguna de estas reglas la impone una gramática: son
+> convenciones — lo retomo en la reflexión.»
 
 ---
 
-## 3:30 – 4:05 · Semántica *(diapositiva 6)*
+## 2:30 – 3:05 · Sintaxis concreta *(diapositiva 5)*
 
-Criterio «Notación y semántica». Tiene bloque propio: no mezclarlo con el ejemplo.
-
-> «La semántica de C4 no está en los símbolos, está en **los niveles**. Cada uno
-> responde una pregunta distinta: quiénes rodean al sistema; qué unidades
-> desplegables lo componen; qué módulos hay dentro de cada unidad; y con qué código
-> se implementan.
+> «La notación es deliberadamente pobre: una **Person** es una figura humana; el
+> resto son **cajas** que se distinguen por color y una etiqueta de tipo, como
+> `[Container: ESP32-CAM]`. Las relaciones son flechas dirigidas y etiquetadas.
 >
-> Un modelo C4 se interpreta entonces como una **jerarquía de contención con flujos
-> de interacción**: dice qué existe, dentro de qué, y quién habla con quién.»
+> La forma es solo una **opción de estilo** —hay diecinueve—, y lo esencial no es
+> la forma sino tres datos: **nombre, tipo y descripción**.»
 
 ---
 
-## 4:05 – 4:50 · C4 aplicado a SVIF *(diapositivas 7 a 9)*
+## 3:05 – 3:35 · Semántica *(diapositiva 6)*
 
-Tres láminas encadenadas, ~15 s cada una. Son ilustración: si el ensayo se pasa de
-7:00, este es el bloque que se comprime.
-
-> «Lo apliqué a **SVIF**, un control de acceso con identificación facial.
->
-> En el **nivel 1, Context**, hay dos personas —el usuario que se presenta ante la
-> cámara y el administrador que consulta el registro— y el sistema como **una sola
-> caja**. Fíjense en lo que **no** está: los dos nodos ESP32 y el broker MQTT. Son
-> contenedores, y abrirlos aquí sería mezclar niveles.
->
-> La cerradura y la alarma las dibujé rotuladas como **extensión propia**, porque el
-> *System Context* de C4 se define sobre personas y otros sistemas de software: un
-> actuador no es ninguna de las dos cosas. Es la primera señal del límite que
-> discuto al final.
->
-> En el **nivel 2, Container**, el sistema se abre en sus dos nodos: el *Face
-> Monitor* sobre ESP32-CAM y el *Access Actuator* sobre ESP32 con relé y buzzer,
-> conectados por MQTT. Aquí aparece la tecnología. Este nivel es, para mí, el más
-> valioso: describe la arquitectura real del sistema en un solo diagrama.
->
-> En el **nivel 3, Component**, entro en el Face Monitor y veo la cadena capturar →
-> detectar → identificar → publicar, más la base de rostros enrolados.»
+> «La semántica de C4 no está en los símbolos, está en **los niveles**: cada uno
+> responde una pregunta distinta — quiénes rodean al sistema, qué unidades lo
+> componen, qué módulos hay dentro, con qué código se implementan. Un modelo C4
+> es una **jerarquía de contención con flujos de interacción**.»
 
 ---
 
-## 4:50 – 6:05 · Reflexión crítica *(diapositiva 10)*
+## 3:35 – 4:00 · C4 aplicado a SVIF *(diapositiva 7)*
+
+Una sola lámina con los tres niveles; ritmo rápido, es ilustración, no análisis.
+
+> «Lo apliqué a **SVIF**. En **Context**, dos personas y el sistema como una sola
+> caja — la cerradura y la alarma van rotuladas como extensión propia, no son
+> elementos C4. En **Container** —el nivel que más vale de este análisis—, el
+> sistema se abre en el *Face Monitor* y el *Access Actuator*, conectados por
+> MQTT: aquí aparece la tecnología. Y en **Component**, dentro del Face Monitor,
+> la cadena capturar → detectar → identificar → publicar.»
+
+---
+
+## 4:00 – 5:10 · Reflexión crítica *(diapositiva 8)*
 
 Esta es la sección que la rúbrica evalúa como «Reflexión crítica: profunda y
-fundamentada». Es la parte que más pesa: no apurarla.
+fundamentada». Es la parte que más pesa: no apurarla, aunque el resto vaya rápido.
 
-> «**Ventajas.** Es escalable en audiencia; es agnóstico de tecnología; y su mayor
-> mérito es que **se aprende en diez minutos**, lo que hace que la documentación
-> efectivamente se escriba y se mantenga.
+> «**Ventajas.** Escalable, agnóstico de tecnología, y se aprende en diez minutos
+> — por eso la documentación efectivamente se escribe y se mantiene.
 >
-> **Limitaciones, y aquí conviene ser preciso.** Sería fácil decir que C4 no
-> describe comportamiento, y **sería falso**: la *Dynamic view* existe justamente
-> para eso, y ordena las interacciones con números de secuencia. Lo que no alcanza
-> es lo específico del dominio:
+> **Limitaciones, con precisión.** Decir que C4 no describe comportamiento sería
+> falso: la *Dynamic view* existe para eso. Lo que no alcanza es el dominio: no
+> hay atributo de período —dice «paso 1, paso 2», no «cada 500 ms»—; el **OR** de
+> SVIF no tiene representación porque la secuencia es lineal; no hay plazos ni
+> *jitter*; y **no hay elemento para el mundo físico** — el *System Context* se
+> define sobre personas y sistemas de software, un sensor no encaja.
 >
-> — la vista dinámica dice «paso 1, paso 2», pero **no «cada 500 milisegundos»**:
-> no hay atributo de período;
-> — la secuencia es lineal, así que el **OR** de SVIF —desbloquear o alarmar— no
-> tiene representación;
-> — no hay plazos ni *jitter* tolerable;
-> — y **no hay elemento para el mundo físico**: el *System Context* se define sobre
-> personas y otros sistemas de software, así que un sensor o una cerradura no
-> encajan. *DeploymentNode* modela infraestructura, no actuadores;
-> — por último, la noción de *Container* es tan amplia que abarca desde una
-> aplicación web hasta un ESP32 con dos kilobytes de RAM.
+> **Qué mejoraría:** un atributo de periodicidad, estereotipos de hardware
+> embebido, y reglas de validación formales — hoy la buena formación es
+> convención, no un metamodelo verificable.
 >
-> **Qué mejoraría.** Un atributo estándar de periodicidad; estereotipos que
-> distingan hardware embebido de servicios; un enlace explícito a los objetivos que
-> justifican cada contenedor; y reglas de validación formales, porque hoy la buena
-> formación es convención documentada, no un metamodelo verificable.
->
-> **¿Es adecuado para mi dominio?** Sí, pero parcialmente, y creo que esa es la
-> respuesta honesta. El nivel 2 describe SVIF con precisión y es la vista que de
-> hecho usaría para explicar el sistema. Lo que le falta —tiempo, hardware,
-> bifurcaciones— es justamente lo que motiva construir un **DSL propio para CPS**.
-> No compiten: C4 aporta contexto y contenedores, el DSL aporta comportamiento y
-> temporización.»
+> **¿Adecuado para mi dominio? Sí, pero parcialmente.** El nivel 2 describe SVIF
+> con precisión. Lo que le falta —tiempo, hardware, bifurcaciones— es justamente
+> lo que motiva un **DSL propio para CPS**: no compiten, C4 aporta contexto y
+> contenedores, el DSL aporta comportamiento y temporización.»
 
 ---
 
-## 6:05 – 6:25 · Cierre *(diapositiva 11)*
+## 5:10 – 5:25 · Cierre *(diapositiva 9)*
 
-> «En síntesis: analicé C4 en sus tres capas —sintaxis abstracta, sintaxis concreta
-> y semántica—, propuse un metamodelo y lo puse a prueba contra un sistema
-> ciberfísico real. La conclusión que me llevo es que un lenguaje de modelado se
-> juzga por su **propósito**: C4 cumple el suyo, y sus límites señalan exactamente
-> dónde empieza a hacer falta otro lenguaje.»
+> «En síntesis: analicé C4 en sintaxis abstracta, concreta y semántica, propuse
+> un metamodelo y lo puse a prueba contra un sistema ciberfísico real. Un
+> lenguaje de modelado se juzga por su propósito: C4 cumple el suyo, y sus
+> límites señalan justo dónde empieza a hacer falta otro lenguaje.»
 
 ---
 
 ## Checklist antes de grabar
 
 - [ ] Cámara encendida y visible durante **toda** la exposición.
-- [ ] `analisis-c4.pdf` abierto en pantalla completa.
-- [ ] Duración entre 5 y 7 minutos (medir en un ensayo previo).
+- [ ] `analisis-c4.pdf` abierto en pantalla completa (9 diapositivas).
+- [ ] Duración entre 5 y 7 minutos (medir en un ensayo previo; esta versión apunta
+      a ~5:25, con margen de sobra hacia ambos límites).
 - [ ] Los dos entregables listos: el video y el archivo de presentación.
 - [ ] Nombrar la fuente principal al menos una vez: **Brown, S. (2016)** y la
       especificación en línea, c4model.com. Si preguntan de dónde salen los
