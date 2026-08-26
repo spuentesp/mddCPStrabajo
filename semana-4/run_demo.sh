@@ -4,6 +4,8 @@
 
 set -e
 
+cd "$(dirname "$0")"
+
 echo "🔬 SVIF Simulation Demo Runner"
 echo "=============================="
 
@@ -83,26 +85,12 @@ else:
 # Ejecuta simulación
 print(f"\n📊 Simulando SVIF por {duracion}s (semilla={semilla})...\n")
 from pathlib import Path
-sim_paths = [
-    Path(__file__).parent / "recursos-comunes" / "herramientas" / "simular_sistema.py",
-    Path.home() / "mddCPStrabajo" / "recursos-comunes" / "herramientas" / "simular_sistema.py",
-]
 
-sim_path = None
-for p in sim_paths:
-    if p.exists():
-        sim_path = p
-        break
+# run_demo.sh hace `cd` a su propio directorio (semana-4/) antes de invocar
+# este script, así que el repo raíz es el directorio padre del cwd.
+sim_path = Path.cwd().parent / "recursos-comunes" / "herramientas" / "simular_sistema.py"
 
-if not sim_path:
-    # Intenta buscar en el directorio actual
-    import os
-    for root, dirs, files in os.walk("."):
-        if "simular_sistema.py" in files:
-            sim_path = Path(root) / "simular_sistema.py"
-            break
-
-if not sim_path:
+if not sim_path.exists():
     print("❌ No se encontró simular_sistema.py")
     sys.exit(1)
 

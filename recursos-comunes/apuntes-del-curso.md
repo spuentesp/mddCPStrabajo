@@ -234,7 +234,7 @@ dependencias desde etapas tempranas** (Cares, Sepúlveda y Navarro, 2019).
 - «Un agente es un sistema computacional **situado en un entorno**, capaz de
   **acción autónoma flexible** para cumplir sus objetivos de diseño»
   (Jennings, Sycara y Wooldridge, 1998).
-- Propiedades según Wooldridge & Ciancarini (2000):
+- Propiedades según Wooldridge & Ciancarini (2001):
 
 | Propiedad | Significado |
 |---|---|
@@ -418,6 +418,6 @@ La lista APA 7 completa, con DOI/URL verificables, está en
   Fowler y Parsons (2010); Mernik, Heering y Sloane (2005); Bézivin (2005); Kleppe et
   al. (2003).
 - **S3:** Bratman (1987); Rao y Georgeff (1995); Jennings, Sycara y Wooldridge
-  (1998); Wooldridge y Ciancarini (2000); Nwana (1996); Lind (2001); Russell y
+  (1998); Wooldridge y Ciancarini (2001); Nwana (1996); Lind (2001); Russell y
   Norvig (2004); Dalpiaz, Franch y Horkoff (2016).
 - **S4:** Bézivin (2005); Navarro, Devia, Labra Gayo y Cares (2025).
