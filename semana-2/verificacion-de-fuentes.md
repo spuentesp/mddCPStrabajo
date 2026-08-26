@@ -224,3 +224,27 @@ la raíz del repo, así que la ruta correcta era `../evidencia-de-pruebas.md`,
 no `../../evidencia-de-pruebas.md`. Corregido. El barrido mecánico completo
 (enlaces `.md` + spans de ruta + `href`/`src` de `.html`) no encontró
 ningún otro enlace roto en todo el repositorio.
+
+### Ronda "revisemos de nuevo": guion de presentaciones y diseño del sistema
+
+- **`recursos-comunes/guion-de-presentaciones.md`** (781 líneas, releído
+  completo): la lámina 11 de Semana 2 seguía diciendo "el libro de 2018" de
+  Brown — quedó sin actualizar en la ronda que fijó el año a 2016 en
+  `referencias.md` y en `analisis-c4.html`. Corregido. El resto del archivo
+  (conteos de láminas, sumas de tiempo, 27 elementos del CIM, citas) se
+  verificó de nuevo y coincide.
+- **`recursos-comunes/diseno-del-sistema.md`**: la tabla de desafíos de CPS
+  afirmaba que "la alarma es accionable localmente" ante una falla de
+  comunicación. Verificado contra `AccessActuatorComponent.ino`:
+  `activarAlarma()` solo se invoca dentro del `if (eventReceived)` de
+  `controlarAccesoAlRecintoTask()`, y `eventReceived` solo lo fija el callback
+  MQTT — no hay disparo local independiente. A diferencia de la cerradura (que
+  sí falla-segura por construcción), una falla de comunicación impide tanto el
+  desbloqueo como la alarma. Corregida la afirmación.
+- **`semana-4/actividad-mdd4cps.md`** y **`comparativa-agente-vs-app.md`**:
+  releídos completos y cruzados número por número contra los `.drawio` y los
+  XML reales (`svif-02-PIM.xml`, `svif-04-PSM.xml`) — conteos de
+  `cps_component`, `operational_goal`, `action`, `id_cim_type`, `sw_resource`,
+  `hw_resource`, `comm_thread`/`listener_thread`, `and_ref_operator` y
+  `or_ref_operator` coinciden exactamente en ambas vías (app y agente). Sin
+  errores.
