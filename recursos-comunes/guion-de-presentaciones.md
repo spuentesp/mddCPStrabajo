@@ -57,6 +57,47 @@ gastar el tiempo cuando el reloj aprieta.
 > (láminas 10 a 13). Es el error de reparto más fácil de cometer: el modelo iStar
 > es lo más vistoso, pero el DSL y la correspondencia son los que puntúan.
 
+## Presupuesto de tiempo
+
+> **Fuente única de los tiempos:** los bloques cronometrados viven en
+> `semana-N/guion-video.md`. Esta tabla los resume; si hay que cambiar un tiempo,
+> se cambia allá y se refleja aquí — nunca al revés, y nunca solo en uno de los dos.
+
+**Semana 2 — 11 láminas · total 6:25 · margen 0:35 sobre el límite de 7:00**
+
+| Láminas | Bloque | Tiempo |
+|---|---|---|
+| 1 | Presentación y elección del lenguaje | 25 s |
+| 2 | Descripción general | 45 s |
+| 3 | Sintaxis abstracta | 45 s |
+| 4 | **Metamodelo** | 55 s |
+| 5 | Sintaxis concreta | 40 s |
+| 6 | Semántica | 35 s |
+| 7–9 | C4 aplicado a SVIF | 45 s |
+| 10 | **Reflexión crítica** | 75 s |
+| 11 | Cierre | 20 s |
+
+**Semana 3 — 14 láminas · total 6:15 · margen 0:45**
+
+| Láminas | Bloque | Tiempo |
+|---|---|---|
+| 1 | Presentación y encuadre | 25 s |
+| 2 | Justificación | 30 s |
+| 3–7 | **El modelo iStar** (la 4 lleva ~30 s) | 120 s |
+| 8–9 | Trazabilidad y supuestos | 30 s |
+| 10 | Por qué hace falta un DSL | 30 s |
+| 11–12 | **Modelo DSL y correspondencia** | 65 s |
+| 13 | **Análisis: qué se gana y qué se pierde** | 55 s |
+| 14 | Cierre | 20 s |
+
+**Si el ensayo se pasa de 7:00**, comprimir en este orden: Semana 2 → las láminas
+7–9 (son ilustración); Semana 3 → las láminas 8–9 (ninguna sostiene un criterio
+por sí sola). **Nunca** recortar la lámina 10 de Semana 2 ni la 13 de Semana 3:
+son los criterios con más recorrido de cada rúbrica.
+
+> **Semana 3 es un mazo denso:** 14 láminas en 6:15 son ~27 s por lámina. El ensayo
+> cronometrado no es opcional.
+
 ---
 
 # Semana 1 — Seguridad y privacidad en CPS de videovigilancia
@@ -273,8 +314,8 @@ Recorrer el diagrama nombrando los tres tipos de flecha es lo que separa un 2 de
 > de interacción**: dice qué existe, dentro de qué, y quién habla con quién.»
 
 > **Las tres láminas siguientes son el mismo sistema con tres zooms.** Van
-> encadenadas en ~50 segundos: son ilustración, no análisis. Si el reloj aprieta,
-> esta es la sección que se comprime.
+> encadenadas en un solo bloque (ver *Presupuesto de tiempo*): son ilustración, no
+> análisis. Si el reloj aprieta, esta es la sección que se comprime.
 
 ### Lámina 7 · Nivel 1 — Context
 
@@ -344,9 +385,9 @@ empieza a hacer falta otro lenguaje.
 > y temporización.»
 
 *Nota:* «Reflexión crítica» es el criterio con más recorrido de la rúbrica
-(«profunda y fundamentada»). Es la lámina que más tiempo merece — apuntar a ~70
-segundos. Notar cómo la crítica se apoya en la lámina 4: eso es lo que la vuelve
-fundamentada y no opinión.
+(«profunda y fundamentada»), y por eso es la lámina con más tiempo asignado de
+todo el mazo. Notar cómo la crítica se apoya en la lámina 4: eso es lo que la
+vuelve fundamentada y no opinión.
 
 ### Lámina 11 · Referencias
 
@@ -422,8 +463,8 @@ enunciado.
 > contribuciones. La línea que sale por abajo a la izquierda y entra por arriba a
 > la derecha, marcada con **D**, es la dependencia — la detallo en un momento.»
 
-*Nota:* 25 segundos, no más. Es orientación de lectura, no análisis. El detalle
-fino va en el archivo `.drawio` durante el video.
+*Nota:* orientación de lectura, no análisis — ~30 s dentro del bloque del modelo
+iStar. El detalle fino va en el archivo `.drawio` durante el video.
 
 ### Lámina 5 · Dependency & Refinement
 
@@ -586,7 +627,7 @@ iStar y abajo traducida a Sender/Receiver.
 > volver al modelo de agentes a recuperar el *porqué*.»
 
 *Nota:* esta es la lámina del criterio «Análisis y explicación». Es la que
-distingue una entrega que describe de una que analiza. ~60 segundos.
+distingue una entrega que describe de una que analiza; no recortarla.
 
 ### Lámina 14 · Cierre
 

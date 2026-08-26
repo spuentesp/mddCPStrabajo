@@ -6,12 +6,12 @@
 No se aceptan avatares sintéticos ni narración automática.
 **Apoyo:** `../slides/semana-2/analisis-c4.pdf` (11 diapositivas).
 
-> Los tiempos suman ≈ 6:20. El texto es la línea argumental, no un libreto para
+> Los tiempos suman ≈ 6:25, con ~35 s de margen sobre el límite de 7:00. El texto es la línea argumental, no un libreto para
 > leer: la rúbrica evalúa «Comunicación oral» y «Comprensión del lenguaje».
 
 ---
 
-## 0:00 – 0:30 · Presentación y elección del lenguaje *(diapositiva 1)*
+## 0:00 – 0:25 · Presentación y elección del lenguaje *(diapositiva 1)*
 
 > «El lenguaje visual que elegí analizar es el **modelo C4**, de Simon Brown. Lo
 > elegí porque es el que efectivamente se usa para documentar arquitectura en la
@@ -23,7 +23,7 @@ No se aceptan avatares sintéticos ni narración automática.
 
 ---
 
-## 0:30 – 1:20 · Descripción general *(diapositiva 2)*
+## 0:25 – 1:10 · Descripción general *(diapositiva 2)*
 
 Responder las tres preguntas del enunciado, en orden:
 
@@ -44,7 +44,7 @@ Responder las tres preguntas del enunciado, en orden:
 
 ---
 
-## 1:20 – 2:10 · Sintaxis abstracta *(diapositiva 3)*
+## 1:10 – 1:55 · Sintaxis abstracta *(diapositiva 3)*
 
 > «Los constructos principales son seis: **Person**, **SoftwareSystem**,
 > **Container**, **Component**, **CodeUnit** y **Relationship**.
@@ -61,7 +61,7 @@ Responder las tres preguntas del enunciado, en orden:
 
 ---
 
-## 2:10 – 3:00 · Metamodelo *(diapositiva 4)*
+## 1:55 – 2:50 · Metamodelo *(diapositiva 4)*
 
 Mostrar el diagrama de clases y recorrerlo:
 
@@ -81,7 +81,7 @@ Mostrar el diagrama de clases y recorrerlo:
 
 ---
 
-## 3:00 – 3:45 · Sintaxis concreta *(diapositiva 5)*
+## 2:50 – 3:30 · Sintaxis concreta *(diapositiva 5)*
 
 > «La notación es deliberadamente pobre, y eso es una decisión de diseño. Una
 > **Person** se dibuja como una figura humana; los demás elementos son **cajas
@@ -97,14 +97,32 @@ Mostrar el diagrama de clases y recorrerlo:
 
 ---
 
-## 3:45 – 4:45 · Semántica + ejemplo aplicado *(diapositivas 6 a 9)*
+## 3:30 – 4:05 · Semántica *(diapositiva 6)*
 
-> «La semántica de C4 está en **qué significa cada nivel**, y se entiende mejor con
-> el caso. Apliqué C4 a **SVIF**, un control de acceso con identificación facial.
+Criterio «Notación y semántica». Tiene bloque propio: no mezclarlo con el ejemplo.
+
+> «La semántica de C4 no está en los símbolos, está en **los niveles**. Cada uno
+> responde una pregunta distinta: quiénes rodean al sistema; qué unidades
+> desplegables lo componen; qué módulos hay dentro de cada unidad; y con qué código
+> se implementan.
 >
-> En el **nivel 1, Context**, aparece el usuario que intenta acceder, el sistema como
-> caja única y el broker MQTT como sistema externo. Es lo que le mostraría a alguien
-> que no conoce el proyecto.
+> Un modelo C4 se interpreta entonces como una **jerarquía de contención con flujos
+> de interacción**: dice qué existe, dentro de qué, y quién habla con quién.»
+
+---
+
+## 4:05 – 4:50 · C4 aplicado a SVIF *(diapositivas 7 a 9)*
+
+Tres láminas encadenadas, ~15 s cada una. Son ilustración: si el ensayo se pasa de
+7:00, este es el bloque que se comprime.
+
+> «Lo apliqué a **SVIF**, un control de acceso con identificación facial.
+>
+> En el **nivel 1, Context**, hay dos personas —el usuario que se presenta ante la
+> cámara y el administrador que consulta el registro—, el sistema como **una sola
+> caja**, y los dos elementos físicos sobre los que actúa. Fíjense en lo que **no**
+> está: los dos nodos ESP32 y el broker MQTT. Son contenedores, y abrirlos aquí
+> sería mezclar niveles de abstracción.
 >
 > En el **nivel 2, Container**, el sistema se abre en sus dos nodos: el *Face
 > Monitor* sobre ESP32-CAM y el *Access Actuator* sobre ESP32 con relé y buzzer,
@@ -112,14 +130,11 @@ Mostrar el diagrama de clases y recorrerlo:
 > valioso: describe la arquitectura real del sistema en un solo diagrama.
 >
 > En el **nivel 3, Component**, entro en el Face Monitor y veo la cadena capturar →
-> detectar → identificar → publicar, más la base de rostros enrolados.
->
-> Un modelo C4 se interpreta entonces como una **jerarquía de contención con flujos
-> de interacción**: dice qué existe, dentro de qué, y quién habla con quién.»
+> detectar → identificar → publicar, más la base de rostros enrolados.»
 
 ---
 
-## 4:45 – 6:00 · Reflexión crítica *(diapositiva 10)*
+## 4:50 – 6:05 · Reflexión crítica *(diapositiva 10)*
 
 Esta es la sección que la rúbrica evalúa como «Reflexión crítica: profunda y
 fundamentada». Es la parte que más pesa: no apurarla.
@@ -152,7 +167,7 @@ fundamentada». Es la parte que más pesa: no apurarla.
 
 ---
 
-## 6:00 – 6:20 · Cierre *(diapositiva 11)*
+## 6:05 – 6:25 · Cierre *(diapositiva 11)*
 
 > «En síntesis: analicé C4 en sus tres capas —sintaxis abstracta, sintaxis concreta
 > y semántica—, propuse un metamodelo y lo puse a prueba contra un sistema

@@ -7,13 +7,15 @@ automática.
 **Apoyo:** `../slides/semana-3/presentacion.pdf` (14 diapositivas) y los dos modelos
 abiertos en diagrams.net para mostrarlos en pantalla.
 
-> Los tiempos son orientativos y suman ≈ 6:15, dentro de la ventana de 5–7 min.
+> Los tiempos suman ≈ 6:15, con 45 s de margen sobre el límite de 7:00. Catorce
+> láminas en ese lapso son ~27 s por lámina: es un mazo denso, así que el ensayo
+> cronometrado no es opcional.
 > El texto no está para leerse literalmente: es la línea argumental. Hablar con
 > las propias palabras es parte de lo que la rúbrica evalúa («Comunicación oral»).
 
 ---
 
-## 0:00 – 0:35 · Presentación y encuadre *(diapositiva 1)*
+## 0:00 – 0:25 · Presentación y encuadre *(diapositiva 1)*
 
 Presentarse y enunciar el objetivo de la actividad:
 
@@ -28,7 +30,7 @@ Presentarse y enunciar el objetivo de la actividad:
 
 ---
 
-## 0:35 – 1:15 · Por qué orientación a agentes *(diapositiva 2)*
+## 0:25 – 0:55 · Por qué orientación a agentes *(diapositiva 2)*
 
 > «Elegí orientación a agentes porque en SVIF hay **objetivos que entran en
 > conflicto**: la privacidad de los datos de las personas frente a la oportunidad de
@@ -41,7 +43,7 @@ Presentarse y enunciar el objetivo de la actividad:
 
 ---
 
-## 1:15 – 2:45 · El modelo iStar *(diapositivas 3 a 7; el modelo está en la lámina 4)*
+## 0:55 – 2:55 · El modelo iStar *(diapositivas 3 a 7; el modelo está en la lámina 4)*
 
 **Mostrar `cim-istar-svif.drawio` en diagrams.net.** Recorrer el paso a paso
 sugerido en la clase, nombrando los constructos:
@@ -70,7 +72,26 @@ sugerido en la clase, nombrando los constructos:
 
 ---
 
-## 2:45 – 3:20 · Por qué hace falta un DSL *(diapositiva 10)*
+## 2:55 – 3:25 · Trazabilidad y supuestos *(diapositivas 8 y 9)*
+
+Dos láminas de cierre del bloque iStar, ~15 s cada una. **Si el ensayo se pasa de
+7:00, este es el primer bloque que se comprime** — ninguna de las dos sostiene un
+criterio de la rúbrica por sí sola.
+
+> «Antes de pasar al DSL, dos cosas breves.
+>
+> Cada elemento del modelo tiene un **identificador estable** —veintisiete en
+> total—. No es burocracia: estos IDs viajan al modelo DSL en el atributo
+> `id_cim_parent`, y de ahí al código. Es lo que me permite preguntar, frente a una
+> función en C++, de qué objetivo venía.
+>
+> Y dos decisiones quedaron **abiertas a propósito**: el criterio del OR —cuándo
+> desbloquear y cuándo alarmar— y los tiempos. Ninguna de las dos pertenece a este
+> nivel de abstracción.»
+
+---
+
+## 3:25 – 3:55 · Por qué hace falta un DSL *(diapositiva 10)*
 
 > «El modelo AO me dice **qué** quiere cada componente y **por qué**. Pero si voy a
 > implementar esto sobre Arduino, necesito hablar de hilos, temporizadores,
@@ -83,7 +104,7 @@ sugerido en la clase, nombrando los constructos:
 
 ---
 
-## 3:20 – 4:40 · El modelo DSL y la correspondencia *(diapositivas 11 y 12)*
+## 3:55 – 5:00 · El modelo DSL y la correspondencia *(diapositivas 11 y 12)*
 
 **Mostrar `pim-dsl-svif.drawio`.** Ir señalando los pares:
 
@@ -110,7 +131,7 @@ sugerido en la clase, nombrando los constructos:
 
 ---
 
-## 4:40 – 5:45 · Análisis: qué se gana y qué se pierde *(diapositiva 13)*
+## 5:00 – 5:55 · Análisis: qué se gana y qué se pierde *(diapositiva 13)*
 
 Esta es la parte que la rúbrica evalúa como «Análisis y explicación». No apurarla.
 
@@ -142,7 +163,7 @@ Esta es la parte que la rúbrica evalúa como «Análisis y explicación». No a
 
 ---
 
-## 5:45 – 6:15 · Cierre *(diapositiva 14)*
+## 5:55 – 6:15 · Cierre *(diapositiva 14)*
 
 > «En resumen: modelé SVIF con iStar 2.0 en vistas SD y SR híbrida, con goals,
 > softgoals, tasks y resources, y con la dependencia *Evento de identificación*
