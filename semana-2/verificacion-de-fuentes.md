@@ -248,3 +248,18 @@ ningún otro enlace roto en todo el repositorio.
   `hw_resource`, `comm_thread`/`listener_thread`, `and_ref_operator` y
   `or_ref_operator` coinciden exactamente en ambas vías (app y agente). Sin
   errores.
+
+**Pendiente de verificación contra fuente primaria (no es un error detectado,
+es una limitación de acceso):** la cifra "~78 % generado (1216 de 1567
+líneas)" atribuida a Navarro et al. (2025) para el caso del invernadero se
+repite en varios archivos (`apuntes-del-curso.md`, `actividad-mdd4cps.md`,
+`comparativa-agente-vs-app.md`, mazos de Semana 4). El paper existe y su cita
+está confirmada (DOI `10.5753/cibse.2025.35298`, página SBC verificada por
+búsqueda), pero `sol.sbc.org.br` está bloqueado por el proxy de este entorno,
+y ni una búsqueda web ni el propio repositorio `mdd4cps/aomdd4cps`
+(`MDD4CPS_process_overview.md`, alcanzable por `raw.githubusercontent.com`)
+mencionan esa cifra exacta. A diferencia de los casos "Romano" y "Mangharam"
+(removidos en una ronda anterior por no encontrar rastro alguno de la fuente
+citada), aquí la fuente sí existe y es real — solo no pudo confirmarse el
+número exacto por la restricción de red. Se mantiene la cifra sin cambios;
+si se logra acceso a `sol.sbc.org.br` en el futuro, verificarla ahí.
