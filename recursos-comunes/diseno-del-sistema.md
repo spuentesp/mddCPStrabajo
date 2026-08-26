@@ -70,7 +70,7 @@ adopta las siguientes decisiones:
 |---|---|
 | *Timing predictability* | Identificación y actuación en la capa edge; período de monitoreo de 500 ms; evaluación de acceso cada 250 ms. |
 | *Security* (confidencialidad) | La imagen nunca abandona el nodo de cámara; solo se transmite el evento de identificación (minimización de datos). |
-| *Safety* | Ante falla de comunicación, la cerradura permanece bloqueada (estado seguro por defecto) y la alarma es accionable localmente. |
+| *Safety* | Ante falla de comunicación, la cerradura permanece bloqueada (estado seguro por defecto: `RELAY_PIN` se fija en `LOW` desde `setup()`, antes de conectar WiFi/MQTT). La actuación en sí (relé y buzzer) es local, vía GPIO; pero, a diferencia de la cerradura, la alarma no tiene disparo local independiente — depende de recibir el evento de identificación por MQTT, así que una falla de comunicación impide tanto el desbloqueo como la alarma, no solo el primero. |
 | *Reliability* | Registro de todos los eventos en bitácora; reconexión automática de WiFi/MQTT. |
 | *Energy efficiency* | Frecuencia de muestreo configurable; el envío de mensajes se limita a eventos con detección efectiva. |
 | *Verification problem* | Modo de simulación (`SIMULATION_MODE`) que permite validar el flujo completo sin hardware. |
