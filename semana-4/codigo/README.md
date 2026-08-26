@@ -34,14 +34,14 @@ del proceso MDD4CPS:
 2. **Observar el tópico** del *dependum*:
 
    ```bash
-   python3 ../recursos-comunes/herramientas/monitor_mqtt.py --broker localhost
+   python3 ../../recursos-comunes/herramientas/monitor_mqtt.py --broker localhost
    ```
 
 3. **Inyectar un evento de prueba** (sustituye al Face Monitor para probar el
    actuador de forma aislada):
 
    ```bash
-   python3 ../recursos-comunes/herramientas/publicar_evento_prueba.py --broker localhost --person-id 1 --authorized
+   python3 ../../recursos-comunes/herramientas/publicar_evento_prueba.py --broker localhost --person-id 1 --authorized
    ```
 
 4. **Simulación completa del sistema** (gemelo en Python de ambos CPC, con los
@@ -49,11 +49,11 @@ del proceso MDD4CPS:
    ramas del OR — desbloqueo y alarma):
 
    ```bash
-   python3 ../recursos-comunes/herramientas/simular_sistema.py --broker localhost --duracion 12 --semilla 7
+   python3 ../../recursos-comunes/herramientas/simular_sistema.py --broker localhost --duracion 12 --semilla 7
    ```
 
    La evidencia de una corrida real está en
-   [`../evidencia-de-pruebas.md`](../evidencia-de-pruebas.md).
+   [`../../evidencia-de-pruebas.md`](../../evidencia-de-pruebas.md).
 
 5. **Nodos ESP32**: compilar con Arduino IDE (core ESP32 + librería
    `PubSubClient`), copiando antes `secrets.h.example` → `secrets.h`. El
