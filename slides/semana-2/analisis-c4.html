@@ -113,7 +113,10 @@
           cualesquiera, <b>incluso de niveles distintos</b> (una Person usa un Container).
           <br><span style="font-size:11px;">Rama aparte para despliegue:
           <span class="mono">DeploymentNode</span>, <span class="mono">ContainerInstance</span>,
-          <span class="mono">InfrastructureNode</span>.</span>
+          <span class="mono">InfrastructureNode</span>.
+          <br>Además de los 4 niveles hay más vistas: <i>System Landscape</i> (que se
+          sitúa <b>por encima</b> del modelo), <i>Dynamic</i> (comportamiento en
+          ejecución, con números de secuencia) y <i>Deployment</i>.</span>
         </div>
         <div class="src">Verificado sobre <span class="mono">structurizr/java</span>,
           paquete <span class="mono">com.structurizr.model</span> (metamodelo de
@@ -416,11 +419,11 @@
         <!-- Hardware externo -->
         <rect x="880" y="60" width="180" height="52" rx="4" fill="#fff8e8" stroke="#b8860b" stroke-width="2"/>
         <text x="970" y="82" text-anchor="middle" font-size="11" font-weight="700" fill="#8a6d00">Cerradura electromecánica</text>
-        <text x="970" y="98" text-anchor="middle" font-size="8.5" fill="#a68a3a">[Elemento físico]</text>
+        <text x="970" y="98" text-anchor="middle" font-size="8.5" fill="#a68a3a">[extensión: no es C4]</text>
 
         <rect x="880" y="160" width="180" height="52" rx="4" fill="#fff8e8" stroke="#b8860b" stroke-width="2"/>
         <text x="970" y="182" text-anchor="middle" font-size="11" font-weight="700" fill="#8a6d00">Alarma sonora</text>
-        <text x="970" y="198" text-anchor="middle" font-size="8.5" fill="#a68a3a">[Elemento físico]</text>
+        <text x="970" y="198" text-anchor="middle" font-size="8.5" fill="#a68a3a">[extensión: no es C4]</text>
 
         <!-- Relaciones -->
         <path d="M162,92 L398,110" stroke="#5a6fd8" stroke-width="1.8" fill="none" marker-end="url(#ctxar)"/>
@@ -437,9 +440,9 @@
 
         <!-- Nota -->
         <rect x="8" y="256" width="1084" height="38" rx="4" fill="#fffbef" stroke="#b8860b" stroke-width="1" stroke-dasharray="3,2"/>
-        <text x="20" y="273" fill="#8a6d00" font-size="9.5" font-weight="700">Regla del nivel 1: el sistema no se abre.</text>
-        <text x="248" y="273" fill="#5d4c10" font-size="9">Aquí no aparecen ni los dos nodos ESP32 ni el broker MQTT — son <tspan font-style="italic">contenedores</tspan>, y descomponer el sistema</text>
-        <text x="248" y="286" fill="#5d4c10" font-size="9">en este nivel sería mezclar niveles de abstracción, que es justamente lo que las reglas de buena formación prohíben.</text>
+        <text x="20" y="273" fill="#8a6d00" font-size="9.5" font-weight="700">Dos cosas que mirar en este nivel.</text>
+        <text x="222" y="273" fill="#5d4c10" font-size="9">(1) El sistema <tspan font-weight="700">no se abre</tspan>: los nodos ESP32 y el broker son contenedores y aparecen en el nivel 2. (2) La cerradura y la alarma</text>
+        <text x="222" y="286" fill="#5d4c10" font-size="9">son una <tspan font-weight="700">extensión propia</tspan>: el System Context de C4 se define sobre «personas y otros sistemas de software», y un actuador no es ninguno.</text>
       </svg>
     </div>
   </div>
@@ -656,8 +659,10 @@
           <ul style="font-size:12.5px; margin-top:6px;">
             <li><b>Escalable.</b> 4 niveles claros permiten comunicar desde CEO hasta desarrollador sin abrumar.</li>
             <li><b>Agnóstico.</b> No asume tecnología; funciona igual para Java, Node, Go, IoT.</li>
-            <li><b>Composable.</b> Se puede expandir con diagramas adicionales (deployment, infraestructura).</li>
-            <li><b>Bidireccional.</b> El código puede generar C4 (inversión) o C4 guiar el código (forward-engineering).</li>
+            <li><b>Composable.</b> Más allá de los 4 niveles: <i>System Landscape</i>,
+              <i>Deployment</i> y <i>Dynamic</i>.</li>
+            <li><b>Sí modela comportamiento.</b> La <i>Dynamic view</i> ordena
+              interacciones en tiempo de ejecución mediante números de secuencia.</li>
             <li><b>Comunicación.</b> Diagramas visuales ayudan a stakeholders no técnicos a entender estructura.</li>
           </ul>
         </div>
@@ -665,12 +670,23 @@
       <div>
         <div class="card alt">
           <div class="meta">Limitaciones para CPS</div>
+          <p style="font-size:11.5px; margin:4px 0 6px 0; color:#6b7390;">
+            Precisión necesaria: C4 <b>sí</b> modela comportamiento — la
+            <i>Dynamic view</i> ordena interacciones con números de secuencia. Lo que
+            no alcanza es lo específico del dominio:</p>
           <ul style="font-size:12.5px; margin-top:6px;">
-            <li><b>No muestra tiempo.</b> ¿Cada cuánto se ejecuta monitorear? (500 ms en SVIF) → necesita anotación.</li>
-            <li><b>No muestra transiciones.</b> ¿Qué ocurre si authorized=true vs false? → necesita lógica de control.</li>
-            <li><b>No muestra hardware.</b> ¿Qué pin? ¿Qué sensor? → apenas menciona HWResource.</li>
-            <li><b>No muestra restricciones temporales duras.</b> ¿Deadline? ¿Jitter tolerable? → requiere DSL más específico.</li>
-            <li><b>Abstracción variable.</b> Un "Container" puede ser app web o nodo ESP32 con 2KB RAM → demasiado genérico.</li>
+            <li><b>No expresa periodicidad.</b> La vista dinámica dice «paso 1, paso 2»,
+              no «cada <b>500 ms</b>». No hay atributo de período.</li>
+            <li><b>No expresa condicionalidad.</b> El OR de SVIF —desbloquear ∨
+              alarmar— no tiene representación: la secuencia es lineal.</li>
+            <li><b>No expresa restricciones temporales duras.</b> Ni plazos ni
+              <i>jitter</i> tolerable.</li>
+            <li><b>No tiene elemento para el mundo físico.</b> El <i>System Context</i>
+              se define sobre «personas y otros sistemas de software»; un sensor o una
+              cerradura no encajan. <i>DeploymentNode</i> modela infraestructura, no
+              actuadores.</li>
+            <li><b>Abstracción variable.</b> Un <i>Container</i> abarca desde una app
+              web hasta un ESP32 con 2 KB de RAM.</li>
           </ul>
         </div>
       </div>

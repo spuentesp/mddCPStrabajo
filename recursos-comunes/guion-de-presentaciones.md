@@ -371,11 +371,13 @@ empieza a hacer falta otro lenguaje.
 > es que **se aprende en diez minutos** — por eso la documentación efectivamente se
 > escribe y se mantiene.
 >
-> **Limitaciones, y aquí el dominio importa.** C4 describe estructura, no
-> comportamiento. En SVIF eso significa que no puedo expresar que el monitoreo
-> ocurre **cada 500 milisegundos**; que la respuesta se bifurca en **desbloquear o
-> alarmar**; ni que el relé está en el pin 26. Y la noción de *Container* es tan
-> amplia que abarca desde una aplicación web hasta un ESP32 con dos kilobytes de RAM.
+> **Limitaciones, y aquí conviene ser preciso.** Decir que C4 no describe
+> comportamiento sería falso: la *Dynamic view* existe para eso. Lo que no alcanza
+> es el dominio: la vista dinámica dice «paso 1, paso 2», no «cada 500
+> milisegundos»; la secuencia es lineal, así que el OR —desbloquear o alarmar— no
+> se representa; no hay plazos; y **no hay elemento para el mundo físico**, porque
+> el *System Context* se define sobre personas y sistemas de software. Y la noción
+> de *Container* abarca desde una app web hasta un ESP32 con 2 KB de RAM.
 >
 > **Qué mejoraría.** Un atributo estándar de periodicidad; estereotipos que
 > distingan hardware embebido de servicios; un enlace explícito a los objetivos que

@@ -34,6 +34,11 @@ pregunta de dónde sale cada dato.
 | Jerarquía de clases del metamodelo | [SJ] leído | `ModelItem` (id, tags, url, properties) → `Element` (name, description, relationships) → `GroupableElement` (group) → `StaticStructureElement` → {Person, SoftwareSystem, Container, Component} | ✅ |
 | «Externo» **no es un atributo** | [SJ] leído | Ni `Person` ni `SoftwareSystem` tienen campo `external`; la distinción se hace con **tags** (`ModelItem.tags`), que además gobiernan el estilo visual | ✅ |
 | Atributos propios reales | [SJ] leído | `Person`: ninguno. `SoftwareSystem`: `containers`. `Container`: `technology`, `components`. `Component`: `technology`. Todo lo demás se hereda | ✅ |
+| Existen vistas más allá de los 4 niveles | [SJ] leído | Clases `SystemLandscapeView`, `SystemContextView`, `ContainerView`, `ComponentView`, `DynamicView`, `DeploymentView`, `FilteredView`, `ImageView` | ✅ |
+| *System Landscape* se sitúa **por encima** del modelo | [SJ] leído | Javadoc: «Represents a System Landscape view that sits "above" the C4 model» | ✅ |
+| C4 **sí modela comportamiento** | [SJ] leído | Javadoc de `DynamicView`: «used to describe behaviour between static elements at runtime»; tiene `SequenceNumber` y `RelationshipView.order` | ✅ |
+| El *System Context* trata de personas y otros sistemas de software | [SJ] leído | Javadoc: «showing how a software system fits into its environment, in terms of the users (people) and other software system dependencies» | ✅ |
+| *Deployment view* mapea instancias de contenedor a nodos | [SJ] leído | Javadoc: «show the mapping of container instances to deployment nodes» | ✅ |
 | C4 fue creado por Simon Brown entre **2006 y 2011** | buscador | Coincidente en varias fuentes secundarias | ⚠️ verificado solo por buscador |
 | El libro de Brown es de **2016** | buscador | Ficha de Leanpub: 197 pp., noviembre de 2016 | ⚠️ edición Leanpub de actualización continua |
 
@@ -53,6 +58,8 @@ Todos estaban en versiones anteriores de este mazo:
 | `SoftwareSystem: external, scope` | Tampoco existen. El único campo propio es `containers` | `containers : Set<Container>` + nota sobre los tags |
 | `Container: type : ContainerType` | No existe tal enumerado | `components : Set<Component>` |
 | `Component: responsibility` | No existe | «sin más atributos propios» |
+| «C4 describe **estructura, no comportamiento**» | **Falso.** La *Dynamic view* existe justamente para describir comportamiento en ejecución, con números de secuencia | Reescrita la crítica: C4 sí modela comportamiento; lo que no expresa es **periodicidad**, **condicionalidad** ni **plazos** |
+| La cerradura y la alarma dibujadas como elementos de C4 en el nivel 1 | El *System Context* se define sobre «personas y otros sistemas de software»; un actuador no es ninguna de las dos cosas | Rotuladas «extensión: no es C4», y la carencia pasa a sostener la crítica de la lámina 10 |
 
 ## Afirmaciones de juicio (no verificables, y está bien)
 
