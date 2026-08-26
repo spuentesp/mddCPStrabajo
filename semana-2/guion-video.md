@@ -27,13 +27,15 @@ No se aceptan avatares sintéticos ni narración automática.
 
 Responder las tres preguntas del enunciado, en orden:
 
-> «**Propósito.** C4 describe la arquitectura estática de un sistema mediante un
-> conjunto de mapas jerárquicos. La idea central es el *zoom*: cada nivel es un
-> acercamiento del anterior, y cada uno está dirigido a una audiencia distinta.
+> «**Propósito.** C4 describe la arquitectura de un sistema mediante un conjunto de
+> mapas jerárquicos. La idea central es el *zoom*: cada nivel es un acercamiento del
+> anterior, dirigido a una audiencia distinta. El eje es la estructura, pero el
+> modelo también cubre comportamiento y despliegue.
 >
 > **Qué permite representar.** Cualquier sistema compuesto por unidades desplegables
-> que se comunican: web, microservicios, integraciones… y también sistemas
-> ciberfísicos, donde los nodos físicos se modelan como contenedores.
+> que se comunican: web, microservicios, integraciones. En un sistema ciberfísico el
+> **firmware** de cada nodo encaja como contenedor, pero el hardware en sí no tiene
+> elemento propio — y eso lo retomo al final.
 >
 > **En qué contexto se usa.** Documentación de arquitectura, incorporación de gente
 > nueva al equipo, revisiones de diseño y conversaciones con gente no técnica.
@@ -46,14 +48,13 @@ Responder las tres preguntas del enunciado, en orden:
 
 ## 1:10 – 1:55 · Sintaxis abstracta *(diapositiva 3)*
 
-> «Los constructos principales son seis: **Person**, **SoftwareSystem**,
-> **Container**, **Component**, **Code element** y **Relationship**.
+> «Los constructos son **Person**, **SoftwareSystem**, **Container**, **Component**
+> y **Relationship**.
 >
 > Los cuatro estructurales forman una **jerarquía de composición**: un sistema
-> contiene contenedores, un contenedor contiene componentes, un componente contiene
-> elementos de código. Relationship es transversal: conecta dos elementos
-> cualesquiera, **incluso de niveles distintos** — una Person se conecta con un
-> Container.
+> contiene contenedores y un contenedor contiene componentes. Relationship es
+> transversal: conecta dos elementos cualesquiera, **incluso de niveles distintos**
+> — una Person se conecta con un Container.
 >
 > Y hay **reglas de buena formación**, pero conviene enunciarlas bien: la regla
 > central **no es sobre las relaciones, es sobre el alcance del diagrama**. Cada
@@ -77,31 +78,31 @@ Mostrar el diagrama de clases y recorrerlo:
 > concretos —esas son las flechas de generalización, con triángulo hueco.
 >
 > Los rombos rellenos son **composiciones**: SoftwareSystem contiene uno o más
-> Containers, Container puede contener Components, y Component puede contener uno o
-> más elementos de código. Las cardinalidades están marcadas en rojo.
+> Containers y Container puede contener Components. Fíjense en que el **nivel 4
+> aparece punteado y fuera de la jerarquía**: no hay elemento para él.
 >
-> **Relationship** aparece como una clase asociativa con dos extremos navegables,
-> `source` y `target`, ambos apuntando a Element: por eso puede conectar cualquier
-> par de elementos. La restricción de que ambos extremos estén en el mismo nivel
-> anotada aparte dice algo importante: las relaciones **sí** cruzan niveles; lo que
+> **Relationship** aparece como clase asociativa con dos extremos navegables,
+> `source` y `target`, ambos apuntando a Element: por eso conecta cualquier par. La
+> nota al costado dice algo importante: las relaciones **sí** cruzan niveles; lo que
 > se mantiene por nivel es el diagrama. Y ninguna de estas reglas la impone una
-> gramática: son convenciones documentadas. Eso lo retomo en la reflexión.»
+> gramática: son convenciones. Eso lo retomo en la reflexión.»
 
 ---
 
 ## 2:50 – 3:30 · Sintaxis concreta *(diapositiva 5)*
 
 > «La notación es deliberadamente pobre, y eso es una decisión de diseño. Una
-> **Person** se dibuja como una figura humana; los demás elementos son **cajas
-> rectangulares** que se distinguen por color y por una etiqueta de tipo entre
-> corchetes —por ejemplo `[Container: ESP32-CAM]`.
+> **Person** se dibuja como figura humana; los demás elementos son **cajas** que se
+> distinguen por color y por una etiqueta de tipo entre corchetes —por ejemplo
+> `[Container: ESP32-CAM]`.
 >
-> Las **relaciones** son flechas dirigidas, siempre etiquetadas con lo que hacen y,
-> cuando corresponde, con la tecnología del canal.
+> Las **relaciones** son flechas dirigidas, siempre etiquetadas, y el estilo
+> asíncrono se marca con línea punteada.
 >
-> C4 no define un estándar gráfico obligatorio: el propio autor insiste en que
-> cualquier notación sirve mientras el diagrama tenga leyenda. Eso lo hace muy fácil
-> de adoptar, pero como veremos, tiene un costo.»
+> Y algo que verifiqué en el metamodelo: la forma es solo una **opción de estilo**
+> —hay diecinueve, desde Box y Cylinder hasta Person y Robot—, y lo que cada caja
+> muestra lo gobiernan dos banderas, `metadata` y `description`. Por eso lo esencial
+> no es la forma sino los tres datos: **nombre, tipo y descripción**.»
 
 ---
 
@@ -127,10 +128,14 @@ Tres láminas encadenadas, ~15 s cada una. Son ilustración: si el ensayo se pas
 > «Lo apliqué a **SVIF**, un control de acceso con identificación facial.
 >
 > En el **nivel 1, Context**, hay dos personas —el usuario que se presenta ante la
-> cámara y el administrador que consulta el registro—, el sistema como **una sola
-> caja**, y los dos elementos físicos sobre los que actúa. Fíjense en lo que **no**
-> está: los dos nodos ESP32 y el broker MQTT. Son contenedores, y abrirlos aquí
-> sería mezclar niveles de abstracción.
+> cámara y el administrador que consulta el registro— y el sistema como **una sola
+> caja**. Fíjense en lo que **no** está: los dos nodos ESP32 y el broker MQTT. Son
+> contenedores, y abrirlos aquí sería mezclar niveles.
+>
+> La cerradura y la alarma las dibujé rotuladas como **extensión propia**, porque el
+> *System Context* de C4 se define sobre personas y otros sistemas de software: un
+> actuador no es ninguna de las dos cosas. Es la primera señal del límite que
+> discuto al final.
 >
 > En el **nivel 2, Container**, el sistema se abre en sus dos nodos: el *Face
 > Monitor* sobre ESP32-CAM y el *Access Actuator* sobre ESP32 con relé y buzzer,
@@ -199,5 +204,5 @@ fundamentada». Es la parte que más pesa: no apurarla.
 - [ ] Los dos entregables listos: el video y el archivo de presentación.
 - [ ] Nombrar la fuente principal al menos una vez: **Brown, S. (2016)** y la
       especificación en línea, c4model.com. Si preguntan de dónde salen los
-      atributos del metamodelo: del código de `structurizr/java`, la
+      atributos del metamodelo: del código de `structurizr/structurizr`, la
       implementación de referencia del mismo autor.

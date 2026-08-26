@@ -232,13 +232,15 @@ aplicado: se recorren rápido, son ilustración, no análisis. El peso está en 
 **Idea única:** responder las tres preguntas del enunciado, en orden y sin
 saltarse ninguna.
 
-> «**Propósito:** describir la arquitectura estática mediante mapas jerárquicos. La
-> idea central es el *zoom* — cada nivel es un acercamiento del anterior, dirigido a
-> una audiencia distinta.
+> «**Propósito:** describir la arquitectura mediante mapas jerárquicos. La idea
+> central es el *zoom* — cada nivel es un acercamiento del anterior, dirigido a una
+> audiencia distinta. El eje es la estructura, pero el modelo también cubre
+> comportamiento y despliegue.
 >
 > **Qué permite representar:** cualquier sistema compuesto por unidades
 > desplegables que se comunican. Web, microservicios, integraciones… y también
-> sistemas ciberfísicos, donde los nodos físicos se modelan como contenedores.
+> sistemas ciberfísicos, donde el **firmware** de cada nodo encaja como contenedor
+> —el hardware en sí no tiene elemento propio.
 >
 > **En qué contexto se usa:** documentación de arquitectura, incorporación de gente
 > nueva, revisiones de diseño y conversación con gente no técnica.»
@@ -251,8 +253,8 @@ Container, Component, Code.
 **Idea única:** seis constructos, una cadena de composición, y reglas que sí
 existen.
 
-> «Los constructos son seis: **Person, SoftwareSystem, Container, Component,
-> Code element y Relationship**.
+> «Los constructos son **Person, SoftwareSystem, Container, Component** y
+> **Relationship**.
 >
 > Los cuatro estructurales forman una **cadena estricta de composición**: un
 > sistema contiene contenedores, un contenedor contiene componentes, un componente
@@ -265,7 +267,7 @@ existen.
 > asíncrono**. Y el nivel 4 no tiene elemento en el metamodelo: C4 remite a UML.»
 
 *Nota:* si preguntan por la fuente de estos atributos, están verificados sobre el
-código de `structurizr/java` — ver `semana-2/verificacion-de-fuentes.md`.
+código de `structurizr/structurizr` — ver `semana-2/verificacion-de-fuentes.md`.
 
 ### Lámina 4 · Metamodelo
 
@@ -279,8 +281,8 @@ notación UML bien usada.
 > con **triángulo hueco**.
 >
 > Los **rombos rellenos** son composiciones, con sus cardinalidades: SoftwareSystem
-> contiene uno o más Containers, Container uno o más Components, Component una o más
-> elementos de código.
+> contiene uno o más Containers y Container puede contener Components. El nivel 4
+> aparece punteado y fuera de la jerarquía: no hay elemento para él.
 >
 > **Relationship** aparece como clase asociativa, con dos extremos navegables
 > —`source` y `target`— que apuntan a Element: por eso puede conectar cualquier par.
@@ -295,7 +297,7 @@ Recorrer el diagrama nombrando los tres tipos de flecha es lo que separa un 2 de
 
 ### Lámina 5 · Sintaxis concreta
 
-**Idea única:** la notación es deliberadamente pobre, y eso es una decisión.
+**Idea única:** la notación no está prescrita — la forma es una opción de estilo.
 
 > «La notación es a propósito mínima. Una **Person** es una figura humana; todo lo
 > demás son **cajas** que se distinguen por color y por una etiqueta de tipo entre
@@ -330,8 +332,10 @@ omisión.
 > «Lo apliqué a **SVIF**, un control de acceso con identificación facial.
 >
 > En el nivel 1 hay dos personas —el usuario que se presenta ante la cámara y el
-> administrador que consulta el registro—, el sistema como **una sola caja**, y los
-> dos elementos físicos sobre los que actúa: la cerradura y la alarma.
+> administrador que consulta el registro— y el sistema como **una sola caja**. La
+> cerradura y la alarma van rotuladas como **extensión propia**: el *System Context*
+> de C4 se define sobre personas y otros sistemas de software, y un actuador no es
+> ninguna de las dos cosas.
 >
 > Fíjense en lo que **no** está: los dos nodos ESP32 y el broker MQTT. Son
 > contenedores, y abrirlos aquí sería mezclar niveles de abstracción, que es

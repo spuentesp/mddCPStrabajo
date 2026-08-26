@@ -51,14 +51,16 @@
         <p><b>Origen.</b> Creado por Simon Brown entre <b>2006 y 2011</b> como respuesta a la
           dificultad de comunicar arquitectura con UML. Hoy es estándar de facto en
           la industria y cuenta con herramientas propias (<i>Structurizr</i>).</p>
-        <p><b>¿Cuál es su propósito?</b> Describir la <b>arquitectura estática</b> de un
-          sistema de software mediante un conjunto de <b>mapas jerárquicos</b>, cada
-          uno dirigido a una audiencia distinta — «zoom» progresivo desde el contexto
-          de negocio hasta el código.</p>
+        <p><b>¿Cuál es su propósito?</b> Describir la <b>arquitectura</b> de un sistema de
+          software mediante un conjunto de <b>mapas jerárquicos</b>, cada uno dirigido
+          a una audiencia distinta — «zoom» progresivo desde el contexto de negocio
+          hasta el código. La estructura es el eje, pero el modelo también cubre
+          <b>comportamiento</b> (vista dinámica) y <b>despliegue</b>.</p>
         <p><b>¿Qué tipo de sistemas permite representar?</b> Cualquier sistema de
           software compuesto por <b>unidades desplegables que se comunican</b>: web,
-          microservicios, móviles, integraciones y también <b>sistemas
-          ciberfísicos</b>, donde los nodos físicos se modelan como contenedores.</p>
+          microservicios, móviles e integraciones. En un <b>sistema ciberfísico</b> el
+          firmware de cada nodo encaja como contenedor —es una unidad desplegable y
+          ejecutable—, pero el <b>hardware en sí no tiene elemento propio</b>.</p>
         <p><b>¿En qué contexto se utiliza?</b> Documentación de arquitectura,
           <i>onboarding</i> de equipos, revisiones de diseño y comunicación con
           <i>stakeholders</i> no técnicos. Su premisa: la arquitectura no es una
@@ -73,7 +75,7 @@
         </div>
         <div class="c4-box" style="background:#e8f5f7; border-color:#1fb8d8;">
           <b>Level 2: Container</b><br>
-          <span style="font-size:11px;">Aplicaciones, bases de datos, nodos físicos</span>
+          <span style="font-size:11px;">Unidades desplegables/ejecutables: aplicaciones y almacenes de datos</span>
         </div>
         <div class="c4-box" style="background:#f0f8e8; border-color:#2f8f4f;">
           <b>Level 3: Component</b><br>
@@ -98,9 +100,9 @@
       <div>
         <table class="dense">
           <tr><th>Constructo</th><th>Rol</th><th>Nivel</th></tr>
-          <tr><td><b>Person</b></td><td>Usuario o actor humano</td><td>1</td></tr>
+          <tr><td><b>Person</b></td><td>Usuario, actor, rol o <i>persona</i></td><td>1</td></tr>
           <tr><td><b>SoftwareSystem</b></td><td>El sistema descrito, o uno externo con el que interactúa</td><td>1</td></tr>
-          <tr><td><b>Container</b></td><td>Unidad desplegable y ejecutable: app, BD, cola, <b>nodo físico</b></td><td>2</td></tr>
+          <tr><td><b>Container</b></td><td>Unidad desplegable y ejecutable: aplicación, almacén de datos, cola</td><td>2</td></tr>
           <tr><td><b>Component</b></td><td>Agrupación lógica dentro de un contenedor</td><td>3</td></tr>
           <tr><td><i>(nivel Code)</i></td><td><b>No hay elemento</b> en el metamodelo: C4 remite a UML</td><td>4</td></tr>
           <tr><td><b>Relationship</b></td><td><i>description</i>, <i>technology</i> e <i>interactionStyle</i>: <b>Sync / Async</b></td><td>todos</td></tr>
@@ -118,9 +120,9 @@
           sitúa <b>por encima</b> del modelo), <i>Dynamic</i> (comportamiento en
           ejecución, con números de secuencia) y <i>Deployment</i>.</span>
         </div>
-        <div class="src">Verificado sobre <span class="mono">structurizr/java</span>,
-          paquete <span class="mono">com.structurizr.model</span> (metamodelo de
-          referencia del autor de C4).</div>
+        <div class="src">Verificado sobre <span class="mono">structurizr/structurizr</span>, paquete
+          <span class="mono">com.structurizr.model</span> — implementación de
+          referencia escrita por el autor de C4.</div>
       </div>
       <div>
         <div class="card">
@@ -267,7 +269,7 @@
       </svg>
     </div>
     <div class="src">Metamodelo simplificado, derivado del código del metamodelo de referencia:
-      <span class="mono">structurizr/java</span> · <span class="mono">com.structurizr.model</span>
+      <span class="mono">structurizr/structurizr</span> · <span class="mono">com.structurizr.model</span>
       (<span class="mono">Element</span>, <span class="mono">StaticStructureElement</span>,
       <span class="mono">Person</span>, <span class="mono">SoftwareSystem</span>,
       <span class="mono">Container</span>, <span class="mono">Component</span>,
@@ -337,10 +339,14 @@
         <!-- nota inferior -->
         <rect x="8" y="182" width="1084" height="56" rx="4" fill="#fffbef" stroke="#b8860b" stroke-width="1" stroke-dasharray="3,2"/>
         <text x="20" y="200" fill="#8a6d00" font-size="9.5" font-weight="700">C4 no impone un estándar gráfico</text>
-        <text x="20" y="216" fill="#5d4c10" font-size="9">El propio autor sostiene que cualquier notación sirve mientras el diagrama lleve <tspan font-weight="700">leyenda</tspan>. Por eso lo esencial no es la forma</text>
-        <text x="20" y="230" fill="#5d4c10" font-size="9">sino los <tspan font-weight="700">tres datos que toda caja debe llevar</tspan>: nombre, etiqueta de tipo entre corchetes y una descripción breve.</text>
+        <text x="20" y="216" fill="#5d4c10" font-size="9">La forma es una <tspan font-style="italic">opción de estilo</tspan>: el enumerado <tspan font-family="monospace">Shape</tspan> ofrece 19 (Box, Cylinder, Pipe, Person, Robot, WebBrowser…). Lo esencial no es la forma,</text>
+        <text x="20" y="230" fill="#5d4c10" font-size="9">sino los <tspan font-weight="700">tres datos de cada caja</tspan>: nombre, etiqueta de tipo y descripción — en el metamodelo son <tspan font-family="monospace">name</tspan>, <tspan font-family="monospace">metadata</tspan> y <tspan font-family="monospace">description</tspan> de <tspan font-family="monospace">ElementStyle</tspan>.</text>
       </svg>
     </div>
+    <div class="src">Formas y flags de visualización verificados en
+      <span class="mono">com.structurizr.view.Shape</span> y
+      <span class="mono">ElementStyle</span> (<span class="mono">metadata</span>,
+      <span class="mono">description</span>).</div>
   </div>
   <div class="pageno">5</div>
 </section>
@@ -746,9 +752,9 @@
         <div class="meta">Standard for unified modeling language; C4 is positioned as simpler alternative for architecture views.</div>
       </div>
       <div class="ref">
-        <b>Structurizr (s. f.).</b> <i>structurizr/java — paquete <span class="mono">com.structurizr.model</span>.</i>
-        https://github.com/structurizr/java
-        <div class="meta">Metamodelo de referencia implementado por el autor de C4; fuente de los constructos, atributos y cardinalidades de la lámina 4.</div>
+        <b>Structurizr (s. f.).</b> <i>structurizr/structurizr — paquetes <span class="mono">com.structurizr.model</span> y <span class="mono">.view</span>.</i>
+        https://github.com/structurizr/structurizr
+        <div class="meta">Implementación de referencia del autor de C4 («remains the reference implementation»); fuente de constructos, atributos, cardinalidades, tipos de vista y notación.</div>
       </div>
     </div>
   </div>

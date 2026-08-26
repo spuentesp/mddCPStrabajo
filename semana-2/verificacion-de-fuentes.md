@@ -9,7 +9,7 @@ pregunta de dónde sale cada dato.
 | Clave | Fuente | Tipo |
 |---|---|---|
 | **[B16]** | Brown, S. (2016). *Software architecture for developers. Volume 2: Visualise, document and explore your software architecture*. Leanpub. https://leanpub.com/visualising-software-architecture | Primaria (autor de C4) |
-| **[SJ]** | Structurizr. *structurizr/java*, paquete `com.structurizr.model`. https://github.com/structurizr/java | Primaria (implementación de referencia del mismo autor) |
+| **[SJ]** | Structurizr. *structurizr/structurizr*, paquetes `com.structurizr.model` y `com.structurizr.view`. https://github.com/structurizr/structurizr | Primaria (implementación de referencia del mismo autor) |
 | **[C4]** | Especificación en línea https://c4model.com, mantenida por el autor | Primaria |
 
 > **Nota sobre el método.** `c4model.com`, la documentación de Structurizr, arXiv y
@@ -39,6 +39,10 @@ pregunta de dónde sale cada dato.
 | C4 **sí modela comportamiento** | [SJ] leído | Javadoc de `DynamicView`: «used to describe behaviour between static elements at runtime»; tiene `SequenceNumber` y `RelationshipView.order` | ✅ |
 | El *System Context* trata de personas y otros sistemas de software | [SJ] leído | Javadoc: «showing how a software system fits into its environment, in terms of the users (people) and other software system dependencies» | ✅ |
 | *Deployment view* mapea instancias de contenedor a nodos | [SJ] leído | Javadoc: «show the mapping of container instances to deployment nodes» | ✅ |
+| Structurizr es la **implementación de referencia** de C4, del mismo autor | [SJ] leído | README de `structurizr/structurizr`: «Structurizr was created by the author of the C4 model and remains the reference implementation» | ✅ |
+| Los nombres oficiales de los constructos | [SJ] leído | `Terminology.java` tiene ranuras para `person`, `softwareSystem`, `container`, `component`, `code`, `deploymentNode`, `infrastructureNode`, `relationship` | ✅ *code* **sí** es un nivel nombrado, aunque sin clase en el modelo |
+| La notación **no está prescrita**: la forma es una opción de estilo | [SJ] leído | `Shape.java`: 19 valores (Box, RoundedBox, Circle, Ellipse, Hexagon, Diamond, Cylinder, Bucket, Pipe, Person, Robot, Folder, WebBrowser, Window, Terminal, Shell, MobileDevicePortrait, MobileDeviceLandscape, Component) | ✅ |
+| Cada caja lleva **nombre, tipo y descripción** | [SJ] leído | `ElementStyle.java`: flags booleanos `metadata` y `description` gobiernan si se muestran la etiqueta de tipo y la descripción | ✅ |
 | C4 fue creado por Simon Brown entre **2006 y 2011** | buscador | Coincidente en varias fuentes secundarias | ⚠️ verificado solo por buscador |
 | El libro de Brown es de **2016** | buscador | Ficha de Leanpub: 197 pp., noviembre de 2016 | ⚠️ edición Leanpub de actualización continua |
 
@@ -59,6 +63,10 @@ Todos estaban en versiones anteriores de este mazo:
 | `Container: type : ContainerType` | No existe tal enumerado | `components : Set<Component>` |
 | `Component: responsibility` | No existe | «sin más atributos propios» |
 | «C4 describe **estructura, no comportamiento**» | **Falso.** La *Dynamic view* existe justamente para describir comportamiento en ejecución, con números de secuencia | Reescrita la crítica: C4 sí modela comportamiento; lo que no expresa es **periodicidad**, **condicionalidad** ni **plazos** |
+| «C4 describe la **arquitectura estática**» (lámina 2) | Se contradecía con la corrección de la lámina 10: existe la *Dynamic view* | «La estructura es el eje, pero el modelo también cubre comportamiento y despliegue» |
+| «Container: … **nodo físico**» y «los nodos físicos se modelan como contenedores» | Impreciso. Un *Container* es una unidad desplegable y ejecutable —aplicación o almacén de datos—. En un CPS encaja el **firmware** del nodo, no el hardware | Reformulado: el firmware encaja como contenedor; el hardware no tiene elemento propio |
+| Citación al repositorio `structurizr/java` | Ese repositorio fue **trasladado**: su README solo dice «The code in this repo has been moved to structurizr/structurizr» | Citación actualizada al repositorio canónico. Verificado que las clases del repo canónico coinciden en contenido con las del espejo |
+| «Person: usuario o actor humano» | La definición de C4 es más amplia: «users, actors, roles, personas» | «Usuario, actor, rol o *persona*» |
 | La cerradura y la alarma dibujadas como elementos de C4 en el nivel 1 | El *System Context* se define sobre «personas y otros sistemas de software»; un actuador no es ninguna de las dos cosas | Rotuladas «extensión: no es C4», y la carencia pasa a sostener la crítica de la lámina 10 |
 
 ## Afirmaciones de juicio (no verificables, y está bien)
