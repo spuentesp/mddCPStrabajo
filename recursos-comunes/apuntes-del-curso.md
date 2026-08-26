@@ -135,7 +135,7 @@ con la IEEE:
 ### 2.1 ¿Qué es un modelo y para qué sirve?
 
 - «Un modelo es una **representación de la realidad para algún propósito
-  definido**» (Pidd, 2000). Ejemplo de clase: distintos mapas de una ciudad
+  definido**» (Pidd, 2003). Ejemplo de clase: distintos mapas de una ciudad
   (transporte público, ciclovías) resaltan aspectos distintos según el
   propósito.
 - Un modelo es útil para **documentar**, **razonar** (propiciar buenas
@@ -414,7 +414,7 @@ La lista APA 7 completa, con DOI/URL verificables, está en
 
 - **S1:** Lee (2006, 2015); Cares, Sepúlveda y Navarro (2019); Marwedel y
   Engel (2016); Zanero (2017); Kreutz et al. (2015).
-- **S2:** Pidd (2000/2003); Selic (2003); Aßmann, Zschaler y Wagner (2006);
+- **S2:** Pidd (2003); Selic (2003); Aßmann, Zschaler y Wagner (2006);
   Fowler y Parsons (2010); Mernik, Heering y Sloane (2005); Bézivin (2005); Kleppe et
   al. (2003).
 - **S3:** Bratman (1987); Rao y Georgeff (1995); Jennings, Sycara y Wooldridge

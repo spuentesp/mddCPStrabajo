@@ -7,7 +7,7 @@
 ## 1. El modelo como representación con propósito
 
 Un modelo es una representación de la realidad para algún propósito definido
-(Pidd, 2000). Entre el sistema y el modelo media la relación *is-represented-by*, y
+(Pidd, 2003). Entre el sistema y el modelo media la relación *is-represented-by*, y
 todo modelo se construye conforme a un paradigma de modelado (Aßmann, Zschaler y
 Wagner, 2006). Un modelo útil es abstracto, comprensible, preciso, predictivo y
 significativamente más barato que construir el sistema (Selic, 2003).
@@ -81,6 +81,6 @@ resto de la cadena.
 - Fowler, M., & Parsons, R. (2010). *Domain-Specific Languages* (Addison-Wesley Signature Series). Addison-Wesley.
 - Mernik, M., Heering, J., & Sloane, A. M. (2005). When and how to develop
   domain-specific languages. *ACM Computing Surveys, 37*(4), 316–344.
-- Pidd, M. (2000). *Tools for Thinking — Modelling in Management Science*. Wiley.
+- Pidd, M. (2003). *Tools for thinking: Modelling in management science* (2.ª ed.). Wiley.
 - Selic, B. (2003). The pragmatics of model-driven development. *IEEE Software,
   20*(5), 19–25.
