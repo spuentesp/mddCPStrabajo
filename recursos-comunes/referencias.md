@@ -27,6 +27,8 @@
 
 ## Fundamentos de CPS (Semana 1)
 
+- Wiener, N. (1948). *Cybernetics: Or control and communication in the
+  animal and the machine*. John Wiley & Sons.
 - Lee, E. A. (2006). *Cyber-physical systems—Are computing foundations
   adequate?* Position paper, NSF Workshop on Cyber-Physical Systems: Research
   Motivation, Techniques and Roadmap. Austin, TX.
@@ -39,6 +41,8 @@
   G. Fortino (Eds.), *Management of Cyber Physical Objects in the Future
   Internet of Things* (pp. 1–30). Springer.
   https://doi.org/10.1007/978-3-319-26869-9_1
+- Satyanarayanan, M. (2017). The emergence of edge computing. *Computer,
+  50*(1), 30–39. https://doi.org/10.1109/MC.2017.9
 - Kreutz, D., Ramos, F. M. V., Veríssimo, P. E., Rothenberg, C. E.,
   Azodolmolky, S., & Uhlig, S. (2015). Software-defined networking: A
   comprehensive survey. *Proceedings of the IEEE, 103*(1), 14–76.
