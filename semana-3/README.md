@@ -50,3 +50,8 @@ Las bibliotecas de símbolos están en `../recursos-comunes/librerias-drawio/`
 > autocontenida y puede entregarse por separado.
 
 **Guion hablado lámina por lámina:** `../recursos-comunes/guion-de-presentaciones.md`.
+
+**Verificación de fuentes:** `../semana-2/verificacion-de-fuentes.md` (sección
+final) — terminología del DSL PIM verificada contra la biblioteca del curso y el
+XML generado por la herramienta oficial `mdd4cps/aomdd4cps` sobre el propio CIM
+del proyecto.

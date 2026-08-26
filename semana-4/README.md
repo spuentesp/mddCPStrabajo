@@ -38,3 +38,7 @@ proceso corriendo la herramienta oficial `aomdd4cps`).
 > versión canónica.
 
 **Guion hablado lámina por lámina:** `../recursos-comunes/guion-de-presentaciones.md`.
+
+**Verificación de fuentes:** `../semana-2/verificacion-de-fuentes.md` (sección
+final) — incluye la verificación de `comparativa-agente-vs-app.md` contra los
+archivos reales de `comparativa-app/modelos/`.

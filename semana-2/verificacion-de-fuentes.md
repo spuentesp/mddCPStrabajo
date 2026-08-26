@@ -1,8 +1,9 @@
-# Verificación de las afirmaciones sobre C4
+# Verificación de las afirmaciones sobre C4 (y, al final, sobre Semanas 3–4)
 
 Registro de qué se afirma en el mazo de la Semana 2, contra qué fuente se
 comprobó y con qué resultado. Sirve para defender la presentación si el profesor
-pregunta de dónde sale cada dato.
+pregunta de dónde sale cada dato. La última sección extiende el mismo método a
+la terminología del DSL de Semanas 3–4 y a las citas usadas en todo el proyecto.
 
 ## Fuentes utilizadas
 
@@ -86,3 +87,73 @@ Además de corregir errores, el código fuente reveló un dato **a favor** que n
 estaba: `InteractionStyle` distingue comunicación **síncrona de asíncrona**. Es
 directamente aplicable a SVIF, donde el canal MQTT entre los dos nodos es
 asíncrono, y refuerza la lámina de notación.
+
+## Verificación extendida: terminología del DSL (Semanas 3–4) y citas transversales
+
+Misma exigencia de fuente primaria, aplicada más allá de C4.
+
+### Terminología del DSL PIM — triple confirmación
+
+El repositorio oficial del proceso, [`mdd4cps/aomdd4cps`](https://github.com/mdd4cps/aomdd4cps),
+es alcanzable (a diferencia de `c4model.com` o el portal de la SBC) y aporta tres
+fuentes independientes para contrastar la terminología usada en `pim-dsl-svif.drawio`
+y en las diapositivas de Semanas 3–4:
+
+| Afirmación | Fuente | Resultado |
+|---|---|---|
+| Los constructos de comunicación se llaman **Message Sender / Message Receiver** | Biblioteca `scratchpad_pimdsl.xml` del curso: shapes con `type="comm_thread"` y `label="message sender"` (ídem `listener_thread`/"message receiver") | ✅ — coincide exactamente |
+| El atributo de trazabilidad es **`id_cim_parent`** | `svif-02-PIM.xml`, generado por la herramienta oficial ejecutada sobre el propio CIM del proyecto: `id_cim_parent="cim-g1"`, etc. en cada objeto | ✅ |
+| El período se llama **`interval_in_milliseconds`** | Mismo archivo: `interval_in_milliseconds="500"` en los `operational_goal`; confirmado también en la biblioteca del curso | ✅ |
+
+**Nota sobre una fuente descartada.** El documento de proceso del mismo
+repositorio (`MDD4CPS_process_overview.md`) usa en su prosa nombres ligeramente
+distintos —"Comm Thread"/"Comm Listener" en vez de Message Sender/Receiver,
+`cim_parent` y `checkInterval_in_milliseconds` en vez de los atributos reales—.
+Se privilegió la evidencia más directa (el propio *schema* usado por la biblioteca
+del curso y el XML realmente generado) sobre la prosa descriptiva de ese documento,
+que es más laxa. El README del repositorio explica el porqué de la discrepancia:
+es una reescritura («revised terminology») de un fork anterior
+(`LD-111/MDD4CPS`), y su prosa no siempre se actualizó al mismo ritmo que el
+código. Conclusión: **la terminología usada en el proyecto es correcta** y
+coincide con la biblioteca de símbolos que el propio curso entrega.
+
+### Corrección encontrada: `comparativa-agente-vs-app.md`
+
+Al cruzar la tabla de conteos de §2.1 contra los archivos reales
+(`svif-02-PIM.xml` y `pim-dsl-svif.drawio`), **todos los números coincidían**
+exactamente (verificado con `grep -c` sobre ambos archivos). Pero la fila
+`task | 2 | —` daba a entender que la vía agente no generó el atributo de
+trazabilidad `id_cim_type` en los constructos de comunicación. **Sí lo generó**:
+lo fijó en `"resource"` en vez de `"task"`, que es coherente con que el propio CIM
+clasifica el dependum `cim-d1` como `resource (dependum)` — no como task. Se
+corrigió la fila y se añadió una nota explicando la diferencia de valor.
+
+### Integridad estructural de los cuatro `.drawio`
+
+`cim-istar-svif.drawio` y `pim-dsl-svif.drawio` en Semanas 3 y 4 (4 archivos):
+
+- **XML bien formado** en los cuatro (`xml.etree.ElementTree.parse` sin error).
+- **Sin IDs duplicados** dentro de cada página de cada archivo.
+- **Sin aristas colgantes**: todo `mxCell` con `edge="1"` tiene su `source` y
+  `target` apuntando a un id existente en la misma página.
+
+Relevante porque cualquiera de estos tres problemas puede hacer que el archivo
+abra con errores silenciosos en diagrams.net (aristas invisibles, formas
+duplicadas que se pisan).
+
+### Citas verificadas contra fuentes (secundarias, vía buscador)
+
+Todas coinciden exactamente con lo escrito en `referencias.md`:
+
+| Cita | Verificado | Coincide |
+|---|---|---|
+| Humayed, Lin, Li & Luo (2017) | *IEEE IoT Journal*, vol. 4(6), pp. 1802–1831 | ✅ |
+| Erkin et al. (2009) | PETS 2009, LNCS 5672, DOI `10.1007/978-3-642-03168-7_14` | ✅ |
+| Chen & Ran (2019) | *Proc. IEEE*, vol. 107, pp. 1655–1674, DOI `10.1109/JPROC.2019.2921977` | ✅ |
+| Cares, Sepúlveda & Navarro (2019) | AISC vol. 918, pp. 93–102, ICITS 2019, eds. Rocha/Ferrás/Paredes | ✅ |
+| Navarro, Devia, Labra Gayo & Cares (2025) | 28.º CIbSE, Ciudad Real, pp. **150–164** | ✅ — página confirmada en esta ronda |
+
+Quedan sin verificar contra fuente primaria (bloqueadas por el proxy: `c4model.com`,
+Leanpub, arXiv, portal SBC): el rango exacto 2006–2011 de creación de C4 y el año
+2016 del libro de Brown. Ambos coinciden en múltiples fuentes secundarias, pero no
+se pudo leer la fuente primaria directamente.

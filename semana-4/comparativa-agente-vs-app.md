@@ -62,7 +62,7 @@ Todos los artefactos generados quedan versionados en
 | `cps_component` | 2 | 2 |
 | `operational_goal` | 2 | 2 |
 | `action` | 10 | 9 |
-| `task` | 2 | — |
+| `id_cim_type="task"` (en `comm_thread`/`listener_thread`) | 2 | 0 |
 | `sw_resource` | 2 | 2 |
 | `hw_resource` | 3 | 3 |
 | `comm_thread` / `listener_thread` | 1 / 1 | 1 / 1 |
@@ -76,6 +76,15 @@ en la transformación CIM→PIM (el atributo `is_a_cpc="true"` no basta para
 propagar el refinamiento). La **vía agente (skill), en cambio, preservó el
 operador OR** (rama alarma vs. desbloqueo), que se materializa en
 `gestionarRespuestaAcceso()` y es verificable ejecutando el sistema.
+
+**Precisión sobre la fila `id_cim_type`.** No significa que el agente omitiera el
+atributo de trazabilidad: ambas vías lo escriben en `comm_thread`/`listener_thread`.
+La diferencia es el **valor**. La herramienta lo fija en `"task"`, mientras que el
+agente lo fija en `"resource"` — coherente con el propio inventario del CIM
+(`actividad-modelado-istar.md`, §4), donde `cim-d1` («Evento de identificación»)
+está clasificado como **resource (dependum)**, no como task. En ese sentido, el
+valor del agente es más fiel a la clasificación iStar del propio modelo que el de
+la herramienta.
 
 Este es un punto importante para la actividad: lo que el §3 (iii) de
 [`actividad-mdd4cps.md`](actividad-mdd4cps.md) describía como limitación

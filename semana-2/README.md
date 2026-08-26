@@ -59,4 +59,6 @@ caso de estudio del proyecto, como preparación para las Semanas 3 y 4:
 
 **Verificación de fuentes:** `verificacion-de-fuentes.md` — cada afirmación
 estructural sobre C4, contra qué fuente se comprobó y con qué resultado, más los
-errores detectados y corregidos.
+errores detectados y corregidos. Incluye también, al final, la terminología del
+DSL de Semanas 3–4 y las citas del proyecto, verificadas contra el repositorio
+oficial `mdd4cps/aomdd4cps` y fuentes secundarias.
