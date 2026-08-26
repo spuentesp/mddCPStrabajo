@@ -4,7 +4,8 @@
 videovigilancia con reconocimiento facial.*
 
 **Entregables:** video individual de 3–5 minutos (guion en `guion-video.md`) y
-presentación de apoyo (`presentacion.md`, formato Marp exportable a PDF/PPT).
+presentación de apoyo (`../slides/semana-1/presentacion.html` → `.pdf`; ver
+`README.md` de esta carpeta para la versión canónica y las alternativas).
 
 ---
 
