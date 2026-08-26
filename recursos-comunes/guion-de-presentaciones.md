@@ -402,7 +402,7 @@ vuelve fundamentada y no opinión.
 
 ### Lámina 11 · Referencias
 
-> «La fuente principal es Simon Brown, tanto el libro de 2018 como la
+> «La fuente principal es Simon Brown, tanto el libro de 2016 como la
 > especificación en línea en c4model.com. Complementan Fowler y Parsons 2010 sobre lenguajes
 > de dominio específico y Navarro y coautores 2025 para el DSL de CPS que mencioné.»
 
