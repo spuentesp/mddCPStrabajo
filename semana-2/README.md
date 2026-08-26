@@ -14,7 +14,7 @@ crítica genuina al confrontarlo con el dominio CPS del curso.
 
 | Entregable (diapositiva) | Estado | Archivo |
 |---|---|---|
-| Archivo de presentación utilizado en la exposición | ✅ 9 diapositivas | `../slides/semana-2/analisis-c4.pdf` (fuente: `.html`) |
+| Archivo de presentación utilizado en la exposición | ✅ 9 diapositivas | `../slides/semana-2/presentacion.pdf` (fuente: `.html`) |
 | Video individual de 5–7 min | ⬜ Grabar (guion cronometrado listo) | `guion-video.md` |
 
 ## Aspectos exigidos por el enunciado
@@ -47,7 +47,7 @@ caso de estudio del proyecto, como preparación para las Semanas 3 y 4:
 | Contenido | Archivo |
 |---|---|
 | Modelo/metamodelo/metametamodelo, DSL y MDD aplicados a SVIF | `fundamentos-de-modelado.md` |
-| Diapositivas puente | `../slides/semana-2/presentacion.html` |
+| Diapositivas puente | `../slides/semana-2/material-puente.html` |
 | Resumen de la materia de la semana | `../slides/semana-2/materia.html` |
 
 > El análisis alternativo del **DSL PIM para CPS** quedó archivado en

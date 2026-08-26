@@ -4,7 +4,7 @@
 **Lenguaje analizado:** el **modelo C4** (Simon Brown), aplicado al caso SVIF.
 **Formato exigido:** video individual, con el expositor visible de forma continua.
 No se aceptan avatares sintéticos ni narración automática.
-**Apoyo:** `../slides/semana-2/analisis-c4.pdf` (9 diapositivas).
+**Apoyo:** `../slides/semana-2/presentacion.pdf` (9 diapositivas).
 
 > Versión compacta: los tiempos suman ≈ 5:25, con margen tanto sobre el piso (5:00)
 > como sobre el techo (7:00) del enunciado. Las diapositivas «C4 aplicado a SVIF»
@@ -144,7 +144,7 @@ fundamentada». Es la parte que más pesa: no apurarla, aunque el resto vaya rá
 ## Checklist antes de grabar
 
 - [ ] Cámara encendida y visible durante **toda** la exposición.
-- [ ] `analisis-c4.pdf` abierto en pantalla completa (9 diapositivas).
+- [ ] `presentacion.pdf` abierto en pantalla completa (9 diapositivas).
 - [ ] Duración entre 5 y 7 minutos (medir en un ensayo previo; esta versión apunta
       a ~5:25, con margen de sobra hacia ambos límites).
 - [ ] Los dos entregables listos: el video y el archivo de presentación.

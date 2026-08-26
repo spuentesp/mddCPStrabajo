@@ -18,7 +18,7 @@ concreta**, en el orden en que aparecen.
 | Semana | Mazo | Láminas | Video |
 |---|---|---|---|
 | 1 | `presentacion` — Desafío abierto en CPS | 8 | 3–5 min |
-| 2 | `analisis-c4` — Análisis del modelo C4 | 9 | 5–7 min |
+| 2 | `presentacion` — Análisis del modelo C4 | 9 | 5–7 min |
 | 3 | `presentacion` — Modelado con AO y DSL | 13 | 5–7 min |
 | 4 | `presentacion` — Proceso MDD4CPS | 10 | 5–7 min |
 

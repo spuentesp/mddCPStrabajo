@@ -189,7 +189,8 @@ se pudo leer la fuente primaria directamente.
 ### Ronda adicional: qué tecnología implementa cada transformación de MDD4CPS
 
 Tres piezas de la materia (`slides/semana-2/materia.html`,
-`slides/semana-2/presentacion.html`, `slides/semana-4/materia.html`) y
+`slides/semana-2/material-puente.html` [renombrado; entonces `presentacion.html`],
+`slides/semana-4/materia.html`) y
 `recursos-comunes/apuntes-del-curso.md` afirmaban «XSLT (CIM→PIM) y Python
 (PIM→PSM)». Se verificó contra la fuente primaria — el documento
 `MDD4CPS_repository_structure_and_transformations.md` del propio repositorio
@@ -203,7 +204,8 @@ partir del PSM (PSM→Code), no quien produce el PSM. Corregido:
   transformaciones" y de la tarjeta "Herramientas" (Python pasó de PIM→PSM a
   PSM→Code; XSLT pasó a cubrir ambas etapas de modelo a modelo).
 - `recursos-comunes/apuntes-del-curso.md` (§4.2): misma corrección.
-- `slides/semana-2/materia.html` y `slides/semana-2/presentacion.html`: estos
+- `slides/semana-2/materia.html` y `slides/semana-2/material-puente.html`
+  [renombrado; entonces `presentacion.html`]: estos
   dos describen la **cadena concreta de SVIF** (no la herramienta oficial), y
   en SVIF las tres transformaciones las aplicó el diseñador/agente
   directamente sobre los modelos — no se corrió ninguna XSLT ni script Python
@@ -230,7 +232,8 @@ ningún otro enlace roto en todo el repositorio.
 - **`recursos-comunes/guion-de-presentaciones.md`** (781 líneas, releído
   completo): la lámina 11 de Semana 2 seguía diciendo "el libro de 2018" de
   Brown — quedó sin actualizar en la ronda que fijó el año a 2016 en
-  `referencias.md` y en `analisis-c4.html`. Corregido. El resto del archivo
+  `referencias.md` y en `presentacion.html` [renombrado; entonces
+  `analisis-c4.html`]. Corregido. El resto del archivo
   (conteos de láminas, sumas de tiempo, 27 elementos del CIM, citas) se
   verificó de nuevo y coincide.
 - **`recursos-comunes/diseno-del-sistema.md`**: la tabla de desafíos de CPS
@@ -263,3 +266,19 @@ mencionan esa cifra exacta. A diferencia de los casos "Romano" y "Mangharam"
 citada), aquí la fuente sí existe y es real — solo no pudo confirmarse el
 número exacto por la restricción de red. Se mantiene la cifra sin cambios;
 si se logra acceso a `sol.sbc.org.br` en el futuro, verificarla ahí.
+
+### Renombre de los archivos de Semana 2 (consistencia de nombres, no un error)
+
+A pedido del usuario, para que Semana 2 use el mismo patrón de nombres que las
+otras tres semanas (`presentacion.*` = la entrega, `materia.*` = resumen de la
+semana):
+
+- `slides/semana-2/analisis-c4.html`/`.pdf` (la entrega, análisis de C4) →
+  renombrados a `presentacion.html`/`.pdf`.
+- `slides/semana-2/presentacion.html`/`.pdf` (el material puente no evaluado,
+  que ya ocupaba ese nombre) → renombrados a `material-puente.html`/`.pdf`
+  para liberar el nombre.
+
+Todas las referencias cruzadas del repo (`README.md` raíz, `semana-2/README.md`,
+`semana-2/guion-video.md`, y las menciones históricas en este mismo archivo) se
+actualizaron para apuntar a los nombres nuevos.

@@ -33,7 +33,7 @@ código personalizado (Code).
 ```
 .
 ├── slides/                       # Diapositivas de todas las entregas (HTML → PDF)
-│   ├── semana-1/ … semana-4/     #   presentacion.* · materia.* · analisis-c4.*
+│   ├── semana-1/ … semana-4/     #   presentacion.* · materia.* (semana-2 también: material-puente.*)
 │   ├── template/                 #   plantilla UFRO compartida (slides.css)
 │   └── scripts/render.sh         #   HTML → PDF
 ├── semana-1/                     # ENTREGA 1: desafío abierto en CPS
