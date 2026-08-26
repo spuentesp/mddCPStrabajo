@@ -4,7 +4,7 @@
 **Formato exigido:** video individual, con la cámara mostrando de forma continua al
 expositor durante la presentación. No se aceptan avatares sintéticos ni narración
 automática.
-**Apoyo:** `../slides/semana-3/presentacion.pdf` (12 diapositivas) y los dos modelos
+**Apoyo:** `../slides/semana-3/presentacion.pdf` (14 diapositivas) y los dos modelos
 abiertos en diagrams.net para mostrarlos en pantalla.
 
 > Los tiempos son orientativos y suman ≈ 6:15, dentro de la ventana de 5–7 min.
@@ -41,7 +41,7 @@ Presentarse y enunciar el objetivo de la actividad:
 
 ---
 
-## 1:15 – 2:45 · El modelo iStar *(diapositivas 3 a 6 + modelo en pantalla)*
+## 1:15 – 2:45 · El modelo iStar *(diapositivas 3 a 7; el modelo está en la lámina 4)*
 
 **Mostrar `cim-istar-svif.drawio` en diagrams.net.** Recorrer el paso a paso
 sugerido en la clase, nombrando los constructos:
@@ -70,7 +70,7 @@ sugerido en la clase, nombrando los constructos:
 
 ---
 
-## 2:45 – 3:20 · Por qué hace falta un DSL *(diapositiva 9)*
+## 2:45 – 3:20 · Por qué hace falta un DSL *(diapositiva 10)*
 
 > «El modelo AO me dice **qué** quiere cada componente y **por qué**. Pero si voy a
 > implementar esto sobre Arduino, necesito hablar de hilos, temporizadores,
@@ -83,7 +83,7 @@ sugerido en la clase, nombrando los constructos:
 
 ---
 
-## 3:20 – 4:40 · El modelo DSL y la correspondencia *(diapositiva 10 + modelo en pantalla)*
+## 3:20 – 4:40 · El modelo DSL y la correspondencia *(diapositivas 11 y 12)*
 
 **Mostrar `pim-dsl-svif.drawio`.** Ir señalando los pares:
 
@@ -110,7 +110,7 @@ sugerido en la clase, nombrando los constructos:
 
 ---
 
-## 4:40 – 5:45 · Análisis: qué se gana y qué se pierde *(diapositiva 11)*
+## 4:40 – 5:45 · Análisis: qué se gana y qué se pierde *(diapositiva 13)*
 
 Esta es la parte que la rúbrica evalúa como «Análisis y explicación». No apurarla.
 
@@ -142,7 +142,7 @@ Esta es la parte que la rúbrica evalúa como «Análisis y explicación». No a
 
 ---
 
-## 5:45 – 6:15 · Cierre *(diapositiva 12)*
+## 5:45 – 6:15 · Cierre *(diapositiva 14)*
 
 > «En resumen: modelé SVIF con iStar 2.0 en vistas SD y SR híbrida, con goals,
 > softgoals, tasks y resources, y con la dependencia *Evento de identificación*
@@ -159,6 +159,8 @@ Esta es la parte que la rúbrica evalúa como «Análisis y explicación». No a
 
 - [ ] Cámara encendida y visible durante **toda** la exposición.
 - [ ] `cim-istar-svif.drawio` y `pim-dsl-svif.drawio` abiertos en pestañas listas.
+      Ambos modelos ya están incrustados en las láminas 4 y 11, así que si la
+      demostración en vivo falla, el mazo se sostiene solo.
 - [ ] Duración entre 5 y 7 minutos (medir en un ensayo previo).
 - [ ] Los cuatro entregables listos: los dos `.drawio`, la presentación en PDF y el video.
 - [ ] Nombrar al menos una vez las fuentes: Dalpiaz et al. (2016) para iStar 2.0,
