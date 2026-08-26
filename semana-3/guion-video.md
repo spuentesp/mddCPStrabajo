@@ -4,175 +4,136 @@
 **Formato exigido:** video individual, con la cámara mostrando de forma continua al
 expositor durante la presentación. No se aceptan avatares sintéticos ni narración
 automática.
-**Apoyo:** `../slides/semana-3/presentacion.pdf` (14 diapositivas) y los dos modelos
+**Apoyo:** `../slides/semana-3/presentacion.pdf` (13 diapositivas) y los dos modelos
 abiertos en diagrams.net para mostrarlos en pantalla.
 
-> Los tiempos suman ≈ 6:15, con 45 s de margen sobre el límite de 7:00. Catorce
-> láminas en ese lapso son ~27 s por lámina: es un mazo denso, así que el ensayo
-> cronometrado no es opcional.
-> El texto no está para leerse literalmente: es la línea argumental. Hablar con
-> las propias palabras es parte de lo que la rúbrica evalúa («Comunicación oral»).
+> Versión compacta: los tiempos suman ≈ 5:25, con margen sobre ambos límites del
+> enunciado (5:00–7:00). Las láminas «Inventario de elementos» y «Lo que el modelo
+> asume (y deja abierto)» (antes 8 y 9) se fusionaron en una sola, y el resto de
+> los bloques se ajustó un poco. El texto no está para leerse literalmente: es la
+> línea argumental. Hablar con las propias palabras es parte de lo que la rúbrica
+> evalúa («Comunicación oral»).
 
 ---
 
-## 0:00 – 0:25 · Presentación y encuadre *(diapositiva 1)*
-
-Presentarse y enunciar el objetivo de la actividad:
+## 0:00 – 0:20 · Presentación y encuadre *(diapositiva 1)*
 
 > «El objetivo es aplicar orientación a agentes con iStar 2.0 sobre un sistema
-> ciberfísico y luego mostrar cómo esas mismas decisiones se representan en un DSL
+> ciberfísico y mostrar cómo esas mismas decisiones se representan en un DSL
 > pensado para CPS.
 >
-> El sistema que elegí es **SVIF**: un control de acceso a un recinto mediante
-> videovigilancia con identificación facial. Tiene **dos componentes ciberfísicos
-> que colaboran**: un *Face Monitor* sobre ESP32-CAM, que percibe e identifica, y un
-> *Access Actuator* sobre ESP32, que acciona una cerradura o una alarma.»
+> El sistema es **SVIF**: control de acceso mediante identificación facial, con
+> dos componentes ciberfísicos que colaboran — un *Face Monitor* sobre
+> ESP32-CAM, que percibe e identifica, y un *Access Actuator* sobre ESP32, que
+> acciona una cerradura o una alarma.»
 
 ---
 
-## 0:25 – 0:55 · Por qué orientación a agentes *(diapositiva 2)*
+## 0:20 – 0:45 · Por qué orientación a agentes *(diapositiva 2)*
 
-> «Elegí orientación a agentes porque en SVIF hay **objetivos que entran en
-> conflicto**: la privacidad de los datos de las personas frente a la oportunidad de
-> la identificación, y la seguridad del recinto frente al uso de recursos.
->
-> La orientación a agentes permite capturar objetivos, responsabilidades y
-> dependencias desde etapas tempranas —Cares, Sepúlveda y Navarro, 2019— y eso es
-> justamente lo que necesito para razonar sobre esos conflictos antes de escribir
-> código.»
+> «Elegí orientación a agentes porque en SVIF hay objetivos que entran en
+> conflicto: la privacidad frente a la oportunidad de la identificación, y la
+> seguridad del recinto frente al uso de recursos. La orientación a agentes
+> permite capturar objetivos, responsabilidades y dependencias desde etapas
+> tempranas —Cares, Sepúlveda y Navarro, 2019.»
 
 ---
 
-## 0:55 – 2:55 · El modelo iStar *(diapositivas 3 a 7; el modelo está en la lámina 4)*
+## 0:45 – 2:35 · El modelo iStar *(diapositivas 3 a 7; el modelo está en la lámina 4)*
 
 **Mostrar `cim-istar-svif.drawio` en diagrams.net.** Recorrer el paso a paso
-sugerido en la clase, nombrando los constructos:
+sugerido en la clase, nombrando los constructos — este bloque concentra la
+mitad del video, es el más denso pero también el más visual:
 
 > «Modelé los dos nodos como **agentes**, porque son instancias concretas con
 > autonomía, y al Administrador de Seguridad como **actor**.
 >
-> **Dependency** — en la vista SD, el Access Actuator depende del Face Monitor por el
-> recurso *Evento de identificación*: no puede decidir sobre el acceso si nadie
-> identifica a la persona. Esta es la dependencia que articula todo el sistema.
+> **Dependency** — el Access Actuator depende del Face Monitor por el recurso
+> *Evento de identificación*: no puede decidir sobre el acceso si nadie
+> identifica a la persona. Es la dependencia que articula todo el sistema.
 >
-> **Refinement** — el objetivo *Monitorear presencia de personas* se refina en AND en
-> cuatro tareas: capturar imagen, detectar rostro, identificar rostro y publicar el
-> evento. En el actuador, *Gestionar respuesta de acceso* se refina en **OR**:
-> desbloquear cerradura **o** activar alarma. Basta una de las dos.
+> **Refinement** — *Monitorear presencia de personas* se refina en AND en cuatro
+> tareas: capturar, detectar, identificar y publicar. En el actuador,
+> *Gestionar respuesta de acceso* se refina en **OR**: desbloquear o activar
+> alarma. Basta una de las dos.
 >
-> **NeededBy** — *Capturar imagen* necesita el sensor OV2640; *Desbloquear cerradura*
-> necesita la cerradura electromecánica.
+> **NeededBy** — *Capturar imagen* necesita el sensor OV2640; *Desbloquear*
+> necesita la cerradura.
 >
-> **Qualification y Contribution** — aquí están los softgoals. *Comparar con rostros
-> enrolados* contribuye **help** a *Privacidad de datos personales*, porque el
-> reconocimiento ocurre localmente en el nodo. Y *Publicar evento de identificación*
-> contribuye **hurt** a esa misma cualidad, porque transmite datos personales por la
-> red. Ese conflicto queda **visible en el modelo**, y es exactamente el tipo de
-> tensión que la orientación a agentes permite discutir.»
+> **Qualification y Contribution** — aquí están los softgoals. *Comparar con
+> rostros enrolados* contribuye **help** a *Privacidad de datos personales*,
+> porque el reconocimiento ocurre localmente. *Publicar evento de
+> identificación* contribuye **hurt** a esa misma cualidad, porque transmite
+> datos por la red. Ese conflicto queda **visible en el modelo**.
+>
+> Y la dependencia central tiene cinco partes: depender —Access Actuator—,
+> dependerElmnt —por qué—, dependum —el evento—, dependee —Face Monitor— y
+> dependeeElmnt —cómo lo provee.»
 
 ---
 
-## 2:55 – 3:25 · Trazabilidad y supuestos *(diapositivas 8 y 9)*
+## 2:35 – 2:55 · Inventario y qué queda abierto *(diapositiva 8)*
 
-Dos láminas de cierre del bloque iStar, ~15 s cada una. **Si el ensayo se pasa de
-7:00, este es el primer bloque que se comprime** — ninguna de las dos sostiene un
-criterio de la rúbrica por sí sola.
-
-> «Antes de pasar al DSL, dos cosas breves.
->
-> Cada elemento del modelo tiene un **identificador estable** —veintisiete en
-> total—. No es burocracia: estos IDs viajan al modelo DSL en el atributo
-> `id_cim_parent`, y de ahí al código. Es lo que me permite preguntar, frente a una
-> función en C++, de qué objetivo venía.
->
-> Y dos decisiones quedaron **abiertas a propósito**: el criterio del OR —cuándo
-> desbloquear y cuándo alarmar— y los tiempos. Ninguna de las dos pertenece a este
-> nivel de abstracción.»
+> «Cada elemento tiene un identificador estable —27 en total—: viajan al DSL en
+> `id_cim_parent`, y de ahí al código. Dos decisiones quedan abiertas a
+> propósito: el criterio del OR y los tiempos — ninguna pertenece a este nivel.»
 
 ---
 
-## 3:25 – 3:55 · Por qué hace falta un DSL *(diapositiva 10)*
+## 2:55 – 3:20 · Por qué hace falta un DSL *(diapositiva 9)*
 
-> «El modelo AO me dice **qué** quiere cada componente y **por qué**. Pero si voy a
-> implementar esto sobre Arduino, necesito hablar de hilos, temporizadores,
-> funciones y acceso a recursos físicos. Entre el modelo y el código hay una
-> distancia considerable.
->
-> El DSL para CPS es el **puente**: conserva las decisiones del modelo AO pero las
-> expresa con conceptos más fáciles de mapear al software, todavía sin comprometerse
-> con una plataforma concreta.»
+> «El modelo de agentes me dice qué quiere cada componente y por qué. Pero para
+> implementar esto sobre Arduino necesito hilos, temporizadores, funciones y
+> acceso a recursos físicos. El DSL es el puente: conserva las decisiones del
+> modelo AO pero las expresa en conceptos más fáciles de mapear al software,
+> todavía sin comprometerse con una plataforma.»
 
 ---
 
-## 3:55 – 5:00 · El modelo DSL y la correspondencia *(diapositivas 11 y 12)*
+## 3:20 – 4:20 · El modelo DSL y la correspondencia *(diapositivas 10 y 11)*
 
 **Mostrar `pim-dsl-svif.drawio`.** Ir señalando los pares:
 
-> «Cada **Agent** pasó a ser un **CP Component**. Los dos objetivos, que son
-> persistentes y requieren verificación continua, pasaron a **On Interval Actions**
-> —y aquí el DSL me obliga a declarar el período: 500 ms para la percepción, 250 ms
-> para la actuación, porque la respuesta debe ser más reactiva que el muestreo.
+> «Cada **Agent** pasó a **CP Component**. Los objetivos pasaron a **On
+> Interval Actions** —y aquí el DSL me obliga a declarar el período: 500 ms
+> para la percepción, 250 para la actuación. Las tareas pasaron a **On Demand
+> Actions**; los recursos se separaron en **HW** y **SW Resources**. Los
+> refinamientos AND y OR se conservan explícitos.
 >
-> Las **tareas** pasaron a **On Demand Actions**. Los recursos se separaron según su
-> naturaleza: el sensor, la cerradura y la alarma son **HW Resources**; la base de
-> rostros enrolados y la bitácora son **SW Resources**, con su `data_structure`.
->
-> Los refinamientos **AND** y **OR** se conservan como operadores explícitos.
->
-> Y lo más interesante: la **dependencia** del modelo iStar se materializó como un
-> **Message Sender** en el Face Monitor y un **Message Receiver** en el Access
-> Actuator. En un CPS los componentes están distribuidos, así que la delegación
-> entre actores se convierte en intercambio de información por la red. El *dependum*
-> pasó a ser el `dependum_data_structure` del mensaje: timestamp, person_id,
-> person_name, confidence y authorized.
->
-> Fíjense en esa estructura: transmito la **identidad**, nunca la imagen. Esa
-> decisión viene directamente del softgoal de privacidad del modelo AO.»
+> Y lo más interesante: la dependencia se materializó como un **Message
+> Sender** en el monitor y un **Message Receiver** en el actuador — en un CPS
+> distribuido, la delegación entre actores se convierte en un mensaje por la
+> red. El dependum pasó a ser la estructura del mensaje: timestamp, person_id,
+> person_name, confidence y authorized. Transmito la **identidad**, nunca la
+> imagen — esa decisión viene del softgoal de privacidad.»
 
 ---
 
-## 5:00 – 5:55 · Análisis: qué se gana y qué se pierde *(diapositiva 13)*
+## 4:20 – 5:10 · Qué se gana y qué se pierde *(diapositiva 12)*
 
-Esta es la parte que la rúbrica evalúa como «Análisis y explicación». No apurarla.
+Esta es la lámina del criterio «Análisis y explicación». No apurarla, aunque el
+resto del video vaya rápido.
 
-> «Al traducir gané información que el CIM deliberadamente no fijaba: los períodos,
-> la estructura de los datos, los parámetros de entrada y salida de cada acción.
+> «Al traducir gané información que el modelo de agentes no fijaba: períodos,
+> estructura de datos, parámetros de cada acción. Pero perdí expresividad:
+> primero, los **softgoals dejaron de ser nodos** — sobreviven en
+> `contribution_array`, pero hay que ir a buscarlos. Segundo, actor, rol y
+> agente colapsan en CP Component. Tercero, el actor humano quedó fuera. Y
+> cuarto, el **criterio del OR no se expresa**: reaparece recién en el código.
 >
-> Pero también **perdí expresividad**, y creo que vale la pena decirlo con
-> honestidad:
->
-> Primero, los **softgoals dejaron de ser nodos**. En iStar, la contribución *hurt*
-> de publicar el evento sobre la privacidad es una arista que se ve y se discute. En
-> el DSL es una entrada dentro de `contribution_array`: sobrevive, pero hay que ir a
-> buscarla.
->
-> Segundo, la distinción entre **actor, rol y agente** desaparece: los tres colapsan
-> en CP Component.
->
-> Tercero, el **actor humano** quedó fuera del PIM, porque el DSL modela nodos
-> computacionales.
->
-> Y cuarto, el **criterio del OR** no se expresa: el DSL dice que basta una de las
-> dos ramas, pero no bajo qué condición se elige cada una. Eso reaparece recién en
-> el código.
->
-> No lo veo como un defecto del DSL. Cada nivel retiene lo que necesita para la
-> transformación siguiente, y el atributo `id_cim_parent` es justamente el mecanismo
-> que me permite volver al modelo de agentes a recuperar el *porqué* cuando lo
-> necesito.»
+> No lo veo como un defecto: cada nivel retiene lo que necesita para la
+> transformación siguiente, y `id_cim_parent` es el mecanismo que me permite
+> volver al modelo de agentes a recuperar el porqué.»
 
 ---
 
-## 5:55 – 6:15 · Cierre *(diapositiva 14)*
+## 5:10 – 5:25 · Cierre *(diapositiva 13)*
 
-> «En resumen: modelé SVIF con iStar 2.0 en vistas SD y SR híbrida, con goals,
-> softgoals, tasks y resources, y con la dependencia *Evento de identificación*
-> entre los dos componentes. Construí la representación equivalente en el DSL para
-> CPS y establecí la correspondencia elemento por elemento, analizando qué se
-> conserva y qué no.
->
-> Los dos archivos `.drawio` van adjuntos. En la Semana 4 este PIM se transforma en
-> código para ESP32.»
+> «En resumen: modelé SVIF con iStar 2.0, con goals, softgoals, tasks y
+> resources, y con la dependencia *Evento de identificación* entre los dos
+> componentes. Construí la representación equivalente en el DSL y establecí la
+> correspondencia elemento por elemento. En la Semana 4 este modelo se
+> transforma en código para ESP32.»
 
 ---
 
@@ -180,9 +141,10 @@ Esta es la parte que la rúbrica evalúa como «Análisis y explicación». No a
 
 - [ ] Cámara encendida y visible durante **toda** la exposición.
 - [ ] `cim-istar-svif.drawio` y `pim-dsl-svif.drawio` abiertos en pestañas listas.
-      Ambos modelos ya están incrustados en las láminas 4 y 11, así que si la
+      Ambos modelos ya están incrustados en las láminas 4 y 10, así que si la
       demostración en vivo falla, el mazo se sostiene solo.
-- [ ] Duración entre 5 y 7 minutos (medir en un ensayo previo).
+- [ ] Duración entre 5 y 7 minutos (medir en un ensayo previo; esta versión apunta
+      a ~5:25, con margen de sobra hacia ambos límites).
 - [ ] Los cuatro entregables listos: los dos `.drawio`, la presentación en PDF y el video.
 - [ ] Nombrar al menos una vez las fuentes: Dalpiaz et al. (2016) para iStar 2.0,
       Navarro et al. (2025) para el DSL, Cares et al. (2019) para la justificación del

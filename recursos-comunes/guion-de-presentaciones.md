@@ -19,7 +19,7 @@ concreta**, en el orden en que aparecen.
 |---|---|---|---|
 | 1 | `presentacion` — Desafío abierto en CPS | 8 | 3–5 min |
 | 2 | `analisis-c4` — Análisis del modelo C4 | 9 | 5–7 min |
-| 3 | `presentacion` — Modelado con AO y DSL | 14 | 5–7 min |
+| 3 | `presentacion` — Modelado con AO y DSL | 13 | 5–7 min |
 | 4 | `presentacion` — Proceso MDD4CPS | 10 | 5–7 min |
 
 > **Regla transversal de las cuatro rúbricas:** el video debe mostrar al expositor
@@ -48,13 +48,13 @@ gastar el tiempo cuando el reloj aprieta.
 |---|---|---|
 | Modelado AO (iStar) | **4** (el modelo) · 5–7 (paso a paso) | Describir el modelo sin mostrarlo |
 | Uso de constructos iStar | 5 · 6 · 7 | Omitir NeededBy o Qualification, que son los que menos se recuerdan |
-| Representación en DSL | **11** (el modelo DSL) · 10 (constructos) | Mostrar solo la tabla de constructos y nunca el modelo |
-| Correspondencia AO–DSL | **12** | Enumerar los pares sin justificar **por qué** cada uno |
-| Análisis y explicación | **13** | Describir la traducción sin decir qué se pierde en ella |
+| Representación en DSL | **10** (el modelo DSL) · 9 (constructos) | Mostrar solo la tabla de constructos y nunca el modelo |
+| Correspondencia AO–DSL | **11** | Enumerar los pares sin justificar **por qué** cada uno |
+| Análisis y explicación | **12** | Describir la traducción sin decir qué se pierde en ella |
 | Comunicación oral | todas | Perder tiempo en el iStar y llegar apurado al DSL |
 
 > En Semana 3, **cuatro de los seis criterios viven en la segunda mitad del mazo**
-> (láminas 10 a 13). Es el error de reparto más fácil de cometer: el modelo iStar
+> (láminas 9 a 12). Es el error de reparto más fácil de cometer: el modelo iStar
 > es lo más vistoso, pero el DSL y la correspondencia son los que puntúan.
 
 ## Presupuesto de tiempo
@@ -81,25 +81,30 @@ más aire de habla. Bajó de 6:25 a 5:25 en total.
 | 8 | **Reflexión crítica** | 70 s |
 | 9 | Cierre | 15 s |
 
-**Semana 3 — 14 láminas · total 6:15 · margen 0:45**
+**Semana 3 — 13 láminas · total 5:25 · margen sobre ambos límites (5:00–7:00)**
+
+Versión compacta: las láminas «Inventario de elementos» y «Lo que el modelo
+asume» (antes 8 y 9) se fusionaron en una sola (lámina 8). Bajó de 6:15 a 5:25.
 
 | Láminas | Bloque | Tiempo |
 |---|---|---|
-| 1 | Presentación y encuadre | 25 s |
-| 2 | Justificación | 30 s |
-| 3–7 | **El modelo iStar** (la 4 lleva ~30 s) | 120 s |
-| 8–9 | Trazabilidad y supuestos | 30 s |
-| 10 | Por qué hace falta un DSL | 30 s |
-| 11–12 | **Modelo DSL y correspondencia** | 65 s |
-| 13 | **Análisis: qué se gana y qué se pierde** | 55 s |
-| 14 | Cierre | 20 s |
+| 1 | Presentación y encuadre | 20 s |
+| 2 | Justificación | 25 s |
+| 3–7 | **El modelo iStar** (la 4 lleva ~30 s) | 110 s |
+| 8 | Inventario y qué queda abierto | 20 s |
+| 9 | Por qué hace falta un DSL | 25 s |
+| 10–11 | **Modelo DSL y correspondencia** | 60 s |
+| 12 | **Análisis: qué se gana y qué se pierde** | 50 s |
+| 13 | Cierre | 15 s |
 
 **Si el ensayo se pasa de 7:00**, comprimir en este orden: Semana 2 → la lámina 7
-(es ilustración, ya viene compacta); Semana 3 → las láminas 8–9 (ninguna sostiene
-un criterio por sí sola). **Nunca** recortar la lámina 8 de Semana 2 ni la 13 de
-Semana 3: son los criterios con más recorrido de cada rúbrica.
+(es ilustración, ya viene compacta); Semana 3 → la lámina 8 (ninguna de sus dos
+mitades sostiene un criterio por sí sola). **Nunca** recortar la lámina 8 de
+Semana 2 ni la 12 de Semana 3: son los criterios con más recorrido de cada
+rúbrica.
 
-> **Semana 3 es un mazo denso:** 14 láminas en 6:15 son ~27 s por lámina. El ensayo
+> **Semana 3 sigue siendo el mazo más denso:** 13 láminas en 5:25 son ~25 s por
+> lámina en promedio (bastante más en el bloque del modelo iStar). El ensayo
 > cronometrado no es opcional.
 
 ---
@@ -393,11 +398,12 @@ vuelve fundamentada y no opinión.
 
 # Semana 3 — Modelado de un CPS mediante AO y DSL
 
-**Duración objetivo: 5–7 min.** Catorce láminas, y **dos modelos que mostrar en
-pantalla**. Tener `cim-istar-svif.drawio` y `pim-dsl-svif.drawio` abiertos en
-pestañas antes de empezar a grabar — aunque ambos modelos ya están incrustados en
-las láminas 4 y 11, así que si algo falla en la demostración en vivo, el mazo se
-sostiene solo.
+**Duración objetivo: 5–7 min** (versión compacta: apunta a ~5:25). Trece láminas
+— las de «Inventario de elementos» y «Lo que el modelo asume» (antes 8 y 9) se
+fusionaron en una sola — y **dos modelos que mostrar en pantalla**. Tener
+`cim-istar-svif.drawio` y `pim-dsl-svif.drawio` abiertos en pestañas antes de
+empezar a grabar — aunque ambos modelos ya están incrustados en las láminas 4 y
+10, así que si algo falla en la demostración en vivo, el mazo se sostiene solo.
 
 La rúbrica tiene seis criterios y **cuatro de ellos viven en la segunda mitad**
 (representación en DSL, correspondencia, análisis, comunicación). No gastar el
@@ -477,7 +483,7 @@ iStar. El detalle fino va en el archivo `.drawio` durante el video.
 > desbloquear cerradura **o** activar alarma. Basta una de las dos — y **el modelo
 > no dice cuál**. Esa decisión queda deliberadamente abierta en este nivel.»
 
-*Nota:* dejar sembrado que el OR queda abierto: se cobra en la lámina 11.
+*Nota:* dejar sembrado que el OR queda abierto: se cobra en la lámina 12.
 
 ### Lámina 6 · NeededBy · Qualification · Contribution
 
@@ -506,31 +512,21 @@ iStar. El detalle fino va en el archivo `.drawio` durante el video.
 > el *Evento de identificación*, el **qué**; el **dependee** es el Face Monitor; y
 > el **dependeeElmnt** es *Publicar evento*, que explica **cómo** se provee.»
 
-### Lámina 8 · Inventario de elementos (cim-*)
+### Lámina 8 · Inventario de elementos y qué queda abierto
 
-**Idea única:** la trazabilidad no es decorativa, es el mecanismo que sostiene
-todo lo que viene después.
+**Idea única:** la trazabilidad no es decorativa — y distinguir lo decidido de lo
+diferido es parte del método.
 
 > «Cada elemento del modelo tiene un identificador estable: 27 en total — tres
 > actores, dos objetivos, diez tareas, cinco recursos, cuatro cualidades y tres
-> dependums.
+> dependums. No es burocracia: estos IDs viajan al modelo DSL en `id_cim_parent`,
+> y de ahí al código.
 >
-> No es burocracia: estos IDs son los que van a viajar al modelo DSL en el atributo
-> `id_cim_parent`, y de ahí al código. Es lo que me permite preguntar, frente a una
-> función en C++, de qué objetivo venía.»
+> Dos cosas quedan **cerradas**: los nodos como agentes, el humano como actor. Y
+> dos quedan **abiertas a propósito**: el criterio del OR —cuándo desbloquear y
+> cuándo alarmar— y los tiempos. Ninguna pertenece a este nivel.»
 
-### Lámina 9 · Lo que el modelo asume (y deja abierto)
-
-**Idea única:** distinguir lo decidido de lo diferido es parte del método.
-
-> «Dos cosas quedan **cerradas**: que los nodos son agentes y el humano es actor, y
-> que las cualidades se limitan a las cuatro con influencia arquitectónica
-> demostrable, para que el modelo siga siendo legible.
->
-> Y dos quedan **abiertas a propósito**: el criterio del OR —cuándo desbloquear y
-> cuándo alarmar— y los tiempos. Ninguna de las dos pertenece a este nivel.»
-
-### Lámina 10 · El DSL para CPS
+### Lámina 9 · El DSL para CPS
 
 **Idea única:** el DSL es un **puente**, y existe por una razón concreta.
 
@@ -546,7 +542,7 @@ todo lo que viene después.
 > Sus constructos son: CP Component, On Interval Action, On Demand Action, HW y SW
 > Resource, los operadores AND y OR, y Message Sender y Receiver.»
 
-### Lámina 11 · El modelo DSL completo
+### Lámina 10 · El modelo DSL completo
 
 **Idea única:** el mismo sistema, dibujado con otros constructos — y la dependencia
 por fin es explícita.
@@ -564,7 +560,7 @@ por fin es explícita.
 *Señalar:* pasar el cursor del trapecio izquierdo al derecho siguiendo el sobre.
 Es la traducción más visible de todo el mazo.
 
-### Lámina 12 · Correspondencia AO → DSL
+### Lámina 11 · Correspondencia AO → DSL
 
 **Idea única:** cada constructo iStar tiene su contraparte, y hay una razón para
 cada par.
@@ -592,7 +588,7 @@ cada par.
 *Señalar:* el diagrama de la derecha, que muestra la misma dependencia arriba en
 iStar y abajo traducida a Sender/Receiver.
 
-### Lámina 13 · Qué se gana y qué se pierde
+### Lámina 12 · Qué se gana y qué se pierde
 
 **Idea única:** la traducción **no es neutra**, y decirlo es el análisis.
 
@@ -623,7 +619,7 @@ iStar y abajo traducida a Sender/Receiver.
 *Nota:* esta es la lámina del criterio «Análisis y explicación». Es la que
 distingue una entrega que describe de una que analiza; no recortarla.
 
-### Lámina 14 · Cierre
+### Lámina 13 · Cierre
 
 > «En resumen: modelé SVIF con iStar 2.0 en vistas SD y SR híbrida, con goals,
 > softgoals, tasks y resources, y con la dependencia *Evento de identificación*

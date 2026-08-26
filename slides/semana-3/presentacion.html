@@ -292,11 +292,11 @@
   <div class="pageno">7</div>
 </section>
 
-<!-- 7. INVENTARIO -->
+<!-- 7. INVENTARIO + DECISIONES -->
 <section class="slide content-bg">
   <div class="content-zone">
-    <div class="kicker-small">06 · Trazabilidad</div>
-    <h2>Inventario de elementos (cim-*)</h2>
+    <div class="kicker-small">06 · Trazabilidad y supuestos</div>
+    <h2>Inventario de elementos (cim-*) y qué queda abierto</h2>
     <div class="grid2">
       <div>
         <p><b>Monitor (cim-a1)</b></p>
@@ -324,50 +324,23 @@
         </table>
       </div>
     </div>
-    <p style="font-size:11.5px; margin-top:8px;"><b>Administrador (cim-a3)</b> +
+    <p style="font-size:11.5px; margin-top:6px;"><b>Administrador (cim-a3)</b> +
       dependums <code>cim-d1</code>, <code>cim-d2</code>, <code>cim-d3</code>.</p>
-  </div>
-  <div class="pageno">8</div>
-</section>
-
-<!-- 8. DECISIONES -->
-<section class="slide content-bg">
-  <div class="content-zone">
-    <div class="kicker-small">07 · Decisiones de modelado y supuestos</div>
-    <h2>Lo que el modelo asume (y deja abierto)</h2>
-    <div class="grid2">
-      <div class="card">
-        <div class="meta">Asunciones tomadas</div>
-        <h3>Cerradas en el CIM</h3>
-        <ul>
-          <li>Los nodos ciberfísicos son <b>agentes</b>; el humano es <b>actor</b>.</li>
-          <li>El <b>OR</b> en la respuesta de acceso captura una decisión de diseño
-            <b>abierta a nivel CIM</b>: el modelo no prescribe cuándo desbloquear o alarmar.</li>
-          <li>Las cualidades se limitan a las <b>4 con influencia arquitectónica
-            demostrable</b> (oportunidad ×2, privacidad, trazabilidad).</li>
-        </ul>
-      </div>
-      <div class="card alt">
-        <div class="meta">Lo que se difiere</div>
-        <h3>Queda para fases siguientes</h3>
-        <ul>
-          <li><b>Lógica del OR</b>: cuándo desbloquear o alarmar (fase Code: política
-            de <code>evaluarAutorizacion</code>).</li>
-          <li>Otras cualidades (eficiencia energética, confiabilidad) → requisitos
-            en <code>diseno-del-sistema.md</code>.</li>
-          <li>Trazabilidad: IDs <code>cim-*</code> se conservan en el PIM mediante
-            <code>id_cim_parent</code> (Semana 4).</li>
-        </ul>
-      </div>
+    <div class="note" style="margin-top:8px; font-size:11.5px;">
+      <b>Cerrado en el CIM:</b> nodos como agentes, humano como actor, cualidades
+      acotadas a las 4 con influencia demostrable. <b>Queda abierto a propósito:</b>
+      el criterio del <b>OR</b> —cuándo desbloquear o alarmar— se resuelve recién en
+      la fase Code (<code>evaluarAutorizacion</code>); la trazabilidad viaja al PIM
+      vía <code>id_cim_parent</code> (Semana 4).
     </div>
   </div>
-  <div class="pageno">9</div>
+  <div class="pageno">8</div>
 </section>
 
 <!-- 9. EL DSL PARA CPS -->
 <section class="slide content-bg">
   <div class="content-zone">
-    <div class="kicker-small">08 · Representación equivalente en DSL</div>
+    <div class="kicker-small">07 · Representación equivalente en DSL</div>
     <h2>El DSL para CPS: constructos más cercanos a la implementación</h2>
     <div class="grid2">
       <div>
@@ -397,13 +370,13 @@
       </div>
     </div>
   </div>
-  <div class="pageno">10</div>
+  <div class="pageno">9</div>
 </section>
 
 <!-- MODELO DSL COMPLETO -->
 <section class="slide content-bg">
   <div class="content-zone">
-    <div class="kicker-small">09 · El modelo DSL</div>
+    <div class="kicker-small">08 · El modelo DSL</div>
     <h2>Representación equivalente en el DSL para CPS</h2>
     <div class="diagram" style="padding:5px; text-align:center;">
       <img src="img/pim-dsl-svif.png" alt="Modelo PIM en el DSL para CPS de SVIF"
@@ -427,13 +400,13 @@
       </div>
     </div>
   </div>
-  <div class="pageno">11</div>
+  <div class="pageno">10</div>
 </section>
 
 <!-- CORRESPONDENCIA AO → DSL -->
 <section class="slide content-bg">
   <div class="content-zone">
-    <div class="kicker-small">10 · Correspondencia AO → DSL</div>
+    <div class="kicker-small">09 · Correspondencia AO → DSL</div>
     <h2>Cómo se representó cada elemento del modelo iStar</h2>
     <div class="grid2">
       <div>
@@ -504,13 +477,13 @@
       </div>
     </div>
   </div>
-  <div class="pageno">12</div>
+  <div class="pageno">11</div>
 </section>
 
 <!-- 11. GANANCIAS Y PÉRDIDAS -->
 <section class="slide content-bg">
   <div class="content-zone">
-    <div class="kicker-small">11 · Análisis de la traducción</div>
+    <div class="kicker-small">10 · Análisis de la traducción</div>
     <h2>Qué se gana y qué se pierde al pasar de AO a DSL</h2>
     <div class="grid2">
       <div class="card">
@@ -546,7 +519,7 @@
       permite volver al CIM a recuperar el «porqué».</b>
     </div>
   </div>
-  <div class="pageno">13</div>
+  <div class="pageno">12</div>
 </section>
 
 <!-- 12. CIERRE -->
@@ -586,7 +559,7 @@
       </div>
     </div>
   </div>
-  <div class="pageno">14</div>
+  <div class="pageno">13</div>
 </section>
 
 </body>

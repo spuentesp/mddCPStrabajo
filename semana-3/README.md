@@ -11,7 +11,7 @@ utilizando un DSL orientado a sistemas ciberfísicos.
 |---|---|---|
 | Archivo fuente (`.drawio`) del modelo iStar | ✅ | `cim-istar-svif.drawio` |
 | Archivo fuente (`.drawio`) del modelo DSL | ✅ | `pim-dsl-svif.drawio` |
-| Presentación utilizada en la exposición (PDF o PowerPoint) |  ✅ 14 diapositivas, con ambos modelos incrustados | `../slides/semana-3/presentacion.pdf` |
+| Presentación utilizada en la exposición (PDF o PowerPoint) |  ✅ 13 diapositivas, con ambos modelos incrustados | `../slides/semana-3/presentacion.pdf` |
 | Video individual de 5–7 min | ⬜ Grabar (guion cronometrado listo) | `guion-video.md` |
 
 ## Instrucciones cubiertas
@@ -32,9 +32,9 @@ utilizando un DSL orientado a sistemas ciberfísicos.
 |---|---|
 | Modelado AO (iStar) | `cim-istar-svif.drawio`, dos vistas; modelo incrustado en la lámina 4 |
 | Uso de constructos iStar | Paso a paso Dependency → Refinement → NeededBy → Qualification → Contribution, documentado en §3 |
-| Representación en DSL | `pim-dsl-svif.drawio`, incrustado en la lámina 11; CP Component, On Interval/On Demand Action, HW/SW Resource, AND/OR, Message Sender/Receiver |
-| Correspondencia AO–DSL | §5 y §5.1: tabla constructo-a-constructo e instancias `cim-*` → `pim-*`; lámina 12 |
-| Análisis y explicación | §5.2: qué se gana y qué se pierde en la traducción; lámina 13 |
+| Representación en DSL | `pim-dsl-svif.drawio`, incrustado en la lámina 10; CP Component, On Interval/On Demand Action, HW/SW Resource, AND/OR, Message Sender/Receiver |
+| Correspondencia AO–DSL | §5 y §5.1: tabla constructo-a-constructo e instancias `cim-*` → `pim-*`; lámina 11 |
+| Análisis y explicación | §5.2: qué se gana y qué se pierde en la traducción; lámina 12 |
 | Comunicación oral | `guion-video.md` |
 
 ## Cómo abrir los modelos
