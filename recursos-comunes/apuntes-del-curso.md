@@ -168,7 +168,7 @@ incrementa la complejidad. La alternativa: **crear un lenguaje propio**.
 
 Un **DSL** (*Domain-Specific Language*) es «un lenguaje bien definido diseñado
 para expresar soluciones utilizando conceptos especializados de un dominio
-particular» (adaptado de Fowler, 2010; Mernik, Heering y Sloane, 2005). Todo
+particular» (adaptado de Fowler y Parsons, 2010; Mernik, Heering y Sloane, 2005). Todo
 DSL posee **tres elementos**:
 
 | Elemento | Qué define | Ejemplo (DSL PIM del curso) |
@@ -415,7 +415,7 @@ La lista APA 7 completa, con DOI/URL verificables, está en
 - **S1:** Lee (2006, 2015); Cares, Sepúlveda y Navarro (2019); Marwedel y
   Engel (2016); Zanero (2017); Kreutz et al. (2015).
 - **S2:** Pidd (2000/2003); Selic (2003); Aßmann, Zschaler y Wagner (2006);
-  Fowler (2010); Mernik, Heering y Sloane (2005); Bézivin (2005); Kleppe et
+  Fowler y Parsons (2010); Mernik, Heering y Sloane (2005); Bézivin (2005); Kleppe et
   al. (2003).
 - **S3:** Bratman (1987); Rao y Georgeff (1995); Jennings, Sycara y Wooldridge
   (1998); Wooldridge y Ciancarini (2000); Nwana (1996); Lind (2001); Russell y

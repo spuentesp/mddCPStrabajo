@@ -74,8 +74,9 @@
 - Kleppe, A. G., Warmer, J., & Bast, W. (2003). *MDA explained: The model
   driven architecture — Practice and promise*. Addison-Wesley.
   ISBN 978-0-321-19442-8.
-- Fowler, M. (2010). *Domain-specific languages* (Addison-Wesley Signature
-  Series). Addison-Wesley. ISBN 978-0-321-71294-3.
+- Fowler, M., & Parsons, R. (2010). *Domain-specific languages*
+  (Addison-Wesley Signature Series). Addison-Wesley.
+  ISBN 978-0-321-71294-3.
 - Mernik, M., Heering, J., & Sloane, A. M. (2005). When and how to develop
   domain-specific languages. *ACM Computing Surveys, 37*(4), 316–344.
   https://doi.org/10.1145/1118890.1118892

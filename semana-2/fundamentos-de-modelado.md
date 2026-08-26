@@ -36,7 +36,7 @@ incorpora conceptos específicos —hilos periódicos, recursos de hardware, men
 entre nodos físicos— cuya representación mediante extensiones UML incrementaría la
 complejidad del modelado. Un Lenguaje de Dominio Específico (DSL) es un lenguaje
 bien definido diseñado para expresar soluciones con conceptos especializados de un
-dominio particular (Fowler, 2010; Mernik, Heering y Sloane, 2005), y posee tres
+dominio particular (Fowler & Parsons, 2010; Mernik, Heering y Sloane, 2005), y posee tres
 elementos:
 
 | Elemento del DSL | En el DSL PIM para CPS del curso |
@@ -78,7 +78,7 @@ resto de la cadena.
   Modeling, 4*(2), 171–188.
 - Dalpiaz, F., Franch, X., & Horkoff, J. (2016). iStar 2.0 language guide. *arXiv
   preprint arXiv:1605.07767*.
-- Fowler, M. (2010). *Domain-Specific Languages*. Pearson Education.
+- Fowler, M., & Parsons, R. (2010). *Domain-Specific Languages* (Addison-Wesley Signature Series). Addison-Wesley.
 - Mernik, M., Heering, J., & Sloane, A. M. (2005). When and how to develop
   domain-specific languages. *ACM Computing Surveys, 37*(4), 316–344.
 - Pidd, M. (2000). *Tools for Thinking — Modelling in Management Science*. Wiley.
