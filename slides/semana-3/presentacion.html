@@ -11,6 +11,9 @@
     display: flex; flex-direction: column; justify-content: center;
   }
   .slide.content-bg .content-zone > h2 { flex: 0 0 auto; }
+  /* Los títulos de artículo dentro de una tarjeta heredaban text-transform de
+     .card .meta y salían en MAYÚSCULAS, incorrecto en APA. */
+  .card .ref .meta { text-transform: none; letter-spacing: 0; font-weight: 400; }
 </style>
 </head>
 <body>

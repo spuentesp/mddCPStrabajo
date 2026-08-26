@@ -272,27 +272,49 @@ Recorrer el diagrama nombrando los tres tipos de flecha es lo que separa un 2 de
 > Un modelo C4 se interpreta entonces como una **jerarquía de contención con flujos
 > de interacción**: dice qué existe, dentro de qué, y quién habla con quién.»
 
-### Láminas 7–9 · C4 aplicado a SVIF (Context, Container, Component)
+> **Las tres láminas siguientes son el mismo sistema con tres zooms.** Van
+> encadenadas en ~50 segundos: son ilustración, no análisis. Si el reloj aprieta,
+> esta es la sección que se comprime.
 
-**Idea única de las tres:** el *zoom* funciona — y la lámina 8 es la que más
-rinde.
+### Lámina 7 · Nivel 1 — Context
+
+**Idea única:** en el nivel 1 el sistema **no se abre**, y eso es una regla, no una
+omisión.
 
 > «Lo apliqué a **SVIF**, un control de acceso con identificación facial.
 >
-> *(Lámina 7 — Context)* En el nivel 1 aparece el usuario que intenta acceder, el
-> sistema como caja única y el broker MQTT como sistema externo. Es lo que le
-> mostraría a alguien que no conoce el proyecto.
+> En el nivel 1 hay dos personas —el usuario que se presenta ante la cámara y el
+> administrador que consulta el registro—, el sistema como **una sola caja**, y los
+> dos elementos físicos sobre los que actúa: la cerradura y la alarma.
 >
-> *(Lámina 8 — Container)* En el nivel 2 el sistema se abre en sus dos nodos: el
-> *Face Monitor* sobre ESP32-CAM y el *Access Actuator* sobre ESP32 con relé y
-> buzzer, conectados por MQTT. Aquí aparece la tecnología. **Para mí este es el
-> nivel más valioso**: describe la arquitectura real en un solo diagrama.
->
-> *(Lámina 9 — Component)* En el nivel 3 entro al Face Monitor y veo la cadena
-> capturar, detectar, identificar, publicar, más la base de rostros enrolados.»
+> Fíjense en lo que **no** está: los dos nodos ESP32 y el broker MQTT. Son
+> contenedores, y abrirlos aquí sería mezclar niveles de abstracción, que es
+> justamente lo que las reglas de buena formación prohíben. Aparecen en el nivel
+> siguiente.»
 
-*Nota:* tres láminas en ~50 segundos. Son ilustración. Si el tiempo aprieta, esta
-es la sección que se comprime.
+*Nota:* señalar la nota al pie del diagrama. Decir en voz alta por qué el sistema
+es caja negra es lo que distingue «comprensión adecuada» de «comprensión profunda»
+en la rúbrica.
+
+### Lámina 8 · Nivel 2 — Container
+
+**Idea única:** este es el nivel que de verdad describe SVIF.
+
+> «En el nivel 2 el sistema se abre en sus dos nodos: el *Face Monitor* sobre
+> ESP32-CAM y el *Access Actuator* sobre ESP32 con relé y buzzer, conectados por
+> MQTT. Aquí sí aparece la tecnología.
+>
+> **Para mí este es el nivel más valioso de C4**: describe la arquitectura real del
+> sistema en un solo diagrama, y es el que usaría para explicárselo a alguien que
+> se suma al proyecto.»
+
+### Lámina 9 · Nivel 3 — Component
+
+**Idea única:** el zoom llega hasta los módulos internos de un contenedor.
+
+> «Y en el nivel 3 entro al Face Monitor y veo la cadena: capturar, detectar,
+> identificar, publicar, apoyada en la base de rostros enrolados. Un nivel más
+> abajo estaría el código, que en este caso son las funciones del `.ino`.»
 
 ### Lámina 10 · Reflexión personal y crítica
 
@@ -473,7 +495,7 @@ todo lo que viene después.
 > Y dos quedan **abiertas a propósito**: el criterio del OR —cuándo desbloquear y
 > cuándo alarmar— y los tiempos. Ninguna de las dos pertenece a este nivel.»
 
-### Lámina 11 · El DSL para CPS
+### Lámina 10 · El DSL para CPS
 
 **Idea única:** el DSL es un **puente**, y existe por una razón concreta.
 
