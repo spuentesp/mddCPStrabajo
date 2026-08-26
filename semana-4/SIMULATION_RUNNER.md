@@ -7,7 +7,7 @@ Scripts para ejecutar la simulación completa del sistema SVIF (Face Monitor + A
 ### Script Python (recomendado)
 
 ```bash
-cd /home/sebastian/mddCPStrabajo/semana-4
+cd mddCPStrabajo/semana-4
 python3 run_simulation.py
 ```
 
@@ -56,41 +56,46 @@ python3 run_simulation.py --no-docker
 
 ## Ejemplo de ejecución
 
-```bash
-$ python3 run_simulation.py --duracion 8 --semilla 7
+Salida real, capturada ejecutando `python3 run_simulation.py --duracion 8
+--semilla 7 --no-docker` contra un broker Mosquitto local (reproducida dos
+veces con resultado idéntico):
+
+```text
 ============================================================
 🔬 SVIF Simulation Runner — MDD4CPS Semana 4
 ============================================================
-🚀 Iniciando broker MQTT en localhost:1883...
-✓ Broker MQTT iniciado
+🔍 Verificando paho-mqtt...
+✓  paho-mqtt está instalado
+ℹ️  Modo manual: asumiendo broker en localhost:1883
+✓  Broker disponible (intento 1, 0.0s)
+🔍 Comando: python3 .../simular_sistema.py --broker localhost --port 1883 --duracion 8 --semilla 7
 
-📊 Ejecutando simulación (8s, semilla=7)...
-
-[FaceMonitor ] capturarImagen: frame=0.22
-[FaceMonitor ] detectarRostro: frame=0.22 → TRUE (< 0.30)
-[FaceMonitor ] identificarRostro: 0.22 → Ana Perez (person_id=1, authorized=true)
-[FaceMonitor ] >>> Publicando evento a svif/eventos/identificacion
-
-[AccessActuator] Recibió evento: {person_id: 1, person_name: 'Ana Perez', ...}
-[AccessActuator] evaluar_autorizacion: authorized=true → GRANTED
-[AccessActuator] >>> RELE ON: cerradura DESBLOQUEADA 5 s
-[AccessActuator] >>> Registrando en bitacora
-
-... (continúa con más detecciones)
-
-[FaceMonitor ] capturarImagen: frame=0.85
-[FaceMonitor ] detectarRostro: frame=0.85 → TRUE (> 0.70)
-[FaceMonitor ] identificarRostro: 0.85 → Visita Roja (person_id=3, authorized=false)
-[AccessActuator] evaluar_autorizacion: authorized=false → DENIED
+=== SVIF: gemelo de simulacion (8 s) ===
+[FaceMonitor ] deteccion -> publica {'person_id': 1, 'person_name': 'Ana Perez', 'confidence': 0.96, 'authorized': True}
+[AccessActuator] >>> RELE ON: cerradura DESBLOQUEADA 5 s (luego retorna a estado seguro)
+[AccessActuator] bitacora #1: {'person_id': 1, 'action_taken': 'desbloqueo', 'confidence': 0.96}
+... (continúa con más detecciones — 6 desbloqueos seguidos de Ana Perez)
+[FaceMonitor ] deteccion -> publica {'person_id': 3, 'person_name': 'Visita Roja', 'confidence': 1.0, 'authorized': False}
 [AccessActuator] >>> BUZZER ON: ALARMA activada 3 s
+[AccessActuator] bitacora #7: {'person_id': 3, 'action_taken': 'alarma', 'confidence': 1.0}
+[FaceMonitor ] deteccion -> publica {'person_id': 1, 'person_name': 'Ana Perez', 'confidence': 0.99, 'authorized': True}
+[AccessActuator] >>> RELE ON: cerradura DESBLOQUEADA 5 s (luego retorna a estado seguro)
+[AccessActuator] bitacora #8: {'person_id': 1, 'action_taken': 'desbloqueo', 'confidence': 0.99}
+[FaceMonitor ] deteccion -> publica {'person_id': 1, 'person_name': 'Ana Perez', 'confidence': 0.89, 'authorized': True}
+[AccessActuator] >>> RELE ON: cerradura DESBLOQUEADA 5 s (luego retorna a estado seguro)
+[AccessActuator] bitacora #9: {'person_id': 1, 'action_taken': 'desbloqueo', 'confidence': 0.89}
 
 === Resumen de la bitacora de accesos ===
-Eventos registrados: 15 (desbloqueos: 8, alarmas: 7)
+Eventos registrados: 9 (desbloqueos: 8, alarmas: 1)
+✓  Simulación completada sin errores
 
-✅ Simulación completada exitosamente
-
-🧹 Limpiando recursos...
+✅ Simulación completada EXITOSAMENTE
 ```
+
+> Con solo 8 segundos de duración la rama de alarma se ejercita una sola vez.
+> `evidencia-de-pruebas.md` usa una corrida más larga (12 s, misma semilla 7)
+> que ejercita ambas ramas con más margen: 14 eventos (10 desbloqueos, 4
+> alarmas). Esa es la corrida de referencia para la actividad.
 
 ## Características
 

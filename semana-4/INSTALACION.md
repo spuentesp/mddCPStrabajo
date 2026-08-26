@@ -42,7 +42,7 @@ sudo dnf install python3-paho-mqtt
 Si no tienes acceso a sudo, crea un entorno virtual:
 
 ```bash
-cd /home/sebastian/mddCPStrabajo/semana-4
+cd mddCPStrabajo/semana-4
 
 # Crea entorno virtual
 python3 -m venv venv
@@ -73,6 +73,6 @@ python3 -c "import paho.mqtt.client; print('✓ paho-mqtt OK')"
 Si ves `✓ paho-mqtt OK`, ejecuta:
 
 ```bash
-cd /home/sebastian/mddCPStrabajo/semana-4
+cd mddCPStrabajo/semana-4
 python3 run_simulation.py
 ```
